@@ -1,0 +1,5 @@
+.idea
+*.pyc
+sqlite.db*
+*~
+__pycache__
