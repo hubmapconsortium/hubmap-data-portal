@@ -7,7 +7,13 @@ def index(request):
     study_list = []
     for model in StudyTypes:
         study_list.extend(model.objects.all())
-    return HttpResponse("Hello, world. You're at the dataportal index.")
+    return render(
+        request,
+        'study_index.html',
+        {
+            'study_list': study_list,
+        },
+    )
 
 def globus(request):
     uuid = None

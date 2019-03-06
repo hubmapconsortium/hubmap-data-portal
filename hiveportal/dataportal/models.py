@@ -7,7 +7,7 @@ class Gene(models.Model):
     # TODO: any other
 
 class Protein(models.Model):
-    gene = models.ForeignKey(Gene)
+    gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
     pdb_id = models.CharField(max_length=50, blank=True, null=True)
 
 class Institution(models.Model):
@@ -21,9 +21,9 @@ class Tissue(models.Model):
 
 class Study(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
-    institution = models.ForeignKey(Institution)
-    data_type = models.ForeignKey(DataType)
-    tissue = models.ForeignKey(Tissue)
+    institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
+    data_type = models.ForeignKey(DataType, on_delete=models.CASCADE)
+    tissue = models.ForeignKey(Tissue, on_delete=models.CASCADE)
 
 StudyTypes = []
 def study_type(model):
