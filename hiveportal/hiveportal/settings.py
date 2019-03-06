@@ -120,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = Path('/opt/hiveportal/static')
 
 # Authentication, including Globus SSO
 AUTHENTICATION_BACKENDS = [
@@ -132,3 +133,9 @@ SOCIAL_AUTH_GLOBUS_SECRET = 'aff0CdncPo/BjHdnnszdmj/oxc3S24hdGOoEhUsAxNE='
 SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
     'access_type': 'offline',
 }
+
+# Keep this as the last section of this file!
+try:
+    from .local_settings import *
+except ImportError:
+    pass
