@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from hiveportal.dataportal import models
+from . import models
 
 # Register your models here.
 

@@ -6,18 +6,34 @@ class Gene(models.Model):
     ensembl_id = models.CharField(max_length=50, blank=True, null=True)
     # TODO: any other
 
+    def __str__(self):
+        return self.hugo_symbol or ''
+
 class Protein(models.Model):
+    name = models.CharField(max_length=100, blank=True, null=True)
     gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
     pdb_id = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.name or ''
 
 class Institution(models.Model):
     name = models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.name
+
 class DataType(models.Model):
     name = models.CharField(max_length=250)
 
+    def __str__(self):
+        return self.name
+
 class Tissue(models.Model):
     name = models.CharField(max_length=250)
+
+    def __str__(self):
+        return self.name
 
 class Study(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
