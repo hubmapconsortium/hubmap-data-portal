@@ -15,6 +15,20 @@ def index(request):
         },
     )
 
+def study_detail(request, study_type_id: int, study_id: int):
+    #study_type_id =
+    study_list = []
+    for model in StudyTypes:
+        for study in model.objects.all():
+            study_list.append((study, model))
+    return render(
+        request,
+        'study_index.html',
+        {
+            'study_list': study_list,
+        },
+    )
+
 def globus(request):
     uuid = None
     access_token = None

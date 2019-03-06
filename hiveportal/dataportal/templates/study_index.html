@@ -9,8 +9,8 @@
     <h1>Study Index</h1>
     <p>
         <ul>
-        {% for study in study_list %}
-            <li></li>
+        {% for study, study_model in study_list %}
+            <li><a href="{% url 'study_detail' study_model.id, study.id %}">Study {{ study.id }} ({{ study_model.name }})</a></li>
         {% endfor %}
         </ul>
     </p>
