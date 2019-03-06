@@ -124,6 +124,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = Path('/opt/hiveportal/static')
 
+MEDIA_ROOT = Path('/opt/hiveportal/media')
+
 # Authentication, including Globus SSO
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.globus.GlobusOpenIdConnect',

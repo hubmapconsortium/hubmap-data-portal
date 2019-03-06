@@ -25,19 +25,33 @@ class Study(models.Model):
     data_type = models.ForeignKey(DataType)
     tissue = models.ForeignKey(Tissue)
 
+StudyTypes = []
+def study_type(model):
+    """
+    Used to mark a study type as a "leaf" in the inheritance hierarchy, to fetch
+    the most specific metadata available
+    """
+    StudyTypes.append(model)
+    return model
+
 class ScRnaSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
 
+@study_type
 class ScRnaSeqStudyCDNA(ScRnaSeqStudy):
     read_count_aligned = models.PositiveIntegerField()
 
+@study_type
 class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
+    genes = models.ManyToManyField(Gene)
     unique_barcode_count = models.PositiveIntegerField()
 
+@study_type
 class SpatialTranscriptomicStudy(Study):
     genes = models.ManyToManyField(Gene)
 
+@study_type
 class MassCytometryStudy(Study):
     proteins = models.ManyToManyField(Protein)
-    preview_image = models.ImageField()
+    preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d')

@@ -1,7 +1,12 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from .models import *
+
 def index(request):
+    study_list = []
+    for model in StudyTypes:
+        study_list.extend(model.objects.all())
     return HttpResponse("Hello, world. You're at the dataportal index.")
 
 def globus(request):
