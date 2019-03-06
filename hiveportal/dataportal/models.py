@@ -20,6 +20,7 @@ class Tissue(models.Model):
     name = models.CharField(max_length=250)
 
 class Study(models.Model):
+    creation_time = models.DateTimeField(auto_now_add=True)
     institution = models.ForeignKey(Institution)
     data_type = models.ForeignKey(DataType)
     tissue = models.ForeignKey(Tissue)
@@ -39,3 +40,4 @@ class SpatialTranscriptomicStudy(Study):
 
 class MassCytometryStudy(Study):
     proteins = models.ManyToManyField(Protein)
+    preview_image = models.ImageField()

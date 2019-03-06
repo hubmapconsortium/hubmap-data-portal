@@ -17,6 +17,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'', include('dataportal.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'', include('dataportal.urls')),
+    url(r'', include('django.contrib.auth.urls')),
+    url(r'', include('social_django.urls', namespace='social')),
 ]
