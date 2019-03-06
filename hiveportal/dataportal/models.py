@@ -54,4 +54,4 @@ class SpatialTranscriptomicStudy(Study):
 @study_type
 class MassCytometryStudy(Study):
     proteins = models.ManyToManyField(Protein)
-    preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d')
+    preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
