@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 class Gene(models.Model):
@@ -40,6 +41,17 @@ class Study(models.Model):
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     data_type = models.ForeignKey(DataType, on_delete=models.CASCADE)
     tissue = models.ForeignKey(Tissue, on_delete=models.CASCADE)
+    subclass = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.subclass = ContentType.objects.get_for_model(type(self))
+
+    def get_subclass_object(self):
+        return self.subclass.get_object_for_this_type(study_id=self.id)
+
+    def __init_subclass__(cls):
+        className = type(cls)
 
 StudyTypes = []
 def study_type(model):

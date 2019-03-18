@@ -7,6 +7,7 @@ def index(request):
     study_list = []
     for model in StudyTypes:
         study_list.extend(model.objects.all())
+
     return render(
         request,
         'study_index.html',
@@ -15,17 +16,14 @@ def index(request):
         },
     )
 
-def study_detail(request, study_type_id: int, study_id: int):
-    #study_type_id =
-    study_list = []
-    for model in StudyTypes:
-        for study in model.objects.all():
-            study_list.append((study, model))
+def study_detail(request, study_id: int):
+    study = Study.objects.get(id=study_id).get_subclass_object()
+
     return render(
         request,
-        'study_index.html',
+        'study_detail.html',
         {
-            'study_list': study_list,
+            'study': study,
         },
     )
 
