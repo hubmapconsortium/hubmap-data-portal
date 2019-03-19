@@ -19,6 +19,8 @@ def index(request):
 def study_detail(request, study_id: int):
     study = Study.objects.get(id=study_id).get_subclass_object()
 
+    fields = study._meta.fields
+
     return render(
         request,
         'study_detail.html',

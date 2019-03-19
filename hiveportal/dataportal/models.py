@@ -45,13 +45,13 @@ class Study(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.subclass = ContentType.objects.get_for_model(type(self))
+        # Can't check 'self.subclass is None' -- this throws an exception for
+        # new objects that aren't saved to the database
+        if not hasattr(self, 'subclass'):
+            self.subclass = ContentType.objects.get_for_model(type(self))
 
     def get_subclass_object(self):
-        return self.subclass.get_object_for_this_type(study_id=self.id)
-
-    def __init_subclass__(cls):
-        className = type(cls)
+        return self.subclass.get_object_for_this_type(study_ptr=self)
 
 StudyTypes = []
 def study_type(model):
@@ -63,6 +63,16 @@ def study_type(model):
     return model
 
 class ScRnaSeqStudy(Study):
+    read_count_total = models.PositiveIntegerField()
+    cell_count = models.PositiveIntegerField()
+
+@study_type
+class ScThsSeqStudy(Study):
+    cell_count = models.PositiveIntegerField()
+    total_read_count = models.PositiveIntegerField()
+
+@study_type
+class ScAtacSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
 
@@ -81,10 +91,18 @@ class SpatialTranscriptomicStudy(Study):
 
 @study_type
 class MassCytometryStudy(Study):
+    sample_count = models.PositiveIntegerField()
     proteins = models.ManyToManyField(Protein)
     preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
 
-@study_type
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
     preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
+
+@study_type
+class SeqFishImagingStudy(ImagingStudy):
+    pass
+
+@study_type
+class MicroscopyStudy(ImagingStudy):
+    pass
