@@ -29,6 +29,30 @@ def study_detail(request, study_id: int):
         },
     )
 
+def gene_detail(request, hugo_symbol: str):
+    gene = Gene.objects.get(hugo_symbol=hugo_symbol)
+    proteins = gene.protein_set.all()
+
+    return render(
+        request,
+        'gene_detail.html',
+        {
+            'gene': gene,
+            'proteins': proteins,
+        },
+    )
+
+def protein_detail(request, protein_name: str):
+    protein = Protein.objects.get(name=protein_name)
+
+    return render(
+        request,
+        'protein_detail.html',
+        {
+            'protein': protein,
+        },
+    )
+
 def globus(request):
     uuid = None
     access_token = None

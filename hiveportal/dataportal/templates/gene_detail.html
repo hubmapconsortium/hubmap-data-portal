@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HuBMAP Gene Detail</title>
+</head>
+<body>
+    <div>
+    <h1>Gene Detail</h1>
+    <ul>
+    {% if gene.hugo_symbol %}
+        <li>HUGO Symbol: {{ gene.hugo_symbol }}</li>
+    {% endif %}
+    {% if gene.entrez_id %}
+        <li>NCBI Entrez ID: {{ gene.entrez_id }}</li>
+    {% endif %}
+    {% if gene.ensembl_id %}
+        <li>Ensembl ID: {{ gene.ensembl_id }}</li>
+    {% endif %}
+    </ul>
+
+    {% if proteins %}
+    <h2>Proteins:</h2>
+        <ul>
+        {% for protein in proteins %}
+            <li><a href="{% url 'protein_detail' protein.name %}">{{ protein.name }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    </div>
+</body>
+</html>
