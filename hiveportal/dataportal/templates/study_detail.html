@@ -7,9 +7,15 @@
 <body>
     <div>
     <h1>Study Detail</h1>
-    <p>
-        {{ study }}
-    </p>
+    <table>
+        <thead>
+            <tr>
+                <td>Field Name</td>
+                <td>Contents</td>
+            </tr>
+        </thead>
+        {{ form.as_table }}
+    </table>
     </div>
 </body>
 </html>

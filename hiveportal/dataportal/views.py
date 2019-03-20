@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from .forms import model_form_mapping
 from .models import *
 
 def index(request):
@@ -19,13 +20,15 @@ def index(request):
 def study_detail(request, study_id: int):
     study = Study.objects.get(id=study_id).get_subclass_object()
 
-    fields = study._meta.fields
+    form_type = model_form_mapping[type(study)]
+    form = form_type(instance=study)
 
     return render(
         request,
         'study_detail.html',
         {
             'study': study,
+            'form': form,
         },
     )
 
