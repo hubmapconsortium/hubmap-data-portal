@@ -1,9 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import model_form_mapping
+from .forms import model_form_mapping, StudyTypeForm, InstitutionForm
 from .models import *
 
+#Developer: Matt Ruffalo
+#Developer modifying prototype: Sushma Anand Akoju
+#TODO: Modify all views to include StudyType search : W.I.P
+#TODO: Implement all views to support FAIR and Restful apis (which it currently is NOT a restful api).
+#TODO: find best way to have Authentication framework. (do we use Globus as Authentication api)?
+#TODO: Re-model, re-design this prorotype
 def index(request):
     study_list = []
     for model in StudyTypes:
@@ -21,13 +27,63 @@ def study_detail(request, study_id: int):
     study = Study.objects.get(id=study_id).get_subclass_object()
 
     form_type = model_form_mapping[type(study)]
-    form = form_type(instance=study)
+    form = StudyTypeForm(instance=study)
 
     return render(
         request,
         'study_detail.html',
         {
             'study': study,
+            'form': form,
+        },
+    )
+
+#this is to show institutions page, by default
+def filterby_institution(request, institution_id: int):
+    institution = Institution.objects.get(id=institution_id)
+
+    form_type = model_form_mapping[institution]
+    form = InstitutionForm(instance=institution)
+
+    return render(
+        request,
+        'institution.html',
+        {
+            'institution': institution,
+            'form': form,
+        },
+    )
+
+
+#this is to show tissues page, by default
+def filterby_tissue_type(request, tissue_id: int):
+    tissue = Tissue.objects.get(id=tissue_id)
+
+    form_type = model_form_mapping[tissue]
+    form = TissueForm(instance=tissue)
+
+    return render(
+        request,
+        'tissue.html',
+        {
+            'institution': tissue,
+            'form': form,
+        },
+    )
+
+
+#this is to show data_type page, by default
+def filterby_data_type(request, data_type_id: int):
+    data_type = DataType.objects.get(id=data_type_id)
+
+    form_type = model_form_mapping[data_type]
+    form = DataTypeForm(instance=data_type)
+
+    return render(
+        request,
+        'datatype.html',
+        {
+            'institution': data_type,
             'form': form,
         },
     )

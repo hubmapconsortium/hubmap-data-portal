@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
+#Developer: Matt Ruffalo
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
     hugo_symbol = models.CharField(max_length=50, blank=True, null=True)
