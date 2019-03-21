@@ -1,7 +1,9 @@
+from collections import OrderedDict
+
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import model_form_mapping, StudyTypeForm, InstitutionForm
+from .forms import model_form_mapping, StudyTypeForm
 from .models import *
 
 #Developer: Matt Ruffalo
@@ -11,6 +13,16 @@ from .models import *
 #TODO: Implement all views to support FAIR and Restful apis (which it currently is NOT a restful api).
 #TODO: find best way to have Authentication framework. (do we use Globus as Authentication api)?
 #TODO: Re-model, re-design this prorotype
+
+"""
+This is default landing page.
+"""
+def landing(request):
+    return render(request, 'landing.html')
+
+"""
+This method lists study/study_types: Default page.
+"""
 def index(request):
     study_list = []
     for model in StudyTypes:
@@ -23,72 +35,64 @@ def index(request):
             'study_list': study_list,
         },
     )
+"""
+This method lists study/study_types based on base_types from Study model: groups by 
+Institution, Tissue, Datatype Models. We filter by name, for now, since prototype.
+"""
+def indexByGroup(request, name: str):
+    study_list = []
+    study = []
+    templateLink = ""
 
+    if(Institution.objects.filter(name=name).count()>0):
+        study = Study.objects.filter(institution_id=Institution.objects.get(name=name))
+        templateLink='institution.html'
+    elif (Tissue.objects.filter(name=name).count()>0):
+        study = Study.objects.filter(tissue_id=Tissue.objects.get(name=name))
+        templateLink='tissue.html'
+    elif (DataType.objects.filter(name=name).count()>0):
+        study = Study.objects.filter(data_type_id=DataType.objects.get(name=name))
+        templateLink='datatype.html'
+    for model in study:
+        study_list.append(model.get_subclass_object())
+
+    return render(
+        request,
+        templateLink,
+        {
+            'study_list': study_list,
+        },
+    )
+
+"""
+This method provides details of Study type by details.
+"""
 def study_detail(request, study_id: int):
     study = Study.objects.get(id=study_id).get_subclass_object()
-
+    fields =OrderedDict()
+    baseFields = []
+    baseFields.append('institution')
+    baseFields.append('data_type')
+    baseFields.append('tissue')
+    baseFields.append('subclass')
     form_type = model_form_mapping[type(study)]
-    form = StudyTypeForm(instance=study)
-
+    form = form_type(instance=study)
+    for field in form.base_fields:
+        if field not in baseFields:
+            field1 = form.base_fields.get(field)
+            fields.__setitem__(field1.label, field1)
     return render(
         request,
         'study_detail.html',
         {
             'study': study,
             'form': form,
+            'fields':fields,
         },
     )
-
-#this is to show institutions page, by default
-def filterby_institution(request, institution_id: int):
-    institution = Institution.objects.get(id=institution_id)
-
-    form_type = model_form_mapping[institution]
-    form = InstitutionForm(instance=institution)
-
-    return render(
-        request,
-        'institution.html',
-        {
-            'institution': institution,
-            'form': form,
-        },
-    )
-
-
-#this is to show tissues page, by default
-def filterby_tissue_type(request, tissue_id: int):
-    tissue = Tissue.objects.get(id=tissue_id)
-
-    form_type = model_form_mapping[tissue]
-    form = TissueForm(instance=tissue)
-
-    return render(
-        request,
-        'tissue.html',
-        {
-            'institution': tissue,
-            'form': form,
-        },
-    )
-
-
-#this is to show data_type page, by default
-def filterby_data_type(request, data_type_id: int):
-    data_type = DataType.objects.get(id=data_type_id)
-
-    form_type = model_form_mapping[data_type]
-    form = DataTypeForm(instance=data_type)
-
-    return render(
-        request,
-        'datatype.html',
-        {
-            'institution': data_type,
-            'form': form,
-        },
-    )
-
+"""
+This method lists all gene-details.
+"""
 def gene_detail(request, hugo_symbol: str):
     gene = Gene.objects.get(hugo_symbol=hugo_symbol)
     proteins = gene.protein_set.all()
@@ -102,6 +106,9 @@ def gene_detail(request, hugo_symbol: str):
         },
     )
 
+"""
+This method lists all protein-details.
+"""
 def protein_detail(request, protein_name: str):
     protein = Protein.objects.get(name=protein_name)
 

@@ -6,7 +6,7 @@
 </head>
 <body>
     <div>
-    <h1>Study Detail</h1>
+    <h1></h1>
     <table>
         <thead>
             <tr>
@@ -14,8 +14,31 @@
                 <td>Contents</td>
             </tr>
         </thead>
-        {{ form.as_table }}
+         <tr>
+             <td>Institution</td>
+             <td><a href="./{{study.institution.name}}">{{ study.institution.name }}</a> </td>
+        </tr>
+        <tr>
+            <td>Datatype</td>
+             <td><a href="./{{study.data_type.name}}">{{ study.data_type.name }}</a> </td>
+        </tr>
+        <tr>
+            <td>Tissue</td>
+             <td><a href="./{{study.tissue.name}}">{{ study.tissue.name }}</a> </td>
+        </tr>
+          <tr>
+            <td>Subclass</td>
+             <td>{{ study.subclass }}</td>
+        </tr>
+      {% for field in fields %}
+        <tr><td>{{ field }} {{ field }}</td></tr>
+      {% endfor %}
     </table>
     </div>
 </body>
+  <footer class="footer">
+    <div class="container-fluid">
+        <h5>&#169; HubMap : Computational Biology, Carnegie Mellon Unievrsity.</h5>
+    </div>
+  </footer>
 </html>

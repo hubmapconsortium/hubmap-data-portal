@@ -1,0 +1,121 @@
+#hubmapnav{
+	background-color:#BE1E2D;
+}
+#navhubmaplink{
+	color:#aaa;
+}
+
+.register, .login, .home{
+outline:none;
+}
+.homenav, .dropdown-menu, #navcontainer, .logout {
+font-size:20px;
+}
+#brand-image{
+	height:40px;
+	margin-top:-32%;
+}
+#brand-image2{
+	height:40px;
+	margin-top:-8%;
+}
+#datatypeheader{
+	background-color:#530000;
+	color:#fff;
+	padding-top:58px;
+    height:100px;
+}
+#HubMapMain1{
+	background-color:#ddd;
+	padding-top:20px;
+    height:100%;
+}
+#HubMapMain2{
+	background-color:#bbb;
+    height:100%;
+}
+#HubMapButton{
+	padding:10px;
+}
+#InverseBadge{
+	background-color:#530000;
+	margin-left:3px;
+}
+#ContributorsOptions{
+	padding-right:15px;
+	padding-left:15px;
+	border-color:transparent;
+}
+#ContactUsForm{
+	width:40%;
+	float:left;
+}
+#SubmitComment{
+	padding:5px;
+}
+#ForgotPassword{
+	padding:10px;
+}
+#ButtonLink{
+	text-decoration:none;
+	color:#fff;
+}
+#ContactUsForm{
+	width:40%;
+}
+#AdminButton{
+	background-color:#530000;
+	border-color:#333;
+}
+#HomePanel{
+	margin-top:100px;
+	opacity:.75;
+}
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  height: 100%;
+  padding:0;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 0px;
+  height: 100%;
+  padding:0;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: #530000;
+  color: #fff;
+}
+#wrapper{
+    height:100%;
+    margin:0;
+    padding:0;
+    position: relative;
+    background-color:#bbb;
+}
+/* Custom page CSS for Footer
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}

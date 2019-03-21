@@ -2,20 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>HubMap Subclasses</title>
+    <title>HubMap Subclass Details</title>
 </head>
 <body>
-<div>
-    <h1>Sub classs</h1>
-    <table>
-        <thead>
-            <tr>
-                <td>Field Name</td>
-                <td>Contents</td>
-            </tr>
-        </thead>
-        {{ form.as_table }}
-    </table>
-</div>
+  <div>
+    <h1>Study Index by Subclass</h1>
+    <p>
+        <ul>
+        {% for study in study_list %}
+            <li><a href="{% url 'study_detail' study.id %}">Study: Institution {{ study.id }} : ({{ study.subclass }})</a></li>
+        {% endfor %}
+        </ul>
+    </p>
+    </div>
 </body>
+ <footer class="footer">
+                <div class="container-fluid">
+        <h5>&#169; HubMap : Computational Biology, Carnegie Mellon Unievrsity.</h5>
+                </div>
+            </footer>
 </html>
