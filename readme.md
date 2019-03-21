@@ -25,10 +25,10 @@ FAIR reference: https://docs.google.com/document/d/1RXmFrLhm_twOQGSlElcqWp8P8uEc
 TODO:
 Along with a full functional description all published APIs will include complete information describing:
 
-authentication and authorization (security scheme)
-request header
-call parameters
-response
-data models used for any of the above
+* authentication and authorization (security scheme)
+* request header
+* call parameters
+* response
+* data models used for any of the above
 
 
