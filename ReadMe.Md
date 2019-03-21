@@ -21,4 +21,14 @@ To see work-in-progress and TODOs, search TODOs in PyCharm.
 Acronyms:
 W.I.P : work in progress
 
+FAIR reference: https://docs.google.com/document/d/1RXmFrLhm_twOQGSlElcqWp8P8uEcq2jiJavjjM13cbo/edit#heading=h.5s6i6l1nfb30
+TODO:
+Along with a full functional description all published APIs will include complete information describing:
+
+authentication and authorization (security scheme)
+request header
+call parameters
+response
+data models used for any of the above
+
 

@@ -6,6 +6,7 @@ from .models import *
 
 #Developer: Matt Ruffalo
 #Developer modifying prototype: Sushma Anand Akoju
+
 #TODO: Modify all views to include StudyType search : W.I.P
 #TODO: Implement all views to support FAIR and Restful apis (which it currently is NOT a restful api).
 #TODO: find best way to have Authentication framework. (do we use Globus as Authentication api)?
