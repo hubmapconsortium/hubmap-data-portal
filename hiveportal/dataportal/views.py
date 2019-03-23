@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+from django.forms import ModelChoiceField, ModelMultipleChoiceField
 from django.http import HttpResponse
 from django.shortcuts import render
 
@@ -35,23 +36,24 @@ def index(request):
             'study_list': study_list,
         },
     )
-"""
-This method lists study/study_types based on base_types from Study model: groups by 
-Institution, Tissue, Datatype Models. We filter by name, for now, since prototype.
-"""
-def indexByGroup(request, name: str):
+
+def indexByGroup(request, id:int):
+    """
+    This method lists study/study_types based on base_types from Study model: groups by
+    Institution, Tissue, Datatype Models. We filter by name, for now, since prototype.
+    """
     study_list = []
     study = []
     templateLink = ""
 
-    if(Institution.objects.filter(name=name).count()>0):
-        study = Study.objects.filter(institution_id=Institution.objects.get(name=name))
+    if request.get_full_path().__contains__('institution') :
+        study = Study.objects.filter(institution_id=id)
         templateLink='institution.html'
-    elif (Tissue.objects.filter(name=name).count()>0):
-        study = Study.objects.filter(tissue_id=Tissue.objects.get(name=name))
+    elif request.get_full_path().__contains__('tissue'):
+        study = Study.objects.filter(tissue_id=id)
         templateLink='tissue.html'
-    elif (DataType.objects.filter(name=name).count()>0):
-        study = Study.objects.filter(data_type_id=DataType.objects.get(name=name))
+    elif request.get_full_path().__contains__('datatype'):
+        study = Study.objects.filter(data_type_id=id)
         templateLink='datatype.html'
     for model in study:
         study_list.append(model.get_subclass_object())
@@ -79,6 +81,8 @@ def study_detail(request, study_id: int):
     form = form_type(instance=study)
     for field in form.base_fields:
         if field not in baseFields:
+            if type(field) is ModelMultipleChoiceField:
+                print(field._choices.selected )
             field1 = form.base_fields.get(field)
             fields.__setitem__(field1.label, field1)
     return render(

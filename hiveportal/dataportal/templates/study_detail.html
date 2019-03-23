@@ -1,9 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>HuBMAP Study Detail</title>
-</head>
+{% extends "base.html" %}
+{% block content %}
 <body>
     <div>
     <h1></h1>
@@ -16,29 +12,25 @@
         </thead>
          <tr>
              <td>Institution</td>
-             <td><a href="./{{study.institution.name}}">{{ study.institution.name }}</a> </td>
+             <td><a href="../query/{{'institution'}}/{{study.institution.id}}">{{ study.institution.name }}</a> </td>
         </tr>
         <tr>
             <td>Datatype</td>
-             <td><a href="./{{study.data_type.name}}">{{ study.data_type.name }}</a> </td>
+             <td><a href="../query/{{'datatype'}}/{{study.data_type.id}}">{{ study.data_type.name }}</a> </td>
         </tr>
         <tr>
             <td>Tissue</td>
-             <td><a href="./{{study.tissue.name}}">{{ study.tissue.name }}</a> </td>
+             <td><a href="../query/{{'tissue'}}/{{study.tissue.id}}">{{ study.tissue.name }}</a> </td>
         </tr>
           <tr>
             <td>Subclass</td>
              <td>{{ study.subclass }}</td>
         </tr>
-      {% for field in fields %}
-        <tr><td>{{ field }} {{ field }}</td></tr>
+      {% for key,value in form.base_fields.items %}
+        <tr><td>{{ key }} {{ study }} </td></tr>
       {% endfor %}
     </table>
+    <!--{ form.base_fields }}-->
     </div>
 </body>
-  <footer class="footer">
-    <div class="container-fluid">
-        <h5>&#169; HubMap : Computational Biology, Carnegie Mellon Unievrsity.</h5>
-    </div>
-  </footer>
-</html>
+ {% endblock %}

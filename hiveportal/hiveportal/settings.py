@@ -25,7 +25,7 @@ SECRET_KEY = 'g+^rn4oz4$##*i6i=z)!vgwufp)4#q(fx5i*1m_8=7s88=rtdr'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -120,9 +120,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+MAIN_PROJECT = os.path.dirname(__file__)
+STATIC_ROOT =  os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-STATIC_ROOT = Path('/opt/hiveportal/static')
+STATICFILES_DIRS = (
+    os.path.join(MAIN_PROJECT, 'static'),
+)
+#STATIC_ROOT = Path('/opt/hiveportal/static')
 
 MEDIA_ROOT = Path('/opt/hiveportal/media')
 

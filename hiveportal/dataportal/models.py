@@ -86,15 +86,26 @@ class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
     genes = models.ManyToManyField(Gene)
     unique_barcode_count = models.PositiveIntegerField()
 
+    def __str__(self):
+        for gene in self.genes.all():
+            print(gene.hugo_symbol)
+        return self.institution.name
+
 @study_type
 class SpatialTranscriptomicStudy(Study):
     genes = models.ManyToManyField(Gene)
+
+    def __str__(self):
+        return self.get_subclass_object()
 
 @study_type
 class MassCytometryStudy(Study):
     sample_count = models.PositiveIntegerField()
     proteins = models.ManyToManyField(Protein)
     preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
+
+    def __str__(self):
+        return self.proteins.name
 
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
