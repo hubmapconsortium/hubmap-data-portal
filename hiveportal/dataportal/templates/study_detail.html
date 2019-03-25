@@ -3,31 +3,37 @@
 <body>
     <div>
     <h1></h1>
-    <table>
+    <table cellspacing="30">
         <thead>
             <tr>
-                <td>Field Name</td>
+                <td>Field Name &nbsp &nbsp </td>
                 <td>Contents</td>
             </tr>
         </thead>
          <tr>
-             <td>Institution</td>
+             <td>Institution &nbsp &nbsp </td>
              <td><a href="../query/{{'institution'}}/{{study.institution.id}}">{{ study.institution.name }}</a> </td>
         </tr>
         <tr>
-            <td>Datatype</td>
+            <td>Datatype &nbsp &nbsp </td>
              <td><a href="../query/{{'datatype'}}/{{study.data_type.id}}">{{ study.data_type.name }}</a> </td>
         </tr>
         <tr>
-            <td>Tissue</td>
+            <td>Tissue &nbsp &nbsp </td>
              <td><a href="../query/{{'tissue'}}/{{study.tissue.id}}">{{ study.tissue.name }}</a> </td>
         </tr>
           <tr>
-            <td>Subclass</td>
-             <td>{{ study.subclass }}</td>
+            <td>Subclass &nbsp &nbsp </td>
+             <td>{{ study.subclass.model }}</td>
         </tr>
-      {% for key,value in form.base_fields.items %}
-        <tr><td>{{ key }} {{ study }} </td></tr>
+      {% for key,value in fields.items %}
+        <tr><td>{{ key }} &nbsp &nbsp </td>
+            {% if key == "genes" %}
+                <td><a href="../{{'gene'}}/{{value}}">{{ value }}</a></td>
+            {% else %}
+                 <td> {{ value }}</td>
+            {% endif %}
+        </tr>
       {% endfor %}
     </table>
     <!--{ form.base_fields }}-->

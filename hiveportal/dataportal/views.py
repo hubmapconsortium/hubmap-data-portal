@@ -1,7 +1,6 @@
 from collections import OrderedDict
 
 from django.forms import ModelChoiceField, ModelMultipleChoiceField
-from django.http import HttpResponse
 from django.shortcuts import render
 
 from .forms import model_form_mapping, StudyTypeForm
@@ -37,7 +36,7 @@ def index(request):
         },
     )
 
-def indexByGroup(request, id:int):
+def index_by_group(request, id:int):
     """
     This method lists study/study_types based on base_types from Study model: groups by
     Institution, Tissue, Datatype Models. We filter by name, for now, since prototype.
@@ -71,20 +70,15 @@ def study_detail(request, study_id: int):
     This method provides details of Study type by details.
     """
     study = Study.objects.get(id=study_id).get_subclass_object()
+
     fields =OrderedDict()
-    baseFields = []
-    baseFields.append('institution')
-    baseFields.append('data_type')
-    baseFields.append('tissue')
-    baseFields.append('subclass')
     form_type = model_form_mapping[type(study)]
     form = form_type(instance=study)
-    for field in form.base_fields:
-        if field not in baseFields:
-            if type(field) is ModelMultipleChoiceField:
-                print(field._choices.selected )
-            field1 = form.base_fields.get(field)
-            fields.__setitem__(field1.label, field1)
+    field_values= study.derived_class_fields
+    for field in field_values.split(' ,'):
+        string_fields = field.strip().split(':')
+        fields.__setitem__(string_fields[0].strip(), string_fields[1].strip())
+    print(fields)
     return render(
         request,
         'study_detail.html',

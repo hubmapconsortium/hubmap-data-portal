@@ -2,6 +2,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 #Developer: Matt Ruffalo
+#developer: Sushma Anand Akoju
+
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
     hugo_symbol = models.CharField(max_length=50, blank=True, null=True)
@@ -11,6 +13,11 @@ class Gene(models.Model):
     def __str__(self):
         return self.hugo_symbol or ''
 
+    @property
+    def derived_class_fields(self):
+        return ''.join(
+            ['hugo_symbol'+self.hugo_symbol])
+
 class Protein(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
@@ -18,6 +25,11 @@ class Protein(models.Model):
 
     def __str__(self):
         return self.name or ''
+
+    @property
+    def derived_class_fields(self):
+        return ''.join(
+            ['name: '+self.name])
 
 class Institution(models.Model):
     name = models.CharField(max_length=250)
@@ -54,6 +66,9 @@ class Study(models.Model):
     def get_subclass_object(self):
         return self.subclass.get_object_for_this_type(study_ptr=self)
 
+    def get_class_name(self):
+        return self.subclass.name
+
 StudyTypes = []
 def study_type(model):
     """
@@ -63,23 +78,44 @@ def study_type(model):
     StudyTypes.append(model)
     return model
 
+@study_type
 class ScRnaSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
+
+    @property
+    def derived_class_fields(self):
+        return ''.join(
+            ['read_count_total: '+str(self.read_count_total), ' ,', 'cell_count: '+str(self.cell_count)])
 
 @study_type
 class ScThsSeqStudy(Study):
     cell_count = models.PositiveIntegerField()
     total_read_count = models.PositiveIntegerField()
 
+    @property
+    def derived_class_fields(self):
+        return ''.join(
+            ['total_read_count: '+str(self.total_read_count), ' ,', 'cell_count: '+str(self.cell_count)])
+
 @study_type
 class ScAtacSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
 
+    @property
+    def derived_class_fields(self):
+        return ''.join(
+            ['read_count_total: '+str(self.read_count_total), ' ,', 'cell_count: '+str(self.cell_count)])
+
 @study_type
 class ScRnaSeqStudyCDNA(ScRnaSeqStudy):
     read_count_aligned = models.PositiveIntegerField()
+
+    @property
+    def derived_class_fields(self):
+        return ''.join(
+            ['read_count_aligned: '+str(self.read_count_aligned)])
 
 @study_type
 class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
@@ -87,16 +123,31 @@ class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
     unique_barcode_count = models.PositiveIntegerField()
 
     def __str__(self):
-        for gene in self.genes.all():
-            print(gene.hugo_symbol)
         return self.institution.name
+
+    @property
+    def derived_class_fields(self):
+        gene_values=''
+        for gene in self.genes.all():
+            gene_values += (gene.hugo_symbol) + ' '
+        return ''.join(
+            ['genes: '+gene_values, ' ,', 'unique_barcode_count: '+str(self.unique_barcode_count)])
 
 @study_type
 class SpatialTranscriptomicStudy(Study):
     genes = models.ManyToManyField(Gene)
 
     def __str__(self):
-        return self.get_subclass_object()
+        return self.get_class_name()
+
+    @property
+    def derived_class_fields(self):
+        gene_values = ''
+        for gene in self.genes.all():
+            gene_values+=(gene.hugo_symbol)+' '
+        return ''.join(
+            ['genes: '+gene_values])
+
 
 @study_type
 class MassCytometryStudy(Study):
@@ -104,9 +155,24 @@ class MassCytometryStudy(Study):
     proteins = models.ManyToManyField(Protein)
     preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
 
+    @property
+    def derived_class_fields(self):
+        protein_values = ''
+        for protein in self.proteins.all():
+            protein_values+=protein.hugo_symbol+' '
+        return ''.join(
+            ['sample_count: '+str(self.sample_count), ' ,', 'proteins: '+protein_values,
+             'preview_image: '+str(self.preview_image)])
+
+
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
     preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
+
+    @property
+    def derived_class_fields(self):
+        return ''.join(
+            ['image_count: '+str(self.image_count), ' ,', 'preview_image: '+str(self.preview_image.path)])
 
 @study_type
 class SeqFishImagingStudy(ImagingStudy):
