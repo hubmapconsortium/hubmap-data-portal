@@ -29,7 +29,7 @@ class Protein(models.Model):
     @property
     def derived_class_fields(self):
         return ''.join(
-            ['name: '+self.name])
+            ['name: '+self.name,' ,'+'gene: '+self.gene])
 
 class Institution(models.Model):
     name = models.CharField(max_length=250)
@@ -159,10 +159,10 @@ class MassCytometryStudy(Study):
     def derived_class_fields(self):
         protein_values = ''
         for protein in self.proteins.all():
-            protein_values+=protein.hugo_symbol+' '
+            protein_values+=protein.name+' '
         return ''.join(
-            ['sample_count: '+str(self.sample_count), ' ,', 'proteins: '+protein_values,
-             'preview_image: '+str(self.preview_image)])
+            ['sample_count: '+str(self.sample_count), ' ,', 'proteins: '+protein_values,' ,',
+             'preview_image: '+str(self.preview_image.name)])
 
 
 class ImagingStudy(Study):

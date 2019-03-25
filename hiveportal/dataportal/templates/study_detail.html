@@ -30,6 +30,8 @@
         <tr><td>{{ key }} &nbsp &nbsp </td>
             {% if key == "genes" %}
                 <td><a href="../{{'gene'}}/{{value}}">{{ value }}</a></td>
+            {% elif key == "proteins" %}
+                <td><a href="../{{'protein'}}/{{value}}">{{ value }}</a></td>
             {% else %}
                  <td> {{ value }}</td>
             {% endif %}

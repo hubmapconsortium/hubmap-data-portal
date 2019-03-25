@@ -6,7 +6,7 @@
     <p>
         <ul>
         {% for study in study_list %}
-            <li><a href="{% url 'study_detail' study.id %}">Study {{ study.id }} ({{ study.data_type }})</a></li>
+            <li><a href="{% url 'study_detail' study.id %}">Study {{ study.id }} ({{ study.subclass.model }})</a></li>
         {% endfor %}
         </ul>
     </p>

@@ -109,13 +109,16 @@ def protein_detail(request, protein_name: str):
     """
     This method lists all protein-details.
     """
-    protein = Protein.objects.get(name=protein_name)
-
+    gene= []
+    proteins = Protein.objects.filter(name=protein_name)
+    for protein in proteins:
+        gene = Gene.objects.get(hugo_symbol=protein.gene.hugo_symbol)
     return render(
         request,
         'protein_detail.html',
         {
-            'protein': protein,
+            'proteins': proteins,
+            'gene': gene,
         },
     )
 

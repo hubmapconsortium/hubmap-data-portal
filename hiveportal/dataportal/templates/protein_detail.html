@@ -1,37 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>HuBMAP Gene Detail</title>
-</head>
+{% extends "base.html" %}
+{% block content %}
 <body>
     <div>
-    <h1>Protein Detail</h1>
+    <h1>Protein Details</h1>
+        <h2>Gene details for this Protein:</h2>
     <ul>
-    {% if gene.hugo_symbol %}
-        <li>HUGO Symbol: {{ gene.hugo_symbol }}</li>
-    {% endif %}
-    {% if gene.entrez_id %}
-        <li>NCBI Entrez ID: {{ gene.entrez_id }}</li>
-    {% endif %}
-    {% if gene.ensembl_id %}
-        <li>Ensembl ID: {{ gene.ensembl_id }}</li>
-    {% endif %}
+            <li>HUGO Symbol: <a href="../{{'gene'}}/{{gene.hugo_symbol}}">{{ gene.hugo_symbol }}</a></li>
+            <li>NCBI Entrez ID: {{ gene.entrez_id }}</li>
+            <li>Ensembl ID: {{ gene.ensembl_id }}</li>
     </ul>
 
-    {% if proteins %}
     <h2>Proteins:</h2>
         <ul>
         {% for protein in proteins %}
-            <li><a href="{% url 'protein_detail' protein.name %}"></a></li>
+            <li> {{ protein.name }}</li>
         {% endfor %}
         </ul>
-    {% endif %}
     </div>
 </body>
- <footer class="footer">
-                <div class="container-fluid">
-        <h5>&#169; HubMap : Computational Biology, Carnegie Mellon Unievrsity.</h5>
-                </div>
-            </footer>
-</html>
+
+{% endblock %}
