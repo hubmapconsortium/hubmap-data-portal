@@ -140,3 +140,33 @@ def globus(request):
             'refresh_token': refresh_token,
         },
     )
+
+def list_projects(request):
+    """
+    This is default projects list page.
+    """
+    return render(request, 'projects.html')
+
+def get_analysis(request):
+    """
+    This is default analysis page.
+    """
+    return render(request, 'analysis.html')
+
+def show_data(request):
+    """
+    This is default data repository page.
+    """
+    return render(request, 'datarepository.html')
+
+def support(request):
+    """
+    This is default support page.
+    """
+    return render(request, 'support.html')
+
+def contactus(request):
+    """
+    This is default contactus page.
+    """
+    return render(request, 'contactus.html')

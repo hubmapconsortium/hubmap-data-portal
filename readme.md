@@ -1,4 +1,4 @@
-This is a simple,quick prototype of HubMap web portal.
+This is a simple,quick prototype of HuBMAP web portal.
 This uses sample data and data types and creates basic 
 Models in Django (database, tables..) by using simple HTML templates.
 This portal simulates Globus authentication.

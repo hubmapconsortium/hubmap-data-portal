@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--The Above 3 Tags Must Be First-->
-    <meta name="description" content="HubMap Web portal">
+    <meta name="description" content="HuBMAP Web portal">
     <meta name="author" content="Computational Biology department, Carnegie Mellon University.">
     <!--Favicon-->
     <link rel="icon" type="image/png" href="{% static 'assets1/img/favicon.png' %}">
-    <title>HubMap Web portal!</title>
+    <title>HuBMAP Web portal!</title>
     <!--Style Sheets-->
 
     <link href="{% static "assets1/css/bootstrap.css" %}" rel="stylesheet" media="screen">
@@ -35,20 +35,27 @@
                         <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand" href="">
-                        <img id="brand-image" src="{% static "assets1/img/hubmap.png" %}" alt="HubMap Logo">
+                        <img id="brand-image" src="{% static "assets1/img/hubmap.png" %}" alt="HuBMAP Logo">
                       </a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                       <ul class="nav navbar-nav">
-						      	<li><a class="login" href="/index">Click Here to see Study data.</a></li>
-                        <li >
+						      	<li><a class="login" href="/">Home</a></li>
+                       <li >
+                          <a href="../projects" >Projects</a>
                         </li>
-                        <li class="dropdown">
+                       <li >
+                          <a href="../analysis" >Analysis</a>
+                        </li>
+                          <li >
+                          <a href="../data_repository" >Data Repository</a>
+                        </li>
+                          <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help<span class="caret"></span></a>
                           <ul class="dropdown-menu">
-                            <li><a href="support.html">Support</a></li>
-                            <li><a href="contactus.html">Contact Us</a></li>
+                            <li><a href="../support/">Support</a></li>
+                            <li><a href="../contactus/">Contact Us</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -76,7 +83,7 @@
      </div>
 <footer class="HubmapFooter">
                 <div class="container-fluid">
-        <h5>&#169; HubMap : Computational Biology, Carnegie Mellon University.</h5>
+        <h5>&#169; HuBMAP : Computational Biology, Carnegie Mellon University.</h5>
                 </div>
             </footer>
     <script src="http://code.jquery.com/jquery.js"></script>
