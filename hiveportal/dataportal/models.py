@@ -104,9 +104,6 @@ class MassCytometryStudy(Study):
     proteins = models.ManyToManyField(Protein)
     preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
 
-    def __str__(self):
-        return self.proteins.name
-
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
     preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)

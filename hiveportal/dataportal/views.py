@@ -15,16 +15,16 @@ from .models import *
 #TODO: find best way to have Authentication framework. (do we use Globus as Authentication api)?
 #TODO: Re-model, re-design this prorotype
 
-"""
-This is default landing page.
-"""
 def landing(request):
+    """
+    This is default landing page.
+    """
     return render(request, 'landing.html')
 
-"""
-This method lists study/study_types: Default page.
-"""
 def index(request):
+    """
+    This method lists study/study_types: Default page.
+    """
     study_list = []
     for model in StudyTypes:
         study_list.extend(model.objects.all())
@@ -66,10 +66,10 @@ def indexByGroup(request, id:int):
         },
     )
 
-"""
-This method provides details of Study type by details.
-"""
 def study_detail(request, study_id: int):
+    """
+    This method provides details of Study type by details.
+    """
     study = Study.objects.get(id=study_id).get_subclass_object()
     fields =OrderedDict()
     baseFields = []
@@ -94,10 +94,11 @@ def study_detail(request, study_id: int):
             'fields':fields,
         },
     )
-"""
-This method lists all gene-details.
-"""
+
 def gene_detail(request, hugo_symbol: str):
+    """
+    This method lists all gene-details.
+    """
     gene = Gene.objects.get(hugo_symbol=hugo_symbol)
     proteins = gene.protein_set.all()
 
@@ -110,10 +111,10 @@ def gene_detail(request, hugo_symbol: str):
         },
     )
 
-"""
-This method lists all protein-details.
-"""
 def protein_detail(request, protein_name: str):
+    """
+    This method lists all protein-details.
+    """
     protein = Protein.objects.get(name=protein_name)
 
     return render(
