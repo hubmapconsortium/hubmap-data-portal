@@ -5,7 +5,7 @@
     <h1>Protein Details</h1>
         <h2>Gene details for this Protein:</h2>
     <ul>
-            <li>HUGO Symbol: <a href="../{{'gene'}}/{{gene.hugo_symbol}}">{{ gene.hugo_symbol }}</a></li>
+            <li>HUGO Symbol: <a href="{% url 'gene_detail' gene.hugo_symbol %}">{{ gene.hugo_symbol }}</a></li>
             <li>NCBI Entrez ID: {{ gene.entrez_id }}</li>
             <li>Ensembl ID: {{ gene.ensembl_id }}</li>
     </ul>
