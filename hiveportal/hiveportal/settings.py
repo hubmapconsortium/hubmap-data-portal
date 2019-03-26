@@ -126,10 +126,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(MAIN_PROJECT, 'static'),
 )
+
 #STATIC_ROOT = Path('/opt/hiveportal/static')
 
-MEDIA_ROOT = Path('/opt/hiveportal/media')
-
+#MEDIA_ROOT = Path('/opt/hiveportal/media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 # Authentication, including Globus SSO
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.globus.GlobusOpenIdConnect',

@@ -3,6 +3,8 @@ from django.db import models
 
 #Developer: Matt Ruffalo
 #developer: Sushma Anand Akoju
+from django.utils.safestring import mark_safe
+
 
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
@@ -153,26 +155,28 @@ class SpatialTranscriptomicStudy(Study):
 class MassCytometryStudy(Study):
     sample_count = models.PositiveIntegerField()
     proteins = models.ManyToManyField(Protein)
-    preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
+    preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
 
     @property
     def derived_class_fields(self):
         protein_values = ''
         for protein in self.proteins.all():
             protein_values+=protein.name+' '
+        preview_image_url = self.preview_image.url
         return ''.join(
             ['sample_count: '+str(self.sample_count), ' ,', 'proteins: '+protein_values,' ,',
-             'preview_image: '+str(self.preview_image.name)])
+             'preview_image: '+str(preview_image_url)])
 
 
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
-    preview_image = models.ImageField(max_length=500, upload_to='thumbnails/%Y/%m/%d', null=True, blank=True)
+    preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
 
     @property
     def derived_class_fields(self):
+        preview_image_url = self.preview_image.url
         return ''.join(
-            ['image_count: '+str(self.image_count), ' ,', 'preview_image: '+str(self.preview_image.path)])
+            ['image_count: '+str(self.image_count), ' ,', 'preview_image: '+str(preview_image_url)])
 
 @study_type
 class SeqFishImagingStudy(ImagingStudy):

@@ -22,4 +22,6 @@ urlpatterns = [
     path('globus/', views.globus, name='globus'),
     path('support/', views.support, name='support'),
     path('contactus/', views.contactus, name='contactus'),
+    path('show_image/<int:study_id>', views.show_image, name='show_image'),
     ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -170,3 +170,26 @@ def contactus(request):
     This is default contactus page.
     """
     return render(request, 'contactus.html')
+
+def show_image(request, study_id:int):
+    """
+    This is default preview_image page.
+    """
+    study = Study.objects.get(id=study_id).get_subclass_object()
+
+    url_path =""
+    form_type = model_form_mapping[type(study)]
+    form = form_type(instance=study)
+    field_values = study.derived_class_fields
+    for field in field_values.split(' ,'):
+        string_fields = field.strip().split(':')
+        if string_fields[0].strip() == "preview_image":
+            url_path = string_fields[1].strip()
+    print(url_path)
+    return render(
+        request,
+        'show_image.html',
+        {
+            'url_path': url_path,
+        },
+    )
