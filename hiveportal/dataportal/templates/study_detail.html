@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-<body>
-    <div>
-    <h1></h1>
+    <div style="margin-top: -50px">
+    <h2>Study Details: {{ study.id }}</h2>
     <table cellspacing="30">
         <thead>
             <tr>
@@ -32,6 +31,9 @@
                 <td><a href="{% url 'gene_detail' value %}">{{ value }}</a></td>
             {% elif key == "proteins" %}
                 <td><a href="{% url 'protein_detail' value %}">{{ value }}</a></td>
+            {% elif key == "preview_image" %}
+               <td><a href="{% url 'show_image' study.id %}" title="Click here to view the Image!"><img src="{{ value }}" alt="{{ key }}" style="float:left;height: 200px;width: 200px">
+                    </a> </td>
             {% else %}
                  <td> {{ value }}</td>
             {% endif %}
@@ -40,5 +42,4 @@
     </table>
     <!--{ form.base_fields }}-->
     </div>
-</body>
  {% endblock %}

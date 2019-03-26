@@ -9,13 +9,13 @@
     <meta name="description" content="HuBMAP Web portal">
     <meta name="author" content="Computational Biology department, Carnegie Mellon University.">
     <!--Favicon-->
-    <link rel="icon" type="image/png" href="{% static 'assets1/img/favicon.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
     <title>HuBMAP Web portal!</title>
     <!--Style Sheets-->
 
-    <link href="{% static "assets1/css/bootstrap.css" %}" rel="stylesheet" media="screen">
-    <link href="{% static "assets1/css/style.css" %}" rel="stylesheet" media="screen">
-    <link href="{% static "assets1/css/sticky-footer-navbar.css" %}" rel="stylesheet">
+    <link href="{% static "assets/css/bootstrap.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "assets/css/style.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "assets/css/sticky-footer-navbar.css" %}" rel="stylesheet">
         <!--FontAwesome-->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
@@ -35,7 +35,7 @@
                         <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand" href="">
-                        <img id="brand-image" src="{% static "assets1/img/hubmap.png" %}" alt="HuBMAP Logo">
+                        <img id="brand-image" src="{% static "assets/img/hubmap.png" %}" alt="HuBMAP Logo">
                       </a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -89,7 +89,15 @@
                 </div>
             </footer>
     <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{% static "assets1/js/bootstrap.js" %}"></script>
+    <script src="{% static "assets/js/bootstrap.js" %}"></script>
+  <script>
+    $(document).ready(function(){
+        $('a.pic').each(function(){ // Foreach a.pic
+            var url = $(this).find('img').attr('src'); // Get src
+            $(this).attr("href",url); // Set href
+        });
+    });
+</script>
   </body>
 
 </html>
