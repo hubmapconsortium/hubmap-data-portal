@@ -48,28 +48,27 @@
 {#                          <a href="../analysis" >Analysis</a>#}
 {#                        </li>#}
                            <li >
-                          <a href="../index" >Study Index</a>
+                          <a href="{% url 'index' %}" >Study Index</a>
                         </li>
                           <li >
-                          <a href="../repository" >Data Repository</a>
+                          <a href="{% url 'repository' %}" >Data Repository</a>
                         </li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help<span class="caret"></span></a>
                           <ul class="dropdown-menu">
-                            <li><a href="support">Support</a></li>
-                            <li><a href="contactus">Contact Us</a></li>
+                            <li><a href="{% url 'support' %}">Support</a></li>
+                            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
                           </ul>
                         </li>
                       </ul>
-                      <ul class="nav navbar-nav navbar-right">
-                        <li class="dropdown">
-                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
-                          <ul class="dropdown-menu">
-                            <li><a href="settings">Account Settings</a></li>
-                            <li><a href="logout">Logout</a></li>
-                          </ul>
-                        </li>
-                      </ul>
+{#                      <ul class="nav navbar-nav navbar-right">#}
+{#                        <li class="dropdown">#}
+{#                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>#}
+{#                          <ul class="dropdown-menu">#}
+{#                            <li><a href="logout">Logout</a></li>#}
+{#                          </ul>#}
+{#                        </li>#}
+{#                      </ul>#}
                     </div><!-- /.navbar-collapse -->
                   </div><!-- /.container-fluid -->
               </div>
@@ -81,7 +80,7 @@
                     <div class="container-fluid" style="background-color: transparent;" >
                          <div class="well" id="MainWell" style="background-color: transparent;border: transparent;">
                             <h2 ><strong> Welcome to HuBMAP portal!</strong> </h2>
-                            <p style="color:black;font-size: medium;">Click <a href="/index"> here</a> to navigate. </p>
+                            <p style="color:black;font-size: medium;">Click <a href="{% url 'index' %}"> here</a> to navigate. </p>
                              <p style="color:black;font-size: medium;"> The Human BioMolecular Atlas Program (HuBMAP) is a consortium composed of diverse research teams funded by the National Institutes of Health (https://commonfund.nih.gov/HuBMAP). HuBMAP is committed to developing the next generation of molecular analysis technologies, computational tools, and to generate foundational tissue maps in order to accelerate the construction of an atlas of the human body for the understanding the relationship between tissue organization and function. HuBMAP values secure, open sharing, and collaboration with other consortia and the wider research community.</p>
                         </div><br><br>
                     </div>

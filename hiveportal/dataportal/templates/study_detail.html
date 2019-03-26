@@ -12,15 +12,15 @@
         </thead>
          <tr>
              <td>Institution &nbsp &nbsp </td>
-             <td><a href="../query/{{'institution'}}/{{study.institution.id}}">{{ study.institution.name }}</a> </td>
+             <td><a href="{% url 'institution' study.institution.id %}">{{ study.institution.name }}</a> </td>
         </tr>
         <tr>
             <td>Datatype &nbsp &nbsp </td>
-             <td><a href="../query/{{'datatype'}}/{{study.data_type.id}}">{{ study.data_type.name }}</a> </td>
+             <td><a href="{% url 'datatype' study.data_type.id %}">{{ study.data_type.name }}</a> </td>
         </tr>
         <tr>
             <td>Tissue &nbsp &nbsp </td>
-             <td><a href="../query/{{'tissue'}}/{{study.tissue.id}}">{{ study.tissue.name }}</a> </td>
+             <td><a href="{% url 'tissue' study.tissue.id %}">{{ study.tissue.name }}</a> </td>
         </tr>
           <tr>
             <td>Subclass &nbsp &nbsp </td>
@@ -29,9 +29,9 @@
       {% for key,value in fields.items %}
         <tr><td>{{ key }} &nbsp &nbsp </td>
             {% if key == "genes" %}
-                <td><a href="../{{'gene'}}/{{value}}">{{ value }}</a></td>
+                <td><a href="{% url 'gene_detail' value %}">{{ value }}</a></td>
             {% elif key == "proteins" %}
-                <td><a href="../{{'protein'}}/{{value}}">{{ value }}</a></td>
+                <td><a href="{% url 'protein_detail' value %}">{{ value }}</a></td>
             {% else %}
                  <td> {{ value }}</td>
             {% endif %}
