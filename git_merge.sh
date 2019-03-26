@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-#!/usr/bin/env bash
-echo "This git upload script for HuBMAP web portal repository. Execute this script to upload to your-branch."
+echo "This git MERGE script for HuBMAP web portal repository. Execute this script to merge your-branch to master."
 echo "First check OS..."
 osname="$(uname -s)"
 case "${osname}" in
