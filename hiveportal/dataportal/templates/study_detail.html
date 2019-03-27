@@ -28,9 +28,17 @@
       {% for key,value in fields.items %}
         <tr><td>{{ key }} &nbsp &nbsp </td>
             {% if key == "genes" %}
-                <td><a href="{% url 'gene_detail' value %}">{{ value }}</a></td>
+                 <td>
+                {% for gene in value %}
+                    <a href="{% url 'gene_detail' gene %}">{{ gene }}</a>
+                {% endfor %}
+                </td>
             {% elif key == "proteins" %}
-                <td><a href="{% url 'protein_detail' value %}">{{ value }}</a></td>
+                <td>
+                {% for protein in value %}
+                    <a href="{% url 'protein_detail' protein %}">{{ protein }}</a>
+                {% endfor %}
+                </td>
             {% elif key == "preview_image" %}
                <td><a href="{% url 'show_image' study.id %}" title="Click here to view the Image!"><img src="{{ value }}" alt="{{ key }}" style="float:left;height: 200px;width: 200px">
                     </a> </td>
