@@ -1,20 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-    <div>
-    <h1>Protein Details</h1>
-        <h2>Gene details for this Protein:</h2>
-    <ul>
-            <li>HUGO Symbol: <a href="{% url 'gene_detail' gene.hugo_symbol %}">{{ gene.hugo_symbol }}</a></li>
-            <li>NCBI Entrez ID: {{ gene.entrez_id }}</li>
-            <li>Ensembl ID: {{ gene.ensembl_id }}</li>
-    </ul>
-
-    <h2>Proteins:</h2>
+    <div style="margin-top: -50px">
+    <h2>Protein Details</h2>
         <ul>
         {% for protein in proteins %}
             <li> {{ protein.name }}</li>
         {% endfor %}
         </ul>
+     <h3>Gene details for this Protein:</h3>
+    <ul>
+            <li>HUGO Symbol: <a href="{% url 'gene_detail' gene.hugo_symbol %}">{{ gene.hugo_symbol }}</a></li>
+            <li>NCBI Entrez ID: {{ gene.entrez_id }}</li>
+            <li>Ensembl ID: {{ gene.ensembl_id }}</li>
+    </ul>
     </div>
 
 {% endblock %}

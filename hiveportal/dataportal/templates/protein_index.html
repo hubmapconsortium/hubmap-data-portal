@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <div style="margin-top: -50px">
+    <h2>Proteins Index</h2>
+    <p>
+        <ul>
+        {% for protein in proteins %}
+            <li><a href="{% url 'protein_detail' protein.name %}">Protein {{ protein.id }} ({{ protein.name }})</a></li>
+        {% endfor %}
+        </ul>
+    </p>
+    </div>
+{% endblock %}

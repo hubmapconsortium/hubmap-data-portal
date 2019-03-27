@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <div style="margin-top: -50px">
+    <h2>Genes Index</h2>
+    <p>
+        <ul>
+        {% for gene in genes %}
+            <li><a href="{% url 'gene_detail' gene.hugo_symbol %}">Gene {{ gene.entrez_id }} ({{ gene.hugo_symbol }})</a></li>
+        {% endfor %}
+        </ul>
+    </p>
+    </div>
+{% endblock %}
