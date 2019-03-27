@@ -80,7 +80,6 @@ def study_type(model):
     StudyTypes.append(model)
     return model
 
-@study_type
 class ScRnaSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
@@ -124,9 +123,6 @@ class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
     genes = models.ManyToManyField(Gene)
     unique_barcode_count = models.PositiveIntegerField()
 
-    def __str__(self):
-        return self.get_class_name()
-
     @property
     def derived_class_fields(self):
         gene_values=''
@@ -138,9 +134,6 @@ class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
 @study_type
 class SpatialTranscriptomicStudy(Study):
     genes = models.ManyToManyField(Gene)
-
-    def __str__(self):
-        return self.get_class_name()
 
     @property
     def derived_class_fields(self):
