@@ -172,9 +172,14 @@ class ImagingStudy(Study):
 
     @property
     def derived_class_fields(self):
-        preview_image_url = self.preview_image.url
-        return ''.join(
-            ['image_count: '+str(self.image_count), ' ,', 'preview_image: '+str(preview_image_url)])
+        if len(self.preview_image.name)!=0:
+            print(" image: is " + self.preview_image.name)
+            preview_image_url = self.preview_image.url
+            return ''.join(
+                ['image_count: '+str(self.image_count), ' ,', 'preview_image: '+str(preview_image_url)])
+        else:
+            return ''.join(
+                ['image_count: ' + str(self.image_count)])
 
 @study_type
 class SeqFishImagingStudy(ImagingStudy):
