@@ -125,7 +125,7 @@ class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
     unique_barcode_count = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.institution.name
+        return self.get_class_name()
 
     @property
     def derived_class_fields(self):
@@ -161,12 +161,11 @@ class MassCytometryStudy(Study):
     def derived_class_fields(self):
         protein_values = ''
         for protein in self.proteins.all():
-            protein_values+=protein.name+' '
+            protein_values+=protein.name+ ' '
         preview_image_url = self.preview_image.url
         return ''.join(
             ['sample_count: '+str(self.sample_count), ' ,', 'proteins: '+protein_values,' ,',
              'preview_image: '+str(preview_image_url)])
-
 
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()

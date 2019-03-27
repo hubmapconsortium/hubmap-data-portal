@@ -77,7 +77,12 @@ def study_detail(request, study_id: int):
     field_values= study.derived_class_fields
     for field in field_values.split(' ,'):
         string_fields = field.strip().split(':')
-        fields.__setitem__(string_fields[0].strip(), string_fields[1].strip())
+        if(string_fields[0].strip() =="proteins"):
+            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip().split(" "))
+        elif (string_fields[0].strip() == "genes"):
+            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip().split(" "))
+        else:
+            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip())
     print(fields)
     return render(
         request,
