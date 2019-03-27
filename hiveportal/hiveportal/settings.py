@@ -128,7 +128,6 @@ STATICFILES_DIRS = (
 )
 
 #STATIC_ROOT = Path('/opt/hiveportal/static')
-
 #MEDIA_ROOT = Path('/opt/hiveportal/media')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

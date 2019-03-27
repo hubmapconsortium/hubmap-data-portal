@@ -198,3 +198,31 @@ def show_image(request, study_id:int):
             'url_path': url_path,
         },
     )
+
+def protein_index(request):
+        """
+        This is default protein index page.
+        """
+        proteins = Protein.objects.all()
+        return render(
+            request,
+            'protein_index.html',
+            {
+                'proteins': proteins,
+            },
+        )
+
+def gene_index(request):
+    """
+    This is default gene index page
+    :param request:
+    :return:
+    """
+    genes = Gene.objects.all()
+    return render(
+        request,
+        'gene_index.html',
+        {
+            'genes': genes,
+        },
+    )

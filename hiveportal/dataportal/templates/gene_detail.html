@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <div>
-    <h1>Gene Detail</h1>
+    <div style="margin-top: -50px">
+    <h2>Gene Details</h2>
     <ul>
     {% if gene.hugo_symbol %}
         <li>HUGO Symbol: {{ gene.hugo_symbol }}</li>
@@ -15,7 +15,7 @@
     </ul>
 
     {% if proteins %}
-    <h2>Proteins:</h2>
+    <h3>Proteins details for this Gene:</h3>
         <ul>
         {% for protein in proteins %}
             <li><a href="{% url 'protein_detail' protein.name %}">{{ protein.name }}</a></li>
