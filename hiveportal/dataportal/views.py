@@ -110,7 +110,6 @@ def study_detail(request, study_id: int):
     This method provides details of Study type by details.
     """
     study = Study.objects.get(id=study_id).get_subclass_object()
-
     form_type = model_form_mapping[type(study)]
     form = form_type(instance=study)
     remaining_fields = sorted(
