@@ -1,6 +1,5 @@
 from collections import OrderedDict
 
-from django.forms import ModelChoiceField, ModelMultipleChoiceField
 from django.shortcuts import render
 
 from .forms import model_form_mapping, StudyTypeForm
@@ -56,7 +55,6 @@ def index_by_group(request, id:int):
         templateLink='datatype.html'
     for model in study:
         study_list.append(model.get_subclass_object())
-
     return render(
         request,
         templateLink,
@@ -71,26 +69,15 @@ def study_detail(request, study_id: int):
     """
     study = Study.objects.get(id=study_id).get_subclass_object()
 
-    fields =OrderedDict()
     form_type = model_form_mapping[type(study)]
     form = form_type(instance=study)
-    field_values= study.derived_class_fields
-    for field in field_values.split(' ,'):
-        string_fields = field.strip().split(':')
-        if(string_fields[0].strip() =="proteins"):
-            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip().split(" "))
-        elif (string_fields[0].strip() == "genes"):
-            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip().split(" "))
-        else:
-            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip())
-    print(fields)
+
     return render(
         request,
         'study_detail.html',
         {
             'study': study,
             'form': form,
-            'fields':fields,
         },
     )
 
@@ -185,11 +172,7 @@ def show_image(request, study_id:int):
     url_path =""
     form_type = model_form_mapping[type(study)]
     form = form_type(instance=study)
-    field_values = study.derived_class_fields
-    for field in field_values.split(' ,'):
-        string_fields = field.strip().split(':')
-        if string_fields[0].strip() == "preview_image":
-            url_path = string_fields[1].strip()
+    url_path = study.preview_image.url
     print(url_path)
     return render(
         request,

@@ -25,28 +25,33 @@
             <td>Subclass &nbsp &nbsp </td>
              <td>{{ study.subclass.model }}</td>
         </tr>
-      {% for key,value in fields.items %}
-        <tr><td>{{ key }} &nbsp &nbsp </td>
-            {% if key == "genes" %}
-                 <td>
-                {% for gene in value %}
+    {% for key,values in form.base_fields.items %}
+            {% if study.genes and key == "genes" %}
+                <tr><td> Genes &nbsp &nbsp </td>
+                <td>
+                {% for gene in study.genes.all %}
                     <a href="{% url 'gene_detail' gene %}">{{ gene }}</a>
                 {% endfor %}
                 </td>
-            {% elif key == "proteins" %}
+                </tr>
+            {% endif %}
+            {% if study.proteins and key == "proteins" %}
+                <tr><td> Proteins &nbsp &nbsp </td>
                 <td>
-                {% for protein in value %}
+                {% for protein in study.proteins.all %}
                     <a href="{% url 'protein_detail' protein %}">{{ protein }}</a>
                 {% endfor %}
                 </td>
-            {% elif key == "preview_image" %}
-               <td><a href="{% url 'show_image' study.id %}" title="Click here to view the Image!"><img src="{{ value }}" alt="{{ key }}" style="float:left;height: 200px;width: 200px">
-                    </a> </td>
-            {% else %}
-                 <td> {{ value }}</td>
+                </tr>
             {% endif %}
-        </tr>
-      {% endfor %}
+            {% if study.preview_image and study.preview_image.url and key == "preview_image" %}
+                <tr>
+                <td>Preview_image  &nbsp &nbsp </td>
+               <td><a href="{% url 'show_image' study.id %}" title="Click here to view the Image!"><img src="{{ study.preview_image.url }}" alt="{{ key }}" style="float:left;height: 200px;width: 200px">
+                    </a> </td>
+                </tr>
+            {% endif %}
+        {% endfor %}
     </table>
     <!--{ form.base_fields }}-->
     </div>
