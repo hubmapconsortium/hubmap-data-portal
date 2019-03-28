@@ -13,7 +13,6 @@ Lists all study types:
 for study_type in StudyTypes:
     class StudyTypeForm(ModelForm):
         class Meta:
-            print(study_type)
             model = study_type
             fields = '__all__'
 
