@@ -1,5 +1,6 @@
 from collections import OrderedDict
 
+from django.forms import IntegerField
 from django.shortcuts import render
 
 from .forms import model_form_mapping, StudyTypeForm
@@ -12,7 +13,17 @@ from .models import *
 #TODO: Implement all views to support FAIR and Restful apis (which it currently is NOT a restful api).
 #TODO: find best way to have Authentication framework. (do we use Globus as Authentication api)?
 #TODO: Re-model, re-design this prorotype
-
+FIELDS_TO_IGNORE = {
+    'id',
+    'study_ptr',
+    'subclass',
+    'institution',
+    'data_type',
+    'tissue',
+    'genes',
+    'proteins',
+    'preview_image',
+}
 def landing(request):
     """
     This is default landing page.
@@ -43,8 +54,7 @@ def index_by_group(request, id:int):
     study_list = []
     study = []
     templateLink = ""
-
-    if request.get_full_path().__contains__('institution') :
+    if request.get_full_path().__contains__('institution'):
         study = Study.objects.filter(institution_id=id)
         templateLink='institution.html'
     elif request.get_full_path().__contains__('tissue'):
@@ -63,6 +73,38 @@ def index_by_group(request, id:int):
         },
     )
 
+def filterby_protein_gene(request, id:int):
+    """
+    This method lists study/study_types based on base_types from Study model: groups by
+    Genes, Proteins. We filter by name, for now, since prototype.
+    """
+    study_list = []
+    if request.get_full_path().__contains__('genes'):
+        study = Study.objects.get(id=id).get_subclass_object()
+        genes = study.genes.all()
+        for s in Study.objects.all():
+            if hasattr(s, "genes"):
+                for gene in genes:
+                    if s.get_subclass_object().objects.get(gene_id=gene.id):
+                        study_list.append(s)
+            # genes.append(Gene.objects.get(gene=gene))
+    elif request.get_full_path().__contains__('proteins'):
+        study = Study.objects.get(id=id).get_subclass_object()
+        proteins = study.proteins.all()
+        for s in Study.objects.all():
+            if hasattr(s, "proteins"):
+                for protein in proteins:
+                    if s.get_subclass_object().objects.get(protein_id=protein.id):
+                        study_list.append(s)
+
+    return render(
+        request,
+        'study_index.html',
+        {
+            'study_list': study_list,
+        },
+    )
+
 def study_detail(request, study_id: int):
     """
     This method provides details of Study type by details.
@@ -71,13 +113,16 @@ def study_detail(request, study_id: int):
 
     form_type = model_form_mapping[type(study)]
     form = form_type(instance=study)
-
+    remaining_fields = sorted(
+        set(f.name for f in study._meta.get_fields()) -
+        FIELDS_TO_IGNORE)
     return render(
         request,
         'study_detail.html',
         {
             'study': study,
             'form': form,
+            'fields': remaining_fields,
         },
     )
 
