@@ -15,11 +15,6 @@ class Gene(models.Model):
     def __str__(self):
         return self.hugo_symbol or ''
 
-    @property
-    def derived_class_fields(self):
-        return ''.join(
-            ['hugo_symbol'+self.hugo_symbol])
-
 class Protein(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
@@ -27,11 +22,6 @@ class Protein(models.Model):
 
     def __str__(self):
         return self.name or ''
-
-    @property
-    def derived_class_fields(self):
-        return ''.join(
-            ['name: '+self.name,' ,'+'gene: '+self.gene])
 
 class Institution(models.Model):
     name = models.CharField(max_length=250)
@@ -84,65 +74,28 @@ class ScRnaSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
 
-    @property
-    def derived_class_fields(self):
-        return ''.join(
-            ['read_count_total: '+str(self.read_count_total), ' ,', 'cell_count: '+str(self.cell_count)])
-
 @study_type
 class ScThsSeqStudy(Study):
     cell_count = models.PositiveIntegerField()
     total_read_count = models.PositiveIntegerField()
-
-    @property
-    def derived_class_fields(self):
-        return ''.join(
-            ['total_read_count: '+str(self.total_read_count), ' ,', 'cell_count: '+str(self.cell_count)])
 
 @study_type
 class ScAtacSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
 
-    @property
-    def derived_class_fields(self):
-        return ''.join(
-            ['read_count_total: '+str(self.read_count_total), ' ,', 'cell_count: '+str(self.cell_count)])
-
 @study_type
 class ScRnaSeqStudyCDNA(ScRnaSeqStudy):
     read_count_aligned = models.PositiveIntegerField()
-
-    @property
-    def derived_class_fields(self):
-        return ''.join(
-            ['read_count_aligned: '+str(self.read_count_aligned)])
 
 @study_type
 class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
     genes = models.ManyToManyField(Gene)
     unique_barcode_count = models.PositiveIntegerField()
 
-    @property
-    def derived_class_fields(self):
-        gene_values=''
-        for gene in self.genes.all():
-            gene_values += (gene.hugo_symbol) + ' '
-        return ''.join(
-            ['genes: '+gene_values, ' ,', 'unique_barcode_count: '+str(self.unique_barcode_count)])
-
 @study_type
 class SpatialTranscriptomicStudy(Study):
     genes = models.ManyToManyField(Gene)
-
-    @property
-    def derived_class_fields(self):
-        gene_values = ''
-        for gene in self.genes.all():
-            gene_values+=(gene.hugo_symbol)+' '
-        return ''.join(
-            ['genes: '+gene_values])
-
 
 @study_type
 class MassCytometryStudy(Study):
@@ -150,36 +103,9 @@ class MassCytometryStudy(Study):
     proteins = models.ManyToManyField(Protein)
     preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
 
-    @property
-    def derived_class_fields(self):
-        protein_values = ''
-        for protein in self.proteins.all():
-            protein_values+=protein.name+ ' '
-        if len(self.preview_image.name)!=0:
-            print(" image: is " + self.preview_image.name)
-            preview_image_url = self.preview_image.url
-            return ''.join(
-                ['sample_count: '+str(self.sample_count), ' ,', 'proteins: '+protein_values,' ,',
-                 'preview_image: '+str(preview_image_url)])
-        else:
-            return ''.join(
-                ['sample_count: '+str(self.sample_count), ' ,', 'proteins: '+protein_values])
-
-
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
     preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
-
-    @property
-    def derived_class_fields(self):
-        if len(self.preview_image.name)!=0:
-            print(" image: is " + self.preview_image.name)
-            preview_image_url = self.preview_image.url
-            return ''.join(
-                ['image_count: '+str(self.image_count), ' ,', 'preview_image: '+str(preview_image_url)])
-        else:
-            return ''.join(
-                ['image_count: ' + str(self.image_count)])
 
 @study_type
 class SeqFishImagingStudy(ImagingStudy):

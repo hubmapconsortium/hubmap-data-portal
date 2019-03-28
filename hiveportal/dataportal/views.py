@@ -1,6 +1,6 @@
 from collections import OrderedDict
 
-from django.forms import ModelChoiceField, ModelMultipleChoiceField
+from django.forms import IntegerField
 from django.shortcuts import render
 
 from .forms import model_form_mapping, StudyTypeForm
@@ -13,7 +13,17 @@ from .models import *
 #TODO: Implement all views to support FAIR and Restful apis (which it currently is NOT a restful api).
 #TODO: find best way to have Authentication framework. (do we use Globus as Authentication api)?
 #TODO: Re-model, re-design this prorotype
-
+FIELDS_TO_IGNORE = {
+    'id',
+    'study_ptr',
+    'subclass',
+    'institution',
+    'data_type',
+    'tissue',
+    'genes',
+    'proteins',
+    'preview_image',
+}
 def landing(request):
     """
     This is default landing page.
@@ -44,8 +54,7 @@ def index_by_group(request, id:int):
     study_list = []
     study = []
     templateLink = ""
-
-    if request.get_full_path().__contains__('institution') :
+    if request.get_full_path().__contains__('institution'):
         study = Study.objects.filter(institution_id=id)
         templateLink='institution.html'
     elif request.get_full_path().__contains__('tissue'):
@@ -56,10 +65,41 @@ def index_by_group(request, id:int):
         templateLink='datatype.html'
     for model in study:
         study_list.append(model.get_subclass_object())
-
     return render(
         request,
         templateLink,
+        {
+            'study_list': study_list,
+        },
+    )
+
+def filterby_protein_gene(request, id:int):
+    """
+    This method lists study/study_types based on base_types from Study model: groups by
+    Genes, Proteins. We filter by name, for now, since prototype.
+    """
+    study_list = []
+    if request.get_full_path().__contains__('genes'):
+        study = Study.objects.get(id=id).get_subclass_object()
+        genes = study.genes.all()
+        for s in Study.objects.all():
+            if hasattr(s, "genes"):
+                for gene in genes:
+                    if s.get_subclass_object().objects.get(gene_id=gene.id):
+                        study_list.append(s)
+            # genes.append(Gene.objects.get(gene=gene))
+    elif request.get_full_path().__contains__('proteins'):
+        study = Study.objects.get(id=id).get_subclass_object()
+        proteins = study.proteins.all()
+        for s in Study.objects.all():
+            if hasattr(s, "proteins"):
+                for protein in proteins:
+                    if s.get_subclass_object().objects.get(protein_id=protein.id):
+                        study_list.append(s)
+
+    return render(
+        request,
+        'study_index.html',
         {
             'study_list': study_list,
         },
@@ -71,26 +111,18 @@ def study_detail(request, study_id: int):
     """
     study = Study.objects.get(id=study_id).get_subclass_object()
 
-    fields =OrderedDict()
     form_type = model_form_mapping[type(study)]
     form = form_type(instance=study)
-    field_values= study.derived_class_fields
-    for field in field_values.split(' ,'):
-        string_fields = field.strip().split(':')
-        if(string_fields[0].strip() =="proteins"):
-            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip().split(" "))
-        elif (string_fields[0].strip() == "genes"):
-            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip().split(" "))
-        else:
-            fields.__setitem__(string_fields[0].strip(), string_fields[1].strip())
-    print(fields)
+    remaining_fields = sorted(
+        set(f.name for f in study._meta.get_fields()) -
+        FIELDS_TO_IGNORE)
     return render(
         request,
         'study_detail.html',
         {
             'study': study,
             'form': form,
-            'fields':fields,
+            'fields': remaining_fields,
         },
     )
 
@@ -185,11 +217,7 @@ def show_image(request, study_id:int):
     url_path =""
     form_type = model_form_mapping[type(study)]
     form = form_type(instance=study)
-    field_values = study.derived_class_fields
-    for field in field_values.split(' ,'):
-        string_fields = field.strip().split(':')
-        if string_fields[0].strip() == "preview_image":
-            url_path = string_fields[1].strip()
+    url_path = study.preview_image.url
     print(url_path)
     return render(
         request,
