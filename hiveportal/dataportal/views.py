@@ -65,11 +65,38 @@ def index_by_group(request, id:int):
         },
     )
 
+if False:
+    # NONE OF THIS WORKS AS-IS
+    FIELDS_TO_IGNORE = {
+        'id',
+        'study_ptr',
+        'subclass',
+    }
+
+    GLOBAL_FIELD_ORDER = [
+        'institution',
+        'data_type',
+        'tissue',
+        'genes',
+        'proteins',
+        'preview_image',
+    ]
+
+    mc = MassCytometryStudy()
+    remaining_fields = sorted(
+        set(f.name for f in mc._meta.get_fields()) -
+        set(GLOBAL_FIELD_ORDER) -
+        FIELDS_TO_IGNORE
+    )
+
 def study_detail(request, study_id: int):
     """
     This method provides details of Study type by details.
     """
     study = Study.objects.get(id=study_id).get_subclass_object()
+
+    # assume common fields are present
+
 
     fields =OrderedDict()
     form_type = model_form_mapping[type(study)]
