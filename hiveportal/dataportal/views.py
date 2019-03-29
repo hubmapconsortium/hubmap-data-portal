@@ -73,30 +73,36 @@ def index_by_group(request, id:int):
         },
     )
 
-def filterby_protein_gene(request, id:int):
+def filterby_gene(request, id:int):
     """
     This method lists study/study_types based on base_types from Study model: groups by
     Genes, Proteins. We filter by name, for now, since prototype.
     """
     study_list = []
+    gene = Gene.objects.get(id=id)
     if request.get_full_path().__contains__('genes'):
-        study = Study.objects.get(id=id).get_subclass_object()
-        genes = study.genes.all()
         for s in Study.objects.all():
+            s =s.get_subclass_object()
             if hasattr(s, "genes"):
-                for gene in genes:
-                    if s.get_subclass_object().objects.get(gene_id=gene.id):
+                if gene in s.genes.all():
                         study_list.append(s)
-            # genes.append(Gene.objects.get(gene=gene))
-    elif request.get_full_path().__contains__('proteins'):
-        study = Study.objects.get(id=id).get_subclass_object()
-        proteins = study.proteins.all()
-        for s in Study.objects.all():
-            if hasattr(s, "proteins"):
-                for protein in proteins:
-                    if s.get_subclass_object().objects.get(protein_id=protein.id):
-                        study_list.append(s)
+    return render(
+        request,
+        'study_index.html',
+        {
+            'study_list': study_list,
+        },
+    )
 
+def filterby_protein(request, id: int):
+    study_list=[]
+    protein = Protein.objects.get(id=id)
+    if request.get_full_path().__contains__('proteins'):
+        for s in Study.objects.all():
+            s = s.get_subclass_object()
+            if hasattr(s, "proteins"):
+                if protein in s.proteins.all():
+                        study_list.append(s)
     return render(
         request,
         'study_index.html',
