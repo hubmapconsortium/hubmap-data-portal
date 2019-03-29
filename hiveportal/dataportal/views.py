@@ -1,4 +1,5 @@
 from collections import OrderedDict
+from operator import attrgetter
 
 from django.forms import IntegerField
 from django.shortcuts import render
@@ -37,12 +38,13 @@ def index(request):
     study_list = []
     for model in StudyTypes:
         study_list.extend(model.objects.all())
+    sorted_studies = sorted(study_list, key=attrgetter('id'))
 
     return render(
         request,
         'study_index.html',
         {
-            'study_list': study_list,
+            'study_list': sorted_studies,
         },
     )
 
