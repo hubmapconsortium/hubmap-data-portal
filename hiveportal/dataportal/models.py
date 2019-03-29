@@ -76,6 +76,9 @@ class ScRnaSeqStudy(Study):
 
 @study_type
 class ScThsSeqStudy(Study):
+    class Meta:
+        verbose_name = 'scTHS-seq'
+
     cell_count = models.PositiveIntegerField()
     total_read_count = models.PositiveIntegerField()
 
@@ -99,6 +102,9 @@ class SpatialTranscriptomicStudy(Study):
 
 @study_type
 class MassCytometryStudy(Study):
+    class Meta:
+        verbose_name = 'Mass Cytometry'
+
     sample_count = models.PositiveIntegerField()
     proteins = models.ManyToManyField(Protein)
     preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
@@ -113,4 +119,7 @@ class SeqFishImagingStudy(ImagingStudy):
 
 @study_type
 class MicroscopyStudy(ImagingStudy):
+    class Meta:
+        verbose_name = 'Microscopy'
+
     pass
