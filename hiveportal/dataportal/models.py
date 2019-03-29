@@ -41,12 +41,20 @@ class Tissue(models.Model):
     def __str__(self):
         return self.name
 
+class Samples(models.Model):
+    name = models.CharField(max_length=250)
+    sample_count = models.PositiveIntegerField()
+
+    def __str__(self):
+        return self.name
+
 class Study(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     data_type = models.ForeignKey(DataType, on_delete=models.CASCADE)
     tissue = models.ForeignKey(Tissue, on_delete=models.CASCADE)
     subclass = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    samples = models.ForeignKey(Samples, on_delete=models.CASCADE)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -105,7 +113,6 @@ class MassCytometryStudy(Study):
     class Meta:
         verbose_name = 'Mass Cytometry'
 
-    sample_count = models.PositiveIntegerField()
     proteins = models.ManyToManyField(Protein)
     preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
 
@@ -123,3 +130,4 @@ class MicroscopyStudy(ImagingStudy):
         verbose_name = 'Microscopy'
 
     pass
+

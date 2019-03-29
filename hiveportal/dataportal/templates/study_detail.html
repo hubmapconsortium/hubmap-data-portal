@@ -25,6 +25,10 @@
             <td>Subclass &nbsp &nbsp </td>
              <td>{{ study.subclass.model }}</td>
         </tr>
+        <tr>
+            <td>Samples &nbsp &nbsp </td>
+             <td>Sample name: &nbsp{{ study.samples.name }}, Samples count: &nbsp {{ study.samples.sample_count }} </td>
+        </tr>
             <tr><td> Creation_time &nbsp &nbsp </td>
         <td>{{ study.creation_time }}</td>
         </tr>
@@ -58,7 +62,7 @@
                     </a> </td>
                 </tr>
             {% elif key in fields %}
-                 {% if not "_ptr" in key %}
+                 {% if not "_ptr" in key and not "samples" in key %}
                     <tr>
                     <td>{{ key }}  &nbsp &nbsp </td>
                    <td>{{ field }} </td>
