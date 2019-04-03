@@ -4,3 +4,5 @@ social-django-auth==3.1.0
 python-jose==3.0.1
 django==2.1.7
 gunicorn==19.9.0
+djangorestframework==3.9.2
+django_elasticsearch_dsl==0.5.1

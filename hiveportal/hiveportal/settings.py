@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dataportal',
     'social_django',
+    'django_elasticsearch_dsl',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,9 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+ELASTICSEARCH_DSL={
+    'default': {
+        'hosts': 'localhost:9200'
+    },
+}
