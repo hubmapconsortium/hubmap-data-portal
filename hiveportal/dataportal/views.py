@@ -261,3 +261,17 @@ def gene_index(request):
             'genes': genes,
         },
     )
+
+def search(request):
+    """
+    This is default Study search page
+    :param request:
+    :return:
+    """
+    return render(
+        request,
+        'search_apppitch.html',
+        {
+            'study': "",
+        },
+    )

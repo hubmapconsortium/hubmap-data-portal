@@ -1,0 +1,764 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="fontawesome-i2svg-active fontawesome-i2svg-complete">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Required meta tags -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" type="text/css" href="{% static "assets/css/search.css"%}">
+
+    <script type="text/javascript" src="{% static "assets/js/fontawesome-all.min.js" %}"></script>
+     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--The Above 3 Tags Must Be First-->
+    <meta name="description" content="HuBMAP Web portal">
+    <meta name="author" content="Computational Biology department, Carnegie Mellon University.">
+    <!--Favicon-->
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}">
+    <title>HuBMAP Web portal!</title>
+    <!--Style Sheets-->
+
+    <link href="{% static "assets/css/bootstrap.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "assets/css/style.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "assets/css/sticky-footer-navbar.css" %}" rel="stylesheet">
+        <!--FontAwesome-->
+    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+    
+    </head>
+    <body>
+        <input type="hidden" name="csrfmiddlewaretoken" value="3srpSedbEhfk0aYvdAbShsrdpLqVkPi3mVJSFYViN9c4uI3yIUOtHJ5lRFcmCdoe">
+
+
+        <div id="HubmapWrap">
+        <div id="top">
+            <! -- This is nav header-->
+         <nav class="navbar navbar-inverse navbar-fixed-top" id="hubmapnav" >
+              <div class="HubmapMain">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
+                      <a class="navbar-brand" href="">
+                        <img id="brand-image" src="{% static "assets/img/hubmap.png" %}" alt="HuBMAP Logo" style="margin-top: -9.5px">
+                      </a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                      <ul class="nav navbar-nav">
+						      	<li><a class="login" href="{% url 'landing' %}">Home</a></li>
+{#                       <li >#}
+{#                          <a href="{% url 'projects' %}" >Projects</a>#}
+{#                        </li>#}
+{#                       <li >#}
+{#                          <a href="{% url 'analysis' %}" >Analysis</a>#}
+{#                        </li>#}
+                          <li >
+                          <a href="{% url 'index' %}" >Study Index</a>
+                        </li>
+                          <li ><a href="{% url 'gene_index' %}" >Gene Index</a></li>
+                          <li ><a href="{% url 'protein_index' %}" >Protein Index</a></li>
+                          <li ><a href="{% url 'repository' %}" >Data Repository</a></li>
+                          <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Help<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{% url 'support' %}">Support</a></li>
+                            <li><a href="{% url 'contactus' %}">Contact Us</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                      <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{% url 'logout' %}">Logout</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div><!-- /.navbar-collapse -->
+                  </div><!-- /.container-fluid -->
+              </div>
+            </nav>
+
+                <!-- Page body -->
+            <div class="container-fluid">
+            <!--Main Body Start-->
+                <div class="row">
+                            <link rel="stylesheet" href="{% static "assets/css/jquery-ui.css"%}">
+             <script src="{% static "assets/js/jquery-1.12.4.js"%}"></script>
+        <script src="{% static "assets/js/cr3-charts.js" %}"></script>
+        <script src="{% static "assets/js/search-utils.js"%}"></script>
+        <script src="{% static "assets/js/jquery-ui.js"%}"></script>
+        <script src="{% static "assets/js/jquery-ui(1).js"%}"></script>
+        <script src="{% static "assets/js/jquery-ui.js"%}"></script>
+        <script type="text/javascript" src="{% static "assets/js/bootstrap.min_search.js"%}"></script>
+        <script src="{% static "assets/js/jquery.mark.es6.min.js"%}"></script>
+
+                            <script>
+
+
+            /*
+              This helper function ensures queries are inserted as the first query-param
+              so that the search url is copy-pastable by the user
+              */
+              function customSearch(page=1) {
+                //copy as a hidden field so we don't change the look of the page
+                var page = $('<input>').attr({type: 'hidden', id: 'foo',
+                                             name: 'page', value: page});
+                console.log(page)
+                var input = $('#search-input').clone().attr('type','hidden');
+                $('#agg-form').prepend(page).prepend(input).submit();
+              }
+
+            function viewDoc() {
+                var x = document.getElementById("documentation");
+                if (x.style.display === "none") {
+                    x.style.display = "block";
+                } else {x.style.display = "none";
+                }
+            }
+
+            function replaceSingleQuotes(p1) {
+                  var s1 = p1.replace(/\'/g, '"')
+                return s1
+            }
+
+            $( function() {
+                $( "#bioaccordion" ).accordion({
+                  collapsible: true,
+                  heightStyle: "content",
+                  active: false
+                });
+                 $( "#accordion" ).accordion({
+                  collapsible: true,
+                  heightStyle: "content"
+                });
+            });
+
+            // manage the collapse/expand icons
+            $(document).ready(function() {
+              $('.collapse').on('shown.bs.collapse', function() {
+                console.log('shown event...');
+                $(this).parent().find('.fa-angle-down').removeClass('fa-angle-down').addClass('fa-angle-up');
+              }).on('hidden.bs.collapse', function() {
+                console.log('hide event...');
+                $(this).parent().find('.fa-angle-up').removeClass('fa-angle-up').addClass('fa-angle-down');
+              })
+            });
+
+        </script>
+
+        <div class="container">
+
+        <div class="search-grid-container">
+            <div class="menu-grid">
+        <!--
+
+        -->
+
+
+              <div id="filters">
+               <form id="facet-form-apply">
+
+
+                </form>
+                <div id="agg-container">
+                    <form id="agg-form">
+                     <div id="accordian">
+
+
+
+
+        <div class="panel panel-default">
+        <hr class="style1">
+            <div class="panel-heading" role="tab" id="repository.species_h">
+                <h4>
+
+                        <a class="facet-link" data-toggle="collapse" data-parent="accordian"  aria-controls="repository.species" aria-expanded="true">Organ <span class="arrow-rt"><svg class="svg-inline--fa fa-angle-down fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse show" id="repository.species" role="tabpanel" aria-labelledby="repository.species_h" data-parent="#accordian">
+
+                <div class="panel-body">
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.species" value="Mouse" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Brain<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.species" value="Rat" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Heart<span style="float: right">(1)</span>
+                    </div>
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.species" value="Human" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Liver<span style="float: right">(24)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.species" value="Monkey" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Lung<span style="float: right">(1)</span>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+        <hr class="style1">
+            <div class="panel-heading" role="tab" id="repository.solid_tissue_h">
+                <h4>
+
+                        <a class="facet-link collapsed" data-toggle="collapse" data-parent="accordian"  aria-controls="" aria-expanded="false">Is Clinical Data Available? <span class="arrow-rt"><svg class="svg-inline--fa fa-angle-down fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse" id="repository.solid_tissue" role="tabpanel" aria-labelledby="repository.solid_tissue_h" data-parent="#accordian" style="">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Lung" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Lung<span style="float: right">(2)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Ovary" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Ovary<span style="float: right">(2)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Blood cell precursor" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Blood cell precursor<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Brain" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Brain<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Breast" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Breast<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Chest Wall" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Chest Wall<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Colon" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Colon<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Endocrine system" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Endocrine system<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.solid_tissue" value="Gastrointestinal tract" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Gastrointestinal tract<span style="float: right">(1)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+        <hr class="style1">
+            <div class="panel-heading" role="tab" id="repository.non_solid_h">
+                <h4>
+
+                        <a class="facet-link" data-toggle="collapse" data-parent="accordian"  aria-controls="" aria-expanded="true">Data Type <span class="arrow-rt"><svg class="svg-inline--fa fa-angle-up fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-up" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M177 159.7l136 136c9.4 9.4 9.4 24.6 0 33.9l-22.6 22.6c-9.4 9.4-24.6 9.4-33.9 0L160 255.9l-96.4 96.4c-9.4 9.4-24.6 9.4-33.9 0L7 329.7c-9.4-9.4-9.4-24.6 0-33.9l136-136c9.4-9.5 24.6-9.5 34-.1z"></path></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse show" id="repository.non_solid" role="tabpanel" aria-labelledby="repository.non_solid_h" data-parent="#accordian" style="">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.non_solid" value="Blood" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Mass Spec Image<span style="float: right">(23)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.non_solid" value="Other" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    ATAC-seq<span style="float: right">(5)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.non_solid" value="Urine" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    scRNA-seq<span style="float: right">(5)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.non_solid" value="Saliva" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    seqFish<span style="float: right">(4)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.non_solid" value="BAL" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Codex Multiplexed Imaging<span style="float: right">(3)</span>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+        <hr class="style1">
+            <div class="panel-heading" role="tab" id="repository.derivatives_h">
+                <h4>
+
+                        <a class="facet-link" data-toggle="collapse" data-parent="accordian" aria-controls="">Institution <span class="arrow-rt"><svg class="svg-inline--fa fa-angle-down fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse" id="repository.derivatives" role="tabpanel" aria-labelledby="repository.derivatives_h" data-parent="#accordian">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.derivatives" value="Serum" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Serum<span style="float: right">(21)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.derivatives" value="Plasma" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Plasma<span style="float: right">(20)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.derivatives" value="Buffy Coat" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Buffy Coat<span style="float: right">(18)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.derivatives" value="PBMC" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    PBMC<span style="float: right">(17)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.derivatives" value="DNA" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    DNA<span style="float: right">(16)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.derivatives" value="Whole Blood" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Whole Blood<span style="float: right">(15)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.derivatives" value="RNA" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    RNA<span style="float: right">(14)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+        <hr class="style1">
+            <div class="panel-heading" role="tab" id="repository.age_range_h">
+                <h4>
+
+
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse" id="repository.age_range" role="tabpanel" aria-labelledby="repository.age_range_h" data-parent="#accordian">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.age_range" value="Adult (19 to 65 years old)" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Adult (19 to 65 years old)<span style="float: right">(23)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.age_range" value="Geriatric (greater than 65 years old)" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Geriatric (greater than 65 years old)<span style="float: right">(6)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.age_range" value="Pediatric (1 mo -18 years old)" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Pediatric (1 mo -18 years old)<span style="float: right">(5)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.age_range" value="Fetal" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Fetal<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.age_range" value="Neo-natal (0-1mo)" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Neo-natal (0-1mo)<span style="float: right">(1)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading" role="tab" id="repository.clinicaldata_h">
+                <h4>
+
+                        <a class="facet-link" data-toggle="collapse" data-parent="accordian"  aria-controls="">Clinical Data Available? <span class="arrow-rt"><svg class="svg-inline--fa fa-angle-down fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"></path></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse" id="repository.clinicaldata" role="tabpanel" aria-labelledby="repository.clinicaldata_h" data-parent="#accordian">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.clinicaldata" value="Yes" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Yes<span style="float: right">(22)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.clinicaldata" value="No" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    No<span style="float: right">(2)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+
+
+                <div class="panel-collapse collapse" id="repository.pedigree" role="tabpanel" aria-labelledby="repository.pedigree_h" data-parent="#accordian">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.pedigree" value="No" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    No<span style="float: right">(21)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.pedigree" value="Yes" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Yes<span style="float: right">(3)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading" role="tab" id="repository.patientidavailable_h">
+                <h4>
+
+                        <a class="facet-link" data-toggle="collapse" data-parent="accordian" aria-controls=""><span class="arrow-rt"><svg class="svg-inline--fa fa-angle-down fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse" id="repository.patientidavailable" role="tabpanel" aria-labelledby="repository.patientidavailable_h" data-parent="#accordian">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.patientidavailable" value="Yes" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Yes<span style="float: right">(22)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.repository.patientidavailable" value="No" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    No<span style="float: right">(2)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+
+            <div class="panel-heading" role="tab" id="investigator.pi_h">
+                <h4>
+
+                        <a class="facet-link" data-toggle="collapse" data-parent="accordian" aria-controls=""> <span class="arrow-rt"><svg class="svg-inline--fa fa-angle-down fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse" id="investigator.pi" role="tabpanel" aria-labelledby="investigator.pi_h" data-parent="#accordian">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.pi" value="Dr. Alison Morris" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Dr. Alison Morris<span style="float: right">(13)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.pi" value="Randall Brand" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Randall Brand<span style="float: right">(4)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.pi" value="Becich, Michael" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Becich, Michael<span style="float: right">(2)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.pi" value="Sally Wenzel MD" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Sally Wenzel MD<span style="float: right">(2)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.pi" value="Byersdorfer" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Byersdorfer<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.pi" value="Kyle Orwig" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Kyle Orwig<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.pi" value="Phuong Mai, MD" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Phuong Mai, MD<span style="float: right">(1)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="panel panel-default">
+        <hr class="style1">
+            <div class="panel-heading" role="tab" id="investigator.department_h">
+                <h4>
+
+                        <a class="facet-link" data-toggle="collapse" data-parent="accordian" aria-controls=""> <span class="arrow-rt"><svg class="svg-inline--fa fa-angle-down fa-w-10" aria-hidden="true" data-prefix="fas" data-icon="angle-down" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""></svg><!-- <i class="fas fa-angle-down"></i> --></span>
+                        </a>
+
+                </h4>
+            </div>
+
+                <div class="panel-collapse collapse" id="investigator.department" role="tabpanel" aria-labelledby="investigator.department_h" data-parent="#accordian">
+
+                <div class="panel-body">
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.department" value="Department of Medicine, PACCM" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Department of Medicine, PACCM<span style="float: right">(13)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.department" value="Medicine, Gastroenterology, Hepatology and Nutrition" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Medicine, Gastroenterology, Hepatology and Nutrition<span style="float: right">(4)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.department" value="Biomedical Informatics" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Biomedical Informatics<span style="float: right">(2)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.department" value="Environmental and Occupational Heatlh" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Environmental and Occupational Heatlh<span style="float: right">(2)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.department" value="Ob/Gyn/RS" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Ob/Gyn/RS<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.department" value="Pediatrics - Division of Blood and Marrow Transplantation and Cellular Therapies" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    Pediatrics - Division of Blood and Marrow Transplantation...<span style="float: right">(1)</span>
+                    </div>
+
+                    <div class="facet-field mr-3">
+                        <input type="checkbox" name="filter.investigator.department" value="UPCI" class="facet-checkbox mr-1" onchange="customSearch(1);" autocomplete="off">
+                    UPCI<span style="float: right">(1)</span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        </div>
+
+                    </form>
+                </div>
+              </div>
+
+
+              <!--<hr class="d-sm-none">-->
+            </div>
+            <div class="main-grid">
+              <h3>Gene/Protein Search</h3>
+              <h6>You can search the database by entering any search term (e.g. Use the "Additional Filters" to add</h6>
+              <h6>terms to the search and learn more about available search functions in the <a id="documentation" onclick="">advanced query documentation</a>
+              </h6>
+              <script>
+                $(function() {
+                    $("#dialogdoc").dialog({
+                        autoOpen: false,
+                        show: {
+                            effect: "blind",
+                            duration: 1000
+                        },
+                        hide: {
+                            effect: "explode",
+                            duration: 1000
+                        },
+                        width:800,
+                        height:900,
+                        position: { my: "center", at: "center", of: window }
+                    });
+                    $("#documentation").on("click", function() {
+                        $("#dialogdoc").dialog("open");
+                    });
+                });
+              </script>
+
+              <form id="search-form" class="my-4" name="search_form">
+                <input type="text" id="search-input" autocomplete="off" data-provide="typeahead" name="q" value="" placeholder="">
+                <button id="search-btn" type="submit" class="btn btn-default">
+                  <svg class="svg-inline--fa fa-search fa-w-16" aria-hidden="true" data-prefix="fas" data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"></path></svg><!-- <i class="fas fa-search"></i> -->
+                </button>
+                <a class="reset-link"></a>
+              </form>
+
+              <div class="container">
+                <div class="tab-content">
+                    <div id="home" class="container tab-pane active">
+
+
+
+
+
+            <div id="search-result" class="search-result">
+            <h2>Found 7 results:</h2>
+                <div id="bioaccordion" class="ui-accordion ui-widget ui-helper-reset" role="tablist">
+
+
+
+
+                  <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-1" aria-controls="ui-id-2" aria-selected="false" aria-expanded="false" tabindex="0" style="padding-bottom:5px"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><span id="nac">seq-FISH files from the Liver </span><span style="float:right"> <b>73 Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
+        <br>
+
+                    </h3>
+                    <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-6" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="true" style="display: none;"></div>
+                    <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-3" aria-controls="ui-id-4" aria-selected="false" aria-expanded="false" tabindex="-1"  style="padding-bottom:5px"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><span id="nac">Codex Muliplex Imaging files from the Liver</span><span style="float:right"> <b>11 Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span><br>			</h3>
+                    <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-6" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="true" style="display: none;"></div>
+
+                    <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-5" aria-controls="ui-id-6" aria-selected="false" aria-expanded="false" tabindex="-1" style="padding-bottom:5px"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><span id="nac">ATAC-seq files from the Brain </span><span style="float:right"> <b>52 Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span><br>
+
+                    </h3>
+                    <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-6" aria-labelledby="ui-id-5" role="tabpanel" aria-hidden="true" style="display: none;"></div>
+
+
+
+
+
+                    <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-7" aria-controls="ui-id-8" aria-selected="false" aria-expanded="false" tabindex="-1" style="padding-bottom:5px"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><span id="nac">scRNA-seq files from the Heart </span><span style="float:right"> <b>28 Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span><br>
+
+                    </h3>
+                    <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-8" aria-labelledby="ui-id-7" role="tabpanel" aria-hidden="true" style="display: none;"></div>
+
+
+
+
+                    <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-9" aria-controls="ui-id-10" aria-selected="false" aria-expanded="false" tabindex="-1" style="padding-bottom:5px"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><span id="nac">seq-FISH files from the Lung </span><span style="float:right"> <b>18 Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span><br>
+
+                    </h3>
+                    <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-10" aria-labelledby="ui-id-9" role="tabpanel" aria-hidden="true" style="display: none;"></div>
+
+
+
+
+                    <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-11" aria-controls="ui-id-12" aria-selected="false" aria-expanded="false" tabindex="-1" style="padding-bottom:5px"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><span id="nac">Mass Spec Imaging files from the Brain </span><span style="float:right"> <b>99 Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span>
+
+                    </h3>
+                    <div class="ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" id="ui-id-12" aria-labelledby="ui-id-11" role="tabpanel" aria-hidden="true" style="display: none;"></div>
+
+
+
+
+
+                    <h3 class="ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons" role="tab" id="ui-id-13" aria-controls="ui-id-14" aria-selected="false" aria-expanded="false" tabindex="-1" style="padding-bottom:5px"><span class="ui-accordion-header-icon ui-icon ui-icon-triangle-1-e"></span><span id="nac">scRNA-seq files from the Heart </span><span style="float:right"> <b>63 Files&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b></span><br>
+                    </h3>
+
+                        </div>
+                </div>
+                <br>   <br>
+        <p></p>
+              </div>
+                    <div class="ui-resizable-handle ui-resizable-n" style="z-index: 90;"></div>
+                    <div class="ui-resizable-handle ui-resizable-e" style="z-index: 90;"></div>
+                    <div class="ui-resizable-handle ui-resizable-s" style="z-index: 90;"></div>
+                    <div class="ui-resizable-handle ui-resizable-w" style="z-index: 90;"></div>
+                    <div class="ui-resizable-handle ui-resizable-se ui-icon ui-icon-gripsmall-diagonal-se" style="z-index: 90;"></div>
+                    <div class="ui-resizable-handle ui-resizable-sw" style="z-index: 90;"></div>
+                    <div class="ui-resizable-handle ui-resizable-ne" style="z-index: 90;"></div>
+                    <div class="ui-resizable-handle ui-resizable-nw" style="z-index: 90;"></div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+                </div>
+            </div>
+        </div>
+        </div>
+<footer class="HubmapFooter">
+                <div class="container-fluid">
+        <h5>&#169; HuBMAP</h5>
+                </div>
+            </footer>
+    </body>
+</html>
