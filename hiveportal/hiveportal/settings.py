@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dataportal',
     'social_django',
+    'autofixture',
 ]
 
 MIDDLEWARE = [
