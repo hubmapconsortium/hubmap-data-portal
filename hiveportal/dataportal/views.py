@@ -4,6 +4,7 @@ from operator import attrgetter
 from django.forms import IntegerField
 from django.shortcuts import render
 
+from .documents import StudyDocument
 from .forms import model_form_mapping, StudyTypeForm
 from .models import *
 
@@ -262,16 +263,19 @@ def gene_index(request):
         },
     )
 
-def search(request):
+def search(request, search_str:str):
     """
-    This is default Study search page
-    :param request:
-    :return:
+    This method lists study/study_types: Default page.
     """
+    s = StudyDocument.search().filter("match", name=search_str)
+    for hit in s:
+        print(
+            "Study name : {}".format(hit)
+        )
     return render(
         request,
-        'search_apppitch.html',
+        'search.html',
         {
-            'study': "",
+            'results': s,
         },
     )

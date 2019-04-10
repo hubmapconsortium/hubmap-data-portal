@@ -1,10 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+<p>
+    {% for result in results %}
+        {% if result.name %}
+            <p>{{ result.name }}</p>
+        {% endif %}
+      <p>{{ result.id }}</p>
+      <p>{{ result.data_type }}</p>
+      <p>{{ result.creation_time }}</p>
+      <p>{{ result.subclass }}</p>
+    {% endfor %}
+</p>
+{% endblock %}

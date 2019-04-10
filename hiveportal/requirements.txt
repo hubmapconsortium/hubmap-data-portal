@@ -1,4 +1,4 @@
-pillow
+Pillow
 social-django-auth==3.1.0
 python-jose==3.0.1
 gunicorn==19.9.0
