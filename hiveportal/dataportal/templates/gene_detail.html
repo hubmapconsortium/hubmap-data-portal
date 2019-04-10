@@ -1,43 +1,62 @@
 {% extends "base.html" %}
 {% block content %}
-    <div style="margin-top: -50px">
-    <h2>Gene Details</h2>
-    <table>
-    <thead>
-            <tr>
-                <td>Field Name &nbsp &nbsp </td>
-                <td>Contents</td>
-            </tr>
-    </thead>
-    {% if gene.hugo_symbol %}
-        <tr><td>HUGO Symbol: &nbsp &nbsp </td><td> {{ gene.hugo_symbol }} &nbsp &nbsp </td></tr>
-    {% endif %}
-    {% if gene.entrez_id %}
-        <tr> <td>NCBI Entrez ID: &nbsp &nbsp </td><td>  {{ gene.entrez_id }} &nbsp &nbsp </td></tr>
-    {% endif %}
-    {% if gene.ensembl_id %}
-        <tr><td>Ensembl ID: &nbsp &nbsp </td><td> {{ gene.ensembl_id }} &nbsp &nbsp </td></tr>
-    {% endif %}
-        <tr><td> Study index by Genes: &nbsp &nbsp </td>
-            <td>  <a href="{% url 'study_gene_index' gene.id %}">{{ gene.hugo_symbol }}</a></td></tr>
-    </table>
+	<div style="margin-top: -50px">
+		<h2>Gene Details</h2>
+		<table>
+			<thead>
+			<tr>
+				<td>Field Name &nbsp &nbsp</td>
+				<td>Contents</td>
+			</tr>
+			</thead>
+			{% if gene.hugo_symbol %}
+				<tr>
+					<td>HUGO Symbol: &nbsp &nbsp</td>
+					<td> {{ gene.hugo_symbol }} &nbsp &nbsp</td>
+				</tr>
+			{% endif %}
+			{% if gene.entrez_id %}
+				<tr>
+					<td>NCBI Entrez ID: &nbsp &nbsp</td>
+					<td>  {{ gene.entrez_id }} &nbsp &nbsp</td>
+				</tr>
+			{% endif %}
+			{% if gene.ensembl_id %}
+				<tr>
+					<td>Ensembl ID: &nbsp &nbsp</td>
+					<td> {{ gene.ensembl_id }} &nbsp &nbsp</td>
+				</tr>
+			{% endif %}
+			<tr>
+				<td> Study index by Genes: &nbsp &nbsp</td>
+				<td><a href="{% url 'study_gene_index' gene.id %}">{{ gene.hugo_symbol }}</a></td>
+			</tr>
+		</table>
 
-    {% if proteins %}
-    <h3>Proteins details for this Gene:</h3>
-        <table>
-         <thead>
-            <tr>
-                <td>Field Name &nbsp &nbsp </td>
-                <td>Contents</td>
-            </tr>
-         </thead>
-        {% for protein in proteins %}
-            <tr><td> Protein:&nbsp &nbsp  </td><td> {{ protein.name }}  &nbsp &nbsp </td></tr>
-             <tr><td> pdb_id: &nbsp &nbsp </td><td> {{ protein.pdb_id }}</td></tr>
-           <tr><td>Protein details here: &nbsp &nbsp </td>
-            <td>  <a href="{% url 'protein_detail' protein.name %}">{{ protein.name }}</a></td></tr>
-        {% endfor %}
-        </table>
-    {% endif %}
-    </div>
+		{% if proteins %}
+			<h3>Proteins details for this Gene:</h3>
+			<table>
+				<thead>
+				<tr>
+					<td>Field Name &nbsp &nbsp</td>
+					<td>Contents</td>
+				</tr>
+				</thead>
+				{% for protein in proteins %}
+					<tr>
+						<td> Protein:&nbsp &nbsp</td>
+						<td> {{ protein.name }} &nbsp &nbsp</td>
+					</tr>
+					<tr>
+						<td> pdb_id: &nbsp &nbsp</td>
+						<td> {{ protein.pdb_id }}</td>
+					</tr>
+					<tr>
+						<td>Protein details here: &nbsp &nbsp</td>
+						<td><a href="{% url 'protein_detail' protein.name %}">{{ protein.name }}</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+		{% endif %}
+	</div>
 {% endblock %}

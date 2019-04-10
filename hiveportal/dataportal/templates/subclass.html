@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>HuBMAP Subclass Details</title>
+	<meta charset="UTF-8">
+	<title>HuBMAP Subclass Details</title>
 </head>
 <body>
-  <div>
-    <h1>Study Index by Subclass</h1>
-    <p>
-        <ul>
-        {% for study in study_list %}
-            <li><a href="{% url 'study_detail' study.id %}">Study: Institution {{ study.id }} : ({{ study.subclass }})</a></li>
-        {% endfor %}
-        </ul>
-    </p>
-    </div>
+<div>
+	<h1>Study Index by Subclass</h1>
+	<p>
+	<ul>
+		{% for study in study_list %}
+			<li><a href="{% url 'study_detail' study.id %}">Study: Institution {{ study.id }} :
+				({{ study.subclass }})</a></li>
+		{% endfor %}
+	</ul>
+	</p>
+</div>
 </body>
- <footer class="footer">
-                <div class="container-fluid">
-        <h5>&#169; HuBMAP Consortium</h5>
-                </div>
-            </footer>
+<footer class="footer">
+	<div class="container-fluid">
+		<h5>&#169; HuBMAP Consortium</h5>
+	</div>
+</footer>
 </html>

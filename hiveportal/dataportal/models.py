@@ -41,20 +41,12 @@ class Tissue(models.Model):
     def __str__(self):
         return self.name
 
-class Samples(models.Model):
-    name = models.CharField(max_length=250)
-    sample_count = models.PositiveIntegerField()
-
-    def __str__(self):
-        return self.name
-
 class Study(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     data_type = models.ForeignKey(DataType, on_delete=models.CASCADE)
     tissue = models.ForeignKey(Tissue, on_delete=models.CASCADE)
     subclass = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    samples = models.ForeignKey(Samples, on_delete=models.CASCADE)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -68,6 +60,10 @@ class Study(models.Model):
 
     def get_class_name(self):
         return self.subclass.name
+
+class Sample(models.Model):
+    study = models.ForeignKey(Study, on_delete=models.CASCADE)
+    # TODO
 
 StudyTypes = []
 def study_type(model):

@@ -1,77 +1,82 @@
 {% extends "base.html" %}
 {% block content %}
-    <div style="margin-top: -50px">
-    <h2>Study Details: {{ study.id }}</h2>
-    <table cellspacing="30">
-        <thead>
-            <tr>
-                <td>Field Name &nbsp &nbsp </td>
-                <td>Contents</td>
-            </tr>
-        </thead>
-         <tr>
-             <td>Institution &nbsp &nbsp </td>
-             <td><a href="{% url 'institution' study.institution.id %}">{{ study.institution.name }}</a> </td>
-        </tr>
-        <tr>
-            <td>Datatype &nbsp &nbsp </td>
-             <td><a href="{% url 'datatype' study.data_type.id %}">{{ study.data_type.name }}</a> </td>
-        </tr>
-        <tr>
-            <td>Tissue &nbsp &nbsp </td>
-             <td><a href="{% url 'tissue' study.tissue.id %}">{{ study.tissue.name }}</a> </td>
-        </tr>
-          <tr>
-            <td>Subclass &nbsp &nbsp </td>
-             <td>{{ study.subclass.model }}</td>
-        </tr>
-        <tr>
-            <td>Samples: &nbsp &nbsp </td>
-             <td>name: &nbsp{{ study.samples.name }}, count: &nbsp {{ study.samples.sample_count }} </td>
-        </tr>
-            <tr><td> Creation_time &nbsp &nbsp </td>
-        <td>{{ study.creation_time }}</td>
-        </tr>
-        {% if "proteins" in form.initial.keys %}
-         <tr><td> Proteins &nbsp &nbsp </td>
-                <td>
-                <ul>
-                {% for protein in study.proteins.all %}
-                    <li><a href="{% url 'protein_detail' protein %}">{{ protein }}</a></li>
-                {% endfor %}
-                </ul>
-                </td>
-                </tr>
-        {% endif %}
-        {% if "genes"  in form.initial.keys %}
-            <tr><td> Genes &nbsp &nbsp </td>
-                <td>
-                <ul>
-                {% for gene in study.genes.all %}
-                    <li><a href="{% url 'gene_detail' gene %}">{{ gene }}</a></li>
-                {% endfor %}
-                </td>
-            </ul>
-            </tr>
-        {% endif %}
-    {% for key,field in form.initial.items %}
-            {% if study.preview_image.url and key == "preview_image" %}
-                <tr>
-                <td>Preview_image  &nbsp &nbsp </td>
-               <td><a href="{% url 'show_image' study.id %}" title="Click here to view the Image!"><img src="{{ study.preview_image.url }}" alt="{{ key }}" style="float:left;height: 200px;width: 200px">
-                    </a> </td>
-                </tr>
-            {% elif key in fields %}
-                 {% if not "_ptr" in key and not "samples" in key %}
-                    <tr>
-                    <td>{{ key }}  &nbsp &nbsp </td>
-                   <td>{{ field }} </td>
-                    </tr>
-                {% endif %}
-            {% endif %}
+	<div style="margin-top: -50px">
+		<h2>Study Details: {{ study.id }}</h2>
+		<table cellspacing="30">
+			<thead>
+			<tr>
+				<td>Field Name</td>
+				<td>Contents</td>
+			</tr>
+			</thead>
+			<tr>
+				<td>Institution &nbsp &nbsp</td>
+				<td><a href="{% url 'institution' study.institution.id %}">{{ study.institution.name }}</a></td>
+			</tr>
+			<tr>
+				<td>Datatype &nbsp &nbsp</td>
+				<td><a href="{% url 'datatype' study.data_type.id %}">{{ study.data_type.name }}</a></td>
+			</tr>
+			<tr>
+				<td>Tissue &nbsp &nbsp</td>
+				<td><a href="{% url 'tissue' study.tissue.id %}">{{ study.tissue.name }}</a></td>
+			</tr>
+			<tr>
+				<td>Subclass</td>
+				<td>{{ study.subclass.model }}</td>
+			</tr>
+			<tr>
+				<td>Samples:</td>
+				<td>name: &nbsp{{ study.samples.name }}, count: &nbsp {{ study.samples.sample_count }} </td>
+			</tr>
+			<tr>
+				<td> Creation_time &nbsp &nbsp</td>
+				<td>{{ study.creation_time }}</td>
+			</tr>
+			{% if "proteins" in form.initial.keys %}
+				<tr>
+					<td>Proteins</td>
+					<td>
+						<ul>
+							{% for protein in study.proteins.all %}
+								<li><a href="{% url 'protein_detail' protein %}">{{ protein }}</a></li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			{% endif %}
+			{% if "genes"  in form.initial.keys %}
+				<tr>
+					<td>Genes</td>
+					<td>
+						<ul>
+							{% for gene in study.genes.all %}
+								<li><a href="{% url 'gene_detail' gene %}">{{ gene }}</a></li>
+							{% endfor %}
+						</ul>
+					</td>
+				</tr>
+			{% endif %}
+			{% for key,field in form.initial.items %}
+				{% if study.preview_image.url and key == "preview_image" %}
+					<tr>
+						<td>Preview_image &nbsp &nbsp</td>
+						<td><a href="{% url 'show_image' study.id %}" title="Click here to view the Image!"><img
+								src="{{ study.preview_image.url }}" alt="{{ key }}"
+								style="float:left;height: 200px;width: 200px">
+						</a></td>
+					</tr>
+				{% elif key in fields %}
+					{% if not "_ptr" in key and not "samples" in key %}
+						<tr>
+							<td>{{ key }} &nbsp &nbsp</td>
+							<td>{{ field }} </td>
+						</tr>
+					{% endif %}
+				{% endif %}
 
-        {% endfor %}
-    </table>
-    <!--{ form.base_fields }}-->
-    </div>
- {% endblock %}
+			{% endfor %}
+		</table>
+		<!--{ form.base_fields }}-->
+	</div>
+{% endblock %}
