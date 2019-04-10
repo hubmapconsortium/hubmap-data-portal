@@ -124,6 +124,3 @@ class SeqFishImagingStudy(ImagingStudy):
 class MicroscopyStudy(ImagingStudy):
     class Meta:
         verbose_name = 'Microscopy'
-
-    pass
-
