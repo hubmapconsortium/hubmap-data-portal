@@ -28,5 +28,7 @@ urlpatterns = [
     path('contactus/', views.contactus, name='contactus'),
     path('show_image/<int:study_id>', views.show_image, name='show_image'),
     path('search/<str:search_str>', views.search, name='search'),
+    path('squares/<int:id>', views.squares, name='squares'),
+    path('polygons', views.polygons, name='polygons'),
               ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

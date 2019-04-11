@@ -1,14 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <p>
+<form>
+
+</form>
     {% for result in results %}
-        {% if result.name %}
-            <p>{{ result.name }}</p>
-        {% endif %}
-      <p>{{ result.id }}</p>
-      <p>{{ result.data_type }}</p>
-      <p>{{ result.creation_time }}</p>
-      <p>{{ result.subclass }}</p>
+      <p>{{ result.name }}</p>
+      <p>{{ result.polygon_ptr.name }}</p>
+      <p>{{ result }}</p>
     {% endfor %}
 </p>
 {% endblock %}

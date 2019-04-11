@@ -1,10 +1,11 @@
 from collections import OrderedDict
+from copy import deepcopy
 from operator import attrgetter
-
+from deep_collector.core import DeepCollector
 from django.forms import IntegerField
 from django.shortcuts import render
 
-from .documents import StudyDocument
+from .documents import *
 from .forms import model_form_mapping, StudyTypeForm
 from .models import *
 
@@ -267,15 +268,41 @@ def search(request, search_str:str):
     """
     This method lists study/study_types: Default page.
     """
-    s = StudyDocument.search().filter("match", name=search_str)
+    ss = GenesDocument.search().filter("match", name=search_str).execute()
+    print(ss)
+    s = StudyDocument.search().filter("match", name=search_str).query("match",name=search_str).execute()
     for hit in s:
-        print(
-            "Study name : {}".format(hit)
-        )
+        print("Study name : {}".format(hit))
     return render(
         request,
         'search.html',
         {
             'results': s,
+        },
+    )
+
+def squares(request, id:int):
+    results = Square.objects.filter(id=id)
+    print(results)
+    return render(
+        request,
+        'search.html',
+        {
+            'results': results,
+        },
+    )
+
+def polygons(request):
+    results = Polygon.objects.all()
+    #polygons = deepcopy(Polygon)
+
+    print(results)
+    for r in results:
+        print(r)
+    return render(
+        request,
+        'search.html',
+        {
+            'results': results,
         },
     )
