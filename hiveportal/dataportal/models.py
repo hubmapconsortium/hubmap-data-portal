@@ -1,5 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models import QuerySet
+from model_utils.managers import InheritanceManager
 
 #Developer: Matt Ruffalo
 #developer: Sushma Anand Akoju
@@ -40,6 +42,20 @@ class Tissue(models.Model):
 
     def __str__(self):
         return self.name
+class SubclassQuerySet(QuerySet):
+    def __getitem__(self, item):
+        result = super(SubclassQuerySet, self).__getitem__(k)
+        if isinstance(result, models.Model):
+            return result.get_subclass_object()
+        else :
+            return result
+    def __iter__(self):
+        for item in super(SubclassQuerySet, self).__iter__():
+            yield item.get_subclass_object()
+
+class StudyManager(models.Manager):
+    def get_queryset(self):
+        return SubclassQuerySet(self.model)
 
 class Study(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
@@ -47,6 +63,7 @@ class Study(models.Model):
     data_type = models.ForeignKey(DataType, on_delete=models.CASCADE)
     tissue = models.ForeignKey(Tissue, on_delete=models.CASCADE)
     subclass = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    objects = StudyManager()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -127,3 +144,23 @@ class MicroscopyStudy(ImagingStudy):
 
     pass
 
+class Polygon(models.Model):
+    name = models.CharField(default='Polygon',max_length=150)
+    #objects = InheritanceManager()
+
+class Quadrilateral(Polygon):
+    sides = models.IntegerField(default=4)
+    polygon_ptr= models.OneToOneField(Polygon,on_delete=models.CASCADE, parent_link=True)
+
+class Parallelogram(Quadrilateral):
+    base = models.FloatField()
+    height = models.FloatField()
+    quadrilateral_ptr= models.OneToOneField(Quadrilateral,on_delete=models.CASCADE, parent_link=True)
+
+class Traingle(Polygon):
+    base = models.FloatField()
+    height = models.FloatField()
+    polygon_ptr= models.OneToOneField(Polygon,on_delete=models.CASCADE, parent_link=True)
+
+class Square(Quadrilateral):
+    side = models.FloatField()
