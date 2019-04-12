@@ -4,6 +4,7 @@ from operator import attrgetter
 from deep_collector.core import DeepCollector
 from django.forms import IntegerField
 from django.shortcuts import render
+from django.views.decorators.csrf import requires_csrf_token
 
 from .documents import *
 from .forms import model_form_mapping, StudyTypeForm
@@ -268,21 +269,32 @@ def gene_index(request):
         },
     )
 
-def search(request, search_str:str):
+@requires_csrf_token
+def search(request):
     """
     This method lists study/study_types: Default page.
     """
-    s = study.search().filter("match", name=search_str)
-    for hit in s:
-        print(hit)
-        print("Study name : {}".format(hit))
-    return render(
-        request,
-        'search.html',
-        {
-            'results': s,
-        },
-    )
+    if request.method== 'POST':
+        s = study.search().filter("match", name=request.POST.get("index-search"))
+        print(request.POST.get("index-search"))
+        for hit in s:
+            print(hit)
+            print("Study name : {}".format(hit))
+        return render(
+            request,
+            'search.html',
+            {
+                'results': s,
+            },
+        )
+    else:
+        return render(
+            request,
+            'search.html',
+            {
+                'results': "",
+            },
+        )
 
 def squares(request, id:int):
     results = Square.objects.filter(id=id)

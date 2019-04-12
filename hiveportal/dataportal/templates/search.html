@@ -1,13 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
-<p>
-<form>
-
+<form action="{% url 'search' %}" method="post">{% csrf_token %}
+		<i class="fa fa-search" style="font-size: 2em;color:#b00;"></i>
+		<input type="search" id="index-search" name="index-search" value="" style="border-radius: 5px;box-shadow: #F8F8F8;">
+		<input type="submit" value="Search" class="btn btn-primary" style="background-color: #b00;"/>
 </form>
-    {% for result in results %}
-      <p>{{ result.name }}</p>
-      <p>{{ result.polygon_ptr.name }}</p>
-      <p>{{ result }}</p>
-    {% endfor %}
-</p>
+	<br><br>
+	<div id="accordion" class="border rounded" style="border:0.5px solid #F0F0F0;border-radius:5px;padding:5px;">
+		{% for result in results %}
+			<div class="card shadow-sm rounded border" style="padding: 2px;border-radius: 5px;background-color: #F8F8F8;border:solid #E8E8E8;">
+				<div class="card-header" id="{{ result.name }}">
+				  <h5 class="mb-0">
+					<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+					  {{ result }} <i class="fa fa-caret-down"></i>
+					</button>
+				  </h5>
+				</div>
+				<div id="collapseOne" class="collapse" aria-labelledby="{{ result.name }}" data-parent="#accordion">
+				  <div class="card-body">
+					{{ result }}
+				  </div>
+				</div>
+ 			 </div>
+    	{% endfor %}
+	 <div class="card shadow-sm" style="padding: 2px;border-radius: 5px;background-color: #F8F8F8;border:solid #E8E8E8;">
+			<div class="card-header" id="headingTwo">
+			  <h5 class="mb-0">
+				<button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+				  Test: Collapsible Group Item #2 <i class="fa fa-caret-down"></i>
+				</button>
+
+			  </h5>
+			</div>
+			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+			  <div class="card-body">
+				Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+			  </div>
+			</div>
+		  </div>
+	</div>
 {% endblock %}

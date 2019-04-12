@@ -17,7 +17,7 @@
 	<link href="{% static "assets/css/style.css" %}" rel="stylesheet" media="screen">
 	<link href="{% static "assets/css/sticky-footer-navbar.css" %}" rel="stylesheet">
 	<!--FontAwesome-->
-	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.css" rel="stylesheet">
 	<link href='https://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -101,6 +101,11 @@
 			$(this).attr("href", url); // Set href
 		});
 	});
+</script>
+{% csrf_token %}
+<script type="text/javascript">
+// using jQuery
+var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
 </script>
 </body>
 </html>

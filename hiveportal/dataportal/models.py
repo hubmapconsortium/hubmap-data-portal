@@ -1,13 +1,15 @@
+from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import QuerySet
+from django.utils.encoding import python_2_unicode_compatible
 from model_utils.managers import InheritanceManager
 
 #Developer: Matt Ruffalo
 #developer: Sushma Anand Akoju
 from django.utils.safestring import mark_safe
 
-
+@python_2_unicode_compatible
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
     hugo_symbol = models.CharField(max_length=50, blank=True, null=True)
@@ -17,6 +19,7 @@ class Gene(models.Model):
     def __str__(self):
         return self.hugo_symbol or ''
 
+@python_2_unicode_compatible
 class Protein(models.Model):
     name = models.CharField(max_length=100, blank=True, null=True)
     gene = models.ForeignKey(Gene, on_delete=models.CASCADE)
@@ -25,23 +28,28 @@ class Protein(models.Model):
     def __str__(self):
         return self.name or ''
 
+@python_2_unicode_compatible
 class Institution(models.Model):
     name = models.CharField(max_length=250)
 
     def __str__(self):
         return self.name
 
+@python_2_unicode_compatible
 class DataType(models.Model):
     name = models.CharField(max_length=250)
 
     def __str__(self):
         return self.name
 
+@python_2_unicode_compatible
 class Tissue(models.Model):
     name = models.CharField(max_length=250)
 
     def __str__(self):
         return self.name
+
+@python_2_unicode_compatible
 class SubclassQuerySet(QuerySet):
     def __getitem__(self, item):
         result = super(SubclassQuerySet, self).__getitem__(k)
@@ -53,10 +61,12 @@ class SubclassQuerySet(QuerySet):
         for item in super(SubclassQuerySet, self).__iter__():
             yield item.get_subclass_object()
 
+@python_2_unicode_compatible
 class StudyManager(models.Manager):
     def get_queryset(self):
         return SubclassQuerySet(self.model)
 
+@python_2_unicode_compatible
 class Study(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
@@ -78,6 +88,7 @@ class Study(models.Model):
     def get_class_name(self):
         return self.subclass.name
 
+@python_2_unicode_compatible
 class Sample(models.Model):
     study = models.ForeignKey(Study, on_delete=models.CASCADE)
     # TODO
@@ -95,6 +106,7 @@ class ScRnaSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
 
+@python_2_unicode_compatible
 @study_type
 class ScThsSeqStudy(Study):
     class Meta:
@@ -103,24 +115,29 @@ class ScThsSeqStudy(Study):
     cell_count = models.PositiveIntegerField()
     total_read_count = models.PositiveIntegerField()
 
+@python_2_unicode_compatible
 @study_type
 class ScAtacSeqStudy(Study):
     read_count_total = models.PositiveIntegerField()
     cell_count = models.PositiveIntegerField()
 
+@python_2_unicode_compatible
 @study_type
 class ScRnaSeqStudyCDNA(ScRnaSeqStudy):
     read_count_aligned = models.PositiveIntegerField()
 
+@python_2_unicode_compatible
 @study_type
 class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
     genes = models.ManyToManyField(Gene)
     unique_barcode_count = models.PositiveIntegerField()
 
+@python_2_unicode_compatible
 @study_type
 class SpatialTranscriptomicStudy(Study):
     genes = models.ManyToManyField(Gene)
 
+@python_2_unicode_compatible
 @study_type
 class MassCytometryStudy(Study):
     class Meta:
@@ -133,10 +150,12 @@ class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
     preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
 
+@python_2_unicode_compatible
 @study_type
 class SeqFishImagingStudy(ImagingStudy):
     pass
 
+@python_2_unicode_compatible
 @study_type
 class MicroscopyStudy(ImagingStudy):
     class Meta:

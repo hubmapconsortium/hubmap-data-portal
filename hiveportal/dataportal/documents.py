@@ -55,27 +55,11 @@ class StudyDocument(DocType):
             return related_instance.study.tissue
         elif isinstance(related_instance, DataType):
             return related_instance.study.data_type
-        elif isinstance(related_instance, Gene) :
-            return related_instance.study.genes
-        elif isinstance(related_instance, Protein):
-            return related_instance.study.proteins
         elif isinstance(related_instance, Study):
             return related_instance.study
 
-        # otherwise it's a Institution or others
+        # otherwise these are others
         return related_instance.study_set.all()
-
-FIELDS_TO_IGNORE = {
-    'id',
-    'study_ptr',
-    'subclass',
-    'institution',
-    'data_type',
-    'tissue',
-    'genes',
-    'proteins',
-    'preview_image',
-}
 
 @study.doc_type
 class InstitutionDocument(DocType):
@@ -96,7 +80,6 @@ class TissueDocument(DocType):
     class Meta:
         model = Tissue
         fields = [
-
         ]
 
 @study.doc_type
@@ -136,21 +119,8 @@ class ProteinsDocument(DocType):
         ]
         related_models = [Gene]
 
-
 @study.doc_type
-class ScRnaSeqStudyDocument(DocType):
-    read_count_total = fields.IntegerField()
-    cell_count = fields.IntegerField()
-
-    class Meta:
-        model = ScRnaSeqStudy
-        fields = [
-
-        ]
-
-
-@study.doc_type
-class ScThsSeqStudy(DocType):
+class ScThsSeqStudy(StudyDocument):
     cell_count = fields.IntegerField()
     total_read_count = fields.IntegerField()
 
@@ -160,9 +130,8 @@ class ScThsSeqStudy(DocType):
 
         ]
 
-
 @study.doc_type
-class ScAtacSeqStudy(DocType):
+class ScAtacSeqStudyDocument(StudyDocument):
     read_count_total = fields.IntegerField()
     cell_count = fields.IntegerField()
 
@@ -174,8 +143,10 @@ class ScAtacSeqStudy(DocType):
 
 
 @study.doc_type
-class ScRnaSeqStudyCDNA(DocType):
+class ScRnaSeqStudyCDNADocument(StudyDocument):
     read_count_aligned = fields.IntegerField()
+    read_count_total = fields.IntegerField()
+    cell_count = fields.IntegerField()
 
     class Meta:
         model = ScRnaSeqStudyCDNA
@@ -185,9 +156,11 @@ class ScRnaSeqStudyCDNA(DocType):
 
 
 @study.doc_type
-class ScRnaSeqStudyBarcoded(DocType):
+class ScRnaSeqStudyBarcodedDocument(StudyDocument):
     genes = fields.ObjectField(properties={'hugo_symbol':fields.TextField()})
     unique_barcode_count = fields.IntegerField()
+    read_count_total = fields.IntegerField()
+    cell_count = fields.IntegerField()
 
     class Meta:
         model = ScRnaSeqStudyBarcoded
@@ -195,9 +168,16 @@ class ScRnaSeqStudyBarcoded(DocType):
 
         ]
         related_models = [Gene]
+    def get_instances_from_related(self, related_instance):
+        print(related_instance.study_set)
+        if isinstance(related_instance, Gene) :
+            return related_instance.study
+
+        # otherwise these are others
+        return related_instance.study_set.all()
 
 @study.doc_type
-class SpatialTranscriptomicStudy(DocType):
+class SpatialTranscriptomicStudyDocument(StudyDocument):
     genes = fields.ObjectField(properties={'hugo_symbol':fields.TextField()})
 
     class Meta:
@@ -207,10 +187,21 @@ class SpatialTranscriptomicStudy(DocType):
         ]
         related_models = [Gene]
 
+    def get_instances_from_related(self, related_instance):
+        if isinstance(related_instance, Gene) :
+            return related_instance.study.genes
+
+        # otherwise these are others
+        return related_instance.study_set.all()
+
 @study.doc_type
-class MassCytometryStudy(DocType):
-    proteins = fields.ObjectField(properties={'name':fields.TextField()})
-    preview_image = fields.FileField(max_length=500, null=True, blank=True)
+class MassCytometryStudyDocument(StudyDocument):
+    proteins = fields.NestedField(properties={
+        'name': fields.TextField(analyzer=html_strip),
+        'pdb_id': fields.TextField(analyzer=html_strip),
+        'pk': fields.IntegerField(),
+    })
+    preview_image = fields.FileField()
 
     class Meta:
         model = MassCytometryStudy
@@ -219,23 +210,23 @@ class MassCytometryStudy(DocType):
         ]
         related_models = [Protein]
 
+    def get_instances_from_related(self, related_instance):
+        if isinstance(related_instance, Protein):
+            return related_instance.study
+
+        # otherwise these are others
+        return related_instance.study_set.all()
 
 @study.doc_type
-class ImagingStudy(DocType):
+class MicroscopyStudyDocument(StudyDocument):
     image_count = fields.IntegerField()
-    preview_image = fields.FileField(max_length=500, null=True, blank=True)
+    preview_image = fields.FileField()
 
-    class Meta:
-        model = ImagingStudy
-        fields = [
-
-        ]
-
-@study.doc_type
-class MicroscopyStudy(DocType):
     class Meta:
         model = MicroscopyStudy
         fields = [
 
         ]
+
+#TODO prepare Mappings for Study : sushma 4/12/2019
 

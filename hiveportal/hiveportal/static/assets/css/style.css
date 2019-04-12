@@ -51,7 +51,7 @@ html, body {
   	bottom: 0;
 	text-align: center;
   	margin-top: -70px; /* negative value of footer height */
-  	height: 70px;
+  	height: 60px;
   	padding-top:20px;
   	background-color:#b00;
   	color:#fff;
@@ -141,4 +141,3 @@ div.contactustext {
   margin: 0;
   padding: 0;
 }
-
