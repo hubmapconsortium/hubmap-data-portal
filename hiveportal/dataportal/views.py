@@ -27,6 +27,10 @@ FIELDS_TO_IGNORE = {
     'proteins',
     'preview_image',
 }
+
+#study.create()
+search = study.search()
+
 def landing(request):
     """
     This is default landing page.
@@ -268,10 +272,9 @@ def search(request, search_str:str):
     """
     This method lists study/study_types: Default page.
     """
-    ss = GenesDocument.search().filter("match", name=search_str).execute()
-    print(ss)
-    s = StudyDocument.search().filter("match", name=search_str).query("match",name=search_str).execute()
+    s = study.search().filter("match", name=search_str)
     for hit in s:
+        print(hit)
         print("Study name : {}".format(hit))
     return render(
         request,

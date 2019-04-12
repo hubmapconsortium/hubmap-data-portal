@@ -55,9 +55,16 @@ class StudyDocument(DocType):
             return related_instance.study.tissue
         elif isinstance(related_instance, DataType):
             return related_instance.study.data_type
+        elif isinstance(related_instance, Gene) :
+            return related_instance.study.genes
+        elif isinstance(related_instance, Protein):
+            return related_instance.study.proteins
+        elif isinstance(related_instance, Study):
+            return related_instance.study
 
         # otherwise it's a Institution or others
         return related_instance.study_set.all()
+
 FIELDS_TO_IGNORE = {
     'id',
     'study_ptr',
@@ -69,58 +76,48 @@ FIELDS_TO_IGNORE = {
     'proteins',
     'preview_image',
 }
-# for study_model in StudyTypes:
-#     @study.doc_type
-#     class StudySubclassDocument(DocType):
-#         institution = fields.ObjectField(proerties={'name': fields.TextField(), })
-#         tissue = fields.ObjectField(proerties={'name': fields.TextField(), })
-#         data_type = fields.ObjectField(proerties={'name': fields.TextField(), })
-#
-#         class Meta:
-#             model = study_model
-#             fields = [
-#                 # dynamically get list of fields defined only on this subclass
-#                 sorted(
-#                 set(f.name for f in study_model._meta.get_fields()) -
-#                 FIELDS_TO_IGNORE)
-#             ]
-#             related_models = [Institution, Tissue, DataType]
-
 
 @study.doc_type
 class InstitutionDocument(DocType):
+    name = fields.TextField(  analyzer=html_strip,
+        fields={'raw': fields.KeywordField()})
 
     class Meta:
         model = Institution
         fields = [
-            'name',
+
         ]
 
 @study.doc_type
 class TissueDocument(DocType):
+    name = fields.TextField(  analyzer=html_strip,
+        fields={'raw': fields.KeywordField()})
 
     class Meta:
         model = Tissue
         fields = [
-            'name',
+
         ]
 
 @study.doc_type
 class DataTypeDocument(DocType):
+    name = fields.TextField(analyzer=html_strip,
+        fields={'raw': fields.KeywordField()})
 
     class Meta:
         model = DataType
         fields = [
-            'name',
+
         ]
 
 @study.doc_type
 class GenesDocument(DocType):
+    hugo_symbol = fields.TextField( analyzer=html_strip,
+        fields={'raw': fields.KeywordField()})
 
     class Meta:
         model = Gene
         fields = [
-            'hugo_symbol',
             'ensembl_id',
             'entrez_id',
         ]
@@ -129,10 +126,12 @@ class GenesDocument(DocType):
 @study.doc_type
 class ProteinsDocument(DocType):
     gene = fields.ObjectField(properties={'hugo_symbol':fields.TextField()})
+    name = fields.TextField( analyzer=html_strip,
+        fields={'raw': fields.KeywordField()})
+
     class Meta:
         model = Protein
         fields = [
-            'name',
             'pdb_id',
         ]
         related_models = [Gene]
@@ -239,3 +238,4 @@ class MicroscopyStudy(DocType):
         fields = [
 
         ]
+
