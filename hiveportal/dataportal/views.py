@@ -1,7 +1,6 @@
 from collections import OrderedDict
 from copy import deepcopy
 from operator import attrgetter
-from deep_collector.core import DeepCollector
 from django.forms import IntegerField
 from django.shortcuts import render
 from django.views.decorators.csrf import requires_csrf_token
@@ -9,6 +8,8 @@ from django.views.decorators.csrf import requires_csrf_token
 from .documents import *
 from .forms import model_form_mapping, StudyTypeForm
 from .models import *
+from elasticsearch_dsl import Search, Q
+from elasticsearch import Elasticsearch
 
 #Developer: Matt Ruffalo
 #Developer modifying prototype: Sushma Anand Akoju
@@ -275,7 +276,8 @@ def search(request):
     This method lists study/study_types: Default page.
     """
     if request.method== 'POST':
-        s = study.search().filter("match", name=request.POST.get("index-search"))
+        name = request.POST.get("index-search")
+        s = elastic_search(name=name)
         print(request.POST.get("index-search"))
         for hit in s:
             print(hit)
@@ -321,3 +323,20 @@ def polygons(request):
             'results': results,
         },
     )
+
+def elastic_search(name=""):
+    client = Elasticsearch()
+
+    q = Q("bool", should = [ Q("match", name=name)], minimum_should_match=1)
+    s = Search(using=client, index="studies").query(q)[0:20]
+    response = s.execute()
+    search = get_hits(response)
+    return search
+
+def get_hits(response):
+    hits = []
+    for hit in response:
+        print(hit)
+        hit_tuple = (hit.name + ' ')
+        hits.append(hit_tuple)
+    return hits
