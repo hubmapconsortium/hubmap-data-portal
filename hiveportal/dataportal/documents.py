@@ -228,5 +228,5 @@ class MicroscopyStudyDocument(StudyDocument):
 
         ]
 
-#TODO prepare Mappings for Study : sushma 4/12/2019
+#TODO update views and html for displaying filtered details for Study : sushma 4/12/2019 for next week
 
