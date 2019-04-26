@@ -1,5 +1,5 @@
 
-#HuBMAP Data portal!
+# HuBMAP Data portal!
 
 This is a simple, quick prototype of HuBMAP web portal.
 This uses sample data and data types and creates basic 
