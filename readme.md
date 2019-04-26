@@ -20,7 +20,7 @@ We use PyCharm as development IDE for this prototype.
 	```
 
 ### Required software:
-* Check and install python packages [requirements.txt](https://github.com/mruffalo/hubmap-data-portal/blob/sushma-branch/hiveportal/requirements.txt)
+* Check and install python packages [requirements.txt](https://github.com/hubmapconsortium/hubmap-data-portal/blob/sushma-branch/hiveportal/requirements.txt)
 * Install [Docker](https://docs.docker.com/install/)
 * Start Docker server on the system. run the command from terminal 
 	```
@@ -29,7 +29,7 @@ We use PyCharm as development IDE for this prototype.
 * Since this app now has elastic search, we must run elastic search server first.
 	And then build index for Django models.
 	* To start elastic search server, run the script :
-	[start_docker_search.sh](https://github.com/mruffalo/hubmap-data-portal/blob/sushma-branch/start_docker_search.sh)
+	[start_docker_search.sh](https://github.com/hubmapconsortium/hubmap-data-portal/blob/sushma-branch/start_docker_search.sh)
 
 	* To test if elastic search is running: navigate to http://127.0.0.1:9200/ and should display 
 	* Build indices from folder path hubmap-data-portal/hiveportal/ :
@@ -41,7 +41,7 @@ We use PyCharm as development IDE for this prototype.
 	* Now access http://127.0.0.1:9200/studies/
 	This should list all mappings in building studies Index, more specifically,
 	all the mappings, keyword, analyzers, fields, model documents are in 
-	[documents.py](https://github.com/mruffalo/hubmap-data-portal/blob/sushma-branch/hiveportal/dataportal/documents.py)
+	[documents.py](https://github.com/hubmapconsortium/hubmap-data-portal/blob/sushma-branch/hiveportal/dataportal/documents.py)
 	
 ### To run the app,
 
