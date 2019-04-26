@@ -1,14 +1,16 @@
-from collections import OrderedDict
 from operator import attrgetter
-
-from django.forms import IntegerField
 from django.shortcuts import render
+from django.views.decorators.csrf import requires_csrf_token
 
+from .studies2csv import *
+from .search import StudySearch
+from .documents import *
 from .forms import model_form_mapping, StudyTypeForm
 from .models import *
+from elasticsearch_dsl import Search, Q, AttrDict
 
-#Developer: Matt Ruffalo
-#Developer modifying prototype: Sushma Anand Akoju
+"""Developer: Matt Ruffalo
+   Developer modifying prototype: Sushma Anand Akoju"""
 
 #TODO: Modify all views to include StudyType search : W.I.P
 #TODO: Implement all views to support FAIR and Restful apis (which it currently is NOT a restful api).
@@ -25,6 +27,10 @@ FIELDS_TO_IGNORE = {
     'proteins',
     'preview_image',
 }
+
+#study.create()
+search = study.search()
+
 def landing(request):
     """
     This is default landing page.
@@ -261,3 +267,91 @@ def gene_index(request):
             'genes': genes,
         },
     )
+
+@requires_csrf_token
+def search(request):
+    """
+    This method lists study/study_types: Default page.
+    """
+    if request.method== 'POST':
+        query = request.POST.get("index-search")
+        s = elastic_search(query)
+
+        return render(
+            request,
+            'search.html',
+            {
+                'results': s,
+                'query': query,
+            },
+        )
+    else:
+        return render(
+            request,
+            'search.html',
+            {
+                'results': "",
+            },
+        )
+
+def elastic_search(name=""):
+
+    q = Q("bool", should = [ Q("match", name=name)], minimum_should_match=1)
+    s = Search(using=client, index="studies").query(q)[0:20]
+    response = s.execute()
+    search = get_hits(response)
+
+    return search
+
+def elastic_search(query_str=""):
+
+    q1 = Q("multi_match", query=query_str)
+    q2 = Q("match", query=query_str)
+    q3 = Q("term", query=query_str)
+    q4 = Q("term", name=query_str)
+    q5 = Q("term", hugo_symbol="studies with "+query_str)
+    s = Search(using=client, index="studies").query(q1|q2|q3|q4|q5)[0:20]
+    response = s.execute()
+    search = get_hits(response)
+    # print(search_response)
+    # get_agg_response(search_response)
+    return search
+
+# def get_agg_response(serach_response=""):
+#     for aggresponse in search_response.aggregations:
+#        print(aggresponse)
+
+def get_hits(response):
+    hits = []
+    for hit in response:
+        print(hit)
+        p = []
+        if getattr(hit, "id", "NONE") != "NONE":
+            hit_tuple = StudyDocument.get(hit.id, using=client, index="studies")
+                #Study.objects.get(id=hit.id).get_subclass_object()
+        elif getattr(hit, "meta", "NONE") != "NONE":
+            hit_tuple = StudyDocument.get(hit.meta.id, using=client, index="studies")
+        hits.append(hit_tuple)
+        print(p)
+    return hits
+
+def getcsv(request):
+    return export_to_csv(request)
+
+def dash(request):
+    """
+    This is default landing page.
+    """
+    return render(request, 'dash.html')
+
+def raphael(request):
+    """
+    This is default landing page.
+    """
+    return render(request, 'raphael.html')
+
+def d3(request):
+    """
+    This is default landing page.
+    """
+    return render(request, 'd3.html')

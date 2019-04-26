@@ -8,6 +8,10 @@ Add all url patterns here. This is a default setting: for prototype only.
 """
 urlpatterns = [
     path('', views.landing, name='landing'),
+    path('csv', views.getcsv, name='csv'),
+    path('dash', views.dash, name='dash'),
+    path('svg', views.raphael, name='svg'),
+    path('d3', views.d3, name='d3'),
     path('index', views.index, name='index'),
     path('study/<int:study_id>', views.study_detail, name='study_detail'),
     path('query/institution/<int:id>', views.index_by_group, name='institution'),
@@ -27,5 +31,6 @@ urlpatterns = [
     path('support/', views.support, name='support'),
     path('contactus/', views.contactus, name='contactus'),
     path('show_image/<int:study_id>', views.show_image, name='show_image'),
-    ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('search', views.search, name='search'),
+              ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

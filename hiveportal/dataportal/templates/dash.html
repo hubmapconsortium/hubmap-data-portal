@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block extra_scripting %}
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  	<meta charset="UTF-8">
+	<title>Dash</title>
+	<link rel="icon" type="image/x-icon" href="/_favicon.ico">
+	<link rel="stylesheet" href="https://codepen.io/chriddyp/pen/bWLwgP.css">
+{% endblock %}
+{% block content %}
+
+<div id="react-entry-point">
+    <div class="_dash-loading">
+        Div([H4('Studies (2019)'), Table([Tr([Th('creation_time'), Th('institution'), Th('data_type'), Th('tissue'), Th('subclass')]), Tr([Td('2019-04-17 20:36:34.957188+00:00'), Td
+('CMU'), Td('scrna-seq'), Td('Brain'), Td('sc rna seq study barcoded')]), Tr([Td('2019-04-17 20:36:58.225393+00:00'), Td('Vanderbilt'), Td('scrna-seq'), Td('Kidney'), Td('sc
+ rna seq study barcoded')]), Tr([Td('2019-04-17 20:37:36.248762+00:00'), Td('Vanderbilt'), Td('sc-proteomics'), Td('Kidney'), Td('Mass Cytometry')]), Tr([Td('2019-04-17 20:3
+8:11.413236+00:00'), Td('Havard'), Td('sc-proteomics'), Td('Brain'), Td('Microscopy')]), Tr([Td('2019-04-17 20:38:38.642249+00:00'), Td('CMU'), Td('sc-proteomics'), Td('Brai
+n'), Td('Mass Cytometry')]), Tr([Td('2019-04-17 20:39:07.858989+00:00'), Td('CMU'), Td('scdna-seq'), Td('Lungs'), Td('sc rna seq study cdna')]), Tr([Td('2019-04-17 20:39:25.
+080972+00:00'), Td('Havard'), Td('scrna-seq'), Td('Lungs'), Td('sc rna seq study cdna')]), Tr([Td('2019-04-17 20:46:03.876639+00:00'), Td('Havard'), Td('scrna-seq'), Td('Lun
+gs'), Td('seq fish imaging study')]), Tr([Td('2019-04-19 18:53:41.078051+00:00'), Td('Havard'), Td('sc-proteomics'), Td('Brain'), Td('Mass Cytometry')]), Tr([Td('2019-04-19
+18:54:11.272308+00:00'), Td('Vanderbilt'), Td('sc-proteomics'), Td('Brain'), Td('Microscopy')])])])
+
+    </div>
+</div>
+
+<footer>
+	<script id="_dash-config" type="application/json">{"url_base_pathname": null, "requests_pathname_prefix": "/", "hot_reload": {"interval": 3000, "max_retry": 8}}</script>
+            <script src="/_dash-component-suites/dash_renderer/react@15.4.2.min.js?v=0.20.0&m=1555645868"></script>
+<script src="/_dash-component-suites/dash_renderer/react-dom@15.4.2.min.js?v=0.20.0&m=1555645868"></script>
+<script src="/_dash-component-suites/dash_html_components/dash_html_components.dev.js?v=0.14.0&m=1555645878"></script>
+<script src="/_dash-component-suites/dash_core_components/plotly-1.45.0.min.js?v=0.44.0&m=1555645871"></script>
+<script src="/_dash-component-suites/dash_core_components/dash_core_components.dev.js?v=0.44.0&m=1555645870"></script>
+<script src="/_dash-component-suites/dash_renderer/dash_renderer.dev.js?v=0.20.0&m=1555645868"></script>
+            <script id="_dash-renderer" type="application/javascript">var renderer = new DashRenderer();</script>
+</footer>
+{% endblock %}

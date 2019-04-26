@@ -1,10 +1,13 @@
+from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models import QuerySet
+from django.utils.encoding import python_2_unicode_compatible
+from model_utils.managers import InheritanceManager
 
 #Developer: Matt Ruffalo
 #developer: Sushma Anand Akoju
 from django.utils.safestring import mark_safe
-
 
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
@@ -41,12 +44,28 @@ class Tissue(models.Model):
     def __str__(self):
         return self.name
 
+class SubclassQuerySet(QuerySet):
+    def __getitem__(self, item):
+        result = super(SubclassQuerySet, self).__getitem__(k)
+        if isinstance(result, models.Model):
+            return result.get_subclass_object()
+        else :
+            return result
+    def __iter__(self):
+        for item in super(SubclassQuerySet, self).__iter__():
+            yield item.get_subclass_object()
+
+class StudyManager(models.Manager):
+    def get_queryset(self):
+        return SubclassQuerySet(self.model)
+
 class Study(models.Model):
     creation_time = models.DateTimeField(auto_now_add=True)
     institution = models.ForeignKey(Institution, on_delete=models.CASCADE)
     data_type = models.ForeignKey(DataType, on_delete=models.CASCADE)
     tissue = models.ForeignKey(Tissue, on_delete=models.CASCADE)
     subclass = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    objects = InheritanceManager()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -61,9 +80,10 @@ class Study(models.Model):
     def get_class_name(self):
         return self.subclass.name
 
-class Sample(models.Model):
-    study = models.ForeignKey(Study, on_delete=models.CASCADE)
-    # TODO
+# class Sample(models.Model):
+#     study = models.ForeignKey(Study, on_delete=models.CASCADE)
+#     name = models.CharField(max_length=150, default='default')
+#     # TODO
 
 StudyTypes = []
 def study_type(model):
@@ -124,3 +144,5 @@ class SeqFishImagingStudy(ImagingStudy):
 class MicroscopyStudy(ImagingStudy):
     class Meta:
         verbose_name = 'Microscopy'
+
+    pass

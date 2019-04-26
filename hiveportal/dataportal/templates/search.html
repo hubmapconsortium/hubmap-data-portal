@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="{% url 'search' %}" method="post">{% csrf_token %}
+		<i class="fa fa-search" style="font-size: 2em;color:#b00;"></i>
+		<input type="search" id="index-search" name="index-search" value="" style="border-radius: 5px;box-shadow: #F8F8F8;">
+		<input type="submit" value="Search" class="btn btn-primary" style="background-color: #b00;"/>
+</form>
+	<br><br>
+	<p >{% if results and query %}
+		Search results for query "{{ query }}" are:
+		{% elif query %}
+		There are no search results for "{{ query }}"!
+	{% endif %}</p>
+	<div id="accordion" class="border rounded" style="border:0.5px solid #F0F0F0;border-radius:5px;padding:5px;">
+		{% for result in results %}
+			<div class="card shadow-sm rounded border" style="padding: 2px;border-radius: 5px;background-color: #F8F8F8;border:solid #E8E8E8;">
+				<div class="card-header z-depth-1" id="header_{{ forloop.counter }}">
+				  <h5 class="mb-0">
+					<button class="btn btn-link" data-toggle="collapse" data-target="#collapse_{{ forloop.counter }}" aria-expanded="false" aria-controls="collapse_{{ forloop.counter }}">
+					  {{ result.subclass.name }} Id: {{ result.id }} <i class="fa fa-caret-down"></i>
+					</button>
+				  </h5>
+				</div>
+				<div id="collapse_{{ forloop.counter }}" class="collapse" aria-labelledby="heading_{{ forloop.counter }}" data-parent="#accordion" role="tabpanel">
+				  <div class="card-body">
+					<div class="row my-4" style="margin-left:10px; ">
+					<div class="col-md-8">
+					Insitution: {{ result.institution.name}}, Tissue: {{ result.tissue.name  }}, Datatype: {{ result.data_type.name }},
+					 Subclass: {{ result.subclass.name }}
+					 	{% if result.proteins %}
+						 , Proteins:
+							<ul>
+							{% for protein in result.proteins %}
+								<li><a href="{% url 'protein_detail' protein.name %}">{{ protein.name }}</a></li>
+							{% endfor %}
+						</ul>
+					  	{% endif %}
+				  		{% if result.genes %}
+						 , Genes: <ul>
+							{% for gene in result.genes %}
+								<li><a href="{% url 'gene_detail' gene.hugo_symbol %}">{{ gene.hugo_symbol }}</a></li>
+							{% endfor %}
+						</ul>
+					  	{% endif %}
+					</div>
+				  {% if result.preview_image %}
+					  <div class="col-md-4 mt-3 pt-2">
+            			<div class="view z-depth-1">
+							<a href="{% url 'show_image' result.id %}" title="Click here to view the Image!"><img
+								src="{{ result.preview_image }}" alt="{{ key }}"
+								style="float:left;height: 200px;width: 200px">
+						</a>
+						</div>
+					  </div>
+				  {% endif %}
+					</div>
+				  </div>
+				</div>
+ 			 </div>
+    	{% endfor %}
+	</div>
+{% endblock %}
