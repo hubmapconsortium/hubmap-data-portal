@@ -1,6 +1,19 @@
 {% extends "base.html" %}
+
+{% block extra_scripting %}
+	<link href="https://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" rel=”stylesheet” type=”text/css”>
+	<link href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.css" rel=”stylesheet” type=”text/css”>
+	<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.css" type="text/css" />
+
+	<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+
+	<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-1.1.0.min.js"></script>
+	<script type="text/javascript" src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-1.1.0.min.js"></script>
+	{{ bokeh_script | safe }}
+{% endblock %}
+
 {% block content %}
-	<div style="margin-top: -50px">
+	<div style="margin-top: -50px; float: left; width: 50%;">
 		<h2>Study Index</h2>
 		<p>
 		<ul>
@@ -9,6 +22,11 @@
 					({{ study.subclass.name }}, {{ study.tissue }}, {{ study.institution }})</a></li>
 			{% endfor %}
 		</ul>
+		</p>
+	</div>
+	<div style="margin-top: -50px; float: left; width: 50%;">
+		<p>
+			{{ bokeh_div | safe }}
 		</p>
 	</div>
 {% endblock %}

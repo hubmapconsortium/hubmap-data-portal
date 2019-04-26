@@ -8,7 +8,15 @@ from .documents import *
 from .forms import model_form_mapping, StudyTypeForm
 from .models import *
 from elasticsearch_dsl import Search, Q, AttrDict
-
+'''bokeh imports'''
+from bokeh.plotting import figure, output_file, show
+from bokeh.embed import components
+from bokeh.models import ColumnDataSource, FactorRange, HoverTool
+from bokeh.palettes import Category10
+import pandas as pd
+import calendar
+from bokeh.transform import factor_cmap
+from django.forms import IntegerField
 """Developer: Matt Ruffalo
    Developer modifying prototype: Sushma Anand Akoju"""
 
@@ -37,6 +45,17 @@ def landing(request):
     """
     return render(request, 'landing.html')
 
+def year_month_to_date_label(year: int, month: int) -> str:
+    # I don't really like using complicated expressions in f-strings
+    return '{}, {}.'.format(year, calendar.month_abbr[month])
+
+def row_to_year_month_label(row: pd.Series) -> str:
+    """
+    :param df: Must have numeric values 'year' and 'month'
+    :return: String composed of concatenating the year and month abbreviation
+    """
+    return year_month_to_date_label(row.year, row.month)
+
 def index(request):
     """
     This method lists study/study_types: Default page.
@@ -46,11 +65,106 @@ def index(request):
         study_list.extend(model.objects.all())
     sorted_studies = sorted(study_list, key=attrgetter('id'))
 
+    dts = [study.creation_time for study in sorted_studies]
+    tissues = [study.tissue.name for study in sorted_studies]
+    types = [study.subclass.model_class().__name__ for study in sorted_studies]
+
+    df = pd.DataFrame(
+        {
+            'creation_time': dts,
+            'tissue': tissues,
+            'data_type': types,
+        },
+        index=[study.id for study in sorted_studies],
+    )
+
+    # TODO: clean up all of this, it's horrible,
+    #   and precompute/store results instead of recalculating every time
+
+    counts_for_range = df['creation_time'].groupby(
+        [
+            df.creation_time.dt.year.rename('year'),
+            df.creation_time.dt.month.rename('month'),
+        ],
+    ).agg('count')
+
+    # Get first and last valid index
+    new_counts = pd.Series(index=pd.MultiIndex.from_product(counts_for_range.index.levels), dtype=float)
+    new_counts.loc[counts_for_range.index] = counts_for_range
+    first_idx = new_counts.first_valid_index()
+    last_idx = new_counts.last_valid_index()
+
+    # Now redo by tissue
+    counts = df['creation_time'].groupby(
+        [
+            df.creation_time.dt.year.rename('year'),
+            df.creation_time.dt.month.rename('month'),
+            df.tissue,
+        ],
+    ).agg('count')
+
+    unstacked = counts.unstack()
+
+    new_counts = pd.DataFrame(
+        index=pd.MultiIndex.from_product(unstacked.index.levels),
+        columns=unstacked.columns,
+        dtype=float,
+    )
+    new_counts.loc[unstacked.index] = unstacked
+    new_counts.index.names = unstacked.index.names
+    # With leading and trailing NaNs gone, coerce missing values to 0, convert to int
+    new_counts = new_counts.loc[first_idx:last_idx].fillna(0).astype(int)
+
+    # Bokeh wants data to be in columns, not the index
+    year_month_df = new_counts.index.to_frame()
+    new_counts.loc[:, 'date'] = year_month_df.apply(row_to_year_month_label, axis=1)
+
+    source = ColumnDataSource(new_counts)
+    hubmap_hover  = HoverTool(
+        tooltips='$name: @$name',
+        point_policy="follow_mouse")
+
+    p = figure(
+        x_range=FactorRange(factors=new_counts.loc[:, 'date']),
+        plot_height=250,
+        title="Study Counts by Month",
+        toolbar_location=None,
+        tools="hover",
+        tooltips='$name: @$name',
+    )
+
+    unique_tissues = sorted(set(tissues))
+    tissue_count = len(unique_tissues)
+    if tissue_count < 3:
+        tissue_count=3
+    tissue_colors = Category10[tissue_count]
+
+    p.vbar_stack(
+        unique_tissues,
+        x='date',
+        width=0.1,
+        source=source,
+        line_color="white",
+        # use the palette to colormap based on the the x[1:2] values
+        color=tissue_colors,
+        legend=[x for x in unique_tissues]
+    )
+
+    p.y_range.start = 0
+    p.x_range.range_padding = 0.1
+    p.xaxis.major_label_orientation = 1
+    p.xgrid.grid_line_color = None
+    p.legend.location = "top_left"
+    p.legend.orientation = "horizontal"
+    bokeh_script, bokeh_div = components(p)
+
     return render(
         request,
         'study_index.html',
         {
             'study_list': sorted_studies,
+            'bokeh_div': bokeh_div,
+            'bokeh_script': bokeh_script,
         },
     )
 
