@@ -4,7 +4,9 @@
 This is a simple, quick prototype of HuBMAP web portal.
 This uses sample data and data types and creates basic 
 Models in Django (database, tables..) by using simple HTML templates.
-This portal simulates Globus authentication.
+This portal simulates Globus authentication. Display basic bar plots for studies.
+Full-text search using Elastic search. The current search supports text search 
+and returns results for all studies including search terms.
 We use PyCharm as development IDE for this prototype.
 
 ## Dataportal
@@ -53,10 +55,11 @@ python manage.py runserver
 ```
 * Access HuBMAP dataportal prototype by : http://127.0.0.1:8000
 * Access HuBMAP dataportal search by : http://127.0.0.1:8000/search
+and type in "studies from April 2019", search for a protein/gene, institution, tissue, datatype name
 
 ### Note:
 This web portal runs locally for now so does not have any 
-web hosting mechanisms implemented.
+web hosting mechanisms implemented. 
 To see work-in-progress and TODOs, look for TODOs in PyCharm.
 
 ### Acronyms:
