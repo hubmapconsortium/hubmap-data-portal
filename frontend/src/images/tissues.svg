@@ -1,0 +1,231 @@
+<svg class="chart" width="380" height="435" viewBox="0 0 380 435">
+	<g>
+		<line stroke="rgba(255, 255, 255, 0.8)" x1="110" x2="380" y1="415.5" y2="415.5"></line>
+		<g id="xAxisLabels">
+			<text y="428" x="164.249547920434" fill="rgb(10, 10, 10)" font-size="12px" style="text-anchor: middle;">
+				1,000
+			</text>
+			<text y="428" x="218.499095840868" fill="rgb(10, 10, 10)" font-size="12px" style="text-anchor: middle;">
+				2,000
+			</text>
+			<text y="428" x="272.748643761302" fill="rgb(10, 10, 10)" font-size="12px" style="text-anchor: middle;">
+				3,000
+			</text>
+			<text y="428" x="326.998191681736" fill="rgb(10, 10, 10)" font-size="12px" style="text-anchor: middle;">
+				4,000
+			</text>
+		</g>
+		<line stroke="rgba(255, 255, 255, 0.8)" x1="110" x2="110" y1="0" y2="415"></line>
+		<line stroke="rgba(255, 255, 255, 0.7)" x1="164.249547920434" x2="164.249547920434" y1="0" y2="415"></line>
+		<line stroke="rgba(255, 255, 255, 0.6)" x1="218.499095840868" x2="218.499095840868" y1="0" y2="415"></line>
+		<line stroke="rgba(255, 255, 255, 0.5)" x1="272.748643761302" x2="272.748643761302" y1="0" y2="415"></line>
+		<line stroke="rgba(255, 255, 255, 0.4)" x1="326.998191681736" x2="326.998191681736" y1="0" y2="415"></line>
+		<g id="primarySiteLabels">
+			<text class="primary-site-label-Adrenal-Gland" y="14" x="100" fill="rgb(10, 10, 10)" font-size="12px"
+				  style="text-anchor: end;">Adrenal Gland
+			</text>
+			<text class="primary-site-label-Bile-Duct" y="28.310344827586206" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Bile Duct
+			</text>
+			<text class="primary-site-label-Bladder" y="42.62068965517241" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Bladder
+			</text>
+			<text class="primary-site-label-Blood" y="56.93103448275862" x="100" fill="rgb(20, 20, 20)" font-size="12px"
+				  style="text-anchor: end;">Blood
+			</text>
+			<text class="primary-site-label-Bone" y="71.24137931034483" x="100" fill="rgb(10, 10, 10)" font-size="12px"
+				  style="text-anchor: end;">Bone
+			</text>
+			<text class="primary-site-label-Bone-Marrow" y="85.55172413793103" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end; cursor: pointer;">Bone Marrow
+			</text>
+			<text class="primary-site-label-Brain" y="99.86206896551724" x="100" fill="rgb(20, 20, 20)" font-size="12px"
+				  style="text-anchor: end;">Brain
+			</text>
+			<text class="primary-site-label-Breast" y="114.17241379310344" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end; cursor: pointer;">Breast
+			</text>
+			<text class="primary-site-label-Cervix" y="128.48275862068965" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Cervix
+			</text>
+			<text class="primary-site-label-Colorectal" y="142.79310344827587" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end; cursor: pointer;">Colorectal
+			</text>
+			<text class="primary-site-label-Esophagus" y="157.10344827586206" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end; cursor: pointer;">Esophagus
+			</text>
+			<text class="primary-site-label-Eye" y="171.41379310344826" x="100" fill="rgb(10, 10, 10)" font-size="12px"
+				  style="text-anchor: end;">Eye
+			</text>
+			<text class="primary-site-label-Head-and-Neck" y="185.72413793103448" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end; cursor: pointer;">Head and Neck
+			</text>
+			<text class="primary-site-label-Kidney" y="200.0344827586207" x="100" fill="rgb(10, 10, 10)"
+				  font-size="12px" style="text-anchor: end;">Kidney
+			</text>
+			<text class="primary-site-label-Liver" y="214.3448275862069" x="100" fill="rgb(20, 20, 20)" font-size="12px"
+				  style="text-anchor: end;">Liver
+			</text>
+			<text class="primary-site-label-Lung" y="228.65517241379308" x="100" fill="rgb(20, 20, 20)" font-size="12px"
+				  style="text-anchor: end;">Lung
+			</text>
+			<text class="primary-site-label-Lymph-Nodes" y="242.9655172413793" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end; cursor: pointer;">Lymph Nodes
+			</text>
+			<text class="primary-site-label-Nervous-System" y="257.2758620689655" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Nervous System
+			</text>
+			<text class="primary-site-label-Ovary" y="271.58620689655174" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Ovary
+			</text>
+			<text class="primary-site-label-Pancreas" y="285.8965517241379" x="100" fill="rgb(10, 10, 10)"
+				  font-size="12px" style="text-anchor: end;">Pancreas
+			</text>
+			<text class="primary-site-label-Pleura" y="300.2068965517241" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Pleura
+			</text>
+			<text class="primary-site-label-Prostate" y="314.51724137931035" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Prostate
+			</text>
+			<text class="primary-site-label-Skin" y="328.8275862068965" x="100" fill="rgb(20, 20, 20)" font-size="12px"
+				  style="text-anchor: end;">Skin
+			</text>
+			<text class="primary-site-label-Soft-Tissue" y="343.13793103448273" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Soft Tissue
+			</text>
+			<text class="primary-site-label-Stomach" y="357.44827586206895" x="100" fill="rgb(10, 10, 10)"
+				  font-size="12px" style="text-anchor: end;">Stomach
+			</text>
+			<text class="primary-site-label-Testis" y="371.7586206896552" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Testis
+			</text>
+			<text class="primary-site-label-Thymus" y="386.0689655172414" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Thymus
+			</text>
+			<text class="primary-site-label-Thyroid" y="400.37931034482756" x="100" fill="rgb(10, 10, 10)"
+				  font-size="12px" style="text-anchor: end;">Thyroid
+			</text>
+			<text class="primary-site-label-Uterus" y="414.6896551724138" x="100" fill="rgb(20, 20, 20)"
+				  font-size="12px" style="text-anchor: end;">Uterus
+			</text>
+		</g>
+		<g id="barGroup">
+			<g>
+				<rect class="bar-Adrenal-Gland" y="6" x="110.5" width="16.329113924050635" height="8.310344827586206"
+					  fill="rgb(190, 48, 44)"></rect>
+			</g>
+			<g>
+				<rect class="bar-Bile-Duct" y="20.310344827586206" x="110.5" width="4.3399638336347195"
+					  height="8.310344827586206" fill="rgb(213, 141, 0)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Bladder" y="34.62068965517241" x="110.5" width="41.0126582278481"
+					  height="8.310344827586206" fill="rgb(105, 161, 236)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Blood" y="48.93103448275862" x="110.5" width="53.598553345388794"
+					  height="8.310344827586206" fill="rgb(246, 40, 12)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Bone" y="63.241379310344826" x="110.5" width="20.88607594936709"
+					  height="8.310344827586206" fill="rgb(156, 156, 156)"></rect>
+			</g>
+			<g>
+				<rect class="bar-Bone-Marrow" y="77.55172413793103" x="110.5" width="18.49909584086799"
+					  height="8.310344827586206" fill="rgb(240, 238, 55)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Brain" y="91.86206896551724" x="110.5" width="61.57323688969259"
+					  height="8.310344827586206" fill="rgb(23, 153, 227)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Breast" y="106.17241379310344" x="110.5" width="199.74683544303798"
+					  height="8.310344827586206" fill="rgb(223, 46, 189)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Cervix" y="120.48275862068965" x="110.5" width="23.924050632911392"
+					  height="8.310344827586206" fill="rgb(215, 33, 93)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Colorectal" y="134.79310344827587" x="110.5" width="149.1862567811935"
+					  height="8.310344827586206" fill="rgb(240, 119, 59)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Esophagus" y="149.10344827586206" x="110.5" width="34.55696202531646"
+					  height="8.310344827586206" fill="rgb(52, 133, 34)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Eye" y="163.41379310344826" x="110.5" width="6.184448462929475"
+					  height="8.310344827586206" fill="rgb(233, 110, 31)"></rect>
+			</g>
+			<g>
+				<rect class="bar-Head-and-Neck" y="177.72413793103448" x="110.5" width="43.77938517179023"
+					  height="8.310344827586206" fill="rgb(240, 142, 26)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Kidney" y="192.0344827586207" x="110.5" width="119.40325497287523"
+					  height="8.310344827586206" fill="rgb(38, 193, 86)"></rect>
+			</g>
+			<g>
+				<rect class="bar-Liver" y="206.3448275862069" x="110.5" width="44.91862567811935"
+					  height="8.310344827586206" fill="rgb(67, 221, 207)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Lung" y="220.65517241379308" x="110.5" width="270" height="8.310344827586206"
+					  fill="rgb(158, 9, 219)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Lymph-Nodes" y="234.9655172413793" x="110.5" width="30.54249547920434"
+					  height="8.310344827586206" fill="rgb(222, 61, 211)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Nervous-System" y="249.27586206896552" x="110.5" width="113.86980108499097"
+					  height="8.310344827586206" fill="rgb(27, 114, 246)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Ovary" y="263.58620689655174" x="110.5" width="83.86980108499097"
+					  height="8.310344827586206" fill="rgb(68, 213, 45)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Pancreas" y="277.8965517241379" x="110.5" width="49.584086799276676"
+					  height="8.310344827586206" fill="rgb(199, 54, 207)"></rect>
+			</g>
+			<g>
+				<rect class="bar-Pleura" y="292.2068965517241" x="110.5" width="17.034358047016273"
+					  height="8.310344827586206" fill="rgb(215, 188, 88)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Prostate" y="306.51724137931035" x="110.5" width="38.89692585895118"
+					  height="8.310344827586206" fill="rgb(60, 166, 205)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Skin" y="320.8275862068965" x="110.5" width="42.911392405063296"
+					  height="8.310344827586206" fill="rgb(245, 42, 182)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Soft-Tissue" y="335.13793103448273" x="110.5" width="6.943942133815552"
+					  height="8.310344827586206" fill="rgb(228, 222, 62)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Stomach" y="349.44827586206895" x="110.5" width="49.638336347197104"
+					  height="8.310344827586206" fill="rgb(222, 175, 53)"></rect>
+			</g>
+			<g>
+				<rect class="bar-Testis" y="363.7586206896552" x="110.5" width="9.38517179023508"
+					  height="8.310344827586206" fill="rgb(218, 125, 58)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Thymus" y="378.0689655172414" x="110.5" width="10.361663652802893"
+					  height="8.310344827586206" fill="rgb(61, 223, 204)" cursor="pointer"></rect>
+			</g>
+			<g>
+				<rect class="bar-Thyroid" y="392.37931034482756" x="110.5" width="36.943942133815554"
+					  height="8.310344827586206" fill="rgb(224, 75, 123)"></rect>
+			</g>
+			<g>
+				<rect class="bar-Uterus" y="406.6896551724138" x="110.5" width="60.596745027124776"
+					  height="8.310344827586206" fill="rgb(245, 97, 154)" cursor="pointer"></rect>
+			</g>
+		</g>
+	</g>
+</svg>

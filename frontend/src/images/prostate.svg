@@ -1,0 +1,14 @@
+<svg id="Prostate" viewBox="0 0 30 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421; opacity: 0.2;">
+          <g transform="matrix(0.5,0,0,0.5,4.27959,4.75916)">
+              <g opacity="0.945098">
+                  <g transform="matrix(0.806252,0,0,0.806252,4.13554,2.81198)">
+                      <g transform="matrix(2.48061,-0,-0,2.48061,-15.7453,-15.2933)">
+                          <use xlink:href="#_prostate" x="0" y="0" width="29.904px" height="24.032px"></use>
+                      </g>
+                  </g>
+              </g>
+          </g>
+          <defs>
+              <image id="_prostate" width="30px" height="25px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAZCAYAAAAmNZ4aAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAC9ElEQVRIib2Wz28aRxTHP28HFjC2sYlxCRaKLVlKkHJr1UPv/qfbew9Rj5GcSk5CtMJxTIKDMQHWzE4OO8P+cKCEtnnS04xGs/t5b35838CmFhhFYNSmn8tagMT+CaQXvbboFfNWgGOgAynAs216LA3T1qPM2JIAHoKTDBVQBPycO7hn5zmQBsKc3y+CyAWQBSdZOmgF2AbKwI5tt5aAvwBTYGTbO2CSgmeyT8BZaNkCd4G69Zr1bZt50X55b7O7A4bWB9Zv7fg0Dy+QNQetWVgT+Mm2TXWvG4VJWCvM5hUV6jKA9tV0XipM5hV/qIuqD1xZ/2Bbt3UOTgJOsi3ajOrAEdAGjnfeDztHf7073e9+rBuREg/PhhFjZjfHB4PeL08uRo9r58TblD6AsQcG2qLTGSu7hNvAPtASY56e/n7+W+PV+yeR8kpGll4CMSLlvXefWvU3/UfXncfN12edP42I2/sJ2f1eLLU7LO4wNcSY9ukf578e/H11HCnPX0bMW6S8UuPV1bHA/OKsMzIiQ5K9nliW9nLXxweqQH239/nk8OVl23iyNtSZ8cQ/fHnZ3u19PiHetirJVYTAKC8134G3gOrO5fAwKnjl74U6iwpeeedyeGihWxkwyV3MK1KpcjOuGpGNtdiIqMrNuAqUcv9WabA7da4/m+xXx2LMSr1dZWKMnuxXx8CMh7JKeqmd5H0BxqNW7dqbR9NNwd48mt4e7X0AxvafYSoAvJSMOfAYGNwe7b29ft4KJDLh90IlMuH181YwatW6xAo2zoDbotNLHREf9zugb0SCi7POi/6zZtfT0WztTHU06z9rdi/OOi+MSAD0Sa7SonLFipAol5PLBpso18nBoPfzQrm6QAD0LHyIk8226HyR8FlDq1WoK4VwXgaY+4Wp9tUqrR6koOGyIqHtBNefEZe5AdDTRVXTxYqrTumyuG51Wtgm9dgnvptp8MzCN6jHWTj80BfIt7N3QfzPb65vB+DsP3tlbm7/8l39Ff/qegT/zkj9AAAAAElFTkSuQmCC"></image>
+          </defs>
+      </svg>

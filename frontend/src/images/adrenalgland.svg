@@ -1,0 +1,14 @@
+<svg id="Adrenal-Gland" viewBox="0 0 15 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+          <g transform="matrix(0.5,0,0,0.5,0.458744,1.14446)">
+              <g opacity="0.886275">
+                  <g transform="matrix(0.7145,0,0,0.7145,3.86761,2.57136)">
+                      <g transform="matrix(2.79916,-0,-0,2.79916,-6.69712,-6.80236)">
+                          <use xlink:href="#_adrenal" x="0" y="0" width="14.464px" height="11.295px"></use>
+                      </g>
+                  </g>
+              </g>
+          </g>
+          <defs>
+              <image id="_adrenal" width="15px" height="12px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAMCAYAAAC9QufkAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABuElEQVQokX2STU8TURSGnzsfd+i0IF8CkRoXEhsKsjAxYQERI7olkvgf3Bl3hpWJP4CfYEhYKAkLWOkOFUwUUwLqgo0QNlNCO53SwelM26mLXkiD0Tc5uclJnptzzvsKlJoSDdAAS1UCMFUvAkIgUG9DRMSiDbSALqAfGAIGgJSCA6AA5AEH8IBQKDABXAVuAhMMp+9UHs2Oe81Gp184pukWgy63fDT862hTRNEXYB8oGGq0PiCLaT4oLizM7V0x5fr7N5ROnPOtJDa3J0b7M0/3i6ZdDctARQOSQBrbnnbfrjx5nf8ul5YX28EL7emh3Oo27gGDgKUBNnAjfPb84drXd/zY/vAX1K7A0DuBDkDTAAmk4qmpnp3tjf+CACPIPHAG1M9t8MXu7mlm/O4/IU3TmbeGqtm895HWxUP9pY4BWMZOTs+8eDUme/tE2fc4O/UA6LBT3M9OMl9LetOfcis0Gp+BQ8AXTXlh0yimOVmfezzz+9ZIut7bY4miW7ccp2Svrn6jUskBP4EDwOWSz93ANeC6+iyhViqpMR1aQfGB2uWEmbRSllSgDsRAlVbCAqAGxCIiBvgDu3eXDbmGRVwAAAAASUVORK5CYII="></image>
+          </defs>
+      </svg>

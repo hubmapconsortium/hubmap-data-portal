@@ -1,0 +1,15 @@
+<svg id="Ovary" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+          <g transform="matrix(0.5,0,0,0.5,-0.573763,-0.115344)">
+              <g transform="matrix(0.593008,0,0,0.593008,6.01479,5.48356)">
+                  <g transform="matrix(3.37264,-0,-0,3.37264,-8.20775,-8.85802)">
+                      <use xlink:href="#_ovary" x="0" y="0" width="13.631px" height="13.243px"></use>
+                  </g>
+              </g>
+              <g transform="matrix(0.593008,0,0,0.593008,6.01479,5.48356)">
+                  <path d="M27.271,3.475C31.757,9.081 29.801,18.101 22.903,23.623C16.003,29.145 6.775,29.077 2.287,23.471C-2.199,17.865 -0.243,8.845 6.657,3.323C13.555,-2.199 22.785,-2.131 27.271,3.475" style="fill:rgb(121,200,67);"></path>
+              </g>
+          </g>
+          <defs>
+              <image id="_ovary" width="14px" height="14px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAACXBIWXMAAA7EAAAOxAGVKw4bAAABDUlEQVQokZXSsUpDMRTG8d+9XqhQoVChg2PBQaqoKPgMjjoVn8IX8QkcXMXFwdnRzQ5ipZsOhQ4XLBQstNCiQ3KlYLHtB4GcJP+ck5wvMaO379s1lLGBKtYxwRCDOCaNpDlNZqByPFzHLvawFaF3PKODLkZZhErx0AnOceavWrjBIz6yWF4tQpc4mgOJ6xly9NP4pm1c/AMV2scxqikqOMTpAqjQDiopNnGwJAQlSOOktgLYwziNwXgFsI3PVGhqZ0noQejnIEU/Bi8LoBbuBDMMi4yvuI6b83SPKzwhbyTNaSZ4sSs4oif0qS58Wh4vbcdMeSNpjiHh19yZ0NOKYIoMo/iULwwbSXNalPADOiBH6QccxMIAAAAASUVORK5CYII="></image>
+          </defs>
+      </svg>

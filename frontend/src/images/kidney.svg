@@ -1,0 +1,12 @@
+<svg id="Kidney" viewBox="0 0 15 21" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+          <g transform="matrix(0.5,0,0,0.5,-0.693446,-2.99762)">
+              <g transform="matrix(0.584218,0,0,0.584218,6.58266,11.0684)">
+                  <g transform="matrix(3.42338,-0,-0,3.42338,-8.89354,-8.68374)">
+                      <use xlink:href="#_kidney" x="0" y="0" width="14.445px" height="20.626px"></use>
+                  </g>
+              </g>
+          </g>
+          <defs>
+              <image id="_kidney" width="15px" height="21px" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAVCAYAAACZm7S3AAAACXBIWXMAAA7EAAAOxAGVKw4bAAACPklEQVQ4jYWUvW7TYBSGH3+O7SaNg0NT2qS0BFGpC6gDElFXhBiZkLgDJO4gF8DQmZkbQGJHSAxd242CivojqNRIplVD3Dq1G//EDN9nCKiYI3mwref8veccDWXNzXUd0IEK4ABl9R4CPhAAodvppjmjTYAmMAfcAe4BbfWtD+wAe8Ah4LudbgRQUk50oAU8AJ6Ok+RJPPTO0iiKrWvXHd2aOgbeAO+AT83Ndc/tdFNNRZ0BOsCL6HywNjj4/HUcR0menmk70/WV1RWhl14pJztAKFTUGWAtjUYPf+x9PJgEASLfuzg/3P0GPAfuAw1AFxO1doLjnpul6ZgrLDz9PrgcnI6AR8BNwBSqbhtoR8Ozi6vA3IKT3gnwGLgNVMTkT03TtCJ45PX9cRyZSEVsASRIDfum7VSLYIBkFIZIZcoCSNXjV+YWW8IwS0XwOIpiZIMrArCQ0+RkaZKQZVkhnMQJsskIBS6SZauD/e39cRKnRbAwDAM5sghUp5PL4DK+8MP/1ayblgl4QJDr3IgDv1Cm3/CUBRwBw7xhidCNwkYBWE6jJgxziFyQQKj8j0qV6jTFMlNtLs0B74GDHPaBL7ppbVdb7fl/gdPzS7NmrT4CNlTaoUAOyC7wtrrQrlVbt278DZYbzXptaXkBeA1sAZ7b6aYlIAJcYEPThG4vLj8rz7buxsPzIZqGVas7wjD3gJfAhzwq/HlJbOS2rCAvSQs5ui5yf3eBHvKSpL/gCQemcmIjhwcVxVPlRZM37CfcpNMeiQoLQwAAAABJRU5ErkJggg=="></image>
+          </defs>
+      </svg>
