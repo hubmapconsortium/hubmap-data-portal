@@ -60,17 +60,6 @@ class StudySerializer(serializers.ModelSerializer):
         model = Study
         depth = 1
 
-        # @staticmethod
-        # def _get_alt_class(cls, args, kwargs):
-        #     if cls != Study :
-        #         print (type(cls))
-        #         return cls
-        #     return kwargs["data"]
-        #
-        # def __new__(cls, *args, **kwargs):
-        #     alt_cls = Study.get_alt_class(cls, args, kwargs)
-        #     return super(Study, alt_cls).__new__(alt_cls, *args, **kwargs)
-
         def to_internal_value(self, data):
             if data.get('subclass') == "ScRnaSeqStudyCDNASerializer":
                 self.Meta.model = ScRnaSeqStudyCDNA

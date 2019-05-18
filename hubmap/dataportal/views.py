@@ -13,11 +13,7 @@ class ListStudy(generics.ListCreateAPIView):
     serializer_class = StudySerializer
 
 class DetailStudy(generics.RetrieveUpdateDestroyAPIView):
-    # JsonSerializer = serializers.get_serializer("json")
-    # json_serializer = JsonSerializer()
     queryset = Study.objects.select_subclasses()
-    # json_serializer.serialize(queryset)
-    # data = json_serializer.getvalue()
 
     def get_serializer_class(self):
         if isinstance(self.get_object(), ScRnaSeqStudyCDNA):
@@ -30,5 +26,5 @@ class DetailStudy(generics.RetrieveUpdateDestroyAPIView):
             return MassCytometryStudySerializer
         if isinstance(self.get_object(), MicroscopyStudy):
             return MicroscopyStudySerializer
-        if isinstance(self.get_object(), SeqFishImagingStudy):
+        if isinstance(self.get_object(`), SeqFishImagingStudy):
             return SeqFishImagingStudySerializer
