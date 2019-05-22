@@ -1,6 +1,7 @@
 .App {
   text-align: center;
-  background-color: #282c34;
+  background-color: darkgray;
+  height: auto;
 }
 
 .App-logo {
@@ -9,6 +10,9 @@
   pointer-events: none;
 }
 
+body{
+  height: 100%;
+}
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -33,27 +37,72 @@
 }
 
 #human {
-  width: 1000px;
-  height: auto;
-  max-width:100%;
+  transform:scale(0.5);
+  -webkit-transform:scale(0.5);
+  margin-bottom: -500px;
 }
 .svgclass {
-  margin-top: -900px;
-  transform:scale(0.2);
-  -webkit-transform:scale(0.2);
+
 }
 
-#Brain{
-height: 20%;
-width: 20%;
-top: -100px;
+#BrainHuman{
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+#BrainHuman g{
+  transition: 2s ease-in-out;
+}
+
+#LungHuman{
+  opacity: 0.4;
+  transition: fill 2s;
+  fill: red;
 }
 
 #Kidney{
   width: 10%;
   height: 10%;
+  cursor: pointer;
 }
 
 #LungHuman{
-display: block;
+  cursor: pointer;
+}
+
+nav {
+  text-decoration:none;
+}
+
+.aclass{
+  text-decoration: none !important;
+color: white !important;
+display: inline-block;
+white-space: nowrap;
+padding: 0.5rem 1rem 0.5rem 0.5rem;
+text-align: center;
+font-size: 1.5rem;
+min-width: 5.5rem;
+margin: 2px;
+height: 2rem;
+border-radius: 6px;
+transition: all 0.25s ease 0s;
+background-color: grey;
+}
+
+.spanclass{
+  margin-left: 2rem;
+}
+
+.headingclass{
+  color:white;
+}
+
+.studiesList
+{
+  margin-top: 600px;
+}
+.mainRow{
+  display:flex; flex-direction:row;
+  margin-top: -500px;
 }
