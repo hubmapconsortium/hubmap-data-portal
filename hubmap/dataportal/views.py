@@ -16,6 +16,8 @@ from .serializers import *
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Build frontend -> more tutorials
+#TODO: Add post request implementations
+#TODO: remove blank models from Get requests in default rest api HTML form
 
 class ListStudy(generics.GenericAPIView):
     serializer_class = StudyListSerializer

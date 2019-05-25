@@ -7,7 +7,7 @@ from rest_framework.test import APIRequestFactory, RequestsClient
 
 from dataportal.views import ListStudy, DetailStudy
 
-#test coverage: 76% files and 87% lines
+#test coverage: 76% files and 87% lines : 5/25/2019
 #TODO : complete tests
 class DataportalModelTest(TestCase):
 
