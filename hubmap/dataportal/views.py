@@ -14,6 +14,8 @@ from rest_framework import status
 from .models import *
 from .serializers import *
 
+#TODO: Add OpenApi -> Swagger to rest framework
+#TODO: Build frontend -> more tutorials
 
 class ListStudy(generics.GenericAPIView):
     serializer_class = StudyListSerializer
