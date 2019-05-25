@@ -4,11 +4,11 @@ import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import Header from "./Header"
 import Footer from "./Footer";
 import MainContent from "./MainContent";
-import Studies from "./Studies";
+//import '@google/model-viewer' ;
 
-/* TODO: add clickable events for brain, kidney and lung tissues
+/* TODO: add chart
 *   TODO: Add api get results fron django to populate results for each tissue
-*      DONE: Added organs prototype!! phew!! */
+*      DONE: Added organs prototype + clickable+rest api!! phew!! */
 
 function StudiesIndex() {
 	return <h2>StudiesIndex</h2>;
@@ -16,6 +16,10 @@ function StudiesIndex() {
 
 const organs = [];
 organs.push({key:"brain", value: "1"}, {key: "lung", value:"2"},  {key: "kidney", value:"3"});
+/*const model = document.createElement('model-viewer');
+model.src = './images/gltf/BrainModel-Gray.gltf';
+
+document.body.appendChild(model);*/
 
 class App extends PureComponent {
 	constructor(props) {
@@ -48,7 +52,7 @@ class App extends PureComponent {
 			  	console.log(brain.getAttribute("id"))
 				  const res = await fetch('http://127.0.0.1:8000/api/tissue/1/');
 			  		const studies = await res.json();
-			 		 this.props.studies = studies;
+			 		 //this.props.studies = studies;
 				  //do something here get studies where tissue = brain
 			  });
 			  brain.addEventListener("mouseenter", function() {

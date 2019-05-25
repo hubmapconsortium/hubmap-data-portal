@@ -67,6 +67,9 @@ class Study(models.Model):
     subclass = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     objects = InheritanceManager()
 
+    class Meta:
+        verbose_name = 'Study Parent class'
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Can't check 'self.subclass is None' -- this throws an exception for

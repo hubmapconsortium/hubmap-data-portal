@@ -37,9 +37,9 @@ body{
 }
 
 #human {
-  transform:scale(0.5);
-  -webkit-transform:scale(0.5);
-  margin-bottom: -500px;
+  transform:scale(0.3);
+  -webkit-transform:scale(0.3);
+   margin-top: -150px;
 }
 .svgclass {
 
@@ -81,10 +81,10 @@ display: inline-block;
 white-space: nowrap;
 padding: 0.5rem 1rem 0.5rem 0.5rem;
 text-align: center;
-font-size: 1.5rem;
-min-width: 5.5rem;
+font-size: 1rem;
+min-width: 4.5rem;
 margin: 2px;
-height: 2rem;
+height: 1.5rem;
 border-radius: 6px;
 transition: all 0.25s ease 0s;
 background-color: grey;
@@ -92,6 +92,7 @@ background-color: grey;
 
 .spanclass{
   margin-left: 2rem;
+  margin-top: -100px;
 }
 
 .headingclass{
@@ -104,5 +105,5 @@ background-color: grey;
 }
 .mainRow{
   display:flex; flex-direction:row;
-  margin-top: -500px;
+  margin-top: -620px;
 }
