@@ -94,8 +94,9 @@ class StudySerializer(serializers.ModelSerializer):
             'creation_time',
         )
         write_only_fields = (
-            'tissue',
-            'institution',)
+            'institution',
+            'data_type',
+            'tissue',)
         model = Study
         depth = 3
 
@@ -121,7 +122,7 @@ class ScRnaSeqStudyCDNASerializer(StudySerializer):
         )
         read_only_fields = StudySerializer.Meta.read_only_fields + (
         )
-        write_only_fields = (
+        write_only_fields = StudySerializer.Meta.write_only_fields + (
             'read_count_aligned',
             'read_count_total',
             'cell_count',)
@@ -147,7 +148,7 @@ class ScRnaSeqStudyBarcodedSerializer(StudySerializer):
             'genes',
         )
         expandable_fields = {'genes' : (GeneSerializer, {'hugo_symbol', 'entrez_id', 'ensembl_id'})}
-        write_only_fields = (
+        write_only_fields = StudySerializer.Meta.write_only_fields +  (
             'unique_barcode_count',
             'read_count_total',
             'cell_count',)
@@ -166,7 +167,7 @@ class ScAtacSeqStudySerializer(StudySerializer):
             'cell_count',
         )
         read_only_fields = StudySerializer.Meta.read_only_fields
-        write_only_fields = (
+        write_only_fields = StudySerializer.Meta.write_only_fields + (
             'read_count_total',
             'cell_count',)
         model = ScAtacSeqStudy
@@ -187,7 +188,7 @@ class SpatialTranscriptomicStudySerializer(StudySerializer):
         read_only_fields = StudySerializer.Meta.read_only_fields +(
             'genes',
         )
-        write_only_fields = ('')
+        write_only_fields = StudySerializer.Meta.write_only_fields + ('genes',)
         model = SpatialTranscriptomicStudy
 
     def create(self, validated_data):
@@ -205,9 +206,9 @@ class MassCytometryStudySerializer(StudySerializer):
         read_only_fields = StudySerializer.Meta.read_only_fields + (
             'proteins',
         )
+        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image', )
         expandable_fields = {'proteins' : (GeneSerializer, {'id','name','pdb_id','gene',})}
         model = MassCytometryStudy
-        depth = 3
 
     def create(self, validated_data):
         mass_cytometry_study = MassCytometryStudy.objects.create(**validated_data)
@@ -223,7 +224,7 @@ class MicroscopyStudySerializer(StudySerializer):
         read_only_fields = StudySerializer.Meta.read_only_fields + (
             'image_count',
         )
-        write_only_fields = ('preview_image', )
+        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image', )
         model = MicroscopyStudy
 
     def create(self, validated_data):
@@ -240,7 +241,7 @@ class SeqFishImagingStudySerializer(StudySerializer):
         read_only_fields = StudySerializer.Meta.read_only_fields + (
             'image_count',
         )
-        write_only_fields = ('preview_image', )
+        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image', )
         model = SeqFishImagingStudy
 
     def create(self, validated_data):
@@ -254,9 +255,9 @@ class StudyListSerializer(serializers.ModelSerializer):
     scrna_barcoded = ScRnaSeqStudyBarcodedSerializer()
     spatial = SpatialTranscriptomicStudySerializer()
     masscytometry = MassCytometryStudySerializer()
-    microscopy = MicroscopyStudySerializer
+    microscopy = MicroscopyStudySerializer()
+    seq_fish_imaging= SeqFishImagingStudySerializer()
 
     class Meta:
         model = Study
         fields = '__all__'
-            #{'study', 'scrna_atac', 'scrna_cdna', 'scrna_barcoded', 'spatial', 'masscytometry', 'microscopy'}

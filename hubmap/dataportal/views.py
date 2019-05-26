@@ -14,7 +14,7 @@ class ListStudy(generics.GenericAPIView):
     serializer_class = StudyListSerializer
 
     def get(self, request, format=None):
-        response = process_list_get_request(self, request, format)
+        response = get_response_for_request(self, request, format)
         return Response(response)
 
 #TODO : deifne what fields are modifiable and what can be created
@@ -29,16 +29,16 @@ class GlobalSearchListStudy(generics.ListAPIView):
     serializer_class = StudyListSerializer
 
     def get(self, request, format=None):
-        response = process_this_search_query(self, request, format)
+        response = get_response_for_request(self, request, format)
         return Response(response)
 
-
 class DetailStudy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Study.objects.all()
+
     def get_serializer_class(self):
         return get_serializer_class(self.get_object())
 
     def retrieve(self, request, *args, **kwargs):
-        self.queryset = Study.objects.all()
         serializer = self.get_serializer(self.get_object().get_subclass_object())
         return Response(serializer.data)
 
