@@ -3,7 +3,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import QuerySet
 from django.utils.encoding import python_2_unicode_compatible
-from model_utils.managers import InheritanceManager
 
 #Developer: Matt Ruffalo
 #developer: Sushma Anand Akoju
@@ -65,7 +64,6 @@ class Study(models.Model):
     data_type = models.ForeignKey(DataType, on_delete=models.CASCADE)
     tissue = models.ForeignKey(Tissue, on_delete=models.CASCADE)
     subclass = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    objects = InheritanceManager()
 
     class Meta:
         verbose_name = 'Study Parent class'

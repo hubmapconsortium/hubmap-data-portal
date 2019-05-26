@@ -29,12 +29,7 @@ class DataportalModelTest(TestCase):
         expected_object_name = f'{study.institution}'
         self.assertEquals(expected_object_name, 'CMU')
 
-    def test_django_rest_framework(self):
-        # Using the standard RequestFactory API to create a form POST request
-        factory = APIRequestFactory()
-        study = Study.objects.get(id=1)
-        view = DetailStudy.as_view()
-        print(view)
+    def test_django_rest_framework_api(self):
         client = RequestsClient()
         response = client.get('http://127.0.0.1:8000/api/')
         assert response.status_code == 200
@@ -49,3 +44,9 @@ class DataportalModelTest(TestCase):
         response = client.get('http://127.0.0.1:8000/api/search/?search=Brain')
         assert response.status_code == 200
         print(response)
+
+    def test_views(self):
+        factory = APIRequestFactory()
+        study = Study.objects.get(id=1)
+        view = DetailStudy.as_view()
+        print(view)
