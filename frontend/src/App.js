@@ -3,12 +3,13 @@ import React, {PureComponent} from 'react';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
 import Header from "./components/Header"
 import Footer from "./components/Footer";
-import MainContent from "./components/MainContent";
+import HumanSvg from "./components/HumanSvg";
 import NavBar from "./components/NavBar";
 import TextField from '@material-ui/core/TextField'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from "prop-types";
-import StudiesChart from "./components/StudiesChart"
+import StudiesChart from "./components/StudiesBarChart"
+import StudiesDashboard from './components/StudiesDashboard';
 
 //import '@google/model-viewer' ;
 //npm run setup -- --spaceId eo4e2dc0pbyt --deliveryToken H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8 --managementToken CFPAT-nXzmTIQFv4Om1KFSnqn0fS3X7_3YLXDacst4IC52_1M
@@ -56,7 +57,6 @@ model.src = './images/gltf/BrainModel-Gray.gltf';
 document.body.appendChild(model);*/
 
 class App extends PureComponent {
- 
 	constructor(props) {
         super(props);
         this.state = {
@@ -120,10 +120,11 @@ class App extends PureComponent {
 		return (
             <div className="App">
                 <NavBar />
-				<MainContent studies={this.state.studies}>
+				<HumanSvg studies={this.state.studies}>
 					{console.log(this.state.studies)}
-				</MainContent>
+				</HumanSvg>
 				<StudiesChart />
+				<StudiesDashboard />
                 <Footer />
 			</div>
 

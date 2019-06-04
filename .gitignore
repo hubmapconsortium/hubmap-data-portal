@@ -11,6 +11,7 @@ media
 # dependencies
 ./node_modules
 ./frontend/node_modules
+./frontend/build
 /.pnp
 .pnp.js
 
