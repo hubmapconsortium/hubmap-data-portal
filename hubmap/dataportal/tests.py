@@ -5,7 +5,7 @@ from django.test import TestCase
 from dataportal.models import *
 from rest_framework.test import APIRequestFactory, RequestsClient
 
-from dataportal.views import ListStudy, DetailStudy
+from dataportal.views import StudyListView, StudyDetailView
 
 #test coverage: 76% files and 87% lines : 5/25/2019
 #TODO : complete tests
@@ -48,5 +48,5 @@ class DataportalModelTest(TestCase):
     def test_views(self):
         factory = APIRequestFactory()
         study = Study.objects.get(id=1)
-        view = DetailStudy.as_view()
+        view = StudyDetailView.as_view()
         print(view)

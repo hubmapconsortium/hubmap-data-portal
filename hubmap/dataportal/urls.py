@@ -4,7 +4,7 @@ from django.conf.urls import *
 from . import views
 
 urlpatterns = [
-    path('', views.ListStudy.as_view()),
-    path(r'<int:pk>/', views.DetailStudy.as_view()),
-    url(r'^search/$', views.GlobalSearchListStudy.as_view(), name="search"),
+    path('', views.StudyListView.as_view()),
+    path(r'<int:pk>/', views.StudyDetailView.as_view()),
+    url(r'^search/$', views.GlobalSearch.as_view(), name="search"),
 ]

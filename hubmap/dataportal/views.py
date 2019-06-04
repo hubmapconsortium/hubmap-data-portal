@@ -10,7 +10,7 @@ from .serializers import *
 #TODO: Add post request implementations
 #TODO: remove blank models from Get requests in default rest api HTML form
 
-class ListStudy(generics.GenericAPIView):
+class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
 
     def get(self, request, format=None):
@@ -25,14 +25,14 @@ class ListStudy(generics.GenericAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class GlobalSearchListStudy(generics.ListAPIView):
+class GlobalSearch(generics.ListAPIView):
     serializer_class = StudyListSerializer
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         return Response(response)
 
-class DetailStudy(generics.RetrieveUpdateDestroyAPIView):
+class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Study.objects.all()
 
     def get_serializer_class(self):

@@ -1,7 +1,8 @@
 .App {
   text-align: center;
-  background-color: darkgray;
+  color: #424242;
   height: auto;
+  background-color: #fafafa,
 }
 
 .App-logo {
@@ -37,12 +38,15 @@ body{
 }
 
 #human {
-  transform:scale(0.3);
-  -webkit-transform:scale(0.3);
-   margin-top: -150px;
+  transform:scale(0.25);
+  -webkit-transform:scale(0.25);
+   margin-top: 10px;
+   margin-left: -300px;
+   margin-top: -250px;
 }
 .svgclass {
-
+  margin-left: 20px;
+  width: 300px;
 }
 
 #BrainHuman{
@@ -87,7 +91,7 @@ margin: 2px;
 height: 1.5rem;
 border-radius: 6px;
 transition: all 0.25s ease 0s;
-background-color: grey;
+background-color: #fafafa;
 }
 
 .spanclass{
@@ -99,11 +103,11 @@ background-color: grey;
   color:white;
 }
 
-.studiesList
-{
-  margin-top: 600px;
-}
 .mainRow{
   display:flex; flex-direction:row;
-  margin-top: -620px;
+  margin-top: -550px;
+}
+
+.studiesList{
+  margin-top: -500px; 
 }
