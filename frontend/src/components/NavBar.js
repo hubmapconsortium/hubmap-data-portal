@@ -11,7 +11,7 @@ import grey from '@material-ui/core/colors/grey';
 import {MuiThemeProvider , createMuiTheme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import HubmapLogo from "../images/HuBMAP-Retina-Logo-Color.png";
 import posed from 'react-pose';
 import { Button } from '@material-ui/core';
@@ -220,11 +220,13 @@ function SearchAppBar(props) {
                     <NavigationIcon />
                     </Button>
                     </div>
-                    
+                    <div className={classes.grow} />
+
                     <div className={classes.sectionIconDesktop} >
                         <div>
-                    <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
+                    <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick} >
                         Browse
+                        <GraphIcon className={classes.rightIcon}/>
                     </Button>
                     <Menu
                         id="browse-menu"
@@ -242,7 +244,7 @@ function SearchAppBar(props) {
                     </div>
                    
                     <div>
-                    <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick}>
+                    <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} >
                         Help
                         <HelpIcon className={classes.rightIcon}  />
                     </Button>
@@ -266,16 +268,16 @@ function SearchAppBar(props) {
                         <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
                         <MenuItem onClick={handleCloseHelp}>Mass Cytometry Pipeline
                         <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>Data Upload
-                        <CloudUploadIcon className={classes.rightIcon} /></MenuItem>
                         <MenuItem onClick={handleCloseHelp}>Data Download
                         <CloudDownloadIcon className={classes.rightIcon} /></MenuItem>
                         <MenuItem onClick={handleCloseHelp}>User FAQs</MenuItem>
 
                     </Menu>
                     </div>
-                    <Button color="inherit">Login <AccountCircle className={classes.rightIcon} /></Button>
+                    <Button color="inherit" aria-haspopup="true" >Login <AccountCircle className={classes.rightIcon} /></Button>
                     </div>
+                    <div className={classes.grow} />
+                    <div className={classes.grow} />
                     <div className={classes.grow} />
                     <div className={classes.search}>
                     <div className={classes.searchIcon}>

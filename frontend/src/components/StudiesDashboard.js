@@ -18,7 +18,7 @@ render() {
                 chartType="BarChart"
                 loader={<div>Loading Chart</div>}
                 data={[
-                        ['Tissue', 'May 2019', 'June 2019'],
+                        ['Cells', 'May 2019', 'June 2019'],
                         ['Lung', 5, 8],
                         ['Spleen', 8, 14],
                         ['Kidney', 5, 18],
@@ -34,12 +34,12 @@ render() {
                     )
                 }}
                 options={{
-                    title: '# of Studies per month, by Tissues',
+                    title: '# of Cells per month',
                     chartArea: { width: '55%', fill:"#fafafa"},
                     colors: ['#42a5f5', '#4caf50', '#ffab00'],
                     isStacked: true,
                     hAxis: {
-                    title: 'Total # Studies',
+                    title: 'Total # Cells',
                     minValue: 0,
                     },
                     vAxis: {

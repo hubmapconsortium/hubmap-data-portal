@@ -1,4 +1,4 @@
-import {ReactComponent as ReactComp} from "../images/Human_body_silhouette.svg";
+import {ReactComponent as ReactComp} from "../images/Human_body_silhouette_minimal.svg";
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
