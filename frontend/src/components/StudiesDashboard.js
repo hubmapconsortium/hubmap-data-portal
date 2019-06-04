@@ -36,6 +36,7 @@ render() {
                 options={{
                     title: '# of Studies per month, by Tissues',
                     chartArea: { width: '55%', fill:"#fafafa"},
+                    colors: ['#42a5f5', '#4caf50', '#ffab00'],
                     isStacked: true,
                     hAxis: {
                     title: 'Total # Studies',

@@ -28,7 +28,7 @@ render() {
             options={{
                 title: '# of Studies per month, by University',
                 chartArea: { width: '50%', fill:"#fafafa"},
-                colors: ['#4dd0e1', '#009688'],
+                colors: ['#42a5f5', '#ffab00', '#4caf50'],
                 isStacked: true,
                 hAxis: {
                 title: 'Total # Studies',

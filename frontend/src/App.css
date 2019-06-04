@@ -121,3 +121,32 @@ background-color: #fafafa;
   margin-top: -260px; 
   margin-left: 380px;
 }
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+rect.overlay {
+  opacity: 0;
+}
+
+rect.selection {
+  fill: #FE9922;
+  opacity: 0.5;
+}
+
+rect.handle {
+  fill: #FE9922;
+  opacity: 0.25;
+}
+
+path.countries {
+  stroke-width: 1;
+  stroke: #75739F;
+  fill: #5EAFC6;
+}
