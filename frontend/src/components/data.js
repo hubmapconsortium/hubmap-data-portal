@@ -5,7 +5,7 @@ const data = [
     },
     {
         tissue: 'Spleen',
-        cells: 22
+        cells: 20
     },
     {
         tissue: 'Kidney',
@@ -30,6 +30,10 @@ const data = [
     {
         tissue: 'LIntestine',
         cells: 38
+    },
+    {
+        tissue: 'Abdomen',
+        cells: 32
     },
 ];
 

@@ -122,39 +122,12 @@ background-color: #fafafa;
 
 .studiesdashboard{
   margin-top: -260px; 
-  margin-left: 380px;
-}
-
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black;
-}
-
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 5px 0;
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.changeSvgOpacity:hover{
-  opacity:0.6;
+  margin-left: 400px;
 }
 
 #tooltip {
   dominant-baseline: hanging; 
-  font-size: 30px;
+  z-index: 1;
 }
 
 

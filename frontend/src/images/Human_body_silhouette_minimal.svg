@@ -75,7 +75,8 @@
   </g>
    <g id="tooltip" visibility="hidden" padding="5" >
 		<rect width="300" height="80" fill="white" rx="20" ry="20"/>
-		<text x="40" y="20" font-size="50" font-weight="bold">Tooltip</text>
+		<text x="40" y="20" font-size="50" font-weight="bold">Tooltip
+      <tspan id="tspanid" x="40" y="75" font-size="50" font-weight="lighter"></tspan></text>
 	</g>
 </svg>
 

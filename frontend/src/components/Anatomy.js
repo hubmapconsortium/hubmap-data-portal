@@ -8,8 +8,14 @@ import { Container } from "@material-ui/core";
 import data from './data';
 
 const cellcount = data;
-var humanSvg, tooltip, tooltipText, tooltipRects;
-
+var humanSvg, tooltip, tooltipText, tooltipRects, tooltipTsspan;
+function updateText(tspanId, txt) {
+  var spanEl = document.getElementById(tspanId);
+  while( spanEl.firstChild ) {
+    spanEl.removeChild( spanEl.firstChild );
+  }
+  spanEl.appendChild( document.createTextNode(txt) );
+}
 function showToolTip(evt){
 	var CTM = humanSvg.getScreenCTM();
 	var mousex = (evt.clientX -CTM.e +6)/CTM.a;
@@ -18,10 +24,14 @@ function showToolTip(evt){
 	tooltip.setAttributeNS(null, "y", mousey + 20 / CTM.d);
 	tooltip.setAttributeNS(null, "transform", "translate(" + mousex + " " + mousey + ")");
 	tooltip.setAttributeNS(null, "visibility", "visible");
-	tooltipText.firstChild.data = evt.target.getAttributeNS(null, "data-tooltip-text");
+	var lines= evt.target.getAttributeNS(null, "data-tooltip-text").split(',');
+	tooltipText.firstChild.data = lines[0];
+	updateText("tspanid",lines[1]);
+	console.log(tooltipTsspan.textContent );
 	var length = tooltipText.getComputedTextLength();
+
 				for (var i = 0; i < tooltipRects.length; i++) {
-					tooltipRects[i].setAttributeNS(null, "width", length + 100);
+					tooltipRects[i].setAttributeNS(null, "width", length + 20);
 					tooltipRects[i].setAttributeNS(null, "height", 150);
 					tooltipRects[i].setAttributeNS(null, "font-size", 30);
 				}
@@ -46,33 +56,32 @@ class HumanAnatomyCard extends React.Component{
 				studies
 				});*/
 				//first get svg 
+				console.log(cellcount);
 				humanSvg = document.getElementById('human');
 				tooltip = humanSvg.getElementById('tooltip');
 				tooltipText = tooltip.getElementsByTagName('text')[0];
 				tooltipRects = tooltip.getElementsByTagName('rect');
+				tooltipTsspan = tooltip.getElementsByTagName('tspan');
 				var pathTriggers = humanSvg.getElementsByClassName('tooltip-trigger');
 				for ( var i=0 ; i < pathTriggers.length; i++)
 				{
 					pathTriggers[i].addEventListener('mousemove', showToolTip);
 					pathTriggers[i].addEventListener('mouseout', hideToolTip);
+					console.log(pathTriggers[i].id)
 				}
+
 				var pancreas =document.getElementById('path4681');
-				pancreas.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[3].tissue+": \n" +"# cells: "+cellcount[3].cells);
+				pancreas.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[3].tissue+"," +cellcount[3].cells+" cells");
 			  pancreas.addEventListener("click", async function() {
 					console.log(pancreas.getAttribute("id"));
 					console.log(cellcount);
 					
 			  });
-        pancreas.addEventListener("mouseenter", function () {
-								console.log("pancreas");
-								console.log(this);
-			  });
-			  pancreas.addEventListener("mouseout", function () {
-								
-			  });
-			  var stomach =document.getElementById('path4745');
-			  stomach.addEventListener("click", async function() {
-                  console.log(stomach.getAttribute("id"))
+        
+				var abdomen =document.getElementById('path4745');
+				abdomen.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[8].tissue+"," +cellcount[8].cells+" cells");
+			  abdomen.addEventListener("click", async function() {
+                  console.log(abdomen.getAttribute("id"))
                   var chart = document.getElementById('studiesbyTissueschart');
                   // Create our table.
                     var barChart = document.getElementById('studiesbyTissueschart');
@@ -80,22 +89,59 @@ class HumanAnatomyCard extends React.Component{
                   console.log(chart);
 				  //do something here get studies where tissue = brain
 			  });
-			  stomach.addEventListener("mouseenter", function() {
-                
-			  });
-              stomach.addEventListener("mouseout", function () {
-                
-              });
               
-			  var liver =document.getElementById('path5194');
+				var liver =document.getElementById('path5194');
+				liver.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[5].tissue+"," +cellcount[5].cells+" cells");
               liver.addEventListener("click", function() {
 			  	console.log(liver.getAttribute("id"));
 					//do something here get studies where tissue = kidney
-			  });
-			  liver.addEventListener("mouseenter", function() {
-			  });
-			  liver.addEventListener("mouseout", function () {
-			  });
+				});
+				
+				var lungs =document.getElementById('path5228');
+				lungs.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[0].tissue+"," +cellcount[0].cells+" cells");
+				lungs.addEventListener("click", function() {
+			  	console.log(lungs.getAttribute("id"));
+					//do something here get studies where tissue = kidney
+				});
+				var smallIntestine =document.getElementById('path8590');
+				smallIntestine.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[6].tissue+"," +cellcount[6].cells+" cells");
+				smallIntestine.addEventListener("click", function() {
+			  	console.log(smallIntestine.getAttribute("id"));
+					//do something here get studies where tissue = kidney
+				});
+				var heart =document.getElementById('path8642');
+				heart.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[4].tissue+"," +cellcount[4].cells+" cells");
+				heart.addEventListener("click", function() {
+			  	console.log(heart.getAttribute("id"));
+					//do something here get studies where tissue = kidney
+				});
+				var bladder =document.getElementById('path8666');
+				bladder.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[3].tissue+"," +cellcount[3].cells+" cells");
+				bladder.addEventListener("click", function() {
+			  	console.log(bladder.getAttribute("id"));
+					//do something here get studies where tissue = kidney
+				});
+				var largeIntestine =document.getElementById('path8736');
+				largeIntestine.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[7].tissue+"," +cellcount[7].cells+" cells");
+				largeIntestine.addEventListener("click", function() {
+			  	console.log(largeIntestine.getAttribute("id"));
+					//do something here get studies where tissue = kidney
+				});
+				var kidney =document.getElementById('path8932');
+				kidney.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[2].tissue+"," +cellcount[2].cells+" cells");
+				kidney.addEventListener("click", function() {
+			  	console.log(kidney.getAttribute("id"));
+					//do something here get studies where tissue = kidney
+				});
+				var spleen =document.getElementById('path32181');
+				spleen.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[1].tissue+", " +cellcount[1].cells+" cells");
+				spleen.addEventListener("click", function() {
+			  	console.log(spleen.getAttribute("id"));
+					//do something here get studies where tissue = kidney
+				});
+				var human =document.getElementById('path2180');
+				human.setAttributeNS(null,  "data-tooltip-text", " Total cells:"+", " +"248");
+			  
 		}
 		catch (e) {
 		  console.log(e);

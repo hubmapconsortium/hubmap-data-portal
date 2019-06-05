@@ -13,20 +13,21 @@ render() {
         return (
             <div className="studiesdashboard" id="studiesbyTissueschart" >
             <Chart 
-                width={'400px'}
+                width={'380px'}
                 height={'200px'}
                 chartType="BarChart"
                 loader={<div>Loading Chart</div>}
                 data={[
                         ['Cells', 'May 2019', 'June 2019'],
                         ['Lung', 5, 8],
-                        ['Spleen', 8, 14],
+                        ['Spleen', 6, 14],
                         ['Kidney', 5, 18],
                         ['Pancreas', 7, 15],
                         ['Heart', 12, 18],
                         ['Liver', 13, 19],
                         ['SIntestine', 16, 23],
                         ['LIntestine', 17, 21],
+                        ['Abdomen', 11, 21],
 
                 ]}
                 rootProps={{ 'data-testid': '6' }}
