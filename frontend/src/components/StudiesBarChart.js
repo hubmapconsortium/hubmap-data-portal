@@ -8,11 +8,11 @@ class StudiesChart extends PureComponent{
     constructor(props) {
         super(props);
         }
-
+       
 render() {
         return (
             <div className="studieschart" >
-            <Chart
+            <Chart id="studiesbyUniversitychart"
             width={'400px'}
             height={'250px'}
             chartType="BarChart"

@@ -11,8 +11,8 @@ class StudiesDashboard extends PureComponent{
 
 render() {
         return (
-            <div className="studiesdashboard" >
-            <Chart
+            <div className="studiesdashboard" id="studiesbyTissueschart" >
+            <Chart 
                 width={'400px'}
                 height={'200px'}
                 chartType="BarChart"
@@ -22,6 +22,12 @@ render() {
                         ['Lung', 5, 8],
                         ['Spleen', 8, 14],
                         ['Kidney', 5, 18],
+                        ['Pancreas', 7, 15],
+                        ['Heart', 12, 18],
+                        ['Liver', 13, 19],
+                        ['SIntestine', 16, 23],
+                        ['LIntestine', 17, 21],
+
                 ]}
                 rootProps={{ 'data-testid': '6' }}
                 chartPackages={['corechart', 'controls']}

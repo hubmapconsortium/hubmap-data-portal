@@ -10,6 +10,7 @@ import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import PropTypes from "prop-types";
 import StudiesChart from "./components/StudiesBarChart"
 import StudiesDashboard from './components/StudiesDashboard';
+import StudyD3BarChart from './components/StudyD3BarChart';
 
 //import '@google/model-viewer' ;
 //npm run setup -- --spaceId eo4e2dc0pbyt --deliveryToken H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8 --managementToken CFPAT-nXzmTIQFv4Om1KFSnqn0fS3X7_3YLXDacst4IC52_1M
@@ -49,8 +50,7 @@ ElevationScroll.propTypes = {
 function StudiesIndex() {
 	return <h2>StudiesIndex</h2>;
 }
-const organs = [];
-organs.push({key:"brain", value: "1"}, {key: "lung", value:"2"},  {key: "kidney", value:"3"});
+
 /*const model = document.createElement('model-viewer');
 model.src = './images/gltf/BrainModel-Gray.gltf';
 
@@ -63,57 +63,6 @@ class App extends PureComponent {
             studies: []
         };
     }
-
-	async componentDidMount() {
-		try {
-			 const res = await fetch('http://127.0.0.1:8000/api/');
-			 const studies = await res.json();
-			  this.setState({
-				studies
-			  });
-			  var lung =document.getElementById('LungHuman');
-			  lung.addEventListener("click", async function() {
-			  	console.log(lung.getAttribute("id"));
-			  		const res = await fetch('http://127.0.0.1:8000/api/tissue/2/');
-			  });
-            lung.addEventListener("mouseenter", function () {
-                console.log("lung");
-			  	lung.setAttribute("style", "fill:green;opacity:0.8;stroke:red;stroke-width:2");
-			  });
-			  lung.addEventListener("mouseleave", function () {
-			  	lung.setAttribute("style", "opacity:0.3;stroke:pink;stroke-width:1");
-			  });
-			  var brain =document.getElementById('BrainHuman');
-			  brain.addEventListener("click", async function() {
-			  	console.log(brain.getAttribute("id"))
-				  const res = await fetch('http://127.0.0.1:8000/api/tissue/1/');
-			  		const studies = await res.json();
-			 		 //this.props.studies = studies;
-				  //do something here get studies where tissue = brain
-			  });
-			  brain.addEventListener("mouseenter", function() {
-			  	brain.setAttribute("style", "opacity:0.8;stroke:blue;stroke-width:2");
-			  });
-			   brain.addEventListener("mouseleave", function () {
-			  	brain.setAttribute("style", "opacity:0.3;stroke:blue;stroke-width:1");
-			  });
-			  var kidney =document.getElementById('Kidney');
-				kidney.addEventListener("click", function() {
-			  	console.log(kidney.getAttribute("id"))
-					//do something here get studies where tissue = kidney
-			  });
-			  kidney.addEventListener("mouseenter", function() {
-			  	kidney.setAttribute("style", "opacity:0.8;stroke:green;stroke-width:2");
-			  });
-			  kidney.addEventListener("mouseleave", function () {
-			  	kidney.setAttribute("style", "opacity:0.3;stroke:green;stroke-width:1");
-			  });
-		}
-		catch (e) {
-		  console.log(e);
-		}
-    }
-
    
     render() {
 
