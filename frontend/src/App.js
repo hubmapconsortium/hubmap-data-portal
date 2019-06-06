@@ -69,12 +69,14 @@ class App extends PureComponent {
 		return (
             <div className="App">
                 <NavBar />
+                <div className={"mainContent"}>
 				<HumanSvg studies={this.state.studies}>
 					{console.log(this.state.studies)}
 				</HumanSvg>
 				<StudiesChart />
 				<StudiesDashboard />
                 <Footer />
+                </div>
 			</div>
 
 		);

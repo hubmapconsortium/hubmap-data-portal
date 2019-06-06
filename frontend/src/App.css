@@ -44,7 +44,7 @@ body{
   transform:scale(0.25);
   -webkit-transform:scale(0.25);
    margin-top: 10px;
-   margin-left: -300px;
+   margin-left: -350px;
    margin-top: -250px;
 }
 .svgclass {
@@ -97,6 +97,15 @@ transition: all 0.25s ease 0s;
 background-color: #fafafa;
 }
 
+@keyframes pulse {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity:1;
+  }
+}
+
 .spanclass{
   margin-left: 2rem;
   margin-top: -100px;
@@ -107,8 +116,8 @@ background-color: #fafafa;
 }
 
 .mainRow{
-  display:flex; flex-direction:row;
   margin-top: -550px;
+  width:350px;
 }
 
 .studiesList{
@@ -121,7 +130,7 @@ background-color: #fafafa;
 }
 
 .studiesdashboard{
-  margin-top: -260px; 
+  margin-top: -300px; 
   margin-left: 400px;
 }
 

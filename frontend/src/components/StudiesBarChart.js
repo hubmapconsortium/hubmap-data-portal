@@ -14,24 +14,24 @@ render() {
             <div className="studieschart" >
             <Chart id="studiesbyUniversitychart"
             width={'400px'}
-            height={'250px'}
+            height={'300px'}
             chartType="BarChart"
             loader={<div>Loading Chart</div>}
             data={[
-                ['University', 'May 2019', 'June 2019'],
-                ['Indiana', 5, 8],
-                ['CMU', 8, 22],
-                ['Havard', 8, 18],
-                ['UCSC', 5, 18],
-                ['Stanford', 5, 18],
+                ['Center', 'May 2019', 'June 2019'],
+                ['Florida', 5, 8],
+                ['Vanderbilt', 8, 22],
+                ['Stanford', 8, 18],
+                ['Caltech', 5, 18],
+                ['UCSD', 5, 18],
             ]}
             options={{
-                title: '# of Studies per month, by University',
+                title: '# of Experiments per month, by Center',
                 chartArea: { width: '50%', fill:"#fafafa"},
                 colors: ['#42a5f5', '#ffab00', '#4caf50'],
                 isStacked: true,
                 hAxis: {
-                title: 'Total # Studies',
+                title: 'Total # Experiments',
                 minValue: 0,
                 },
                 vAxis: {
@@ -45,7 +45,7 @@ render() {
                     filterColumnIndex: 0,
                     matchType: 'any', // 'prefix' | 'exact',
                     ui: {
-                    label: 'Search by University',
+                    label: 'Search by Center',
                     },
                 },
                 },
