@@ -41,15 +41,13 @@ body{
 }
 
 #human {
-  transform:scale(0.25);
-  -webkit-transform:scale(0.25);
-   margin-top: 10px;
-   margin-left: -350px;
-   margin-top: -250px;
+  transform:scale(0.5);
+  -webkit-transform:scale(0.5);
+   margin-top: -280px;
+   margin-left: -260px;
 }
 .svgclass {
   margin-left: 20px;
-  width: 300px;
 }
 
 #BrainHuman{
@@ -99,7 +97,7 @@ background-color: #fafafa;
 
 @keyframes pulse {
   0% {
-    opacity: 0.2;
+    opacity: 0;
   }
   100% {
     opacity:1;
@@ -116,7 +114,6 @@ background-color: #fafafa;
 }
 
 .mainRow{
-  margin-top: -550px;
   width:350px;
 }
 
@@ -125,13 +122,10 @@ background-color: #fafafa;
 }
 
 .studieschart{
-  margin-top: -1350px; 
-  margin-left: 835px;
+
 }
 
 .studiesdashboard{
-  margin-top: -300px; 
-  margin-left: 400px;
 }
 
 #tooltip {

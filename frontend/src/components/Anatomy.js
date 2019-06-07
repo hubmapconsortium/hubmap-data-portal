@@ -6,7 +6,6 @@ import grey from '@material-ui/core/colors/grey';
 import { Container } from "@material-ui/core";
 import data from './data';
 
-
 const cellcount = data;
 var humanSvg, tooltip, tooltipText, tooltipRects, tooltipTsspan;
 function updateText(tspanId, txt) {
@@ -20,8 +19,8 @@ function showToolTip(evt){
 	var CTM = humanSvg.getScreenCTM();
 	var mousex = (evt.clientX -CTM.e +6)/CTM.a;
 	var mousey = (evt.clientY - CTM.f +20)/CTM.d;
-	tooltip.setAttributeNS(null, "x", mousex + 6 / CTM.a);
-	tooltip.setAttributeNS(null, "y", mousey + 20 / CTM.d);
+	var x = (evt.clientX - CTM.e + 6) / CTM.a;
+	var y = (evt.clientY - CTM.f + 20) / CTM.d;
 	tooltip.setAttributeNS(null, "transform", "translate(" + mousex + " " + mousey + ")");
 	tooltip.setAttributeNS(null, "visibility", "visible");
 	var lines= evt.target.getAttributeNS(null, "data-tooltip-text").split(',');
@@ -30,10 +29,11 @@ function showToolTip(evt){
 	updateText("tspanid2",lines[2]);
 	var length = tooltipText.getComputedTextLength();
 
-	for (var i = 0; i < tooltipRects.length; i++) {
-		tooltipRects[i].setAttributeNS(null, "width", length + 10);
-		tooltipRects[i].setAttributeNS(null, "height", 200);
-		tooltipRects[i].setAttributeNS(null, "font-size", 30);
+	for (var i = 0; i < tooltipRects.length; i++) 
+	{
+		tooltipRects[i].setAttributeNS(null, "width", length + 2);
+		tooltipRects[i].setAttributeNS(null, "height", 30);
+		tooltipRects[i].setAttributeNS(null, "font-size", 5);
 	}
 	this.setAttribute('opacity', 0.6);
 }
@@ -49,8 +49,6 @@ class HumanAnatomyCard extends React.Component{
         super(props);
 		}
 
-
-		
 	 componentDidMount() {
 		try {
 			 /*const res = await fetch('http://127.0.0.1:8000/api/');
@@ -144,7 +142,7 @@ class HumanAnatomyCard extends React.Component{
 					//do something here get studies where tissue = spleen
 				});
 				var human =document.getElementById('path2180');
-				human.setAttributeNS(null,  "data-tooltip-text", " Total experiments:"+", " +"248, 9 genes");
+				human.setAttributeNS(null,  "data-tooltip-text", " #Total, experiments: " +"248, 9 genes");
 			  
 		}
 		catch (e) {
@@ -154,9 +152,9 @@ class HumanAnatomyCard extends React.Component{
 
     render(){
         return (
-            <div className="svgclass">        
+            //<div className="svgclass">        
                 <ReactComp />
-        		</div>
+        		//</div>
         );
     }
 }

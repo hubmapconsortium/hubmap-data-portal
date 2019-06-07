@@ -201,7 +201,7 @@ function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" style={{ backgroundColor: grey[50] } } height={60}>
+            <AppBar position="static" style={{ backgroundColor: grey[50] } } height={60} width={'100%'}>
                 <Toolbar>
                     <IconButton
                     edge="start"

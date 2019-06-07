@@ -3,15 +3,16 @@
         id="human"
    xmlns="http://www.w3.org/2000/svg"
    version="1.0"
-   height="2200"
-   width="970">
+   viewBox="0 0 210 297"
+   height="297mm"
+   width="210mm" >
   <defs
      id="defs4" />
   <metadata
      id="metadata7">
   </metadata>
   <g
-     transform="translate(41.500029,630.92312)"
+     transform="matrix(0.13012435,0,0,0.12753052,49.042251,87.621012)"
      id="layer1">
     <path
        id="path2180" class="changeSvgOpacity tooltip-trigger on" data-tooltip-text="human body"
@@ -73,11 +74,11 @@
          id="path32181" class="changeSvgOpacity tooltip-trigger on" />
     </g>
   </g>
-   <g id="tooltip" visibility="hidden" padding="5" >
-		<rect width="250" height="200" fill="white" rx="20" ry="20"/>
-		<text x="40" y="20" font-size="50" font-weight="bold">Tooltip
-      <tspan id="tspanid" x="40" y="75" font-size="50" font-weight="lighter"></tspan>
-      <tspan id="tspanid2" x="40" y="130" font-size="50" font-weight="lighter"></tspan></text>
+   <g id="tooltip" visibility="hidden" padding="1" >
+		<rect width="10" height="20" fill="white" rx="10" ry="10"/>
+		<text x="10" y="5" font-size="5" opacity='0.8' font-weight="bold" >Tooltip
+      <tspan id="tspanid" x="10" y="10" font-size="5" font-weight="lighter"></tspan>
+      <tspan id="tspanid2" x="10" y="15" font-size="5" font-weight="lighter"></tspan></text>
 	</g>
 </svg>
 

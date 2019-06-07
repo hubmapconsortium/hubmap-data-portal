@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import StudiesChart from "./components/StudiesBarChart"
 import StudiesDashboard from './components/StudiesDashboard';
 import StudyD3BarChart from './components/StudyD3BarChart';
+import RootContainer from './components/RootContainer';
 
 //import '@google/model-viewer' ;
 //npm run setup -- --spaceId eo4e2dc0pbyt --deliveryToken H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8 --managementToken CFPAT-nXzmTIQFv4Om1KFSnqn0fS3X7_3YLXDacst4IC52_1M
@@ -68,7 +69,8 @@ class App extends PureComponent {
 
 		return (
             <div className="App">
-                <NavBar />
+                <RootContainer />
+                {/* <NavBar />
                 <div className={"mainContent"}>
 				<HumanSvg studies={this.state.studies}>
 					{console.log(this.state.studies)}
@@ -76,7 +78,7 @@ class App extends PureComponent {
 				<StudiesChart />
 				<StudiesDashboard />
                 <Footer />
-                </div>
+                </div> */}
 			</div>
 
 		);
