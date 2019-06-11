@@ -10,8 +10,8 @@ media
 
 # dependencies
 ./node_modules
-./frontend/node_modules
-./frontend/build
+hubmap/frontend/node_modules
+hubmap/frontend/build
 /.pnp
 .pnp.js
 
