@@ -5,9 +5,9 @@
 	<threads>4</threads>
 	<workers>3</workers>
 	<socket>:5000</socket>
-	<chdir>/opt/dataportal/hiveportal</chdir>
+	<chdir>/opt/hubmap-data-portal/hubmap</chdir>
 	<plugin>python3</plugin>
-	<module>hiveportal.wsgi</module>
+	<module>hubmap.wsgi</module>
 	<env>LC_ALL=en_US.UTF-8</env>
 	<env>LANG=en_US.UTF-8</env>
 	<env>PYTHONIOENCODING=utf-8</env>

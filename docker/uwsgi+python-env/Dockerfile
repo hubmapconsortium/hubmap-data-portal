@@ -2,7 +2,7 @@
 FROM node:12.4.0 as NODE
 
 WORKDIR /opt
-RUN git clone https://github.com/hubmapconsortium/hubmap-data-portal.git
+COPY . /opt/hubmap-data-portal
 WORKDIR /opt/hubmap-data-portal/frontend
 RUN npm install
 RUN npm run build
@@ -18,7 +18,7 @@ RUN apt-get -y install \
     python3-dev \
     python3-pip
 
-COPY requirements.txt /opt
+COPY hubmap/requirements.txt /opt
 # Doing a little redundant work to actually *install* things in the base
 # container, but worth it to avoid specifying packages to build wheels by hand
 RUN pip3 install -r /opt/requirements.txt
@@ -30,14 +30,14 @@ RUN apt-get update
 RUN apt-get -y install uwsgi uwsgi-plugin-python3 python3 python3-six python3-idna
 RUN rm -rf /var/cache/apt/*
 
-RUN git clone https://github.com/hubmapconsortium/hubmap-dataportal-rest.git hubmap-data-portal
-
 COPY --from=BASE /usr/local/lib/python3.6 /usr/local/lib/python3.6
 COPY --from=NODE /opt/hubmap-data-portal/frontend/build /opt/hubmap-data-portal-static
-COPY dataportal.xml /opt/dataportal.xml
+COPY uwsgi/dataportal.xml /opt/dataportal.xml
 
-WORKDIR /opt
-RUN git clone https://github.com/hubmapconsortium/hubmap-data-portal.git
+COPY . /opt/hubmap-data-portal
+WORKDIR /opt/hubmap-data-portal/hubmap
+RUN python3 -m compileall .
+RUN python3 -O -m compileall .
 
 EXPOSE 5000
 
