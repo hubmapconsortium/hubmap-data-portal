@@ -3,10 +3,12 @@ import { GLOBAL_FETCH_ACTION } from '../controllers/actions';
 
 //define DEFAULT state, so it is never "undefined".
 const DEFAULT_STATE = {
-    studies: [],
+    type: '',
+    status:'',
+    response: {},
     error: null,
     isFetching:false,
-    type: '',
+
 };
 
 export default function studyReducer(state = DEFAULT_STATE, action){
@@ -16,7 +18,7 @@ export default function studyReducer(state = DEFAULT_STATE, action){
             return {
                 ...state,
                 isFetching: false,
-                studies: action.studies,
+                response: action.studies,
             };
         
         default:
