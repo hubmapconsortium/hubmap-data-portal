@@ -1,3 +1,15 @@
+## 1. Build static ReactJS/etc. content, to copy to static files later
+FROM node:12.4.0 as NODE
+
+WORKDIR /opt
+RUN git clone https://github.com/hubmapconsortium/hubmap-data-portal.git
+WORKDIR /opt/hubmap-data-portal/frontend
+RUN npm install
+RUN npm run build
+
+## 2. Install Python packages and requirements into throwaway build stage,
+# so the cached archives/wheels and development dependencies don't take up
+# disk space in the real image
 FROM ubuntu:18.04 as BASE
 
 RUN apt-get update
@@ -11,15 +23,22 @@ COPY requirements.txt /opt
 # container, but worth it to avoid specifying packages to build wheels by hand
 RUN pip3 install -r /opt/requirements.txt
 
+## 3. Actual container
 FROM ubuntu:18.04 as RELEASE
 
 RUN apt-get update
 RUN apt-get -y install uwsgi uwsgi-plugin-python3 python3 python3-six python3-idna
 RUN rm -rf /var/cache/apt/*
 
-EXPOSE 5000
+RUN git clone https://github.com/hubmapconsortium/hubmap-dataportal-rest.git hubmap-data-portal
 
 COPY --from=BASE /usr/local/lib/python3.6 /usr/local/lib/python3.6
+COPY --from=NODE /opt/hubmap-data-portal/frontend/build /opt/hubmap-data-portal-static
 COPY dataportal.xml /opt/dataportal.xml
 
-CMD ["uwsgi", "--xml", "/opt/dataportal.xml"]
+WORKDIR /opt
+RUN git clone https://github.com/hubmapconsortium/hubmap-data-portal.git
+
+EXPOSE 5000
+
+ENTRYPOINT ["uwsgi", "--xml", "/opt/dataportal.xml"]
