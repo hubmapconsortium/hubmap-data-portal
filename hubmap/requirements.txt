@@ -1,3 +1,10 @@
-django
-djangorestframework
+Pillow
+social-auth-app-django==3.1.0
+python-jose==3.0.1
+djangorestframework==3.9.3
+django<2.3
+bokeh==1.1.0
+pandas
+django-model-utils==3.1.2
 django-cors-headers
+django_filters
