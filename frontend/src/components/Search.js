@@ -15,22 +15,23 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
       },
 search: {
-    width:160,
+    width:200,
     height:40,
     border: '1px solid #fafafa',
     borderRadius: theme.shape.borderRadius,
+    padding:0,
     backgroundColor: fade(theme.palette.common.white, 0.15),
     '&:hover': {
         backgroundColor: fade(theme.palette.common.white, 0.25),
         border: '1px solid #424242',
     },
-    marginLeft: theme.spacing(1),
+
     marginTop: theme.spacing(3),
-    marginRight: theme.spacing(1),
+    marginRight: theme.spacing(1.5),
     [theme.breakpoints.up('sm')]: {
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(4),
         marginTop: theme.spacing(4),
-        width: 'auto',
+        width: '260px',
     },
 },
 inputRoot: {
@@ -42,7 +43,8 @@ inputRoot: {
 inputInput: {
     transition: theme.transitions.create('width'),
     width: 150,
-    
+    marginLeft: 3,
+    flex: 1,
     [theme.breakpoints.up('sm')]: {
         width: 150,
         '&:focus': {

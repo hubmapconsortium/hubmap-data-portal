@@ -13,6 +13,7 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 import StudiesChart from "./StudiesBarChart"
 import StudiesDashboard from './StudiesDashboard';
+import StudiesTable from './StudiesTable';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -53,29 +54,27 @@ function RootContainer(){
     setSpacing(Number(value));
   }
     return (
-        <Container xl component="div" style={{height:'1200px'}} >
-        <Grid container className={classes.root} spacing={5} marginTop="20px">
+        <Container xl="true" component="div" style={{height:'1200px'}} >
+        <Grid container className={classes.root} spacing={5} margin-top="20px">
         <Grid item md >
         <NavBar />
         </Grid>
-        <Grid item style={{height:'650px', width:'320px'}} >
+        <Grid item style={{height:'650px', width:'320px', marginTop:'-40px', marginRight:'10px'}} >
           <HumanSvg studies={''} />
         </Grid>
-        <Grid item >
+        <Grid item style={{height:'400px', width:'450px', marginTop:'50px'}}>
             <StudiesChart />
         </Grid>
-        <Grid item >
+        <Grid item style={{height:'400px', width:'450px', marginTop:'50px'}}>
          
 				    <StudiesDashboard />
-        
         </Grid>
-                <Footer />
+        <Grid item>
+          <StudiesTable />
       </Grid>
-
-   
-   
+      <Footer />
+    </Grid> 
 </Container>
 );
-
 }
 export default RootContainer;

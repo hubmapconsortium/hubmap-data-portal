@@ -12,6 +12,13 @@ import StudiesChart from "./components/StudiesBarChart"
 import StudiesDashboard from './components/StudiesDashboard';
 import StudyD3BarChart from './components/StudyD3BarChart';
 import RootContainer from './components/RootContainer';
+import {Provider} from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import { GLOBAL_FETCH_ACTION } from './controllers/actions';
+import reducer from './controllers/reducer'
+import thunk from 'redux-thunk';
+
+const hubmapStore = createStore(reducer, applyMiddleware(thunk));
 
 //import '@google/model-viewer' ;
 //npm run setup -- --spaceId eo4e2dc0pbyt --deliveryToken H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8 --managementToken CFPAT-nXzmTIQFv4Om1KFSnqn0fS3X7_3YLXDacst4IC52_1M
@@ -26,28 +33,6 @@ const styles = theme => ({
     }
 });
 
-function ElevationScroll(props) {
-    const { children } = props;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 0
-    });
-
-    return React.cloneElement(children, {
-        elevation: trigger ? 4 : 0,
-    });
-}
-
-ElevationScroll.propTypes = {
-    children: PropTypes.node.isRequired,
-    // Injected by the documentation to work in an iframe.
-    // You won't need it on your project.
-    window: PropTypes.func,
-};
-
 function StudiesIndex() {
 	return <h2>StudiesIndex</h2>;
 }
@@ -58,18 +43,14 @@ model.src = './images/gltf/BrainModel-Gray.gltf';
 document.body.appendChild(model);*/
 
 class App extends PureComponent {
-	constructor(props) {
-        super(props);
-        this.state = {
-            studies: []
-        };
-    }
-   
-    render() {
 
+    render() {
+        
 		return (
             <div className="App">
+                <Provider store={hubmapStore}>
                 <RootContainer />
+                </Provider>
                 {/* <NavBar />
                 <div className={"mainContent"}>
 				<HumanSvg studies={this.state.studies}>
@@ -84,5 +65,4 @@ class App extends PureComponent {
 		);
 	}
 }
-
 export default App;
