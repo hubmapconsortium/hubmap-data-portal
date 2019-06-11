@@ -28,7 +28,7 @@ class StudiesTable extends React.Component{
         if (isFetching) {
             return <div> Loading...</div>
         }
-        if (studies != "") {
+        if (studies != "" && studies != undefined) {
             console.log(studies);
             return(
                 <table >

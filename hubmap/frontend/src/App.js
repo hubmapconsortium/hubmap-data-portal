@@ -14,7 +14,6 @@ import StudyD3BarChart from './components/StudyD3BarChart';
 import RootContainer from './components/RootContainer';
 import {Provider} from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { GLOBAL_FETCH_ACTION } from './controllers/actions';
 import reducer from './controllers/reducer'
 import thunk from 'redux-thunk';
 
