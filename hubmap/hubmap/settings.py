@@ -24,8 +24,9 @@ SECRET_KEY = '**53v-%94cnsh08+l(@+)^5$@*u=xsrps!o4k4_r+lnfhjwsh5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'demo1.hubmapconsortium.org',
+]
 
 # Application definition
 
@@ -53,9 +54,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-    'localhost:3000/'
-)
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
+CORS_ORIGIN_WHITELIST.extend(f'https://{host}' for host in ALLOWED_HOSTS)
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
