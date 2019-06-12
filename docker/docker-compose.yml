@@ -1,24 +1,32 @@
 version: '3'
 
 services:
-  db:
+  postgres:
     image: postgres:11
     environment:
-      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=hubmap_db
+      - POSTGRES_USER=hubmap_login
+      - POSTGRES_PASSWORD=SFz0C96otU0i6Cgy3BP3tE7n5SEgt2Dj
     ports:
       - "5432:5432"
   uwsgi:
-    build: uwsgi+python-env
-    volumes:
-      - ..:/opt/dataportal
+    image: "mruffalo/hubmap-data-portal-python:latest"
     ports:
       - "5000:5000"
-  nginx:
-    build: nginx
-    ports:
-      - "8000:80"
-      - "80:80"
-      - "443:443"
     expose:
-      - 80
-      - 443
+      - 5000
+  react_app:
+    image: "mruffalo/hubmap-data-portal-reactjs:latest"
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+#  nginx:
+#    build: nginx
+#    ports:
+#      - "8000:80"
+#      - "80:80"
+#      - "443:443"
+#    expose:
+#      - 80
+#      - 443
