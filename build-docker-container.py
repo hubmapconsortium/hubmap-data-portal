@@ -38,12 +38,17 @@ IMAGES: List[Tuple[str, Path]] = [
     ('mruffalo/hubmap-data-portal-reactjs', Path('docker/reactjs_app/Dockerfile')),
 ]
 
-def print_run_return_stdout(command: List[str], pretend: bool):
+def print_run(command: List[str], pretend: bool, return_stdout: bool=False):
     print('Running "{}"'.format(' '.join(command)))
     if pretend:
         return '<pretend>'
     else:
-        return run(command, stdout=PIPE, check=True).stdout.strip().decode('utf-8')
+        kwargs = {}
+        if return_stdout:
+            kwargs['stdout'] = PIPE
+        proc = run(command, check=True, **kwargs)
+        if return_stdout:
+            return proc.stdout.strip().decode('utf-8')
 
 def main(tag_latest: bool, push: bool, pretend: bool):
     directory_of_this_script = Path(__file__).parent
@@ -60,7 +65,7 @@ def main(tag_latest: bool, push: bool, pretend: bool):
             )
             for piece in DOCKER_BUILD_COMMAND_TEMPATE
         ]
-        image_id = print_run_return_stdout(docker_build_command, pretend)
+        image_id = print_run(docker_build_command, pretend, return_stdout=True)
         images_to_push.append(label)
         print('Tagged image', image_id, 'as', label)
 
@@ -73,7 +78,7 @@ def main(tag_latest: bool, push: bool, pretend: bool):
                 )
                 for piece in DOCKER_TAG_COMMAND_TEMPATE
             ]
-            print_run_return_stdout(docker_tag_latest_command, pretend)
+            print_run(docker_tag_latest_command, pretend)
             print('Tagged image', image_id, 'as', latest_tag_name)
             images_to_push.append(latest_tag_name)
 
@@ -85,7 +90,7 @@ def main(tag_latest: bool, push: bool, pretend: bool):
                 )
                 for piece in DOCKER_PUSH_COMMAND_TEMPLATE
             ]
-            print_run_return_stdout(docker_push_command, pretend)
+            print_run(docker_push_command, pretend)
 
 if __name__ == '__main__':
     p = ArgumentParser()
