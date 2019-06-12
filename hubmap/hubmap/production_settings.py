@@ -1,3 +1,5 @@
+from pathlib import Path
+
 print('Loading production settings')
 
 # TODO: figure out how to store this securely while sharing containers;
@@ -24,3 +26,5 @@ DATABASES = {
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+STATIC_ROOT = Path('/opt/hubmap-data-portal/static')
