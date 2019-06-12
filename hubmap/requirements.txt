@@ -4,6 +4,8 @@ django-cors-headers
 django-filter
 django<2.3
 djangorestframework==3.9.3
+matplotlib
+numpy
 pandas
 psycopg2
 python-jose==3.0.1
