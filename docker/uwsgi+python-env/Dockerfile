@@ -34,6 +34,8 @@ RUN python3 -m compileall .
 RUN python3 -O -m compileall .
 RUN python3 manage.py collectstatic
 
+VOLUME /opt/hubmap-data-portal/static
+
 EXPOSE 5000
 
 ENTRYPOINT ["uwsgi", "--xml", "/opt/dataportal.xml"]
