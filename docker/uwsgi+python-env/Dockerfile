@@ -25,6 +25,9 @@ COPY --from=BASE /usr/local/lib/python3.6 /usr/local/lib/python3.6
 COPY uwsgi/dataportal.xml /opt/dataportal.xml
 
 COPY . /opt/hubmap-data-portal
+RUN mv \
+    /opt/hubmap-data-portal/hubmap/hubmap/production_settings.py \
+    /opt/hubmap-data-portal/hubmap/hubmap/local_settings.py
 WORKDIR /opt/hubmap-data-portal/hubmap
 RUN python3 -m compileall .
 RUN python3 -O -m compileall .
