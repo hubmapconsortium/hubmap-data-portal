@@ -4,6 +4,7 @@ services:
   db:
     image: postgres:11
     environment:
+      - POSTGRES_DB=hubmap_db
       - POSTGRES_USER=hubmap_login
       - POSTGRES_PASSWORD=SFz0C96otU0i6Cgy3BP3tE7n5SEgt2Dj
     ports:

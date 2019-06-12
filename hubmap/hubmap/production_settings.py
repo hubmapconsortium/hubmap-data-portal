@@ -14,7 +14,7 @@ ALLOWED_HOSTS = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
+        'NAME': 'hubmap_db',
         'USER': 'hubmap_login',
         'PASSWORD': 'SFz0C96otU0i6Cgy3BP3tE7n5SEgt2Dj',
         'HOST': 'postgres',
