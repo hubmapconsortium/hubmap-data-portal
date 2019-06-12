@@ -32,6 +32,7 @@ RUN mv \
 WORKDIR /opt/hubmap-data-portal/hubmap
 RUN python3 -m compileall .
 RUN python3 -O -m compileall .
+RUN python3 manage.py collectstatic
 
 EXPOSE 5000
 

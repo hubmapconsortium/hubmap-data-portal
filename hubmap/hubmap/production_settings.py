@@ -24,3 +24,5 @@ DATABASES = {
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
+
+STATIC_ROOT = '/opt/hubmap-data-portal/static'

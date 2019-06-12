@@ -15,6 +15,8 @@ services:
       - "5000:5000"
     expose:
       - 5000
+    volumes:
+      - /opt/hubmap-data-portal-static:/opt/hubmap-data-portal/static
   react_app:
     image: "mruffalo/hubmap-data-portal-reactjs:latest"
     ports:
