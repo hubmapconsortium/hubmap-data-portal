@@ -1,4 +1,3 @@
-import REST_API_BASE_URL from '../App';
 
 //the following are two basic gloabl REST API level actions, we need more, later.
 // first thing first...
@@ -10,8 +9,6 @@ export const SUCCESS = "SUCCESS";
 export const FAILURE = "FAILURE";
 export const IN_PROGRESS = "IN_PROGRESS";
 
-
-const BASE_API = REST_API_BASE_URL;
-export const GET_STUDIES_REST_API = BASE_API + '?format=json';
-export const SEARCH_STUDIES_REST_API = BASE_API + 'search/?format=json&query=';
-export const GET_TISSUE_COLORS_API = BASE_API + 'colors/?format=json';
+export const GET_STUDIES_REST_API = '?format=json';
+export const SEARCH_STUDIES_REST_API = 'search/?format=json&query=';
+export const GET_TISSUE_COLORS_API = 'colors/?format=json';

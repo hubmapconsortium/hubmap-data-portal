@@ -9,7 +9,6 @@ import reducer from './controllers/reducer'
 import thunk from 'redux-thunk';
 
 export const hubmapStore = createStore(reducer, applyMiddleware(thunk));
-export const REST_API_BASE_URL = window.location.href;
 
 ReactDOM.render(
     <Provider store={hubmapStore}><App /></Provider>

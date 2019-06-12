@@ -31,10 +31,11 @@ async function fetchStudiesData(){
 }
 
 export function fetchStudies() {
+    const BASE_API =(window.location.href+"api/").replace("3000", "8000")
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(Constants.GET_STUDIES_REST_API);
+            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API);
             console.log('action',response);
 
             return dispatch(fetch_studies(response.data));
@@ -48,17 +49,17 @@ export function fetchStudies() {
 export function fetch_colors(colors) {
     return {
         response: colors,
-        isFetching: false,
         status:Constants.SUCCESS,
         type: Constants.GET_TISSUE_COLORS,
     }
 }
 
 export function getTissueColorsFromServer(){
+    const BASE_API =(window.location.href+"api/");
     return async dispatch =>
     {
         dispatch(in_progress());
-        let response = await axios.get(Constants.GET_TISSUE_COLORS_API);
+        let response = await axios.get(BASE_API + Constants.GET_TISSUE_COLORS_API);
         console.log('action',response.data);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));

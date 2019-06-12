@@ -7,6 +7,7 @@
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
+import * as Constants from './commons/constants';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -35,7 +36,7 @@ export default function register() {
       if (isLocalhost) {
         // This is running on localhost. Lets check if a service worker still exists or not.
         checkValidServiceWorker(swUrl);
-
+        console.log(swUrl);
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
         navigator.serviceWorker.ready.then(() => {
@@ -47,6 +48,8 @@ export default function register() {
       } else {
         // Is not local host. Just register service worker
         registerValidSW(swUrl);
+        Constants.setBaseUrl( window.location.href);
+
       }
     });
   }
