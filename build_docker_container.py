@@ -10,7 +10,7 @@ from typing import List, Tuple
 TIMESTAMP_FORMAT = '%Y%m%d-%H%M%S%z'
 
 DOCKER = 'docker'
-DOCKER_BUILD_COMMAND_TEMPATE: List[str] = [
+DOCKER_BUILD_COMMAND_TEMPLATE: List[str] = [
     DOCKER,
     'build',
     '-q',
@@ -20,7 +20,7 @@ DOCKER_BUILD_COMMAND_TEMPATE: List[str] = [
     '{dockerfile_path}',
     '{base_dir}',
 ]
-DOCKER_TAG_COMMAND_TEMPATE: List[str] = [
+DOCKER_TAG_COMMAND_TEMPLATE: List[str] = [
     DOCKER,
     'tag',
     '{image_id}',
@@ -63,7 +63,7 @@ def main(tag_latest: bool, push: bool, pretend: bool):
                 dockerfile_path=filename,
                 base_dir=directory_of_this_script,
             )
-            for piece in DOCKER_BUILD_COMMAND_TEMPATE
+            for piece in DOCKER_BUILD_COMMAND_TEMPLATE
         ]
         image_id = print_run(docker_build_command, pretend, return_stdout=True)
         images_to_push.append(label)
@@ -76,7 +76,7 @@ def main(tag_latest: bool, push: bool, pretend: bool):
                     image_id=image_id,
                     tag_name=latest_tag_name,
                 )
-                for piece in DOCKER_TAG_COMMAND_TEMPATE
+                for piece in DOCKER_TAG_COMMAND_TEMPLATE
             ]
             print_run(docker_tag_latest_command, pretend)
             print('Tagged image', image_id, 'as', latest_tag_name)
