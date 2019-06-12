@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  db:
+  postgres:
     image: postgres:11
     environment:
       - POSTGRES_DB=hubmap_db
