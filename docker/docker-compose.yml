@@ -11,10 +11,14 @@ services:
     build: uwsgi+python-env
     ports:
       - "5000:5000"
+    expose:
+      - 5000
   react_app:
     build: reactjs_app
     ports:
       - "3000:3000"
+    expose:
+      - 3000
 #  nginx:
 #    build: nginx
 #    ports:
