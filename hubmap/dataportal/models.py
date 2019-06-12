@@ -1,12 +1,6 @@
-from __future__ import unicode_literals
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import QuerySet
-from django.utils.encoding import python_2_unicode_compatible
-
-#Developer: Matt Ruffalo
-#developer: Sushma Anand Akoju
-from django.utils.safestring import mark_safe
 
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
@@ -130,8 +124,6 @@ class SeqFishImagingStudy(ImagingStudy):
 class MicroscopyStudy(ImagingStudy):
     class Meta:
         verbose_name = 'Microscopy'
-
-    pass
 
 class TissueExpressionHeatmap(models.Model):
     """
