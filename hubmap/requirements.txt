@@ -5,6 +5,5 @@ djangorestframework==3.9.3
 django<2.3
 bokeh==1.1.0
 pandas
-django-model-utils==3.1.2
 django-cors-headers
-django_filters
+django-filter
