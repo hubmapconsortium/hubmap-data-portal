@@ -1,0 +1,570 @@
+[
+{
+    "model": "dataportal.gene",
+    "pk": 1,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "CTNNB1",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 2,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "CA9",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 3,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "CD44",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 4,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "CD68",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 5,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "CREB",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 6,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "KRT7",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 7,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "KRT8",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 8,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "CDH1",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 9,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "EPCAM",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 10,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "FN1",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 11,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "GATA3",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 12,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "HER2",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 13,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "HIST3H3",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 14,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "MKI67",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 15,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "PRAB",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 16,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "RPS6",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 17,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "ACTA2",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 18,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "TWIST1",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.gene",
+    "pk": 19,
+    "fields": {
+        "entrez_id": null,
+        "hugo_symbol": "VIM",
+        "ensembl_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 1,
+    "fields": {
+        "name": "b-catenin",
+        "gene": 1,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 2,
+    "fields": {
+        "name": "CarbonicAnhydraseIX",
+        "gene": 2,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 3,
+    "fields": {
+        "name": "CD44",
+        "gene": 3,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 4,
+    "fields": {
+        "name": "CD68",
+        "gene": 4,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 5,
+    "fields": {
+        "name": "Creb",
+        "gene": 5,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 6,
+    "fields": {
+        "name": "Cytokeratin7",
+        "gene": 6,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 7,
+    "fields": {
+        "name": "Cytokeratin8-18",
+        "gene": 7,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 8,
+    "fields": {
+        "name": "E-cadherin",
+        "gene": 8,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 9,
+    "fields": {
+        "name": "EpCAM",
+        "gene": 9,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 10,
+    "fields": {
+        "name": "Fibronectin",
+        "gene": 10,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 11,
+    "fields": {
+        "name": "GATA3",
+        "gene": 11,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 12,
+    "fields": {
+        "name": "Her2",
+        "gene": 12,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 13,
+    "fields": {
+        "name": "HistoneH3",
+        "gene": 13,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 14,
+    "fields": {
+        "name": "Ki-67",
+        "gene": 14,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 15,
+    "fields": {
+        "name": "PRAB",
+        "gene": 15,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 16,
+    "fields": {
+        "name": "S6",
+        "gene": 16,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 17,
+    "fields": {
+        "name": "SMA",
+        "gene": 17,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 18,
+    "fields": {
+        "name": "Twist",
+        "gene": 18,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.protein",
+    "pk": 19,
+    "fields": {
+        "name": "Vimentin",
+        "gene": 19,
+        "pdb_id": null
+    }
+},
+{
+    "model": "dataportal.institution",
+    "pk": 1,
+    "fields": {
+        "name": "University of Florida"
+    }
+},
+{
+    "model": "dataportal.institution",
+    "pk": 2,
+    "fields": {
+        "name": "University of California San Diego"
+    }
+},
+{
+    "model": "dataportal.institution",
+    "pk": 3,
+    "fields": {
+        "name": "Vanderbilt University"
+    }
+},
+{
+    "model": "dataportal.datatype",
+    "pk": 1,
+    "fields": {
+        "name": "Mass Cytometry"
+    }
+},
+{
+    "model": "dataportal.datatype",
+    "pk": 2,
+    "fields": {
+        "name": "scTHS-seq"
+    }
+},
+{
+    "model": "dataportal.datatype",
+    "pk": 3,
+    "fields": {
+        "name": "Imaging Mass Spectrometry"
+    }
+},
+{
+    "model": "dataportal.tissue",
+    "pk": 1,
+    "fields": {
+        "name": "Breast"
+    }
+},
+{
+    "model": "dataportal.tissue",
+    "pk": 2,
+    "fields": {
+        "name": "Brain"
+    }
+},
+{
+    "model": "dataportal.tissue",
+    "pk": 3,
+    "fields": {
+        "name": "Kidney"
+    }
+},
+{
+    "model": "dataportal.study",
+    "pk": 1,
+    "fields": {
+        "creation_time": "2019-03-19T16:45:15.168Z",
+        "institution": 1,
+        "data_type": 1,
+        "tissue": 1,
+        "subclass": 14
+    }
+},
+{
+    "model": "dataportal.study",
+    "pk": 2,
+    "fields": {
+        "creation_time": "2019-03-19T16:56:37.475Z",
+        "institution": 1,
+        "data_type": 1,
+        "tissue": 1,
+        "subclass": 14
+    }
+},
+{
+    "model": "dataportal.study",
+    "pk": 3,
+    "fields": {
+        "creation_time": "2019-03-19T16:56:53.015Z",
+        "institution": 1,
+        "data_type": 1,
+        "tissue": 1,
+        "subclass": 14
+    }
+},
+{
+    "model": "dataportal.study",
+    "pk": 4,
+    "fields": {
+        "creation_time": "2019-03-19T18:33:51.978Z",
+        "institution": 2,
+        "data_type": 2,
+        "tissue": 2,
+        "subclass": 26
+    }
+},
+{
+    "model": "dataportal.study",
+    "pk": 5,
+    "fields": {
+        "creation_time": "2019-03-20T13:48:56.110Z",
+        "institution": 3,
+        "data_type": 3,
+        "tissue": 3,
+        "subclass": 27
+    }
+},
+{
+    "model": "dataportal.scthsseqstudy",
+    "pk": 4,
+    "fields": {
+        "cell_count": 26494,
+        "total_read_count": 11255404
+    }
+},
+{
+    "model": "dataportal.masscytometrystudy",
+    "pk": 1,
+    "fields": {
+        "sample_count": 58,
+        "preview_image": "",
+        "proteins": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+        ]
+    }
+},
+{
+    "model": "dataportal.masscytometrystudy",
+    "pk": 2,
+    "fields": {
+        "sample_count": 58,
+        "preview_image": "",
+        "proteins": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+        ]
+    }
+},
+{
+    "model": "dataportal.masscytometrystudy",
+    "pk": 3,
+    "fields": {
+        "sample_count": 58,
+        "preview_image": "thumbnails/2019/03/19/sample-images/uf-cytometry_EudDV7o.png",
+        "proteins": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19
+        ]
+    }
+},
+{
+    "model": "dataportal.imagingstudy",
+    "pk": 5,
+    "fields": {
+        "image_count": 6,
+        "preview_image": "thumbnails/2019/03/20/sample-images/vanderbilt-histology.png"
+    }
+},
+{
+    "model": "dataportal.microscopystudy",
+    "pk": 5,
+    "fields": {}
+}
+]
