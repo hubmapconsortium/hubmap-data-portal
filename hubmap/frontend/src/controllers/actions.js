@@ -56,6 +56,7 @@ export function fetch_colors(colors) {
 
 export function getTissueColorsFromServer(){
     const BASE_API =(window.location.href+"api/");
+    console.log(BASE_API);
     return async dispatch =>
     {
         dispatch(in_progress());

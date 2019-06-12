@@ -122,5 +122,4 @@ except ImportError:
     pass
 # This must be run after loading local_settings
 CORS_ORIGIN_WHITELIST.extend(f'https://{host}' for host in ALLOWED_HOSTS)
-CORS_ORIGIN_WHITELIST.extend(f'http://{host}' for host in ALLOWED_HOSTS)
 # Do not add anything after this
