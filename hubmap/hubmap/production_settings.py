@@ -28,3 +28,5 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 STATIC_ROOT = Path('/opt/hubmap-data-portal/static')
+# Can't collide with /static from the React app, so make up something for now
+STATIC_URL = '/_static/'
