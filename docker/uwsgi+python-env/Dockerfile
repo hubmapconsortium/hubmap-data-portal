@@ -38,4 +38,4 @@ VOLUME /opt/hubmap-data-portal/static
 
 EXPOSE 5000
 
-ENTRYPOINT ["uwsgi", "--xml", "/opt/dataportal.xml"]
+ENTRYPOINT ["/opt/hubmap-data-portal/docker/uwsgi+python-env/collectstatic_then_web_app.sh"]
