@@ -261,3 +261,8 @@ class StudyListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Study
         fields = '__all__'
+
+class TissueColorSerializer(serializers.Serializer):
+    """define tissue color fields"""
+    tissue = serializers.CharField()
+    color = serializers.CharField()

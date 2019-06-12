@@ -8,7 +8,7 @@ export function fetch_studies(studies) {
     return {
     isFetching: false,
     status: Constants.SUCCESS,
-    studies: studies,
+    response: studies,
     type: Constants.GLOBAL_FETCH_ACTION,}
 }
 
@@ -16,7 +16,7 @@ export const fetch_studies_error = error =>{
     return {
     isFetching: false,
     status: Constants.FAILURE,
-    studies: {},
+    response: {},
     error: { error },
     type: Constants.GLOBAL_FETCH_ACTION,}
 }
@@ -33,13 +33,29 @@ async function fetchStudiesData(){
 export function fetchStudies() {
     return async dispatch => {
         try {
-            const response = await axios.get(Constants.GET_STUDIES_REST_API);
+            let response = await axios.get(Constants.GET_STUDIES_REST_API);
             console.log('action',response);
+
             return dispatch(fetch_studies(response.data));
         }
         catch (error) {
-            const errorMessage = console.log('An error occurred.', error);
             return dispatch(fetch_studies_error(error));
         }
     }
+}
+
+export function fetch_colors(colors) {
+    return {
+        colors: colors,
+    }
+}
+
+export function getTissueColorsFromServer(){
+    return async dispatch => {
+            let response = await axios.get(Constants.GET_TISSUE_COLORS_API);
+            console.log('action',response);
+            // wait 3 seconds
+            await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
+            return dispatch(fetch_colors(response.data));
+	}
 }

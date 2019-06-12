@@ -5,6 +5,10 @@ import clsx from "clsx";
 import grey from '@material-ui/core/colors/grey';
 import { Container } from "@material-ui/core";
 import data from './data';
+import { fetch_colors } from "../controllers/actions";
+import * as Constants from '../commons/constants';
+import {hubmapStore} from '../index';
+import {connect} from 'react-redux';
 
 const cellcount = data;
 var humanSvg, tooltip, tooltipText, tooltipRects, tooltipTsspan;
@@ -15,6 +19,7 @@ function updateText(tspanId, txt) {
   }
   spanEl.appendChild( document.createTextNode(txt) );
 }
+
 function showToolTip(evt){
 	var CTM = humanSvg.getScreenCTM();
 	var mousex = (evt.clientX -CTM.e +6)/CTM.a;
@@ -44,18 +49,17 @@ function hideToolTip(evt){
 }
 
 class HumanAnatomyCard extends React.Component{
-
-    constructor(props) {
-        super(props);
-		}
+	currentState = {};
+	constructor (props) {
+		super(props);
+	}
 
 	 componentDidMount() {
 		try {
-			 /*const res = await fetch('http://127.0.0.1:8000/api/');
-			 const studies = await res.json();
-			  this.setState({
-				studies
-				});*/
+				//this.props.dispatch(fetch_colors());
+				//hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
+				//const {colors, isFetching, error, status} = this.currentState;
+				//console.log(this.currentState);
 				//first get svg 
 				console.log(cellcount);
 				humanSvg = document.getElementById('human');
@@ -69,20 +73,19 @@ class HumanAnatomyCard extends React.Component{
 					pathTriggers[i].addEventListener('mousemove', showToolTip);
 					pathTriggers[i].addEventListener('mouseout', hideToolTip);
 					//pathTriggers[i].addEventListener('mouseover', setHover);
-					console.log(pathTriggers[i].id)
 				}
 
 				var pancreas =document.getElementById('pancreas');
 				pancreas.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[3].tissue+"," +cellcount[3].cells+" experiments,"+cellcount[3].gene+" gene");
-			  pancreas.addEventListener("click", async function() {
-					console.log(pancreas.getAttribute("id"));
-					console.log(cellcount);
-					
-			  });
+				pancreas.addEventListener("click", async function() {
+						console.log(pancreas.getAttribute("id"));
+						console.log(cellcount);
+						
+				});
         
 				var abdomen =document.getElementById('abdomen');
 				abdomen.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[8].tissue+"," +cellcount[8].cells+" experiments,"+cellcount[8].gene+" gene");
-			  abdomen.addEventListener("click", async function() {
+			  	abdomen.addEventListener("click", async function() {
                   console.log(abdomen.getAttribute("id"))
                   var chart = document.getElementById('studiesbyTissueschart');
                   // Create our table.
@@ -94,7 +97,7 @@ class HumanAnatomyCard extends React.Component{
               
 				var liver =document.getElementById('liver');
 				liver.setAttributeNS(null,  "data-tooltip-text", " "+cellcount[5].tissue+"," +cellcount[5].cells+" experiments,"+cellcount[5].gene+" gene");
-              liver.addEventListener("click", function() {
+              	liver.addEventListener("click", function() {
 			  	console.log(liver.getAttribute("id"));
 					//do something here get studies where tissue = kidney
 				});
@@ -152,9 +155,7 @@ class HumanAnatomyCard extends React.Component{
 
     render(){
         return (
-            //<div className="svgclass">        
                 <ReactComp />
-        		//</div>
         );
     }
 }

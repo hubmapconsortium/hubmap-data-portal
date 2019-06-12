@@ -132,3 +132,22 @@ class MicroscopyStudy(ImagingStudy):
         verbose_name = 'Microscopy'
 
     pass
+
+class TissueExpressionHeatmap(models.Model):
+    """
+    Instances of this class provide all of the data to render a heatmap
+    of gene expression across the human body.
+    """
+    kidney_color = models.CharField(max_length=7)
+    lung_color = models.CharField(max_length=7)
+    heart_color = models.CharField(max_length=7)
+    pancreas_color = models.CharField(max_length=7)
+    abdomencolor = models.CharField(max_length=7)
+    liver_color = models.CharField(max_length=7)
+    smallIntestine_color = models.CharField(max_length=7)
+    bladder_color = models.CharField(max_length=7)
+    largeIntestine_color = models.CharField(max_length=7)
+    spleen_color = models.CharField(max_length=7)
+    genes = models.ForeignKey(Gene,on_delete=models.CASCADE)
+
+# then a ForeignKey from Gene to TissueExpressionHeatmap

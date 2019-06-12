@@ -1,9 +1,13 @@
-from rest_framework import generics
+from rest_framework import generics, views
 from rest_framework.response import Response
 from rest_framework import status
 from .utils import *
-
+from django.forms.models import model_to_dict
 from .serializers import *
+import matplotlib.cm
+import numpy as np
+import pandas as pd
+from django.shortcuts import render
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Build frontend -> more tutorials
@@ -42,7 +46,44 @@ class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
         serializer = self.get_serializer(self.get_object().get_subclass_object())
         return Response(serializer.data)
 
+def tissue_svg(request):
+    # These match the Django template fields in `human_body.svg`
+    organs = [
+        'stomach',
+        'liver',
+        'lung',
+        'small_intestine',
+        'heart',
+        'bladder',
+        'large_intestine',
+        'kidney',
+    ]
+def rgba_float_to_rgb_hex(floats):
+    return '#' + ''.join('{:02x}'.format(int(c * 255)) for c in floats[:3])
 
+class Tissue_svg_colors(views.APIView):
 
-
-
+    def get(self, request):
+        # These match the Django template fields in `human_body.svg`
+        organs = [
+            'pancreas',
+            'abdomen',
+            'liver',
+            'lungs',
+            'small_intestine',
+            'heart',
+            'bladder',
+            'large_intestine',
+            'kidney',
+            'spleen',
+        ]
+        vec = pd.Series(np.random.random(len(organs)), index=organs)
+        values = [
+            {"tissue": tissue, "color" : rgba_float_to_rgb_hex(matplotlib.cm.viridis(expr))}
+            for tissue, expr in vec.items()
+        ]
+        print(values)
+        results = TissueColorSerializer(values, many=True).data
+        return Response(
+            results
+        )

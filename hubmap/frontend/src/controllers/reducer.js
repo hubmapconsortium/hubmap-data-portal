@@ -16,10 +16,19 @@ export default function studyReducer(state = DEFAULT_STATE, action){
         case Constants.GLOBAL_FETCH_ACTION:
             return {
                 ...state,
+                status: state.status,
+                error: state.error,
                 isFetching: false,
-                response: action.studies,
+                response: action.response,
             };
-        
+
+        case Constants.GET_TISSUE_COLORS:
+            return {
+                ...state,
+                error: state.error,
+                colors: action.colors,
+            };
+            
         default:
             return state;
     }

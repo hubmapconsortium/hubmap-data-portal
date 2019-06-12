@@ -1,35 +1,40 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import { fetchStudies } from '../controllers/actions';
-
+import { fetch_studies } from '../controllers/actions';
+import * as Constants from '../commons/constants';
+import {hubmapStore} from '../index';
+import PropTypes from 'prop-types';
 
 const mapStateToProps = state => {
+    console.log(state);
     return {
-        studies: state.studies,
+        status:state.status,
+        studies: state.response,
         error: state.error,
         isFetching: state.isFetching
     }
 };
-
 class StudiesTable extends React.Component{
-
+    currentState = {};
     componentDidMount()
     {
         console.log('componentDidMount');
-        this.props.dispatch(fetchStudies());
+        hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
+        this.props.dispatch(fetch_studies());
     }
 
     render() {
-        console.log(this.props);
-        const {studies, isFetching, error} = this.props;
+         console.log(this.currentState);
+         const {response, isFetching, error, status} = this.currentState;
+        console.log(response);
         if (error){
             return <div>Error! {error.message}</div>
         }
         if (isFetching) {
             return <div> Loading...</div>
         }
-        if (studies != "" && studies != undefined) {
-            console.log(studies);
+        if (response != "" && response !== undefined) {
+            console.log(response);
             return(
                 <table >
                     <thead>
@@ -40,7 +45,7 @@ class StudiesTable extends React.Component{
                     </tr>
                     </thead>
                     <tbody>
-                    {studies.map(study => (
+                    {response.map(study => (
                         <tr key={study.id}>
                         <td>{study.id}</td>
                         <td>{study.institution.name}</td>
@@ -55,4 +60,5 @@ class StudiesTable extends React.Component{
             }
     };
 }
+
 export default connect(mapStateToProps) (StudiesTable);
