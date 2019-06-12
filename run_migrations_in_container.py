@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 from argparse import ArgumentParser
-from datetime import datetime
 import json
-from pathlib import Path
 from subprocess import PIPE, run
-from typing import List, Tuple
+from typing import List
 
 MIGRATE_COMMAND: List[str] = [
     'python3',
     '/opt/hubmap-data-portal/hubmap/manage.py',
     'migrate',
+    '--force-color',
 ]
 
 DOCKER = 'docker'
