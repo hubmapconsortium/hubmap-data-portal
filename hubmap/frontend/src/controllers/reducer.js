@@ -4,32 +4,26 @@ import * as Constants from '../commons/constants';
 const DEFAULT_STATE = {
     type: '',
     status:'',
+    colors: {},
     response: {},
     error: null,
-    isFetching:false,
-
 };
 
 export default function studyReducer(state = DEFAULT_STATE, action){
     console.log('reducer', state, action );
     switch(action.type) {
-        case Constants.GLOBAL_FETCH_ACTION:
+        case Constants.IN_PROGRESS:
             return {
                 ...state,
-                status: state.status,
-                error: state.error,
-                isFetching: false,
-                response: action.response,
+                status: Constants.IN_PROGRESS,
             };
-
-        case Constants.GET_TISSUE_COLORS:
-            return {
-                ...state,
-                error: state.error,
-                colors: action.colors,
-            };
-            
         default:
-            return state;
+            console.log(state.status);
+            return {
+                ...state,
+                response: action.response,
+                type: action.type,
+                status: action.status,
+            };
     }
 };

@@ -3,10 +3,11 @@ import fetch from 'cross-fetch';
 import axios from 'axios';
 import * as Constants from '../commons/constants';
 
+export const in_progress = () => ({type: Constants.IN_PROGRESS});
 
 export function fetch_studies(studies) {
+    console.log('fetch_studies');
     return {
-    isFetching: false,
     status: Constants.SUCCESS,
     response: studies,
     type: Constants.GLOBAL_FETCH_ACTION,}
@@ -14,7 +15,6 @@ export function fetch_studies(studies) {
 
 export const fetch_studies_error = error =>{
     return {
-    isFetching: false,
     status: Constants.FAILURE,
     response: {},
     error: { error },
@@ -32,6 +32,7 @@ async function fetchStudiesData(){
 
 export function fetchStudies() {
     return async dispatch => {
+        dispatch(in_progress());
         try {
             let response = await axios.get(Constants.GET_STUDIES_REST_API);
             console.log('action',response);
@@ -46,16 +47,21 @@ export function fetchStudies() {
 
 export function fetch_colors(colors) {
     return {
-        colors: colors,
+        response: colors,
+        isFetching: false,
+        status:Constants.SUCCESS,
+        type: Constants.GET_TISSUE_COLORS,
     }
 }
 
 export function getTissueColorsFromServer(){
-    return async dispatch => {
-            let response = await axios.get(Constants.GET_TISSUE_COLORS_API);
-            console.log('action',response);
-            // wait 3 seconds
-            await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
-            return dispatch(fetch_colors(response.data));
+    return async dispatch =>
+    {
+        dispatch(in_progress());
+        let response = await axios.get(Constants.GET_TISSUE_COLORS_API);
+        console.log('action',response.data);
+        // wait 3 seconds
+        await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
+        return dispatch(fetch_colors(response.data));
 	}
 }

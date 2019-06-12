@@ -43,14 +43,14 @@ class App extends PureComponent {
     componentDidMount() {
         console.log('componentDidMount');
         this.props.dispatch(fetchStudies());
-        //this.props.dispatch(getTissueColorsFromServer());
+        this.props.dispatch(getTissueColorsFromServer());
     }
 
     render() {
-        
+
 		return (
             <div className="App">
-                
+
                 <RootContainer />
                 {/* <NavBar />
                 <div className={"mainContent"}>

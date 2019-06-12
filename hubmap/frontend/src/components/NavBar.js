@@ -8,7 +8,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import grey from '@material-ui/core/colors/grey';
-import {MuiThemeProvider , createMuiTheme } from '@material-ui/core/styles';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
@@ -29,27 +29,27 @@ import { Light } from 'three';
 
 const theme = createMuiTheme({
     typography: {
-      // Use the system font instead of the default Roboto font.
-      fontFamily: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Impact"',
-      ].join(','),
+        // Use the system font instead of the default Roboto font.
+        fontFamily: [
+            '-apple-system',
+            'BlinkMacSystemFont',
+            '"Segoe UI"',
+            'Roboto',
+            '"Helvetica Neue"',
+            'Arial',
+            'sans-serif',
+            '"Apple Color Emoji"',
+            '"Segoe UI Emoji"',
+            '"Segoe UI Symbol"',
+            '"Impact"',
+        ].join(','),
     },
-  });
-  
+});
+
 const useStyles = makeStyles(theme => ({
     grow: {
         flexGrow: 0.2,
-      },
+    },
     root: {
         flexGrow: 1,
         backgroundColor: grey[50],
@@ -57,21 +57,21 @@ const useStyles = makeStyles(theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        backgroundColor:  grey[50],
+        backgroundColor: grey[50],
         color: grey[800],
     },
     title: {
         flexGrow: 2,
-        fontSize:20,
-        fontVariant:"H2",
-        fontFamily:"Impact",
+        fontSize: 20,
+        fontVariant: "H2",
+        fontFamily: "Impact",
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
-            backgroundColor:  grey[50],
+            backgroundColor: grey[50],
             color: grey[800],
         },
-        backgroundColor:  grey[50],
+        backgroundColor: grey[50],
         color: grey[800],
     },
     search: {
@@ -89,7 +89,7 @@ const useStyles = makeStyles(theme => ({
             marginLeft: theme.spacing(1),
             width: 'auto',
         },
-        borderBlockColor:grey[800]
+        borderBlockColor: grey[800]
     },
     searchIcon: {
         width: theme.spacing(7),
@@ -102,9 +102,9 @@ const useStyles = makeStyles(theme => ({
         color: grey[800],
     },
     inputRoot: {
-        backgroundColor:  grey[50],
+        backgroundColor: grey[50],
         color: grey[800],
-        borderColor:grey[800],
+        borderColor: grey[800],
         width: 300,
     },
     inputInput: {
@@ -123,36 +123,36 @@ const useStyles = makeStyles(theme => ({
     sectionDesktop: {
         display: 'none',
         [theme.breakpoints.up('md')]: {
-          display: 'flex',
-          backgroundColor:  grey[50],
-          color: grey[800],
+            display: 'flex',
+            backgroundColor: grey[50],
+            color: grey[800],
         },
-        backgroundColor: grey[50], 
-        color:grey[800],
+        backgroundColor: grey[50],
+        color: grey[800],
         marginLeft: -33,
         marginTop: -20,
-      },
+    },
 
-      sectionIconDesktop: {
+    sectionIconDesktop: {
         display: 'none',
         [theme.breakpoints.up('md')]: {
-          display: 'flex',
+            display: 'flex',
         },
-        backgroundColor: grey[50], 
-        color:grey[800],
+        backgroundColor: grey[50],
+        color: grey[800],
         marginLeft: 105,
-      },
-      button: {
-        marginTop:36,
-        marginLeft:17,
+    },
+    button: {
+        marginTop: 36,
+        marginLeft: 17,
         margin: theme.spacing(1),
-      },
-      input: {
+    },
+    input: {
         display: 'none',
-      },
-      rightIcon: {
+    },
+    rightIcon: {
         marginLeft: theme.spacing(1),
-      },
+    },
 }));
 
 function SearchAppBar(props) {
@@ -161,12 +161,16 @@ function SearchAppBar(props) {
     const [anchorEl1, setAnchorEl1] = React.useState(null);
     const isMenuOpen = Boolean(anchorEl);
     const isHelpMenuOpen = Boolean(anchorEl1);
-    const Img = posed.img({ pressable: true,
-            init: { scale: 1 },
-            press: { scale: 0.8 }});
-    const img = <img style={{marginTop: 10,  flex: 1,
-            width: 150,
-            resizeMode: 'contain',}} src={HubmapLogo} alt="Logo"/>;
+    const Img = posed.img({
+        pressable: true,
+        init: { scale: 1 },
+        press: { scale: 0.8 }
+    });
+    const img = <img style={{
+        marginTop: 10, flex: 1,
+        width: 150,
+        resizeMode: 'contain',
+    }} src={HubmapLogo} alt="Logo" />;
 
     function handleMenuOpen(event) {
         setAnchorEl(event.currentTarget);
@@ -177,21 +181,21 @@ function SearchAppBar(props) {
     }
 
     function handleMenuClose() {
-    setAnchorEl(null);
+        setAnchorEl(null);
     }
 
     function handleHelpMenuClose() {
         setAnchorEl1(null);
-        }
+    }
 
     function handleClose() {
         setAnchorEl(null);
-      }
+    }
 
     function handleCloseHelp() {
         setAnchorEl1(null);
-      }
-        
+    }
+
     function handleClick(event) {
         setAnchorEl(event.currentTarget);
     }
@@ -201,104 +205,104 @@ function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" style={{ backgroundColor: grey[50] } } height={60} width={'100%'}>
+            <AppBar position="static" style={{ backgroundColor: grey[50] }} height={60} width={'100%'}>
                 <Toolbar>
                     <IconButton
-                    edge="start"
-                    className={classes.menuButton}
-                    color="inherit"
-                    aria-label="Open drawer">
-                    {img}
+                        edge="start"
+                        className={classes.menuButton}
+                        color="inherit"
+                        aria-label="Open drawer">
+                        {img}
                     </IconButton>
                     <div className={classes.sectionDesktop}>
-                    <Button className={classes.button}>
-                    <MuiThemeProvider  theme={theme}  >
-                    <Typography className={classes.title} noWrap >
-                        DataPortal
+                        <Button className={classes.button}>
+                            <MuiThemeProvider theme={theme}  >
+                                <Typography className={classes.title} noWrap >
+                                    DataPortal
                     </Typography>
-                    </MuiThemeProvider >
-                    <NavigationIcon />
-                    </Button>
+                            </MuiThemeProvider >
+                            <NavigationIcon />
+                        </Button>
                     </div>
                     <div className={classes.grow} />
 
                     <div className={classes.sectionIconDesktop} >
                         <div>
-                    <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick} >
-                        Browse
-                        <GraphIcon className={classes.rightIcon}/>
-                    </Button>
-                    <Menu
-                        id="browse-menu"
-                        anchorEl={anchorEl}
-                        keepMounted
-                        open={Boolean(anchorEl)}
-                        onClose={handleClose}>
-                        <MenuItem onClick={handleClose}>Data Analysis
-                        <GraphIcon className={classes.rightIcon}/></MenuItem>
-                        <MenuItem onClick={handleClose}>Studies
-                        <LibraryIcon className={classes.rightIcon}/></MenuItem>
-                        <MenuItem onClick={handleClose}>Pipelines
-                        <FlowIcon className={classes.rightIcon}/></MenuItem>
-                    </Menu>
-                    </div>
-                   
-                    <div>
-                    <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} >
-                        Help
-                        <HelpIcon className={classes.rightIcon}  />
-                    </Button>
-                    <Menu
-                        id="help-menu"
-                        anchorEl={anchorEl1}
-                        keepMounted
-                        open={Boolean(anchorEl1)}
-                        onClose={handleCloseHelp}>
-                        <MenuItem onClick={handleCloseHelp}>Rna seq Pipeline
-                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>ATAC-seq Pipeline
-                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>CDNA-seq Pipeline
-                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>Spatial Transcriptomic Pipeline
-                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>Microscopy Pipeline
-                        <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>Seq Fish Imaging Pipeline
-                        <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>Mass Cytometry Pipeline
-                        <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>Data Download
-                        <CloudDownloadIcon className={classes.rightIcon} /></MenuItem>
-                        <MenuItem onClick={handleCloseHelp}>User FAQs</MenuItem>
+                            <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick} >
+                                Browse
+                        <GraphIcon className={classes.rightIcon} />
+                            </Button>
+                            <Menu
+                                id="browse-menu"
+                                anchorEl={anchorEl}
+                                keepMounted
+                                open={Boolean(anchorEl)}
+                                onClose={handleClose}>
+                                <MenuItem onClick={handleClose}>Data Analysis
+                        <GraphIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleClose}>Studies
+                        <LibraryIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleClose}>Pipelines
+                        <FlowIcon className={classes.rightIcon} /></MenuItem>
+                            </Menu>
+                        </div>
 
-                    </Menu>
-                    </div>
-                    <Button color="inherit" aria-haspopup="true" >Login <AccountCircle className={classes.rightIcon} /></Button>
+                        <div>
+                            <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} >
+                                Help
+                        <HelpIcon className={classes.rightIcon} />
+                            </Button>
+                            <Menu
+                                id="help-menu"
+                                anchorEl={anchorEl1}
+                                keepMounted
+                                open={Boolean(anchorEl1)}
+                                onClose={handleCloseHelp}>
+                                <MenuItem onClick={handleCloseHelp}>Rna seq Pipeline
+                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>ATAC-seq Pipeline
+                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>CDNA-seq Pipeline
+                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>Spatial Transcriptomic Pipeline
+                        <ExploreIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>Microscopy Pipeline
+                        <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>Seq Fish Imaging Pipeline
+                        <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>Mass Cytometry Pipeline
+                        <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>Data Download
+                        <CloudDownloadIcon className={classes.rightIcon} /></MenuItem>
+                                <MenuItem onClick={handleCloseHelp}>User FAQs</MenuItem>
+
+                            </Menu>
+                        </div>
+                        <Button color="inherit" aria-haspopup="true" >Login <AccountCircle className={classes.rightIcon} /></Button>
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.grow} />
                     <div className={classes.grow} />
                     <div className={classes.search}>
-                    <div className={classes.searchIcon}>
-                        <SearchIcon  />
-                    </div>
+                        <div className={classes.searchIcon}>
+                            <SearchIcon />
+                        </div>
                         <InputBase
-                        placeholder="Search"
-                        classes={{
-                            root: classes.inputRoot,
-                            input: classes.inputInput,
-                        }}
-                        inputProps={{
-                            'aria-label': 'Search',
-                          }}
-                        variant="outlined"
+                            placeholder="Search"
+                            classes={{
+                                root: classes.inputRoot,
+                                input: classes.inputInput,
+                            }}
+                            inputProps={{
+                                'aria-label': 'Search',
+                            }}
+                            variant="outlined"
                         />
                     </div>
                 </Toolbar>
-                </AppBar>
-  
-            </div>
+            </AppBar>
+
+        </div>
     );
 }
 export default SearchAppBar;

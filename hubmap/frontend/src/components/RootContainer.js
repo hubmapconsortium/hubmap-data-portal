@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
@@ -21,60 +21,60 @@ const useStyles = makeStyles(theme => ({
   },
   humanClass:
   {
-    marginTop:"-30px",
+    marginTop: "-30px",
   },
   humanPaper: {
-    flex:1,
-    width:"320px",
+    flex: 1,
+    width: "320px",
     height: "650px",
     border: '0px solid #fafafa',
-    backgroundColor:  grey[50],
+    backgroundColor: grey[50],
     color: grey[800],
-    marginTop:theme.spacing(1),
+    marginTop: theme.spacing(1),
     padding: theme.spacing(1, 1, 1, 1),
   },
   chartPaper: {
-    flex:1,
-    width:"420px",
+    flex: 1,
+    width: "420px",
     height: "650px",
     border: '0px solid #fafafa',
-    backgroundColor:  grey[50],
+    backgroundColor: grey[50],
     color: grey[800],
-    marginTop:theme.spacing(1),
+    marginTop: theme.spacing(1),
     padding: theme.spacing(1, 1, 1, 1),
   },
-  
+
 }));
 
-function RootContainer(){
-    const [spacing, setSpacing] = React.useState(2);
+function RootContainer() {
+  const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
 
   function handleChange(event, value) {
     setSpacing(Number(value));
   }
-    return (
-        <Container xl="true" component="div" style={{height:'1200px'}} >
-        <Grid container className={classes.root} spacing={5} margin-top="20px">
+  return (
+    <Container xl="true" component="div" style={{ height: '1200px' }} >
+      <Grid container className={classes.root} spacing={5} margin-top="20px">
         <Grid item md >
-        <NavBar />
+          <NavBar />
         </Grid>
-        <Grid item style={{height:'650px', width:'320px', marginTop:'-40px', marginRight:'10px'}} >
+        <Grid item style={{ height: '650px', width: '320px', marginTop: '-40px', marginRight: '10px' }} >
           <HumanSvg studies={''} />
         </Grid>
-        <Grid item style={{height:'400px', width:'450px', marginTop:'50px'}}>
-            <StudiesChart />
+        <Grid item style={{ height: '400px', width: '450px', marginTop: '50px' }}>
+          <StudiesChart />
         </Grid>
-        <Grid item style={{height:'400px', width:'450px', marginTop:'50px'}}>
-         
-				    <StudiesDashboard />
+        <Grid item style={{ height: '400px', width: '450px', marginTop: '50px' }}>
+
+          <StudiesDashboard />
         </Grid>
         <Grid item>
           <StudiesTable />
+        </Grid>
+        <Footer />
       </Grid>
-      <Footer />
-    </Grid> 
-</Container>
-);
+    </Container>
+  );
 }
 export default RootContainer;

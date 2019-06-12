@@ -47,7 +47,7 @@ class Studies extends PureComponent {
         icon: {
             color: 'rgba(255, 255, 255, 0.54)',
         },
-        studiesList:{ marginTop: -600},
+        studiesList: { marginTop: -600 },
     }));
 
     getStudies = () => {
@@ -70,20 +70,19 @@ class Studies extends PureComponent {
         return (
             <div className={"studiesList"}>
                 {this.state.studies ? (
-                        <GridList cellHeight={100} className={this.useStyles.gridList}>
-                            <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                                <ListSubheader component="div">Studies from HuBMAP Consortium</ListSubheader>
-                            </GridListTile>
-                            {this.state.studies.map(study => (
-                                <Study key={study['id']} study={study}>
-                                </Study>
-                            ))}
-                        </GridList>
-                    
+                    <GridList cellHeight={100} className={this.useStyles.gridList}>
+                        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+                            <ListSubheader component="div">Studies from HuBMAP Consortium</ListSubheader>
+                        </GridListTile>
+                        {this.state.studies.map(study => (
+                            <Study key={study['id']} study={study}>
+                            </Study>
+                        ))}
+                    </GridList>
+
                 ) : "No studies found"}
             </div>
         );
     }
 }
 export default Studies;
-   

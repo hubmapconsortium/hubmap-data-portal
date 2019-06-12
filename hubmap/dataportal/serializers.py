@@ -249,6 +249,11 @@ class SeqFishImagingStudySerializer(StudySerializer):
         seq_fish_imaging.save()
         return seq_fish_imaging
 
+class TissueColorSerializer(serializers.Serializer):
+    """define tissue color fields"""
+    tissue = serializers.CharField()
+    color = serializers.CharField()
+
 class StudyListSerializer(serializers.ModelSerializer):
     scrna_atac = ScAtacSeqStudySerializer()
     scrna_cdna = ScRnaSeqStudyCDNASerializer()
@@ -261,8 +266,3 @@ class StudyListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Study
         fields = '__all__'
-
-class TissueColorSerializer(serializers.Serializer):
-    """define tissue color fields"""
-    tissue = serializers.CharField()
-    color = serializers.CharField()

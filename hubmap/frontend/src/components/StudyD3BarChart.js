@@ -1,10 +1,10 @@
 import * as d3 from 'd3';
-import React, {Component} from 'react';
-import {Element} from 'react-faux-dom';
+import React, { Component } from 'react';
+import { Element } from 'react-faux-dom';
 import '../App.css';
 import data from './data';
 
-class StudyD3BarChart extends Component{
+class StudyD3BarChart extends Component {
     plot(chart, width, height) {
         // create scales!
         const xScale = d3.scaleBand()
@@ -31,7 +31,7 @@ class StudyD3BarChart extends Component{
             .enter()
             .append('text')
             .classed('bar-label', true)
-            .attr('x', d => xScale(d.cells) + xScale.bandwidth()/2)
+            .attr('x', d => xScale(d.cells) + xScale.bandwidth() / 2)
             .attr('dx', 0)
             .attr('y', d => yScale(d.value))
             .attr('dy', -6)
@@ -39,7 +39,7 @@ class StudyD3BarChart extends Component{
 
         const xAxis = d3.axisBottom()
             .scale(xScale);
-            
+
         chart.append('g')
             .classed('x axis', true)
             .attr('transform', `translate(0,${height})`)
@@ -56,23 +56,23 @@ class StudyD3BarChart extends Component{
 
         chart.select('.x.axis')
             .append('text')
-            .attr('x',  width/2)
+            .attr('x', width / 2)
             .attr('y', 60)
             .attr('fill', '#000')
             .style('font-size', '20px')
             .style('text-anchor', 'middle')
-            .text('Cells');    
-            
+            .text('Cells');
+
         chart.select('.y.axis')
             .append('text')
             .attr('x', 0)
             .attr('y', 0)
-            .attr('transform', `translate(-50, ${height/2}) rotate(-90)`)
+            .attr('transform', `translate(-50, ${height / 2}) rotate(-90)`)
             .attr('fill', '#000')
             .style('font-size', '20px')
             .style('text-anchor', 'middle')
-            .text('Government Expenditure in Billion Dollars');   
-            
+            .text('Government Expenditure in Billion Dollars');
+
         // const yGridlines = d3.axisLeft()
         //     .scale(yScale)
         //     .ticks(5)
@@ -102,8 +102,8 @@ class StudyD3BarChart extends Component{
             right: 40
         }
         const chart = svg.append('g')
-        .classed('display', true)
-        .attr('transform', `translate(${margin.left},${margin.top})`);
+            .classed('display', true)
+            .attr('transform', `translate(${margin.left},${margin.top})`);
 
         const chartWidth = width - margin.left - margin.right;
         const chartHeight = height - margin.top - margin.bottom
