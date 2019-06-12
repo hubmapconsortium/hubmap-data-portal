@@ -30,6 +30,8 @@ const styles = theme => ({
     }
 });
 
+export const REST_API_BASE_URL = window.location.href;
+
 function StudiesIndex() {
 	return <h2>StudiesIndex</h2>;
 }
@@ -41,7 +43,7 @@ document.body.appendChild(model);*/
 
 class App extends PureComponent {
     componentDidMount() {
-        console.log('componentDidMount');
+        console.log('componentDidMount', window.location.href);
         this.props.dispatch(fetchStudies());
         this.props.dispatch(getTissueColorsFromServer());
     }
