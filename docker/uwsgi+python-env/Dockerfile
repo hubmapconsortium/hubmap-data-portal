@@ -5,6 +5,7 @@ FROM ubuntu:18.04 as BASE
 
 RUN apt-get update
 RUN apt-get -y install \
+    postgresql-server-dev-all \
     python3 \
     python3-dev \
     python3-pip
