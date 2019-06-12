@@ -46,7 +46,7 @@ def print_run_return_stdout(command: List[str], pretend: bool):
         return run(command, stdout=PIPE, check=True).stdout.strip().decode('utf-8')
 
 def main(tag_latest: bool, push: bool, pretend: bool):
-    directory_of_this_script = Path(__file__)
+    directory_of_this_script = Path(__file__).parent
     timestamp = datetime.now().strftime(TIMESTAMP_FORMAT)
     images_to_push = []
     for label_base, filename in IMAGES:
