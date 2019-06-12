@@ -412,56 +412,34 @@
         "institution": 1,
         "data_type": 1,
         "tissue": 1,
-        "subclass": 14
+        "subclass": 21
     }
 },
 {
     "model": "dataportal.study",
     "pk": 2,
     "fields": {
-        "creation_time": "2019-03-19T16:56:37.475Z",
-        "institution": 1,
-        "data_type": 1,
-        "tissue": 1,
-        "subclass": 14
+        "creation_time": "2019-03-19T18:33:51.978Z",
+        "institution": 2,
+        "data_type": 2,
+        "tissue": 2,
+        "subclass": 15
     }
 },
 {
     "model": "dataportal.study",
     "pk": 3,
     "fields": {
-        "creation_time": "2019-03-19T16:56:53.015Z",
-        "institution": 1,
-        "data_type": 1,
-        "tissue": 1,
-        "subclass": 14
-    }
-},
-{
-    "model": "dataportal.study",
-    "pk": 4,
-    "fields": {
-        "creation_time": "2019-03-19T18:33:51.978Z",
-        "institution": 2,
-        "data_type": 2,
-        "tissue": 2,
-        "subclass": 26
-    }
-},
-{
-    "model": "dataportal.study",
-    "pk": 5,
-    "fields": {
         "creation_time": "2019-03-20T13:48:56.110Z",
         "institution": 3,
         "data_type": 3,
         "tissue": 3,
-        "subclass": 27
+        "subclass": 17
     }
 },
 {
     "model": "dataportal.scthsseqstudy",
-    "pk": 4,
+    "pk": 2,
     "fields": {
         "cell_count": 26494,
         "total_read_count": 11255404
@@ -471,65 +449,6 @@
     "model": "dataportal.masscytometrystudy",
     "pk": 1,
     "fields": {
-        "sample_count": 58,
-        "preview_image": "",
-        "proteins": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19
-        ]
-    }
-},
-{
-    "model": "dataportal.masscytometrystudy",
-    "pk": 2,
-    "fields": {
-        "sample_count": 58,
-        "preview_image": "",
-        "proteins": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19
-        ]
-    }
-},
-{
-    "model": "dataportal.masscytometrystudy",
-    "pk": 3,
-    "fields": {
-        "sample_count": 58,
         "preview_image": "thumbnails/2019/03/19/sample-images/uf-cytometry_EudDV7o.png",
         "proteins": [
             1,
@@ -556,7 +475,7 @@
 },
 {
     "model": "dataportal.imagingstudy",
-    "pk": 5,
+    "pk": 3,
     "fields": {
         "image_count": 6,
         "preview_image": "thumbnails/2019/03/20/sample-images/vanderbilt-histology.png"
@@ -564,7 +483,7 @@
 },
 {
     "model": "dataportal.microscopystudy",
-    "pk": 5,
+    "pk": 3,
     "fields": {}
 }
 ]
