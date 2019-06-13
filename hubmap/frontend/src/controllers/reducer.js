@@ -24,6 +24,7 @@ export default function studyReducer(state = DEFAULT_STATE, action){
                 response: action.response,
                 type: action.type,
                 status: action.status,
+                error: action.error,
             };
     }
 };

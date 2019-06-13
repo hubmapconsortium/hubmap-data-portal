@@ -1,88 +1,119 @@
 import React from "react";
 import Study from "./Study";
 import { PureComponent } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import TextField from '@material-ui/core/TextField';
-import * as contentful from 'contentful';
 import grey from '@material-ui/core/colors/grey';
-import axios from 'axios';
+import PropTypes from 'prop-types';
+import { withStyles, makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-const SPACE_ID = 'eo4e2dc0pbyt'
-const ACCESS_TOKEN = 'H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8'
+const StyledTableCell = withStyles(theme => ({
+    head: {
+      backgroundColor: grey[800],
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
 
-const client = contentful.createClient({
-    space: SPACE_ID,
-    accessToken: ACCESS_TOKEN
-})
+  const StyledTableRow = withStyles(theme => ({
+    root: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: grey[50],
+      },
+    },
+  }))(TableRow);
 
-class Studies extends PureComponent {
+  const useStyles = makeStyles(theme => ({
+    root: {
+      width: '100%',
+      marginTop: theme.spacing(3),
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+  }));
 
+class Studies extends React.Component {
     state = {
         studies: [],
         searchString: ''
     }
 
-    constructor() {
-        super()
-        this.getStudies()
+    getStudiesTable(studies) {
+        console.log(useStyles);
+        return (<Paper className={useStyles.root}>
+                    <Table className={useStyles.table} title="Studies from HuBMAP Consortium">
+                        <TableHead>
+                        <TableRow backgroundColor={grey[50]}>
+                            <StyledTableCell align="right">Id</StyledTableCell>
+                            <StyledTableCell align="right">Study type</StyledTableCell>
+                            <StyledTableCell align="right">Institution</StyledTableCell>
+                            <StyledTableCell align="right">Data type</StyledTableCell>
+                            <StyledTableCell align="right">Tissue</StyledTableCell>
+                            <StyledTableCell align="right">Uploaded on</StyledTableCell>
+                            <StyledTableCell align="right">Genes </StyledTableCell>
+                            <StyledTableCell align="right">Proteins</StyledTableCell>
+                            <StyledTableCell align="right"># Cells</StyledTableCell>
+                            <StyledTableCell align="right"># Unique barcode </StyledTableCell>
+                            <StyledTableCell align="right"># Reads </StyledTableCell>
+                            <StyledTableCell align="right"># Reads Aligned </StyledTableCell>
+                            <StyledTableCell align="right"># Images </StyledTableCell>
+                        </TableRow>
+                        </TableHead>
+                        <TableBody>
+                { this.props.studies ?
+                         this.props.studies.map(study => (
+                            <StyledTableRow key={study.id}>
+                            <StyledTableCell component="th" scope="row">{study.id}</StyledTableCell>
+                            <StyledTableCell component="th" scope="row">{study.subclass.model}</StyledTableCell>
+                            <StyledTableCell align="right">{study.institution.name}</StyledTableCell>
+                            <StyledTableCell align="right">{study.data_type.name}</StyledTableCell>
+                            <StyledTableCell align="right">{study.tissue.name}</StyledTableCell>
+                            <StyledTableCell align="right">{study.creation_time}</StyledTableCell>
+                            {study.genes !== undefined ?
+                            <StyledTableCell align="right">{ study.genes.map( (gene) => gene.hugo_symbol).join(',')}</StyledTableCell>
+                            : <StyledTableCell align="right"></StyledTableCell>}
+                            {study.proteins !== undefined ?
+                            <StyledTableCell align="right">{ study.proteins.map( (protein) => protein.name).join(',')}</StyledTableCell>
+                             : <StyledTableCell align="right"></StyledTableCell>}
+                            {study.cell_count ?
+                            <StyledTableCell align="right">{study.cell_count}</StyledTableCell>
+                             : <StyledTableCell align="right"></StyledTableCell>}
+                            { study.Unique_barcode_count ?
+                            <StyledTableCell align="right">{study.Unique_barcode_count}</StyledTableCell>
+                             : <StyledTableCell align="right"></StyledTableCell>}
+                             { study.read_count_total ?
+                            <StyledTableCell align="right">{study.read_count_total}</StyledTableCell>
+                            : <StyledTableCell align="right"></StyledTableCell>}
+                            {study.read_count_aligned ?
+                            <StyledTableCell align="right">{study.read_count_aligned}</StyledTableCell>
+                             : <StyledTableCell align="right"></StyledTableCell>}
+                              {study.image_count ?
+                            <StyledTableCell align="right">{study.image_count}</StyledTableCell>
+                             : <StyledTableCell align="right"></StyledTableCell>}
+                          </StyledTableRow>
+                        ))
+
+                 : "No studies found"}
+                </TableBody>
+                </Table>
+                </Paper>);
     }
-
-    useStyles = makeStyles(theme => ({
-        root: {
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'space-around',
-            overflow: 'hidden',
-            backgroundColor: grey[50],
-            color: grey[800],
-        },
-        gridList: {
-            width: 500,
-            height: 450,
-        },
-        icon: {
-            color: 'rgba(255, 255, 255, 0.54)',
-        },
-        studiesList: { marginTop: -600 },
-    }));
-
-    getStudies = () => {
-
-        /*client.getEntries({
-            content_type: 'study',
-            query: this.state.searchString
-        })
-            .then((response) => {
-                this.setState({ studies: response.items })
-            })
-            .catch((error) => {
-                console.log("Error occured while fetching data")
-                console.log(error)
-            })*/
-    }
-
     render() {
-        console.log(this.state.studies);
+        console.log(this.props.studies);
         return (
-            <div className={"studiesList"}>
-                {this.state.studies ? (
-                    <GridList cellHeight={100} className={this.useStyles.gridList}>
-                        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-                            <ListSubheader component="div">Studies from HuBMAP Consortium</ListSubheader>
-                        </GridListTile>
-                        {this.state.studies.map(study => (
-                            <Study key={study['id']} study={study}>
-                            </Study>
-                        ))}
-                    </GridList>
-
-                ) : "No studies found"}
-            </div>
+                this.getStudiesTable(this.props.studies)
         );
     }
+}
+Studies.propTypes = {
+    studies: PropTypes.array,
 }
 export default Studies;

@@ -13,4 +13,5 @@ export const hubmapStore = createStore(reducer, applyMiddleware(thunk));
 ReactDOM.render(
     <Provider store={hubmapStore}><App /></Provider>
     , document.getElementById('root'));
+    module.hot.accept();
 serviceWorker.unregister();

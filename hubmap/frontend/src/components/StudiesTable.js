@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { fetch_studies, in_progress } from '../controllers/actions';
 import * as Constants from '../commons/constants';
 import { hubmapStore } from '../index';
-import PropTypes from 'prop-types';
+import Studies from './Studies';
+import MaterialTableDemo from './Study';
 
 const mapStateToProps = state => {
     console.log(state);
@@ -41,27 +42,12 @@ class StudiesTable extends React.Component {
             this.previousState.response = this.currentState ;
             this.previousState.type = type;
             return (
-                <table >
-                    <thead>
-                        <tr style={{ textAlign: 'center' }}>
-                            <th>Name</th>
-                            <th>Institution</th>
-                            <th>Tissue</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {response.map(study => (
-                            <tr key={study.id}>
-                                <td>{study.id}</td>
-                                <td>{study.institution.name}</td>
-                                <td>{study.tissue.name}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>);
+                <div>
+
+                <MaterialTableDemo studies = {response} /> </div>);
         }
         else {
-            return (<div>not studies</div>);
+            return (<div>not studies <Studies /></div>);
         }
     };
 }

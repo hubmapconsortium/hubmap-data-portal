@@ -4,7 +4,7 @@
   min-height: 100%;
   height: auto !important;
   height: 100%;
-  margin: 0 auto -40px; 
+  margin: 0 auto -40px;
   background-color: #fafafa;
 }
 
@@ -118,7 +118,7 @@ background-color: #fafafa;
 }
 
 .studiesList{
-  margin-top: -500px; 
+  margin-top: 100px;
 }
 
 .studieschart{
@@ -129,7 +129,7 @@ background-color: #fafafa;
 }
 
 #tooltip {
-  dominant-baseline: hanging; 
+  dominant-baseline: hanging;
   z-index: 1;
 }
 

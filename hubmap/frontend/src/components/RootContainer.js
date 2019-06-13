@@ -1,14 +1,9 @@
 import React, { PureComponent } from 'react';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import HumanSvg from "./HumanSvg";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import grey from '@material-ui/core/colors/grey';
-import SearchBox from './Search';
-import Header from "./Header"
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import StudiesChart from "./StudiesBarChart"
