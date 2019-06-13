@@ -43,7 +43,7 @@ class StudiesDashboard extends PureComponent {
                             minValue: 0,
                         },
                         vAxis: {
-                            title: 'Tissues',
+                            title: 'Tissue',
                         },
                     }}
                     controls={[

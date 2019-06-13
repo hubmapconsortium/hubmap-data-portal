@@ -35,7 +35,7 @@ class StudiesChart extends PureComponent {
                             minValue: 0,
                         },
                         vAxis: {
-                            title: 'Tissues',
+                            title: 'Center',
                         },
                     }}
                     controls={[
