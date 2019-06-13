@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 import { fetch_studies, in_progress } from '../controllers/actions';
 import * as Constants from '../commons/constants';
 import { hubmapStore } from '../index';
-import Studies from './Studies';
-import MaterialTableDemo from './Study';
+import MaterialTableDemo from './MUITable';
 
 const mapStateToProps = state => {
     console.log(state);
@@ -46,8 +45,12 @@ class StudiesTable extends React.Component {
 
                 <MaterialTableDemo studies = {response} /> </div>);
         }
+        /*else if(type != Constants.GLOBAL_FETCH_ACTION && response != "")
+        /{
+            console.log(this.previousState);
+        }*/
         else {
-            return (<div>not studies <Studies /></div>);
+            return (<div>no studies </div>);
         }
     };
 }

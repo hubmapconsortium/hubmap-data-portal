@@ -3,12 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import grey from '@material-ui/core/colors/grey';
-import SearchIcon from '@material-ui/icons/Search';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
 import data from './data';
-import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -26,10 +21,10 @@ const useStyles = makeStyles(theme => ({
             border: '1px solid #424242',
         },
 
-        marginTop: theme.spacing(3),
+        marginTop: theme.spacing(1),
         marginRight: theme.spacing(1.5),
         [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(4),
+            marginLeft: theme.spacing(2),
             marginTop: theme.spacing(4),
             width: '260px',
         },

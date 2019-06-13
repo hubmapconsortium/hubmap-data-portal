@@ -11,7 +11,7 @@ function MainContent(props) {
         <React.Fragment >
             <CssBaseline />
             <SearchBox />
-            <HumanAnatomyCard marginTop="-100px" />
+            <HumanAnatomyCard />
         </React.Fragment>
 
     );

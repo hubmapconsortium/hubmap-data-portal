@@ -42,7 +42,6 @@ class MaterialTableDemo extends React.Component {
 					'institution': study.institution.name,
 					'data_type': study.data_type.name,
 					'tissue': study.tissue.name,
-					'creation_time': new Date(study.creation_time) + '',
 					'cell_count': study.cell_count ? study.cell_count : '' + '',
 					'unique_barcode_count': study.unique_barcode_count ? study.unique_barcode_count : '' + '',
 					'read_count': study.read_count_total ? study.read_count_total : '' + '',
@@ -62,11 +61,10 @@ class MaterialTableDemo extends React.Component {
 				{label: 'Id', name: 'id', filtering: false, type: 'numeric', removable: false,},
 				{label: 'Study type', name: 'study_type', removable: false,},
 				{label: 'Institution', name: 'institution', removable: false,},
-				{label: 'Data type', name: 'data_type', removable: false,},
+				{label: 'Data type', name: 'data_type',removable: false, cellStyle: {width:150}},
 				{label: 'Tissue', name: 'tissue', removable: false,},
-				{label: 'Uploaded on', name: 'creation_time', removable: false,},
 				{label: '# Cells', name: 'cell_count', removable: false,},
-				{label: '# Unique barcode', name: 'unique_barcode_count', removable: false,},
+				{label: '# Unique barcode', name: 'unique_barcode_count', removable: false,headerStyle: { }},
 				{label: '# Reads', name: 'read_count', removable: false,},
 				{label: '# Reads aligned', name: 'read_count_aligned', removable: false,},
 				{label: '# Images', name: 'image_count', removable: false,},
@@ -81,11 +79,10 @@ class MaterialTableDemo extends React.Component {
 		console.log(this.state.columns);
 		console.log(this.state.data);
 		return (
-			<MUIDataTable
+			<MUIDataTable size='small' style={{ maxWidth: '100%'}}
 				title="Studies From HuBMAP Consortium"
 				columns={this.state.columns}
 				data={this.state.data}
-				tableRef={this.tableRef}
 				options={{
 					filtering: true, sorting: true
 				}}

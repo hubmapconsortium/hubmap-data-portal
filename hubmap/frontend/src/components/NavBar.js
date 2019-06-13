@@ -16,7 +16,6 @@ import HubmapLogo from "../images/HuBMAP-Retina-Logo-Color.png";
 import posed from 'react-pose';
 import { Button } from '@material-ui/core';
 import NavigationIcon from '@material-ui/icons/NavigateNext';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import LibraryIcon from '@material-ui/icons/LibraryBooks';
 import ExploreIcon from '@material-ui/icons/ExploreOutlined';
@@ -25,7 +24,6 @@ import FlowIcon from '@material-ui/icons/TableChart';
 import HelpIcon from '@material-ui/icons/Help';
 
 import MicroscopeIcon from '../icons/MicroscopeIcon';
-import { Light } from 'three';
 
 const theme = createMuiTheme({
     typography: {
@@ -84,6 +82,7 @@ const useStyles = makeStyles(theme => ({
             border: '1px solid #424242',
         },
         marginRight: theme.spacing(1.5),
+        marginLeft:0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(1),
@@ -205,7 +204,7 @@ function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static" style={{ backgroundColor: grey[50] }} height={60} width={'100%'}>
+            <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[50] }} height={50} width={'100%'}>
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -227,7 +226,7 @@ function SearchAppBar(props) {
                     <div className={classes.grow} />
 
                     <div className={classes.sectionIconDesktop} >
-                        <div>
+
                             <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick} >
                                 Browse
                         <GraphIcon className={classes.rightIcon} />
@@ -245,9 +244,9 @@ function SearchAppBar(props) {
                                 <MenuItem onClick={handleClose}>Pipelines
                         <FlowIcon className={classes.rightIcon} /></MenuItem>
                             </Menu>
-                        </div>
 
-                        <div>
+
+
                             <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} >
                                 Help
                         <HelpIcon className={classes.rightIcon} />
@@ -277,7 +276,7 @@ function SearchAppBar(props) {
                                 <MenuItem onClick={handleCloseHelp}>User FAQs</MenuItem>
 
                             </Menu>
-                        </div>
+
                         <Button color="inherit" aria-haspopup="true" >Login <AccountCircle className={classes.rightIcon} /></Button>
                     </div>
                     <div className={classes.grow} />

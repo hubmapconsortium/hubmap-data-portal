@@ -50,17 +50,17 @@ function RootContainer() {
   }
   return (
     <Container xl="true" component="div" style={{ height: '1200px' }} >
-      <Grid container className={classes.root} spacing={5} margin-top="20px">
-        <Grid item md >
+      <Grid container className={classes.root} spacing={8} margin-top="20px">
+        <Grid item >
           <NavBar />
         </Grid>
-        <Grid item style={{ height: '650px', width: '320px', marginTop: '-40px', marginRight: '10px' }} >
+        <Grid item style={{ height: '650px', width: '320px', marginTop: '90px', marginLeft:'-50px' }} >
           <HumanSvg studies={''} />
         </Grid>
-        <Grid item style={{ height: '400px', width: '450px', marginTop: '50px' }}>
+        <Grid item style={{ height: '400px', width: '420px', marginTop: '170px', marginLeft:'20px'}}>
           <StudiesChart />
         </Grid>
-        <Grid item style={{ height: '400px', width: '450px', marginTop: '50px' }}>
+        <Grid item style={{ height: '400px', width: '450px', marginTop: '170px', marginLeft:'20px'}}>
 
           <StudiesDashboard />
         </Grid>

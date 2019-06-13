@@ -1,7 +1,5 @@
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
-import grey from '@material-ui/core/colors/grey';
-import { makeStyles } from '@material-ui/core/styles';
 
 class StudiesDashboard extends PureComponent {
 

@@ -1,15 +1,10 @@
 import { ReactComponent as ReactComp } from "../images/Human_body_silhouette_minimal.svg";
 import React from 'react';
-import PureComponent from 'react';
-import clsx from "clsx";
-import grey from '@material-ui/core/colors/grey';
-import { Container } from "@material-ui/core";
 import data from './data';
 import { fetch_colors, in_progress } from "../controllers/actions";
 import * as Constants from '../commons/constants';
 import { hubmapStore } from '../index';
 import { connect } from 'react-redux';
-import { JSONLoader } from "three";
 
 const mapStateToProps = state => {
 	console.log(state);
