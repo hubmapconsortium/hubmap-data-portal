@@ -30,9 +30,7 @@ class StudiesTable extends React.Component {
     }
 
     render() {
-        console.log(this.currentState);
         const { response, error, status, type } = this.currentState;
-        console.log(response);
         if (error) {
             return <div>Error! {error.message}</div>
         }
@@ -40,7 +38,6 @@ class StudiesTable extends React.Component {
             return <div> Loading...</div>
         }
         if (response != "" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
-            console.log(response);
             this.previousState.response = this.currentState ;
             this.previousState.type = type;
             return (

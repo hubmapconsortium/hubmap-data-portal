@@ -7,7 +7,6 @@
 
 // To learn more about the benefits of this model, read https://goo.gl/KwvDNy.
 // This link also includes instructions on opting out of this behavior.
-import * as Constants from './commons/constants';
 
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
@@ -48,8 +47,6 @@ export default function register() {
       } else {
         // Is not local host. Just register service worker
         registerValidSW(swUrl);
-        Constants.setBaseUrl( window.location.href);
-
       }
     });
   }
