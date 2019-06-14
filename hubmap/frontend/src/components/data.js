@@ -3,55 +3,55 @@ const data = [
         tissue: 'Lung',
         cells: 13,
         gene: 'SFTPA1',
-        path: 'path5228',
+        path: 'lung',
     },
     {
         tissue: 'Spleen',
         cells: 20,
         gene: 'NKX2-5',
-        path: 'path32181',
+        path: 'spleen',
     },
     {
         tissue: 'Kidney',
         cells: 23,
         gene: 'KNG1',
-        path: 'path8932',
+        path: 'kidney',
     },
     {
         tissue: 'Pancreas',
         cells: 22,
         gene: 'A2M',
-        path: 'path4681'
+        path: 'pancreas'
     },
     {
         tissue: 'Heart',
         cells: 30,
         gene: 'NPPB',
-        path: 'path8642',
+        path: 'heart',
     },
     {
         tissue: 'Liver',
         cells: 32,
         gene: 'CFHR2',
-        path: 'path5194',
+        path: 'liver',
     },
     {
         tissue: 'SIntestine',
         cells: 39,
         gene: 'LCT',
-        path: 'path8590',
+        path: 'sIntestine',
     },
     {
         tissue: 'LIntestine',
         cells: 38,
         gene: 'INSL5',
-        path: 'path8736',
+        path: 'lIntestine',
     },
     {
         tissue: 'Abdomen',
         cells: 32,
         gene: 'PGA4',
-        path: 'path4745',
+        path: 'abdomen',
     },
 ];
 
