@@ -8,14 +8,21 @@ import matplotlib.cm
 import numpy as np
 import pandas as pd
 from django.shortcuts import render
+from rest_framework.pagination import PageNumberPagination
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Build frontend -> more tutorials
 #TODO: Add post request implementations
 #TODO: remove blank models from Get requests in default rest api HTML form
 
+class StandardResultsSetPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 1000
+
 class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
+    pagination_class = StandardResultsSetPagination
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)

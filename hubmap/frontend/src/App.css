@@ -41,9 +41,9 @@ body{
 }
 
 #human {
-  transform:scale(0.5);
-  -webkit-transform:scale(0.5);
-   margin-top: -280px;
+  transform:scale(0.7);
+  -webkit-transform:scale(0.7);
+   margin-top: -180px;
    margin-left: -260px;
 }
 .svgclass {

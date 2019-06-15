@@ -54,7 +54,7 @@ function RootContainer() {
         <Grid item >
           <NavBar />
         </Grid>
-        <Grid item style={{ height: '650px', width: '320px', marginTop: '90px', marginLeft:'-50px' }} >
+        <Grid item style={{ height: '700px', width: '320px', marginTop: '90px', marginLeft:'-50px' }} >
           <HumanSvg studies={''} />
         </Grid>
         <Grid item style={{ height: '400px', width: '420px', marginTop: '170px', marginLeft:'20px'}}>
@@ -64,7 +64,7 @@ function RootContainer() {
 
           <StudiesDashboard />
         </Grid>
-        <Grid item>
+        <Grid item style={{ height: '400px', width: 'auto', marginTop: '-190px', marginLeft:'360px'}}>
           <StudiesTable />
         </Grid>
         <Footer />

@@ -30,12 +30,12 @@ async function fetchStudiesData(){
     return response;
 }
 
-export function fetchStudies() {
-    const BASE_API =(window.location.href+"api/").replace("3000", "8000")
+export function fetchStudies(page) {
+    const BASE_API =(window.location.href+"api/").replace("3000", "8000");
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API);
+            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API + Constants.GET_PAGE+page);
             console.log('action',response);
 
             return dispatch(fetch_studies(response.data));
@@ -55,7 +55,7 @@ export function fetch_colors(colors) {
 }
 
 export function getTissueColorsFromServer(){
-    const BASE_API =(window.location.href+"api/");
+    const BASE_API =(window.location.href+"api/").replace("3000", "8000");
     console.log(BASE_API);
     return async dispatch =>
     {

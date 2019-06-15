@@ -5,7 +5,6 @@ import SearchBox from "./Search";
 
 
 function MainContent(props) {
-    const studies = props.studies;
     return (
 
         <React.Fragment >
