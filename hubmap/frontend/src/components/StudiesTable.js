@@ -11,6 +11,10 @@ const mapStateToProps = state => {
         status: state.status,
         response: state.response,
         error: state.error,
+        count: 0,
+        page:0,
+        next: "",
+        previous: "",
     }
 };
 class StudiesTable extends React.Component {
@@ -30,7 +34,7 @@ class StudiesTable extends React.Component {
     }
 
     render() {
-        const { response, error, status, type } = this.currentState;
+        const { response, error, status, type , page, count, next, previous} = this.currentState;
         if (error) {
             return <div>Error! {error.message}</div>
         }
@@ -40,6 +44,7 @@ class StudiesTable extends React.Component {
         if (response != "" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
             this.previousState.response = this.currentState ;
             this.previousState.type = type;
+            console.log(response);
             return (
                 <div>
 

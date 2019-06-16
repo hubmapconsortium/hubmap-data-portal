@@ -6,6 +6,10 @@ const DEFAULT_STATE = {
     status:'',
     colors: {},
     response: {},
+    count: 0,
+    page:0,
+    next: "",
+    previous: "",
     error: null,
 };
 
@@ -25,6 +29,10 @@ export default function studyReducer(state = DEFAULT_STATE, action){
                 type: action.type,
                 status: action.status,
                 error: action.error,
+                count: state.count,
+                page: state.page,
+                next: state.next,
+                previous: state.previous,
             };
     }
 };

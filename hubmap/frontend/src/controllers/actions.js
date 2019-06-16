@@ -5,11 +5,15 @@ import * as Constants from '../commons/constants';
 
 export const in_progress = () => ({type: Constants.IN_PROGRESS});
 
-export function fetch_studies(studies) {
-    console.log('fetch_studies');
+export function fetch_studies(response) {
+    console.log(response);
     return {
     status: Constants.SUCCESS,
-    response: studies,
+    response: response.results,
+    count: response.count,
+    page: response.page,
+    next: response.next,
+    previous: response.previous,
     type: Constants.GLOBAL_FETCH_ACTION,}
 }
 
@@ -18,19 +22,26 @@ export const fetch_studies_error = error =>{
     status: Constants.FAILURE,
     response: {},
     error: { error },
+    count: 0,
+    page:0,
+    next: "",
+    previous: "",
     type: Constants.GLOBAL_FETCH_ACTION,}
 }
 
-export function search_studies() {
+export function search_studies() 
+{
     return {type: Constants.GLOBAL_SEARCH_ACTION}
 }
 
-async function fetchStudiesData(){
+async function fetchStudiesData()
+{
     const response = await axios.get(Constants.GET_STUDIES_REST_API);
     return response;
 }
 
-export function fetchStudies(page) {
+export function fetchStudies(page) 
+{
     const BASE_API =(window.location.href+"api/").replace("3000", "8000");
     return async dispatch => {
         dispatch(in_progress());
@@ -46,7 +57,24 @@ export function fetchStudies(page) {
     }
 }
 
-export function fetch_colors(colors) {
+export function fetchNextPageFromStudies(next) 
+{
+    return async dispatch => {
+        dispatch(in_progress());
+        try {
+            let response = await axios.get(next);
+            console.log('action',response);
+
+            return dispatch(fetch_studies(response.data));
+        }
+        catch (error) {
+            return dispatch(fetch_studies_error(error));
+        }
+    }
+}
+
+export function fetch_colors(colors) 
+{
     return {
         response: colors,
         status:Constants.SUCCESS,
@@ -54,7 +82,8 @@ export function fetch_colors(colors) {
     }
 }
 
-export function getTissueColorsFromServer(){
+export function getTissueColorsFromServer()
+{
     const BASE_API =(window.location.href+"api/").replace("3000", "8000");
     console.log(BASE_API);
     return async dispatch =>

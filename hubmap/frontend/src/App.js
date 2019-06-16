@@ -42,7 +42,7 @@ document.body.appendChild(model);*/
 class App extends PureComponent {
 
     componentDidMount() {
-        this.props.dispatch(fetchStudies());
+        this.props.dispatch(fetchStudies(1));
         this.props.dispatch(getTissueColorsFromServer());
     }
 

@@ -41,6 +41,8 @@ def get_response_for_request(self, request, format=None):
     self.queryset = list(
         chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic, genes,
               proteins))
+    self.queryset.sort(key=lambda x: x.id)
+    print(self.queryset)
     #set context
     context = {
         "request": request,
@@ -52,8 +54,8 @@ def get_response_for_request(self, request, format=None):
                                                                              context=context)
     microscopy_serializer = MicroscopyStudySerializer(microscopy, many=True, context=context)
     mass_cytometry_serializer = MassCytometryStudySerializer(mass_cytometry, many=True, context=context)
-    scrna_atac_serializer = ScAtacSeqStudySerializer(seq_fish_imaging, many=True, context=context)
-    seq_fish_imaging_serializer = SeqFishImagingStudySerializer(scrna_atac, many=True, context=context)
+    scrna_atac_serializer = ScAtacSeqStudySerializer(scrna_atac, many=True, context=context)
+    seq_fish_imaging_serializer = SeqFishImagingStudySerializer(seq_fish_imaging, many=True, context=context)
     genes_serializer = GeneSerializer(genes, many=True, context=context)
     proteins_serializer = ProteinSerializer(proteins, many=True, context=context)
     response = scrna_barcorded_serializer.data + scrna_cdna_serializer.data + scrna_atac_serializer.data + \
