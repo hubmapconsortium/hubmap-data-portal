@@ -22,13 +22,18 @@ class PaginationClass(PageNumberPagination):
 
 class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
-    pagination_class = PaginationClass
-    
+
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        paginated_queryset = self.paginate_queryset(response)
-        paginated_response = self.get_paginated_response(paginated_queryset)
-        return paginated_response
+        return Response(response)
+
+    def list(self, request):
+        queryset = self.get_queryset()
+        page = self.paginate_queryset(queryset, request)
+        serializer_context = {'request': request}
+        serializer = self.serializer_class(page, context=serializer_context, many=True)
+        print(serializer.data)
+        return self.get_paginated_response(serializer.data)
 
 #TODO : deifne what fields are modifiable and what can be created
     def post(self, request, format=None):
@@ -37,6 +42,16 @@ class StudyListView(generics.GenericAPIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class StudyListPageView(generics.GenericAPIView):
+    serializer_class = StudyListSerializer
+    pagination_class = PaginationClass
+
+    def get(self, request, format=None):
+        response = get_response_for_request(self, request, format)
+        paginated_queryset = self.paginate_queryset(response)
+        paginated_response = self.get_paginated_response(paginated_queryset)
+        return paginated_response
 
 class GlobalSearch(generics.ListAPIView):
     serializer_class = StudyListSerializer

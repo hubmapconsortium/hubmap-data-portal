@@ -10,6 +10,6 @@ export const FAILURE = "FAILURE";
 export const IN_PROGRESS = "IN_PROGRESS";
 
 export const GET_STUDIES_REST_API = '?format=json';
+export const GET_STUDIES_PAGINATED_REST_API = '?format=json&page=';
 export const SEARCH_STUDIES_REST_API = 'search/?format=json&query=';
 export const GET_TISSUE_COLORS_API = 'colors/?format=json';
-export const GET_PAGE = '&page=';

@@ -13,7 +13,7 @@ const DEFAULT_STATE = {
     error: null,
 };
 
-export default function studyReducer(state = DEFAULT_STATE, action){
+export default function studyResponseReducer(state = DEFAULT_STATE, action){
     console.log('reducer', state, action );
     switch(action.type) {
         case Constants.IN_PROGRESS:

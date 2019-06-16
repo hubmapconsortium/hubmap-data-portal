@@ -12,7 +12,7 @@ import StudiesChart from "./components/StudiesBarChart"
 import StudiesDashboard from './components/StudiesDashboard';
 import StudyD3BarChart from './components/StudyD3BarChart';
 import RootContainer from './components/RootContainer';
-import { fetchStudies, getTissueColorsFromServer, fetch_colors } from './controllers/actions';
+import { fetchStudiesByPage, getTissueColorsFromServer, fetch_colors } from './controllers/actions';
 import * as Constants from './commons/constants';
 import {hubmapStore} from './index';
 import {connect} from 'react-redux';
@@ -42,7 +42,7 @@ document.body.appendChild(model);*/
 class App extends PureComponent {
 
     componentDidMount() {
-        this.props.dispatch(fetchStudies(1));
+        this.props.dispatch(fetchStudiesByPage(1));
         this.props.dispatch(getTissueColorsFromServer());
     }
 

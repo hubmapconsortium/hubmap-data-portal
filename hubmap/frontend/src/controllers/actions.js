@@ -34,19 +34,30 @@ export function search_studies()
     return {type: Constants.GLOBAL_SEARCH_ACTION}
 }
 
-async function fetchStudiesData()
-{
-    const response = await axios.get(Constants.GET_STUDIES_REST_API);
-    return response;
-}
-
-export function fetchStudies(page) 
+async function fetchAllStudies()
 {
     const BASE_API =(window.location.href+"api/").replace("3000", "8000");
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API + Constants.GET_PAGE+page);
+            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API );
+            console.log('action',response);
+
+            return dispatch(fetch_studies(response.data));
+        }
+        catch (error) {
+            return dispatch(fetch_studies_error(error));
+        }
+    }
+}
+
+export function fetchStudiesByPage(page) 
+{
+    const BASE_API =(window.location.href+"api/").replace("3000", "8000");
+    return async dispatch => {
+        dispatch(in_progress());
+        try {
+            let response = await axios.get(BASE_API + Constants.GET_STUDIES_PAGINATED_REST_API);
             console.log('action',response);
 
             return dispatch(fetch_studies(response.data));
