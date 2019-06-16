@@ -16,14 +16,18 @@ from rest_framework.pagination import PageNumberPagination
 #TODO: remove blank models from Get requests in default rest api HTML form
 
 
+class PaginationClass(PageNumberPagination):
+    page_size =  10
+    max_page_size = 10
+
 class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
+    pagination_class = PaginationClass
     
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        page = self.paginate_queryset(response)
-        paginated_response  = self.get_paginated_response(response)
-        print(paginated_response)
+        paginated_queryset = self.paginate_queryset(response)
+        paginated_response = self.get_paginated_response(paginated_queryset)
         return paginated_response
 
 #TODO : deifne what fields are modifiable and what can be created
