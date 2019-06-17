@@ -2,11 +2,6 @@ import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 
 class StudiesChart extends PureComponent {
-
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="studieschart" >

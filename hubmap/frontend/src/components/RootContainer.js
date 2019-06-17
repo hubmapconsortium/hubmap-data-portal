@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
 import HumanSvg from "./HumanSvg";
 import { makeStyles } from '@material-ui/core/styles';
@@ -42,16 +42,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function RootContainer() {
-  const [spacing, setSpacing] = React.useState(2);
   const classes = useStyles();
-
-  function handleChange(event, value) {
-    setSpacing(Number(value));
-  }
   return (
     <Container xl="true" component="div" style={{ height: '1600px' }} >
       <Grid container className={classes.root} spacing={8} margin-top="20px">
-        <Grid item >
+        <Grid item style={{height:30}}>
           <NavBar />
         </Grid>
         <Grid item style={{ height: '700px', width: '320px', marginTop: '90px', marginLeft:'-50px' }} >

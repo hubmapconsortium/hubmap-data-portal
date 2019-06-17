@@ -12,11 +12,14 @@ const DEFAULT_STATE = {
     error: null,
 };
 
+/***
+ * fill in state object for studies
+ */
 export default function studyResponseReducer(state = DEFAULT_STATE, action){
     console.log('reducer', state, action );
     switch(action.type) {
         case Constants.GLOBAL_FETCH_ACTION:
-            console.log(state.status);
+            console.log(state.page);
             return {
                 ...state,
                 response: action.response,

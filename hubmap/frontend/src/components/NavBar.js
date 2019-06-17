@@ -13,7 +13,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import HubmapLogo from "../images/HuBMAP-Retina-Logo-Color.png";
-import posed from 'react-pose';
 import { Button } from '@material-ui/core';
 import NavigationIcon from '@material-ui/icons/NavigateNext';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
@@ -41,6 +40,8 @@ const theme = createMuiTheme({
             '"Segoe UI Symbol"',
             '"Impact"',
         ].join(','),
+        backgroundColor: grey[50],
+        color: grey[800],
     },
 });
 
@@ -60,7 +61,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         flexGrow: 2,
-        fontSize: 20,
+        fontSize: 22,
         fontVariant: "H2",
         fontFamily: "Impact",
         display: 'none',
@@ -157,34 +158,12 @@ function SearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl1, setAnchorEl1] = React.useState(null);
-    const isMenuOpen = Boolean(anchorEl);
-    const isHelpMenuOpen = Boolean(anchorEl1);
-    const Img = posed.img({
-        pressable: true,
-        init: { scale: 1 },
-        press: { scale: 0.8 }
-    });
+
     const img = <img style={{
         marginTop: 10, flex: 1,
         width: 150,
         resizeMode: 'contain',
     }} src={HubmapLogo} alt="Logo" />;
-
-    function handleMenuOpen(event) {
-        setAnchorEl(event.currentTarget);
-    }
-
-    function handleHelpMenuOpen(event) {
-        setAnchorEl1(event.currentTarget);
-    }
-
-    function handleMenuClose() {
-        setAnchorEl(null);
-    }
-
-    function handleHelpMenuClose() {
-        setAnchorEl1(null);
-    }
 
     function handleClose() {
         setAnchorEl(null);
@@ -203,7 +182,7 @@ function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" style={{ backgroundColor: grey[50] }} height={50} width={'100%'}>
+            <AppBar position="fixed" style={{ backgroundColor: grey[50] }} height={30} width={'100%'}>
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -211,17 +190,14 @@ function SearchAppBar(props) {
                         color="inherit"
                         aria-label="Open drawer">
                         {img}
-                    </IconButton>
-                    <div className={classes.sectionDesktop}>
-                        <Button className={classes.button}>
-                            <MuiThemeProvider theme={theme}  >
-                                <Typography className={classes.title} noWrap >
+                        <MuiThemeProvider theme={theme}  >
+                        <Typography className={classes.title} noWrap >
                                     DataPortal
-                    </Typography>
-                            </MuiThemeProvider >
-                            <NavigationIcon />
-                        </Button>
-                    </div>
+                        </Typography>
+                        <NavigationIcon />
+                        </MuiThemeProvider>
+                    </IconButton>
+                   
                     <div className={classes.grow} />
 
                     <div className={classes.sectionIconDesktop} >

@@ -32,8 +32,6 @@ function showToolTip(evt) {
 	var CTM = humanSvg.getScreenCTM();
 	var mousex = (evt.clientX - CTM.e + 6) / CTM.a;
 	var mousey = (evt.clientY - CTM.f + 20) / CTM.d;
-	var x = (evt.clientX - CTM.e + 6) / CTM.a;
-	var y = (evt.clientY - CTM.f + 20) / CTM.d;
 	tooltip.setAttributeNS(null, "transform", "translate(" + mousex + " " + mousey + ")");
 	tooltip.setAttributeNS(null, "visibility", "visible");
 	var lines = evt.target.getAttributeNS(null, "data-tooltip-text").split(',');
@@ -58,16 +56,13 @@ function hideToolTip(evt) {
 class HumanAnatomyCard extends React.Component {
 	currentState = {};
 	previousState = {};
-	constructor(props) {
-		super(props);
-	}
 
 	componentDidMount() {
 		try {
 			store.subscribe(() => this.currentState = store.getState().colorsState);
 			console.log(this.currentState);
-			if (this.currentState != "" && this.currentState.status != Constants.IN_PROGRESS && this.currentState.response != ""
-				&& this.currentState.type == Constants.GET_TISSUE_COLORS) {
+			if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS && this.currentState.response !== ""
+				&& this.currentState.type === Constants.GET_TISSUE_COLORS) {
 				console.log('get tissue colors');
 				this.props.dispatch(fetch_colors());
 			}
@@ -101,66 +96,52 @@ class HumanAnatomyCard extends React.Component {
 			abdomen.setAttributeNS(null, "data-tooltip-text", " " + cellcount[8].tissue + "," + cellcount[8].cells + " experiments," + cellcount[8].gene + " gene");
 			abdomen.addEventListener("click", async function () {
 				console.log(abdomen.getAttribute("id"))
-				var chart = document.getElementById('studiesbyTissueschart');
-				// Create our table.
-				var barChart = document.getElementById('studiesbyTissueschart');
-				//barChart.draw(data, options);
-				console.log(chart);
-				//do something here get studies where tissue = brain
+				//do something here get studies where tissue = abdomen
 			});
 
 			liver = document.getElementById('liver');
 			liver.setAttributeNS(null, "data-tooltip-text", " " + cellcount[5].tissue + "," + cellcount[5].cells + " experiments," + cellcount[5].gene + " gene");
 			liver.addEventListener("click", function () {
 				console.log(liver.getAttribute("id"));
-				//do something here get studies where tissue = kidney
 			});
 
 			lungs = document.getElementById('lungs');
 			lungs.setAttributeNS(null, "data-tooltip-text", " " + cellcount[0].tissue + "," + cellcount[0].cells + " experiments," + cellcount[0].gene + " gene");
 			lungs.addEventListener("click", function () {
 				console.log(lungs.getAttribute("id"));
-				//do something here get studies where tissue = kidney
 			});
 			smallIntestine = document.getElementById('sIntestine');
 			smallIntestine.setAttributeNS(null, "data-tooltip-text", " " + cellcount[6].tissue + "," + cellcount[6].cells + " experiments," + cellcount[6].gene + " gene");
 			smallIntestine.addEventListener("click", function () {
 				console.log(smallIntestine.getAttribute("id"));
-				//do something here get studies where tissue = kidney
 			});
 			heart = document.getElementById('heart');
 			heart.setAttributeNS(null, "data-tooltip-text", " " + cellcount[4].tissue + "," + cellcount[4].cells + " experiments," + cellcount[4].gene + " gene");
 			heart.addEventListener("click", function () {
 				console.log(heart.getAttribute("id"));
-				//do something here get studies where tissue = kidney
 			});
 			bladder = document.getElementById('bladder');
 			bladder.setAttributeNS(null, "data-tooltip-text", " Bladder: , No data");
 			bladder.addEventListener("click", function () {
 				console.log(bladder.getAttribute("id"));
-				//do something here get studies where tissue = kidney
 			});
 			largeIntestine = document.getElementById('lIntestine');
 			largeIntestine.setAttributeNS(null, "data-tooltip-text", " " + cellcount[7].tissue + "," + cellcount[7].cells + " experiments," + cellcount[7].gene + " gene");
 			largeIntestine.addEventListener("click", function () {
 				console.log(largeIntestine.getAttribute("id"));
-				//do something here get studies where tissue = largeIntestine
 			});
 			kidney = document.getElementById('kidney');
 			kidney.setAttributeNS(null, "data-tooltip-text", " " + cellcount[2].tissue + "," + cellcount[2].cells + " experiments," + cellcount[2].gene + " gene");
 			kidney.addEventListener("click", function () {
 				console.log(kidney.getAttribute("id"));
-				//do something here get studies where tissue = kidney
 			});
 			spleen = document.getElementById('spleen');
 			spleen.setAttributeNS(null, "data-tooltip-text", " " + cellcount[1].tissue + ", " + cellcount[1].cells + " experiments," + cellcount[1].gene + " gene");
 			spleen.addEventListener("click", function () {
 				console.log(spleen.getAttribute("id"));
-				//do something here get studies where tissue = spleen
 			});
 			human = document.getElementById('main');
-			human.setAttributeNS(null, "data-tooltip-text", " #Total, experiments: " + "248, 9 genes");
-
+			human.setAttributeNS(null, "data-tooltip-text", " #Total, experiments: 248, 9 genes");
 		}
 		catch (e) {
 			console.log(e);
@@ -168,42 +149,41 @@ class HumanAnatomyCard extends React.Component {
 	}
 
 	render() {
-		if (this.currentState.response != "" && this.currentState.response !== undefined
-			&& this.currentState.type == Constants.GET_TISSUE_COLORS) {
+		if (this.currentState.response !== "" && this.currentState.response !== undefined
+			&& this.currentState.type === Constants.GET_TISSUE_COLORS) {
 			this.previousState = this.currentState;
 			var colors = this.currentState.response;
 			colors.map(color => {
 				switch (color.tissue) {
 					case "pancreas":
-						pancreas.style.fill = color.color;
-						break;
+						return pancreas.style.fill = color.color;
 					case "liver":
-						liver.style.fill = color.color;
-						break;
+						return liver.style.fill = color.color;
 					case "lungs":
-						lungs.style.fill = color.color;
-						break;
+						return lungs.style.fill = color.color;
+						
 					case "abdomen":
-						abdomen.style.fill = color.color;
-						break;
+						return abdomen.style.fill = color.color;
+						
 					case "kidney":
-						kidney.style.fill = color.color;
-						break;
+						return kidney.style.fill = color.color;
+						
 					case "spleen":
-						spleen.style.fill = color.color;
-						break;
+						return spleen.style.fill = color.color;
+						
 					case "small_intestine":
-						smallIntestine.style.fill = color.color;
-						break;
+						return smallIntestine.style.fill = color.color;
+						
 					case "large_intestine":
-						largeIntestine.style.fill = color.color;
-						break;
+						return largeIntestine.style.fill = color.color;
+						
 					case "bladder":
-						bladder.style.fill = color.color;
-						break;
+						return bladder.style.fill = color.color;
+						
 					case "heart":
-						heart.style.fill = color.color;
-						break;
+						return heart.style.fill = color.color;
+					default:
+						return;
 				}
 			});
 			console.log(colors);

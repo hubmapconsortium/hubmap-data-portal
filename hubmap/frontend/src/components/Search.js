@@ -52,12 +52,10 @@ const useStyles = makeStyles(theme => ({
 
 function SearchBox(props) {
     const classes = useStyles();
-    const studies = props.studies;
     const [values, setValues] = React.useState({
         searchtext: 'gene',
         path: 'path',
     });
-    var searchtext = "";
     return (
         <div className={classes.search}>
             <InputBase
@@ -74,9 +72,10 @@ function SearchBox(props) {
                     // give react a function to set the state asynchronously.
                     // here it's using the "name" value set on the TextField
                     // to set state.person.[firstname|lastname]. event.target.name
+                    //required for showing animation
                     setValues({ ...values, ['searchtext']: event.target.value });
-                    console.log(newValue);
-                    console.log(event.target.value);
+                    //console.log(newValue);
+                    //console.log(event.target.value);
                 }}
                 onKeyPress={(ev) => {
                     console.log(`Pressed keyCode ${ev.key}`);
@@ -86,6 +85,7 @@ function SearchBox(props) {
                         for (var i = 0; i < data.length; i++) {
                             if (values.searchtext === data[i].gene) {
                                 var tissue = document.getElementById(data[i].path);
+                                //required for showing animation
                                 setValues({ ...values, ['path']: data[i].path });
                                 tissue.style.setProperty("animation", "pulse 10s linear");
                                 tissue.setAttribute("opacity", "0.4");
@@ -100,11 +100,6 @@ function SearchBox(props) {
                     if (ev.key === 'Enter') {
                         // Do code here
                         console.log(values.searchtext);
-                        if (values.path != '') {
-                            console.log(values);
-                            var tissue = document.getElementById(values.path);
-
-                        }
 
                         ev.preventDefault();
                     }

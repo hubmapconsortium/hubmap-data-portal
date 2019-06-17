@@ -3,10 +3,6 @@ import { Chart } from 'react-google-charts';
 
 class StudiesDashboard extends PureComponent {
 
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <div className="studiesdashboard" id="studiesbyTissueschart" >
