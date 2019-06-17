@@ -5,13 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from './controllers/reducer'
+import reducer from './middleware/rootReducer'
 import thunk from 'redux-thunk';
 
-export const hubmapStore = createStore(reducer, applyMiddleware(thunk));
+export const store = createStore(reducer, applyMiddleware(thunk));
+console.log(store.getState())
 
 ReactDOM.render(
-    <Provider store={hubmapStore}><App /></Provider>
+    <Provider store={store}><App /></Provider>
     , document.getElementById('root'));
     module.hot.accept();
 serviceWorker.unregister();

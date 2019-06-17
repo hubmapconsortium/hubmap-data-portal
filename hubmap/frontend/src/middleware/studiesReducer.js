@@ -4,7 +4,6 @@ import * as Constants from '../commons/constants';
 const DEFAULT_STATE = {
     type: '',
     status:'',
-    colors: {},
     response: {},
     count: 0,
     page:0,
@@ -16,12 +15,7 @@ const DEFAULT_STATE = {
 export default function studyResponseReducer(state = DEFAULT_STATE, action){
     console.log('reducer', state, action );
     switch(action.type) {
-        case Constants.IN_PROGRESS:
-            return {
-                ...state,
-                status: Constants.IN_PROGRESS,
-            };
-        default:
+        case Constants.GLOBAL_FETCH_ACTION:
             console.log(state.status);
             return {
                 ...state,
@@ -29,10 +23,12 @@ export default function studyResponseReducer(state = DEFAULT_STATE, action){
                 type: action.type,
                 status: action.status,
                 error: action.error,
-                count: state.count,
-                page: state.page,
-                next: state.next,
-                previous: state.previous,
+                count: action.count,
+                page: action.page,
+                next: action.next,
+                previous: action.previous,
             };
+        default :
+            return state;
     }
 };

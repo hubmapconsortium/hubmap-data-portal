@@ -1,17 +1,17 @@
 import { ReactComponent as ReactComp } from "../images/Human_body_silhouette_minimal.svg";
 import React from 'react';
 import data from './data';
-import { fetch_colors, in_progress } from "../controllers/actions";
+import { fetch_colors, in_progress } from "../middleware/actions";
 import * as Constants from '../commons/constants';
-import { hubmapStore } from '../index';
+import { store } from '../index';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {
-	console.log(state);
+	console.log(state.colorsState);
 	return {
-		status: state.status,
-		response: state.response,
-		error: state.error,
+		status: state.colorsState.status,
+		response: state.colorsState.response,
+		error: state.colorsState.error,
 	}
 };
 
@@ -64,7 +64,7 @@ class HumanAnatomyCard extends React.Component {
 
 	componentDidMount() {
 		try {
-			hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
+			store.subscribe(() => this.currentState = store.getState().colorsState);
 			console.log(this.currentState);
 			if (this.currentState != "" && this.currentState.status != Constants.IN_PROGRESS && this.currentState.response != ""
 				&& this.currentState.type == Constants.GET_TISSUE_COLORS) {

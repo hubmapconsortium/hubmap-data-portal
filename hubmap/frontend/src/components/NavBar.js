@@ -97,7 +97,6 @@ const useStyles = makeStyles(theme => ({
         pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
         color: grey[800],
     },
     inputRoot: {
@@ -204,7 +203,7 @@ function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[50] }} height={50} width={'100%'}>
+            <AppBar position="fixed" style={{ backgroundColor: grey[50] }} height={50} width={'100%'}>
                 <Toolbar>
                     <IconButton
                         edge="start"

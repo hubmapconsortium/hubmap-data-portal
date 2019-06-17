@@ -1,5 +1,4 @@
-import { GET_STUDIES_REST_API } from "../commons/utils";
-import fetch from 'cross-fetch';
+
 import axios from 'axios';
 import * as Constants from '../commons/constants';
 
@@ -34,7 +33,7 @@ export function search_studies()
     return {type: Constants.GLOBAL_SEARCH_ACTION}
 }
 
-async function fetchAllStudies()
+export function fetchAllStudies()
 {
     const BASE_API =(window.location.href+"api/").replace("3000", "8000");
     return async dispatch => {
@@ -54,10 +53,11 @@ async function fetchAllStudies()
 export function fetchStudiesByPage(page) 
 {
     const BASE_API =(window.location.href+"api/").replace("3000", "8000");
+    console.log(BASE_API+ Constants.GET_STUDIES_PAGINATED_REST_API+page);
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API + Constants.GET_STUDIES_PAGINATED_REST_API);
+            let response = await axios.get(BASE_API + Constants.GET_STUDIES_PAGINATED_REST_API+page);
             console.log('action',response);
 
             return dispatch(fetch_studies(response.data));

@@ -1,20 +1,8 @@
 import './App.css';
 import React, {PureComponent} from 'react';
 import {BrowserRouter as Router, Route, Link, Switch} from "react-router-dom";
-import Header from "./components/Header"
-import Footer from "./components/Footer";
-import HumanSvg from "./components/HumanSvg";
-import NavBar from "./components/NavBar";
-import TextField from '@material-ui/core/TextField'
-import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import PropTypes from "prop-types";
-import StudiesChart from "./components/StudiesBarChart"
-import StudiesDashboard from './components/StudiesDashboard';
-import StudyD3BarChart from './components/StudyD3BarChart';
 import RootContainer from './components/RootContainer';
-import { fetchStudiesByPage, getTissueColorsFromServer, fetch_colors } from './controllers/actions';
-import * as Constants from './commons/constants';
-import {hubmapStore} from './index';
+import { fetchStudiesByPage, getTissueColorsFromServer } from './middleware/actions';
 import {connect} from 'react-redux';
 
 //import '@google/model-viewer' ;

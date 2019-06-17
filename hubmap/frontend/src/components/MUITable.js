@@ -3,20 +3,21 @@ import MUIDataTable from "mui-datatables";
 import PropTypes from 'prop-types';
 import grey from '@material-ui/core/colors/grey';
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../controllers/actions';
+import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../middleware/actions';
 import * as Constants from '../commons/constants';
-import { hubmapStore } from '../index';
+import { store } from '../index';
+import  {CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
-    console.log(state);
+    console.log(state.studyState);
     return {
-        status: state.status,
-        response: state.response,
-		error: state.error,
-		count: 0,
-		page:0,
-		next: "",
-		previous: "",
+        status: state.studyState.status,
+        response: state.studyState.response,
+		error: state.studyState.error,
+		count: state.studyState.count,
+		page: state.studyState.page,
+		next: state.studyState.next,
+		previous: state.studyState.previous,
     }
 };
 class MaterialTableDemo extends React.Component {
@@ -47,13 +48,15 @@ class MaterialTableDemo extends React.Component {
 
 	}
 
-	getFromData() {
-		console.log('Logging studies');
-		for (let study of this.props.studies) {
+	getFromData(response) {
+		console.log('Logging studies', response);
+		/*for (let study of this.currentState) {
 			console.log(study);
-		}
+		}*/
 		console.log('Done logging studies');
-		var data = this.props.studies.map(study =>
+		var data;
+		response != undefined ?
+		 data = response.map(study =>
 			(
 				{
 					'id': study.id,
@@ -68,79 +71,79 @@ class MaterialTableDemo extends React.Component {
 					'image_count': study.image_count ? study.image_count : '' + '',
 				}
 			)
-		)
+		) : ( data ={});
 
-		return data.sort((a,b) => Number(a.id) - Number(b.id))
+		return data!= "" ? data.sort((a,b) => Number(a.id) - Number(b.id)) : {}
 	};
 
 	componentWillMount() {
-		console.log('componentDidMount');
-        hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
+		console.log(this.currentState, this.previousState, this.state);
+	}
+
+    componentDidMount() {
+        store.subscribe(() => this.currentState = store.getState().studyState);
         if (this.currentState != "" && this.currentState.status != Constants.IN_PROGRESS
         && this.currentState.studies != {} && this.currentState.type == Constants.GLOBAL_FETCH_ACTION) {
-            this.props.dispatch(fetch_studies());
+			console.log(this.currentState);
+            this.props.dispatch(fetch_studies(this.currentState));
         }
         else if(this.currentState.type == Constants.GLOBAL_FETCH_ACTION && this.currentState.status == Constants.IN_PROGRESS)
         {
             this.props.dispatch(in_progress());
         }
-		var studydata = this.getFromData();
-		console.log('In table componentWillMount');
-		console.log(studydata);
-		this.setState({
-			columns: [
-				{label: 'Id', name: 'id', filtering: false, type: 'numeric', removable: false, sort:true,  display: 'excluded',},
-				{label: 'Study type', name: 'study_type', removable: false,},
-				{label: 'Institution', name: 'institution', removable: false,},
-				{label: 'Data type', name: 'data_type',removable: false, cellStyle: {width:150}},
-				{label: 'Tissue', name: 'tissue', removable: false,},
-				{label: '# Cells', name: 'cell_count', removable: false,},
-				/*{label: '# Unique barcode', name: 'unique_barcode_count', removable: false,headerStyle: { }},
-				{label: '# Reads', name: 'read_count', removable: false,},
-				{label: '# Reads aligned', name: 'read_count_aligned', removable: false,},*/
-				{label: '# Images', name: 'image_count', removable: false,},
-			],
-			data: studydata
-		});
-		console.log(this.state);
-	}
-
-    componentDidMount() {
-       
+		
+		console.log(this.currentState);
     }
 
 	changePage = (page) => {
-		this.setState({
-			status: Constants.IN_PROGRESS,
-		});
-		this.props.dispatch(fetchNextPageFromStudies(this.state.next));
+		this.previousState.status= Constants.IN_PROGRESS;
+		console.log("changePage",this.previousState);
+		this.props.dispatch(fetchNextPageFromStudies(this.previousState.next));
 	}
 	render() {
-		console.log('In table render()');
-		console.log(this.state.columns);
-		console.log(this.state.data);
-		const { response, error, status, type } = this.currentState;
+		console.log('In table render()', this.currentState, store.getState().studyState, this.state.studyState);
+		const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
+
         if (error) {
             return <div>Error! {error.message}</div>
-        }
-        if (status == Constants.IN_PROGRESS) {
-            return <div> Loading...</div>
-        }
-        if (response != "" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
-            this.previousState.response = this.currentState ;
-            this.previousState.type = type;
-			
+		}
+		
+		else if (response != "" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION 
+		&&  status == Constants.SUCCESS) 
+		{
+			var studydata = this.getFromData(response);
+			console.log('In table render', count, page, next, previous);
+			console.log(studydata);
+			this.previousState = {
+				columns: [
+					{label: 'Id', name: 'id', filtering: false, type: 'numeric', removable: false, sort:true,  display: 'excluded',},
+					{label: 'Study type', name: 'study_type', removable: false,},
+					{label: 'Institution', name: 'institution', removable: false,},
+					{label: 'Data type', name: 'data_type',removable: false, cellStyle: {width:150}},
+					{label: 'Tissue', name: 'tissue', removable: false,},
+					{label: '# Cells', name: 'cell_count', removable: false,},
+					{label: '# Images', name: 'image_count', removable: false,},
+				],
+				data: studydata,
+				next: next,
+				previous: previous,
+				page: page,
+				count: count,
+			}
+			console.log(this.previousState.columns);
+			console.log(this.previousState.data);
 			return (
 				
 				< MUIDataTable size='medium' style={{ maxWidth: '100%'}}
-					title="Studies From HuBMAP Consortium"
-					columns={this.state.columns}
-					data={this.state.data}
+					title={<Typography variant='title'>Studies From HuBMAP Consortium
+					{(status == Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
+					columns={this.previousState.columns}
+					data={this.previousState.data}
 					options={
 						{
 						filter: true, sorting: true, fixedHeader: true,
-						//count: count,
-						//page: page,
+						count: count,
+						page: page,
 						MUIDataTableBodyCell: {
 							root: {
 							border: 'solid 1px #000',
@@ -164,26 +167,30 @@ class MaterialTableDemo extends React.Component {
 								separator: ';',
 							},
 							rowHover: true,
-							
+							serverSide: true,
 							onTableChange: (action, tableState) => {
-
-								console.log(action, tableState);
-								switch (action) {
-									case 'changePage':
-									this.changePage(tableState.page);
-									break;
-								}
-							},
+								action == 'changePage' ?
+									this.changePage(tableState.page) :
+								console.log(action, tableState)} ,
 
 					}
 				}
 				/>
 			);
 		}
+		else if(status == Constants.IN_PROGRESS && response == undefined && type== Constants.GLOBAL_FETCH_ACTION  )
+		{
+			return < MUIDataTable size='medium' style={{ maxWidth: '100%'}}
+					title={<Typography variant='title'>Studies From HuBMAP Consortium
+					{(status == Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
+					/>
+		}
+		else
+		{
+			console.log(status, response, type, store.getState());
+			return (<div>no studies</div>)
+		}
 	}
 }
 
-MaterialTableDemo.propTypes = {
-	studies: PropTypes.array,
-};
 export default connect(mapStateToProps)(MaterialTableDemo);

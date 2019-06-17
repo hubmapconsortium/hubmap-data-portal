@@ -8,7 +8,7 @@ import Footer from "./Footer";
 import NavBar from "./NavBar";
 import StudiesChart from "./StudiesBarChart"
 import StudiesDashboard from './StudiesDashboard';
-import StudiesTable from './StudiesTable';
+import MaterialTableDemo from './MUITable';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -49,7 +49,7 @@ function RootContainer() {
     setSpacing(Number(value));
   }
   return (
-    <Container xl="true" component="div" style={{ height: '1200px' }} >
+    <Container xl="true" component="div" style={{ height: '1600px' }} >
       <Grid container className={classes.root} spacing={8} margin-top="20px">
         <Grid item >
           <NavBar />
@@ -64,8 +64,8 @@ function RootContainer() {
 
           <StudiesDashboard />
         </Grid>
-        <Grid item style={{ height: '400px', width: 'auto', marginTop: '-190px', marginLeft:'360px'}}>
-          <StudiesTable />
+        <Grid item style={{ height: '600px', width: 'auto', marginTop: '-190px', marginLeft:'360px'}}>
+          <MaterialTableDemo />
         </Grid>
         <Footer />
       </Grid>
