@@ -118,7 +118,7 @@ class MaterialTableDemo extends React.Component {
 					options={
 						{
 						filter: true, sorting: true, fixedHeader: true,
-						count: 8,
+						//count: 8,
 						pagination: true,
 						MUIDataTableBodyCell: {
 							root: {
@@ -137,7 +137,7 @@ class MaterialTableDemo extends React.Component {
 						selectableRows: false,
 							filterType: 'multiselect',
 							responsive: 'scroll',
-							rowsPerPage: 8,
+							//rowsPerPage: 8,
 							downloadOptions: {
 								filename: 'excel-format.csv',
 								separator: ';',
