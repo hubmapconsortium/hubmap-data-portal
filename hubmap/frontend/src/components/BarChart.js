@@ -162,7 +162,7 @@ class StudiesBarChart extends React.Component{
           .attr("x", width / 2 + margin)
           .attr("y", height + margin * 1.7)
           .attr("text-anchor", "middle")
-          .text("Centers");
+          .text("Center");
     
         svg
           .append("text")
