@@ -96,11 +96,11 @@ class MaterialTableDemo extends React.Component {
 			var studydata = this.getFromData(response);
 			this.previousState = {
 				columns: [
-					{label: 'Id', name: 'id', filtering: false, type: 'numeric', removable: false, sort:true,  display: 'excluded',},
-					{label: 'Study type', name: 'study_type', removable: false,},
-					{label: 'Center', name: 'institution', removable: false,},
-					{label: 'Data type', name: 'data_type',removable: false, cellStyle: {width:150}},
-					{label: 'Tissue', name: 'tissue', removable: false,},
+					{name: 'id',label: 'Id',  type: 'numeric',  display: 'excluded', filter: true, sortDirection: 'asc'},
+					{ name: 'study_type',label: 'Study type',  filter: true, },
+					{name: 'institution', label: 'Center',  filter: true, },
+					{name: 'data_type', label: 'Data type', cellStyle: {width:150} ,filter: true, },
+					{name: 'tissue', label: 'Tissue', filter: true,},
 				],
 				data: studydata,
 				next: next,
@@ -111,15 +111,22 @@ class MaterialTableDemo extends React.Component {
 			return (
 				
 				< MUIDataTable size='medium' style={{ maxWidth: '100%'}}
-					title={<Typography variant='title'>Studies From HuBMAP Consortium
+					title={<Typography >Studies From HuBMAP Consortium
 					{(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
 					columns={this.previousState.columns}
 					data={this.previousState.data}
 					options={
 						{
-						filter: true, sorting: true, fixedHeader: true,
+						filter: true, 
+						customSort: (data, colIndex, order) => {
+							return data.sort((a, b) => {
+								console.log(a,b, (a.data[colIndex].length < b.data[colIndex].length ? -1: 1 ) * (order === 'desc' ? 1 : -1));
+							  return (a.data[colIndex].length < b.data[colIndex].length ? -1: 1 ) * (order === 'desc' ? 1 : -1);
+							});
+						  },
+						//onColumnSortChange: (changedColumn, direction) => console.log('changedColumn: ', changedColumn, 'direction: ', direction),
 						//count: 8,
-						pagination: true,
+						//pagination: true,
 						MUIDataTableBodyCell: {
 							root: {
 							border: 'solid 1px #000',
@@ -135,7 +142,7 @@ class MaterialTableDemo extends React.Component {
 							deleteAria: "Delete Selected Rows",
 						},
 						selectableRows: false,
-							filterType: 'multiselect',
+							filterType: 'dropdown',
 							responsive: 'scroll',
 							//rowsPerPage: 8,
 							downloadOptions: {
@@ -143,10 +150,7 @@ class MaterialTableDemo extends React.Component {
 								separator: ';',
 							},
 							rowHover: true,
-							serverSide: true,
-							onTableChange: (action, tableState) => {
-								//action == 'changePage' ? '': ''; 
-							},
+							
 					}
 				}
 				/>

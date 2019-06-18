@@ -16,7 +16,6 @@ const DEFAULT_STATE = {
  * fill in state object for studies
  */
 export default function studyResponseReducer(state = DEFAULT_STATE, action){
-    console.log('reducer', state, action );
     switch(action.type) {
         case Constants.GLOBAL_FETCH_ACTION:
             console.log(state.page);

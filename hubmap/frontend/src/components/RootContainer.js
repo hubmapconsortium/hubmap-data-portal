@@ -7,8 +7,9 @@ import grey from '@material-ui/core/colors/grey';
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import StudiesChart from "./StudiesBarChart"
-import StudiesDashboard from './StudiesDashboard';
+import StudiesByTissues from './Chart';
 import MaterialTableDemo from './MUITable';
+import StudiesBarChart from './BarChart';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -56,11 +57,13 @@ function RootContainer() {
           <StudiesChart />
         </Grid>
         <Grid item style={{ height: '400px', width: '450px', marginTop: '170px', marginLeft:'20px'}}>
-
-          <StudiesDashboard />
+          <StudiesByTissues />
         </Grid>
-        <Grid item style={{ height: '600px', width: 'auto', marginTop: '-190px', marginLeft:'360px'}}>
+        <Grid item style={{ height: '450px', width: '900px', marginTop: '-250px', marginLeft:'370px'}}>
           <MaterialTableDemo />
+        </Grid>
+        <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft:'0px'}}>
+          <StudiesBarChart />
         </Grid>
         <Footer />
       </Grid>

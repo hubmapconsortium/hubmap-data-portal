@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 
-class StudiesDashboard extends PureComponent {
+class StudiesByTissues extends PureComponent {
 
     render() {
         return (
@@ -58,5 +58,5 @@ class StudiesDashboard extends PureComponent {
     }
 }
 export default () => (
-    <StudiesDashboard />
+    <StudiesByTissues />
 )

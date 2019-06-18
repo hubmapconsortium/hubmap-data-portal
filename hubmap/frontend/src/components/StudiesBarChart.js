@@ -21,7 +21,7 @@ class StudiesChart extends PureComponent {
                     options={{
                         title: '# of Experiments per month, by Center',
                         chartArea: { width: '50%', fill: "#fafafa" },
-                        colors: ['#42a5f5', '#ffab00', '#4caf50'],
+                        colors: ['#42a5f5', '#ffc400', '#66bb6a'],
                         isStacked: true,
                         hAxis: {
                             title: 'Total # Experiments',

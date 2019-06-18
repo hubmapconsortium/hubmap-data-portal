@@ -8,8 +8,10 @@ const DEFAULT_STATE = {
     error: null,
 };
 
+/***
+ * fill in the state object for colors
+ */
 export default function colorResponseReducer(state = DEFAULT_STATE, action){
-    console.log('reducer', state, action );
     switch(action.type) {
          case Constants.GET_TISSUE_COLORS:
             return {
