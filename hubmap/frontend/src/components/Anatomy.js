@@ -32,18 +32,22 @@ function showToolTip(evt) {
 	var CTM = humanSvg.getScreenCTM();
 	var mousex = (evt.clientX - CTM.e + 6) / CTM.a;
 	var mousey = (evt.clientY - CTM.f + 20) / CTM.d;
+	var x = (evt.clientX - CTM.e + 6) / CTM.a;
+	var y = (evt.clientY - CTM.f + 20) / CTM.d;
 	tooltip.setAttributeNS(null, "transform", "translate(" + mousex + " " + mousey + ")");
 	tooltip.setAttributeNS(null, "visibility", "visible");
 	var lines = evt.target.getAttributeNS(null, "data-tooltip-text").split(',');
 	tooltipText.firstChild.data = lines[0];
+	console.log(typeof(tooltipText.firstChild));
+	//tooltipText.firstChild.setAttributeNS(null, "font-size", 2);
 	updateText("tspanid", lines[1]);
 	updateText("tspanid2", lines[2]);
 	var length = tooltipText.getComputedTextLength();
 
 	for (var i = 0; i < tooltipRects.length; i++) {
-		tooltipRects[i].setAttributeNS(null, "width", length + 2);
+		tooltipRects[i].setAttributeNS(null, "width", length-20 );
 		tooltipRects[i].setAttributeNS(null, "height", 30);
-		tooltipRects[i].setAttributeNS(null, "font-size", 5);
+		tooltipRects[i].setAttributeNS(null, "font-size", 2);
 	}
 	this.setAttribute('opacity', 0.6);
 }
@@ -96,7 +100,6 @@ class HumanAnatomyCard extends React.Component {
 			abdomen.setAttributeNS(null, "data-tooltip-text", " " + cellcount[8].tissue + "," + cellcount[8].cells + " experiments," + cellcount[8].gene + " gene");
 			abdomen.addEventListener("click", async function () {
 				console.log(abdomen.getAttribute("id"))
-				//do something here get studies where tissue = abdomen
 			});
 
 			liver = document.getElementById('liver');
