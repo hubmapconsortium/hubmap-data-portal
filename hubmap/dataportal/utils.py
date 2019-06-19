@@ -61,6 +61,7 @@ def get_response_for_request(self, request, format=None):
     response = scrna_barcorded_serializer.data + scrna_cdna_serializer.data + scrna_atac_serializer.data + \
             microscopy_serializer.data + mass_cytometry_serializer.data + spatial_transcriptomic_serializer.data \
                + seq_fish_imaging_serializer.data
+    response.sort(key=lambda x: x['id'])
     if not query is None:
         response += genes_serializer.data + proteins_serializer.data
     return response

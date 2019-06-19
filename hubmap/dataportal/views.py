@@ -25,6 +25,17 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
+        summary = {"summary" : []}
+        for r in response:
+            image_count =''
+            cell_count = ''
+            if r.get( 'image_count', ''):
+                image_count = r['image_count']
+            if r.get( 'cell_count', ''):
+                cell_count = r['cell_count']
+            summary["summary"].append({"id": r['id'], "tissue":r['tissue']['name'], "insitution": r['institution']['name'],
+                   "image_count": image_count, "cell_count": cell_count})
+        response.append(summary)
         return Response(response)
 
     def list(self, request):

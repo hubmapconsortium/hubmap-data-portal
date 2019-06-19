@@ -43,8 +43,10 @@ class MaterialTableDemo extends React.Component {
 	getFromData(response) {
 
 		var data;
+		const size = response.length;
+		console.log(response.length);
 		response !== undefined ?
-		 data = response.map(study =>
+		 data = response.slice(0, size-1).map(study =>
 			(
 				{
 					'id': study.id,
