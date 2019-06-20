@@ -1,7 +1,7 @@
 import './App.css';
 import React, {PureComponent} from 'react';
 import RootContainer from './components/RootContainer';
-import { getTissueColorsFromServer, fetchAllStudies } from './middleware/actions';
+import { getTissueColorsFromServer, fetchAllStudies, getGeneTissueColors } from './middleware/actions';
 import {connect} from 'react-redux';
 
 //import '@google/model-viewer' ;
@@ -16,6 +16,7 @@ class App extends PureComponent {
     componentDidMount() {
         this.props.dispatch(fetchAllStudies());
         this.props.dispatch(getTissueColorsFromServer());
+        this.props.dispatch(getGeneTissueColors());
     }
 
     render() {

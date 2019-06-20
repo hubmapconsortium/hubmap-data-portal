@@ -8,6 +8,7 @@ admin.site.register(models.Gene)
 admin.site.register(models.Protein)
 admin.site.register(models.DataType)
 admin.site.register(models.Tissue)
+admin.site.register(models.TissueExpressionHeatmap)
 
 fields = ['image_tag']
 readonly_fields = ['image_tag']

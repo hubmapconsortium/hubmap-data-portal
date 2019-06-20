@@ -132,6 +132,21 @@ def get_genes_list(query):
         genes = Gene.objects.filter(Q(hugo_symbol__icontains=query))
     return genes
 
+def get_genes(self, request):
+    query = self.request.query_params.get('gene', None)
+
+    genes = get_genes_list(query)
+    self.queryset = genes
+    #set context
+    context = {
+        "request": request,
+    }
+    print(genes)
+    print(GeneSerializer(genes, many=True, context=context))
+    #get serializers lists
+    response = GeneSerializer(genes, many=True, context=context).data
+    return response
+
 def get_proteins_list(query):
     if query is None:
         proteins = Protein.objects.all()

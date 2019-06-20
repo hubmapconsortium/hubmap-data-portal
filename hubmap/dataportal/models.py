@@ -2,10 +2,31 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import QuerySet
 
+class TissueExpressionHeatmap(models.Model):
+    """
+    Instances of this class provide all of the data to render a heatmap
+    of gene expression across the human body.
+    """
+    kidney_color = models.CharField(max_length=7)
+    lung_color = models.CharField(max_length=7)
+    heart_color = models.CharField(max_length=7)
+    pancreas_color = models.CharField(max_length=7)
+    abdomen_color = models.CharField(max_length=7)
+    liver_color = models.CharField(max_length=7)
+    smallIntestine_color = models.CharField(max_length=7)
+    bladder_color = models.CharField(max_length=7)
+    largeIntestine_color = models.CharField(max_length=7)
+    spleen_color = models.CharField(max_length=7)
+
+    def __str__(self):
+        return 'tissue_colors'
+
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
     hugo_symbol = models.CharField(max_length=50, blank=True, null=True)
     ensembl_id = models.CharField(max_length=50, blank=True, null=True)
+    tissue_expression_heatmap = models.ForeignKey(TissueExpressionHeatmap, on_delete=models.CASCADE, null=True)
+
     # TODO: any other
 
     def __str__(self):

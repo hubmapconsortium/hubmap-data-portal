@@ -30,9 +30,9 @@ class MaterialTableDemo extends React.Component {
 		this.state = {
 			columns: [
 				{label: 'Id', name: 'id', filtering: false},
-				{label: 'Study type', name: 'study_type'},
+				{label: 'Experiment type', name: 'study_type'},
 				{label: 'Institution', name: 'institution'},
-				{label: 'Data type', name: 'data_type'},
+				//{label: 'Data type', name: 'data_type'},
 				{label: 'Tissue', name: 'tissue'},
 			],
 			data: [],
@@ -41,7 +41,6 @@ class MaterialTableDemo extends React.Component {
 	}
 
 	getFromData(response) {
-
 		var data;
 		const size = response.length;
 		console.log(response.length);
@@ -52,7 +51,7 @@ class MaterialTableDemo extends React.Component {
 					'id': study.id,
 					'study_type': study.subclass.model,
 					'institution': study.institution.name,
-					'data_type': study.data_type.name,
+					//'data_type': study.data_type.name,
 					'tissue': study.tissue.name,
 				}
 			)
@@ -99,9 +98,9 @@ class MaterialTableDemo extends React.Component {
 			this.previousState = {
 				columns: [
 					{name: 'id',label: 'Id',  type: 'numeric',  display: 'excluded', filter: true, sortDirection: 'asc'},
-					{ name: 'study_type',label: 'Study type',  filter: true, },
+					{ name: 'study_type',label: 'Experiment type',  filter: true, },
 					{name: 'institution', label: 'Center',  filter: true, },
-					{name: 'data_type', label: 'Data type', cellStyle: {width:150} ,filter: true, },
+					//{name: 'data_type', label: 'Data type', cellStyle: {width:150} ,filter: true, },
 					{name: 'tissue', label: 'Tissue', filter: true,},
 				],
 				data: studydata,
@@ -113,7 +112,7 @@ class MaterialTableDemo extends React.Component {
 			return (
 				
 				< MUIDataTable size='medium' style={{ maxWidth: '100%'}}
-					title={<Typography >Studies From HuBMAP Consortium
+					title={<Typography >Experiments From HuBMAP Consortium
 					{(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
 					columns={this.previousState.columns}
 					data={this.previousState.data}
@@ -161,14 +160,14 @@ class MaterialTableDemo extends React.Component {
 		else if(status === Constants.IN_PROGRESS && response === undefined && type=== Constants.GLOBAL_FETCH_ACTION  )
 		{
 			return < MUIDataTable size='medium' style={{ maxWidth: '100%'}}
-					title={<Typography variant='title'>Studies From HuBMAP Consortium
+					title={<Typography variant='title'>Experiments From HuBMAP Consortium
 					{(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
 					/>
 		}
 		else
 		{
-			//console.log(status, response, type, store.getState());
-			return (<div>no studies</div>)
+			console.log(status, response, type, store.getState(), this.previousState);
+			return (<div>No Experiments</div>)
 		}
 	}
 }

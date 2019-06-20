@@ -4,6 +4,10 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import grey from '@material-ui/core/colors/grey';
 import data from './data';
+import * as Constants from '../commons/constants';
+import { store } from '../index';
+import { connect } from 'react-redux';
+import { fetch_gene_tissue_colors, in_progress } from "../middleware/actions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -50,61 +54,96 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-function SearchBox(props) {
-    const classes = useStyles();
-    const [values, setValues] = React.useState({
-        searchtext: 'gene',
-        path: 'path',
-    });
-    return (
-        <div className={classes.search}>
-            <InputBase
-                placeholder="Search Gene..eg: NPPB"
-                classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                }}
-                inputProps={{
-                    'aria-label': 'Search',
-                }}
-                variant="outlined" fullWidth={true} onChange={(event, newValue) => {
-                    event.persist(); // allow native event access (see: https://facebook.github.io/react/docs/events.html)
-                    // give react a function to set the state asynchronously.
-                    // here it's using the "name" value set on the TextField
-                    // to set state.person.[firstname|lastname]. event.target.name
-                    //required for showing animation
-                    setValues({ ...values, ['searchtext']: event.target.value });
-                    //console.log(newValue);
-                    //console.log(event.target.value);
-                }}
-                onKeyPress={(ev) => {
-                    console.log(`Pressed keyCode ${ev.key}`);
-                    if (ev.key === 'Enter') {
-                        // Do code here
-                        console.log(values.searchtext);
-                        for (var i = 0; i < data.length; i++) {
-                            if (values.searchtext === data[i].gene) {
-                                var tissue = document.getElementById(data[i].path);
-                                //required for showing animation
-                                setValues({ ...values, ['path']: data[i].path });
-                                tissue.style.setProperty("animation", "pulse 10s linear");
-                                tissue.setAttribute("opacity", "0.4");
-                            }
-                        };
+const mapStateToProps = state => {
+    console.log(state.geneTissueColorState);
+    return {
+        status: state.geneTissueColorState.status,
+        response: state.geneTissueColorState.response,
+		error: state.geneTissueColorState.error,
+		count: state.geneTissueColorState.count,
+		page: state.geneTissueColorState.page,
+		next: state.geneTissueColorState.next,
+		previous: state.geneTissueColorState.previous,
+    }
+};
 
-                        ev.preventDefault();
-                    }
-                }}
-                onAnimationStart={(ev) => {
-                    console.log(`Pressed keyCode ${ev.key}`);
-                    if (ev.key === 'Enter') {
-                        // Do code here
-                        console.log(values.searchtext);
+class SearchBox extends React.Component{
+    currentState = {};
+    previousState ={};
+    constructor(props)
+    {
+        super(props);
+		this.state = {
+			searchtext: 'gene',
+            path: 'path',
+		};
+    }
 
-                        ev.preventDefault();
-                    }
-                }} />
-        </div>
-    )
+    componentDidMount(){
+        store.subscribe(() => this.currentState = store.getState().geneTissueColorState);
+        if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
+        && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
+			console.log(this.currentState);
+            this.props.dispatch(fetch_gene_tissue_colors(this.currentState));
+        }
+        else if(this.currentState.type === Constants.GET_GENE_TISSUE_COLOR_API && this.currentState.status === Constants.IN_PROGRESS)
+        {
+            this.props.dispatch(in_progress());
+        }
+    }
+
+        render() {
+        return (
+            <div className={useStyles.search}>
+                <InputBase
+                    placeholder="Genes: NPPB, SFTPA1"
+                    classes={{
+                        root: useStyles.inputRoot,
+                        input: useStyles.inputInput,
+                    }}
+                    inputProps={{
+                        'aria-label': 'Search',
+                    }}
+                    variant="outlined" fullWidth={true} onChange={(event, newValue) => {
+                        event.persist(); // allow native event access (see: https://facebook.github.io/react/docs/events.html)
+                        // give react a function to set the state asynchronously.
+                        // here it's using the "name" value set on the TextField
+                        // to set state.person.[firstname|lastname]. event.target.name
+                        //required for showing animation
+                        this.setState({ ...this.state, ['searchtext']: event.target.value });
+                        console.log(newValue, store.getState());
+                        console.log(event.target.value, this.currentState);
+                    }}
+                    onKeyPress={(ev) => {
+                        console.log(`Pressed keyCode ${ev.key}`);
+                        if (ev.key === 'Enter') {
+                            // Do code here
+                            console.log(this.state.searchtext);
+                            console.log(this.currentState);
+                            for (var i = 0; i < data.length; i++) {
+                                if (this.state.searchtext === data[i].gene) {
+                                    
+                                    var tissue = document.getElementById(data[i].path);
+                                    console.log(data[i].path);
+                                    //required for showing animation
+                                    this.setState({ ...this.state, ['path']: data[i].path });
+                                    tissue.style.setProperty("animation", "pulse 10s linear");
+                                    tissue.setAttribute("opacity", "0.4");
+                                }
+                            };
+                            ev.preventDefault();
+                        }
+                    }}
+                    onAnimationStart={(ev) => {
+                        console.log(`Pressed keyCode ${ev.key}`);
+                        if (ev.key === 'Enter') {
+                            // Do code here
+                            console.log(this.state.searchtext);
+
+                            ev.preventDefault();
+                        }
+                    }} />
+            </div>);
+         }
 }
-export default SearchBox;
+export default connect(mapStateToProps)(SearchBox);

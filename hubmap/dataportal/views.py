@@ -64,6 +64,13 @@ class StudyListPageView(generics.GenericAPIView):
         paginated_response = self.get_paginated_response(paginated_queryset)
         return paginated_response
 
+class GeneListView(generics.GenericAPIView):
+    serializer_class = GeneSerializer
+
+    def get(self, request, format=None):
+        response = get_genes(self, request)
+        return Response(response)
+
 class GlobalSearch(generics.ListAPIView):
     serializer_class = StudyListSerializer
 

@@ -34,6 +34,18 @@ export const fetch_studies_error = error =>{
     type: Constants.GLOBAL_FETCH_ACTION,}
 }
 
+/**
+ * fills study state props here after any of fetch methods from studies reducer
+ * @param {Props object} response 
+ */
+export function fetch_gene_tissue_colors(response) {
+    console.log(response);
+    return {
+        response: response,
+        status:Constants.SUCCESS,
+        type: Constants.GET_GENE_TISSUE_COLORS,}
+}
+
 /***
  * Search studies by REST filter api
  */
@@ -47,7 +59,7 @@ export function search_studies()
  */
 export function fetchAllStudies()
 {
-    const BASE_API =(window.location.href+"api/").replace("3000", "8000");
+    const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch => {
         dispatch(in_progress());
         try {
@@ -76,7 +88,7 @@ export function fetchAllStudies()
  */
 export function fetchStudiesFirstPage(page) 
 {
-    const BASE_API =(window.location.href+"api/").replace("3000", "8000");
+    const BASE_API =(window.location.href).replace("3000", "8000");
     console.log(BASE_API+ Constants.GET_STUDIES_PAGINATED_REST_API+page);
     return async dispatch => {
         dispatch(in_progress());
@@ -125,7 +137,7 @@ export function fetch_colors(colors)
  */
 export function getTissueColorsFromServer()
 {
-    const BASE_API =(window.location.href+"api/").replace("3000", "8000");
+    const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch =>
     {
         dispatch(in_progress());
@@ -133,5 +145,21 @@ export function getTissueColorsFromServer()
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
         return dispatch(fetch_colors(response.data));
+	}
+}
+
+/***
+ * Get gene-tissue colors maps from REST api for tissues SVGs
+ */
+export function getGeneTissueColors()
+{
+    const BASE_API =(window.location.href).replace("3000", "8000");
+    return async dispatch =>
+    {
+        dispatch(in_progress());
+        let response = await axios.get(BASE_API + Constants.GET_GENE_TISSUE_COLOR_API);
+        // wait 3 seconds
+        await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
+        return dispatch(fetch_gene_tissue_colors(response.data));
 	}
 }

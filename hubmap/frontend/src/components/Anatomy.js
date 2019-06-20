@@ -19,7 +19,7 @@ var pancreas, heart, lungs, smallIntestine, largeIntestine,
 	abdomen, liver, bladder, kidney, spleen, human;
 
 const cellcount = data;
-var humanSvg, tooltip, tooltipText, tooltipRects, tooltipTsspan;
+var humanSvg, tooltip, tooltipText, tooltipRects;
 function updateText(tspanId, txt) {
 	var spanEl = document.getElementById(tspanId);
 	while (spanEl.firstChild) {
@@ -39,7 +39,6 @@ function showToolTip(evt) {
 	var lines = evt.target.getAttributeNS(null, "data-tooltip-text").split(',');
 	tooltipText.firstChild.data = lines[0];
 	console.log(typeof(tooltipText.firstChild));
-	//tooltipText.firstChild.setAttributeNS(null, "font-size", 2);
 	updateText("tspanid", lines[1]);
 	updateText("tspanid2", lines[2]);
 	var length = tooltipText.getComputedTextLength();
@@ -60,14 +59,15 @@ function hideToolTip(evt) {
 class HumanAnatomyCard extends React.Component {
 	currentState = {};
 	previousState = {};
-
+	 
 	componentDidMount() {
+
 		try {
 			store.subscribe(() => this.currentState = store.getState().colorsState);
 			console.log(this.currentState);
 			if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS && this.currentState.response !== ""
 				&& this.currentState.type === Constants.GET_TISSUE_COLORS) {
-				console.log('get tissue colors');
+				console.log('get tissue colors', this.currentState);
 				this.props.dispatch(fetch_colors());
 			}
 			else {
@@ -80,7 +80,6 @@ class HumanAnatomyCard extends React.Component {
 			tooltip = humanSvg.getElementById('tooltip');
 			tooltipText = tooltip.getElementsByTagName('text')[0];
 			tooltipRects = tooltip.getElementsByTagName('rect');
-			tooltipTsspan = tooltip.getElementsByTagName('tspan');
 			var pathTriggers = humanSvg.getElementsByClassName('tooltip-trigger');
 			for (var i = 0; i < pathTriggers.length; i++) {
 				pathTriggers[i].addEventListener('mousemove', showToolTip);
@@ -93,7 +92,6 @@ class HumanAnatomyCard extends React.Component {
 			pancreas.addEventListener("click", async function () {
 				console.log(pancreas.getAttribute("id"));
 				console.log(cellcount);
-
 			});
 
 			abdomen = document.getElementById('abdomen');
@@ -152,10 +150,15 @@ class HumanAnatomyCard extends React.Component {
 	}
 
 	render() {
-		if (this.currentState.response !== "" && this.currentState.response !== undefined
-			&& this.currentState.type === Constants.GET_TISSUE_COLORS) {
+		const { response, error, status, type } = store.getState().colorsState;
+		this.currentState =store.getState().colorsState;
+		console.log(response, error, status, type);
+		console.log(this.currentState);
+		if (response !== "" && response !== undefined
+			&& type === Constants.GET_TISSUE_COLORS) {
 			this.previousState = this.currentState;
 			var colors = this.currentState.response;
+			console.log(this.currentState);
 			colors.map(color => {
 				switch (color.tissue) {
 					case "pancreas":

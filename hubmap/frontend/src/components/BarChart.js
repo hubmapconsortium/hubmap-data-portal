@@ -131,7 +131,7 @@ class StudiesBarChart extends React.Component{
     
             d3.select(this)
               .transition()
-              .duration(300)
+              .duration(500)
               .attr("opacity", 1)
               .attr("x", a => xScale(a.center))
               .attr("width", xScale.bandwidth());

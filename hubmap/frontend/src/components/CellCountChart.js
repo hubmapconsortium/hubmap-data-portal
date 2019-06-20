@@ -1,40 +1,13 @@
 import React from "react";
 import * as d3 from "d3";
 import "./App.css";
-const sample1 = [
-  {
-    center: "Florida",
-    May2019: 78.9,
-    color: "#000000"
-  },
-  {
-    center: "Vanderbilt",
-    May2019: 75.1,
-    color: "#00a2ee"
-  },
-  {
-    center: "Stanford",
-    May2019: 68.0,
-    color: "#fbcb39"
-  },
-  {
-    center: "Caltech",
-    May2019: 67.0,
-    color: "#007bc8"
-  },
-  {
-    center: "UCSD",
-    May2019: 65.6,
-    color: "#65cedb"
-  }
-];
 
 const sample = [
-  { center: "Florida", May2019: 5, June2019: 8 },
-  { center: "Vanderbilt", May2019: 8, June2019: 22 },
-  { center: "Stanford", May2019: 8, June2019: 18 },
-  { center: "Caltech", May2019: 5, June2019: 18 },
-  { center: "UCSD", May2019: 5, June2019: 18 }
+  { center: "Florida", cellcount: 5, },
+  { center: "Vanderbilt", cellcount: 8,},
+  { center: "Stanford", cellcount: 8, },
+  { center: "Caltech", cellcount: 5, },
+  { center: "UCSD", cellcount: 5, }
 ];
 
 class StudyBarChart extends React.Component {
