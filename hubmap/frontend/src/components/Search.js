@@ -7,7 +7,7 @@ import data from './data';
 import * as Constants from '../commons/constants';
 import { store } from '../index';
 import { connect } from 'react-redux';
-import { fetch_gene_tissue_colors, in_progress } from "../middleware/actions";
+import { fetch_gene_tissue_colors, in_progress, searchThis, search_studies } from "../middleware/actions";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -112,17 +112,20 @@ class SearchBox extends React.Component{
                         //required for showing animation
                         this.setState({ ...this.state, ['searchtext']: event.target.value });
                         console.log(newValue, store.getState());
+                     
                         console.log(event.target.value, this.currentState);
                     }}
                     onKeyPress={(ev) => {
                         console.log(`Pressed keyCode ${ev.key}`);
                         if (ev.key === 'Enter') {
                             // Do code here
-                            console.log(this.state.searchtext);
-                            console.log(this.currentState);
+                               //search for tissue+gene 
+                               var searchState = {};
+                        this.props.dispatch(searchThis(this.state.searchtext))
+                        .then(() => {this.searchState = store.getState().searchState;
+                            console.log(this.searchState);
                             for (var i = 0; i < data.length; i++) {
                                 if (this.state.searchtext === data[i].gene) {
-                                    
                                     var tissue = document.getElementById(data[i].path);
                                     console.log(data[i].path);
                                     //required for showing animation
@@ -130,7 +133,11 @@ class SearchBox extends React.Component{
                                     tissue.style.setProperty("animation", "pulse 10s linear");
                                     tissue.setAttribute("opacity", "0.4");
                                 }
-                            };
+                            }
+                        });
+                        console.log(store.getState().searchState, this.searchState);
+                            console.log(this.state.searchtext);
+                            console.log(this.currentState);
                             ev.preventDefault();
                         }
                     }}

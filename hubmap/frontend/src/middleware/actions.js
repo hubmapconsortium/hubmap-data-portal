@@ -49,9 +49,11 @@ export function fetch_gene_tissue_colors(response) {
 /***
  * Search studies by REST filter api
  */
-export function search_studies() 
+export function search_studies(response) 
 {
-    return {type: Constants.GLOBAL_SEARCH_ACTION}
+    return {type: Constants.GLOBAL_SEARCH_ACTION,
+        response: response,
+        status:Constants.SUCCESS,}
 }
 
 /***
@@ -162,4 +164,24 @@ export function getGeneTissueColors()
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
         return dispatch(fetch_gene_tissue_colors(response.data));
 	}
+}
+
+/***
+ * Fetch studies by page
+ */
+export function searchThis(searchTerm) 
+{
+    const BASE_API =(window.location.href).replace("3000", "8000");
+    console.log(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
+    return async dispatch => {
+        dispatch(in_progress());
+        try {
+            let response = await axios.get(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
+            console.log('action',response.data);
+            return dispatch(search_studies(response.data));
+        }
+        catch (error) {
+            return dispatch(fetch_studies_error(error));
+        }
+    }
 }
