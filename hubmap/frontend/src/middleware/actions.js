@@ -152,6 +152,7 @@ export function getTissueColorsFromServer()
 
 /***
  * Get gene-tissue colors maps from REST api for tissues SVGs
+ * NOTE: this a temporary tweak for prototype
  */
 export function getGeneTissueColors()
 {

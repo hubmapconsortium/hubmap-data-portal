@@ -125,16 +125,14 @@ class MaterialTableDemo extends React.Component {
 							  return (a.data[colIndex].length < b.data[colIndex].length ? -1: 1 ) * (order === 'desc' ? 1 : -1);
 							});
 						  },
-						//onColumnSortChange: (changedColumn, direction) => console.log('changedColumn: ', changedColumn, 'direction: ', direction),
-						//count: 8,
-						//pagination: true,
-						MUIDataTableBodyCell: {
+						MUIDataTableBodyCell: 
+						{
 							root: {
 							border: 'solid 1px #000',
 							'&:nth-child(5)': {
 								backgroundColor: grey[800],
 								textAlign: 'center'
-							}
+								}
 							}
 						},
 						selectedRows: {

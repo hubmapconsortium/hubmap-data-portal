@@ -13,6 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import HubmapLogo from "../images/HuBMAP-Retina-Logo-Color.png";
+import posed from 'react-pose';
 import { Button } from '@material-ui/core';
 import NavigationIcon from '@material-ui/icons/NavigateNext';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
@@ -40,8 +41,6 @@ const theme = createMuiTheme({
             '"Segoe UI Symbol"',
             '"Impact"',
         ].join(','),
-        backgroundColor: grey[50],
-        color: grey[800],
     },
 });
 
@@ -61,7 +60,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         flexGrow: 2,
-        fontSize: 22,
+        fontSize: 20,
         fontVariant: "H2",
         fontFamily: "Impact",
         display: 'none',
@@ -83,7 +82,7 @@ const useStyles = makeStyles(theme => ({
             border: '1px solid #424242',
         },
         marginRight: theme.spacing(1.5),
-        marginLeft:0,
+        marginLeft: 0,
         width: '100%',
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(1),
@@ -98,6 +97,7 @@ const useStyles = makeStyles(theme => ({
         pointerEvents: 'none',
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         color: grey[800],
     },
     inputRoot: {
@@ -158,12 +158,34 @@ function SearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl1, setAnchorEl1] = React.useState(null);
-
+    const isMenuOpen = Boolean(anchorEl);
+    const isHelpMenuOpen = Boolean(anchorEl1);
+    const Img = posed.img({
+        pressable: true,
+        init: { scale: 1 },
+        press: { scale: 0.8 }
+    });
     const img = <img style={{
         marginTop: 10, flex: 1,
         width: 150,
         resizeMode: 'contain',
     }} src={HubmapLogo} alt="Logo" />;
+
+    function handleMenuOpen(event) {
+        setAnchorEl(event.currentTarget);
+    }
+
+    function handleHelpMenuOpen(event) {
+        setAnchorEl1(event.currentTarget);
+    }
+
+    function handleMenuClose() {
+        setAnchorEl(null);
+    }
+
+    function handleHelpMenuClose() {
+        setAnchorEl1(null);
+    }
 
     function handleClose() {
         setAnchorEl(null);
@@ -182,7 +204,7 @@ function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar position="fixed" style={{ backgroundColor: grey[50] }} height={30} width={'100%'}>
+            <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[50] }} height={30} width={'100%'}>
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -190,67 +212,70 @@ function SearchAppBar(props) {
                         color="inherit"
                         aria-label="Open drawer">
                         {img}
-                        <MuiThemeProvider theme={theme}  >
-                        <Typography className={classes.title} noWrap >
-                                    DataPortal
-                        </Typography>
-                        <NavigationIcon />
-                        </MuiThemeProvider>
                     </IconButton>
-                   
+                    <div className={classes.sectionDesktop}>
+                        <Button className={classes.button}>
+                            <MuiThemeProvider theme={theme}  >
+                                <Typography className={classes.title} noWrap >
+                                    DataPortal
+                    </Typography>
+                            </MuiThemeProvider >
+                            <NavigationIcon />
+                        </Button>
+                    </div>
                     <div className={classes.grow} />
 
                     <div className={classes.sectionIconDesktop} >
 
-                            <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick} >
-                                Browse
+                        <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick} >
+                            Browse
                         <GraphIcon className={classes.rightIcon} />
-                            </Button>
-                            <Menu
-                                id="browse-menu"
-                                anchorEl={anchorEl}
-                                keepMounted
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}>
-                                <MenuItem onClick={handleClose}>Data Analysis
+                        </Button>
+                        <Menu
+                            id="browse-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}>
+                            <MenuItem onClick={handleClose}>Data Analysis
                         <GraphIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleClose}>Studies
+                            <MenuItem onClick={handleClose}>Studies
                         <LibraryIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleClose}>Pipelines
+                            <MenuItem onClick={handleClose}>Pipelines
                         <FlowIcon className={classes.rightIcon} /></MenuItem>
-                            </Menu>
+                        </Menu>
 
 
 
-                            <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} >
-                                Help
+                        <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} >
+                            Help
                         <HelpIcon className={classes.rightIcon} />
-                            </Button>
-                            <Menu
-                                id="help-menu"
-                                anchorEl={anchorEl1}
-                                keepMounted
-                                open={Boolean(anchorEl1)}
-                                onClose={handleCloseHelp}>
-                                <MenuItem onClick={handleCloseHelp}>Rna seq Pipeline
+                        </Button>
+                        <Menu
+                            id="help-menu"
+                            anchorEl={anchorEl1}
+                            keepMounted
+                            open={Boolean(anchorEl1)}
+                            onClose={handleCloseHelp}>
+                            <MenuItem onClick={handleCloseHelp}>Rna seq Pipeline
                         <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>ATAC-seq Pipeline
+                            <MenuItem onClick={handleCloseHelp}>ATAC-seq Pipeline
                         <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>CDNA-seq Pipeline
+                            <MenuItem onClick={handleCloseHelp}>CDNA-seq Pipeline
                         <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>Spatial Transcriptomic Pipeline
+                            <MenuItem onClick={handleCloseHelp}>Spatial Transcriptomic Pipeline
                         <ExploreIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>Microscopy Pipeline
+                            <MenuItem onClick={handleCloseHelp}>Microscopy Pipeline
                         <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>Seq Fish Imaging Pipeline
+                            <MenuItem onClick={handleCloseHelp}>Seq Fish Imaging Pipeline
                         <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>Mass Cytometry Pipeline
+                            <MenuItem onClick={handleCloseHelp}>Mass Cytometry Pipeline
                         <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>Data Download
+                            <MenuItem onClick={handleCloseHelp}>Data Download
                         <CloudDownloadIcon className={classes.rightIcon} /></MenuItem>
-                                <MenuItem onClick={handleCloseHelp}>User FAQs</MenuItem>
+                            <MenuItem onClick={handleCloseHelp}>User FAQs</MenuItem>
 
-                            </Menu>
+                        </Menu>
 
                         <Button color="inherit" aria-haspopup="true" >Login <AccountCircle className={classes.rightIcon} /></Button>
                     </div>

@@ -188,53 +188,53 @@ div#layout {
   fill: #607d8b;
 }
 
-text {
+#barchart .text {
   font-size: 12px;
   fill: #282c34;
 }
 
-path {
+#barchart .path {
   stroke: gray;
 }
 
-line {
+#barchart .line {
   stroke: gray;
 }
 
-line#limit {
+#barchart .line#limit {
   stroke: #263238;
   stroke-width: 3;
   stroke-dasharray: 3 6;
 }
 
-.grid path {
+#barchart .grid path {
   stroke-width: 0;
 }
 
-.grid .tick line {
+#barchart .grid .tick line {
   stroke: #9FAAAE;
   stroke-opacity: 0.3;
 }
 
-text.divergence {
+#barchart .text.divergence {
   font-size: 14px;
   fill: #2F4A6D;
 }
 
-svg text.value {
+#barchart text.value {
   font-size: 14px;
 }
 
-svg text.title {
+#barchart text.title {
   font-size: 22px;
   font-weight: 600;
 }
 
-svg text.label {
+#barchart text.label {
   font-size: 14px;
   font-weight: 400;
 }
 
-text.source {
+#barchart .text.source {
   font-size: 10px;
 }

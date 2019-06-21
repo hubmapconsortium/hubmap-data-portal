@@ -55,7 +55,8 @@ function hideToolTip(evt) {
 	tooltip.setAttributeNS(null, "visibility", "hidden");
 	this.setAttribute('opacity', 1);
 }
-
+//console.log(ev);
+//tissue.style.removeProperty("animation");
 class HumanAnatomyCard extends React.Component {
 	currentState = {};
 	previousState = {};
