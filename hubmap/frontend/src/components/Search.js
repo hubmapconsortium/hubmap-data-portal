@@ -179,21 +179,22 @@ class SearchBox extends React.Component{
                                 if (new Set(tissues).has( tissueColorMap[0])) {
                                     console.log(heatmap[i], heatmap[i].split(":"));
                                     var tissue = document.getElementById(tissueColorMap[0]);
+                                    console.log(tissue);
                                     Utils.addAnimationToStyle(tissueColorMap[0]+'tissueAnimation', 
                                     `0% {fill: ${tissueColorMap[1]}; opacity: 0;}
                                     100% {fill: ${tissueColorMap[1]}; opacity: 1;}` );
                                     tissue.style.removeProperty("animation");
-                                    // tissue.addEventListener("animationend", animationEnd);
+                                    tissue.addEventListener("animationend", animationEnd);
                                     tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
                                     tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
-                                    console.log(tissueColorMap[0]);
+                                    console.log(tissue.style);
                                     
                                 }
                                 else
                                 {
                                     var tissue = document.getElementById(tissueColorMap[0]);
                                     tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
-                                    tissue.style.setProperty("opacity", "0.2");
+                                    //tissue.style.setProperty("opacity", "0.2");
                                     console.log(tissueColorMap[0]);
                                 }                                
                             }
