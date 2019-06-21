@@ -148,10 +148,11 @@ class SearchBox extends React.Component{
                             console.log(results);
                               var tissues = results.reduce((arr, h) => {
                                 if (h.tissue !== undefined) {
-                                  arr.push(h.tissue.name);
+                                  arr.push(h.tissue.name.toLowerCase());
                                 }
                                 return arr;
                               }, []);
+                             
                               let heatmap = results.reduce((arr, h) => {
                                 if (h.hugo_symbol !== undefined) {
                                   var colors = JSON.stringify(h.tissue_expression_heatmap);
@@ -174,34 +175,27 @@ class SearchBox extends React.Component{
                             
                             for (var i = 0; i < heatmap.length; i++) {
                                 var tissueColorMap = heatmap[i].split(':');
-                                tissues.map(function(t) {
-                                    if (t.toLowerCase() === tissueColorMap[0]) {
-                                        console.log(heatmap[i], heatmap[i].split(":"));
-                                        var tissue = document.getElementById(tissueColorMap[0]);
-                                        console.log(tissue);
-                                        Utils.addAnimationToStyle(tissueColorMap[0]+'tissueAnimation', 
-                                        `0% {fill: ${tissueColorMap[1]}; opacity: 0;}
-                                        100% {fill: ${tissueColorMap[1]}; opacity: 1;}` );
-                                        tissue.style.removeProperty("animation");
-                                        tissue.addEventListener("animationend", animationEnd);
-                                        //this.setState({ ...this.state, ['path']: tissueColorMap[0] });
-                                        tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
-                                        console.log(tissue.style);
-                                    }
-                                    else
-                                    {
-                                        var tissue = document.getElementById(tissueColorMap[0]);
-                                        Utils.addAnimationToStyle(tissueColorMap[0]+'tissueAnimation', 
-                                        `100% {fill: ${tissueColorMap[1]}; opacity: 1;}` );
-                                        tissue.style.removeProperty("animation");
-                                        tissue.addEventListener("animationend", animationEnd);
-                                        //this.setState({ ...this.state, ['path']: tissueColorMap[0] });
-                                        tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
-                                        console.log(tissue.style);
-                                    }
-                                });
-                                //tissue.setAttribute("opacity", "0.4");
-                                
+                                console.log(tissueColorMap[0]);
+                                if (new Set(tissues).has( tissueColorMap[0])) {
+                                    console.log(heatmap[i], heatmap[i].split(":"));
+                                    var tissue = document.getElementById(tissueColorMap[0]);
+                                    Utils.addAnimationToStyle(tissueColorMap[0]+'tissueAnimation', 
+                                    `0% {fill: ${tissueColorMap[1]}; opacity: 0;}
+                                    100% {fill: ${tissueColorMap[1]}; opacity: 1;}` );
+                                    tissue.style.removeProperty("animation");
+                                    // tissue.addEventListener("animationend", animationEnd);
+                                    tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
+                                    tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
+                                    console.log(tissueColorMap[0]);
+                                    
+                                }
+                                else
+                                {
+                                    var tissue = document.getElementById(tissueColorMap[0]);
+                                    tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
+                                    tissue.style.setProperty("opacity", "0.2");
+                                    console.log(tissueColorMap[0]);
+                                }                                
                             }
                         });
                         console.log(store.getState().searchState, this.searchState);
