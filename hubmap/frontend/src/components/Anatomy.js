@@ -112,7 +112,7 @@ class HumanAnatomyCard extends React.Component {
 			lungs.addEventListener("click", function () {
 				console.log(lungs.getAttribute("id"));
 			});
-			smallIntestine = document.getElementById('sIntestine');
+			smallIntestine = document.getElementById('smallIntestine');
 			smallIntestine.setAttributeNS(null, "data-tooltip-text", " " + cellcount[6].tissue + "," + cellcount[6].cells + " experiments," + cellcount[6].gene + " gene");
 			smallIntestine.addEventListener("click", function () {
 				console.log(smallIntestine.getAttribute("id"));
@@ -127,7 +127,7 @@ class HumanAnatomyCard extends React.Component {
 			bladder.addEventListener("click", function () {
 				console.log(bladder.getAttribute("id"));
 			});
-			largeIntestine = document.getElementById('lIntestine');
+			largeIntestine = document.getElementById('largeIntestine');
 			largeIntestine.setAttributeNS(null, "data-tooltip-text", " " + cellcount[7].tissue + "," + cellcount[7].cells + " experiments," + cellcount[7].gene + " gene");
 			largeIntestine.addEventListener("click", function () {
 				console.log(largeIntestine.getAttribute("id"));

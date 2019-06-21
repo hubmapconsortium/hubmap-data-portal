@@ -39,13 +39,13 @@ const data = [
         tissue: 'SIntestine',
         cells: 39,
         gene: 'LCT',
-        path: 'sIntestine',
+        path: 'smallIntestine',
     },
     {
         tissue: 'LIntestine',
         cells: 38,
         gene: 'INSL5',
-        path: 'lIntestine',
+        path: 'largeIntestine',
     },
     {
         tissue: 'Abdomen',

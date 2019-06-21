@@ -152,37 +152,56 @@ class SearchBox extends React.Component{
                                 }
                                 return arr;
                               }, []);
-                             let heatmap = results.reduce((arr, h) => {
+                              let heatmap = results.reduce((arr, h) => {
                                 if (h.hugo_symbol !== undefined) {
                                   var colors = JSON.stringify(h.tissue_expression_heatmap);
                                   var res = colors.split(",");
-                                  res.map(h1 => {
-                                    tissues.forEach(element => {
-                                      if (h1.indexOf(element.toLowerCase()) === 1) {
-                                        arr.push(element.toLowerCase()+":" +h1.substr(h1.indexOf(":")+2, 7));
-                                      }
-                                    });
+                                  console.log(res.slice(1,res.length));
+                                  res.slice(1,res.length).map(h1 => {
+                                    console.log(h1);
+                                    if (!h1.includes('"id:"')) {
+                                      arr.push(
+                                        h1.substr(1, h1.indexOf("_") - 1) +
+                                          ":" +
+                                          h1.substr(h1.indexOf(":") + 2, 7)
+                                      );
+                                    }
                                   });
                                 }
                                 return arr;
-                              }, []);
+                              }, []);                              
                             console.log(results);
                             
                             for (var i = 0; i < heatmap.length; i++) {
                                 var tissueColorMap = heatmap[i].split(':');
-                                console.log(heatmap[i], heatmap[i].split(":"));
-                                var tissue = document.getElementById(tissueColorMap[0]);
-                                console.log(tissue);
-                                Utils.addAnimationToStyle(tissueColorMap[0]+'tissueAnimation', 
-                                `0% {fill: ${tissueColorMap[1]}; opacity: 0;}
-                                100% {fill: ${tissueColorMap[1]}; opacity: 1;}` );
-                                tissue.style.removeProperty("animation");
-                                tissue.addEventListener("animationend", animationEnd);
-                                this.setState({ ...this.state, ['path']: tissueColorMap[0] });
-                                tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
-                                
+                                tissues.map(function(t) {
+                                    if (t.toLowerCase() === tissueColorMap[0]) {
+                                        console.log(heatmap[i], heatmap[i].split(":"));
+                                        var tissue = document.getElementById(tissueColorMap[0]);
+                                        console.log(tissue);
+                                        Utils.addAnimationToStyle(tissueColorMap[0]+'tissueAnimation', 
+                                        `0% {fill: ${tissueColorMap[1]}; opacity: 0;}
+                                        100% {fill: ${tissueColorMap[1]}; opacity: 1;}` );
+                                        tissue.style.removeProperty("animation");
+                                        tissue.addEventListener("animationend", animationEnd);
+                                        //this.setState({ ...this.state, ['path']: tissueColorMap[0] });
+                                        tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
+                                        console.log(tissue.style);
+                                    }
+                                    else
+                                    {
+                                        var tissue = document.getElementById(tissueColorMap[0]);
+                                        Utils.addAnimationToStyle(tissueColorMap[0]+'tissueAnimation', 
+                                        `100% {fill: ${tissueColorMap[1]}; opacity: 1;}` );
+                                        tissue.style.removeProperty("animation");
+                                        tissue.addEventListener("animationend", animationEnd);
+                                        //this.setState({ ...this.state, ['path']: tissueColorMap[0] });
+                                        tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
+                                        console.log(tissue.style);
+                                    }
+                                });
                                 //tissue.setAttribute("opacity", "0.4");
-                                console.log(tissue.style);
+                                
                             }
                         });
                         console.log(store.getState().searchState, this.searchState);
