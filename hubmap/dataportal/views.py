@@ -1,17 +1,15 @@
-from rest_framework import generics, views
+from json import loads, dumps
+
+from rest_framework import generics, status, views
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework import status
-from .utils import *
-from django.forms.models import model_to_dict
-from .serializers import *
 import matplotlib.cm
 import numpy as np
 import pandas as pd
-from django.shortcuts import render
-from rest_framework.pagination import PageNumberPagination
-import pandas as pd
-import numpy as np
-from json import loads, dumps
+import xarray as xr
+
+from .serializers import *
+from .utils import *
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Build frontend -> more tutorials
@@ -50,7 +48,7 @@ class StudyListView(generics.GenericAPIView):
         print(serializer.data)
         return self.get_paginated_response(serializer.data)
 
-#TODO : deifne what fields are modifiable and what can be created
+#TODO : define what fields are modifiable and what can be created
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():
@@ -92,18 +90,6 @@ class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
         serializer = self.get_serializer(self.get_object().get_subclass_object())
         return Response(serializer.data)
 
-def tissue_svg(request):
-    # These match the Django template fields in `human_body.svg`
-    organs = [
-        'stomach',
-        'liver',
-        'lung',
-        'small_intestine',
-        'heart',
-        'bladder',
-        'large_intestine',
-        'kidney',
-    ]
 def rgba_float_to_rgb_hex(floats):
     return '#' + ''.join('{:02x}'.format(int(c * 255)) for c in floats[:3])
 
