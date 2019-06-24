@@ -28,6 +28,7 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
+        summary = {"all": [], "summary": [], "grouped": []}
         result = loads(dumps(response))
         values = [
             {"tissue": r['tissue']['name'], "institution" : r['institution']['name'],
