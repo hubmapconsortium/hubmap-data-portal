@@ -8,6 +8,7 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 
+from .models import *
 from .serializers import *
 from .utils import *
 
@@ -119,3 +120,44 @@ class Tissue_svg_colors(views.APIView):
         return Response(
             results
         )
+
+# Each label (element 0 in tuples) has multiple meanings/functions.
+# 1. it will be a dimension of the `xr.DataArray` returned by
+#    `compute_multi_dim_counts`.
+# 2. it must be an attribute on the base Study class, which is a
+#    foreign key to element 1 in the tuples
+MULTI_DIM_CLASSES = [
+    ('tissue', Tissue),
+    ('institution', Institution),
+    ('data_type', DataType),
+]
+
+def compute_multi_dim_counts(field_name: str) -> xr.DataArray:
+    """
+    :param field_name: A field on Study subclasses which holds numeric data.
+      All Study objects will be queried; if this field is missing from a
+      certain subclass, it will be treated as 0.
+    :return: A `xr.DataArray` with aggregated counts
+    """
+    dims = []
+    coords = []
+    for label, model in MULTI_DIM_CLASSES:
+        dims.append(label)
+        coords.append([obj.name for obj in model.objects.all()])
+
+    shape = tuple(len(c) for c in coords)
+    zeros = np.zeros(shape).astype(int)
+
+    data = xr.DataArray(
+        zeros,
+        dims=dims,
+        coords=coords,
+    )
+
+    for study_type in StudyTypes:
+        for raw_obj in study_type.objects.all():
+            study_obj = raw_obj.get_subclass_object()
+            sel_dict = {label: getattr(study_obj, label).name for label, _ in MULTI_DIM_CLASSES}
+            data.loc[sel_dict] += getattr(study_obj, field_name, 0)
+
+    return data
