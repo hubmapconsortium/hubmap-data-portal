@@ -9,6 +9,9 @@ import numpy as np
 import pandas as pd
 from django.shortcuts import render
 from rest_framework.pagination import PageNumberPagination
+import pandas as pd
+import numpy as np
+from json import loads, dumps
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Build frontend -> more tutorials
@@ -25,17 +28,17 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        summary = {"summary" : []}
-        for r in response:
-            image_count =''
-            cell_count = ''
-            if r.get( 'image_count', ''):
-                image_count = r['image_count']
-            if r.get( 'cell_count', ''):
-                cell_count = r['cell_count']
-            summary["summary"].append({"id": r['id'], "tissue":r['tissue']['name'], "insitution": r['institution']['name'],
-                   "image_count": image_count, "cell_count": cell_count})
-        response.append(summary)
+        result = loads(dumps(response))
+        values = [
+            {"tissue": r['tissue']['name'], "institution" : r['institution']['name'],
+               "image_count": r['image_count'] } if (r.get( 'image_count', '')) else
+            {"tissue": r['tissue']['name'], "institution": r['institution']['name'],
+             "cell_count": r['cell_count'] if (r.get( 'cell_count', '')) else '' } for r in result
+        ]
+        print(values)
+        data = pd.DataFrame.from_records(summary["all"]).fillna('').groupby(['tissue', 'institution']).first()
+        response.append({"cell_count":data['cell_count'].items()})
+        response.append({"image_count":data['image_count'].items()})
         return Response(response)
 
     def list(self, request):
