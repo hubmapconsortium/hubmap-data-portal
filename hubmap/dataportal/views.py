@@ -36,9 +36,11 @@ class StudyListView(generics.GenericAPIView):
              "cell_count": r['cell_count'] if (r.get( 'cell_count', '')) else '' } for r in result
         ]
         print(values)
-        data = pd.DataFrame.from_records(summary["all"]).fillna('').groupby(['tissue', 'institution']).first()
+        data = pd.DataFrame.from_records(values).fillna('').groupby(['tissue', 'institution']).first()
         response.append({"cell_count":data['cell_count'].items()})
         response.append({"image_count":data['image_count'].items()})
+        xrdata = compute_multi_dim_counts(self.queryset, "cell_count")
+        print(xrdata)
         return Response(response)
 
     def list(self, request):
@@ -132,7 +134,7 @@ MULTI_DIM_CLASSES = [
     ('data_type', DataType),
 ]
 
-def compute_multi_dim_counts(field_name: str) -> xr.DataArray:
+def compute_multi_dim_counts(queryset, field_name: str) -> xr.DataArray:
     """
     :param field_name: A field on Study subclasses which holds numeric data.
       All Study objects will be queried; if this field is missing from a
@@ -154,10 +156,11 @@ def compute_multi_dim_counts(field_name: str) -> xr.DataArray:
         coords=coords,
     )
 
-    for study_type in StudyTypes:
-        for raw_obj in study_type.objects.all():
-            study_obj = raw_obj.get_subclass_object()
-            sel_dict = {label: getattr(study_obj, label).name for label, _ in MULTI_DIM_CLASSES}
-            data.loc[sel_dict] += getattr(study_obj, field_name, 0)
-
+    for study_obj in queryset:
+        sel_dict = {label: getattr(study_obj, label).name for label, _ in MULTI_DIM_CLASSES}
+        data.loc[sel_dict] += getattr(study_obj, field_name, 0)
+    stacked = data.stack(gridcell = ['tissue', 'institution'])
+    grouped = stacked.groupby('gridcell', squeeze=False).sum().unstack('gridcell')
+    for g in grouped :
+        print(g.unstack()[0], g.unstack())
     return data
