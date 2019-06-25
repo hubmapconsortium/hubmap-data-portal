@@ -1,5 +1,6 @@
 import React from "react";
 import '../App.css';
+import GitVersion from '../GitVersion'
 import { makeStyles } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 
@@ -21,7 +22,7 @@ function Footer() {
 		<div className={classes.footer}>
 			<footer >
 				<span style={{ display: "inline-block" }}>
-					<h5>&#169; Human Bio Molecular Atlas Program</h5>
+					<h5>&#169; Human Bio Molecular Atlas Program | { GitVersion }</h5>
 				</span>
 			</footer>
 		</div>

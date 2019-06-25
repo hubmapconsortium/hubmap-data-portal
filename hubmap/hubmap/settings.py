@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'dataportal',
+    'frontend',
     'django_filters',
 ]
 
