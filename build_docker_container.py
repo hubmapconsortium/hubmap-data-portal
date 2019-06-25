@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from argparse import ArgumentParser
 from datetime import datetime
+import json
 from pathlib import Path
 from subprocess import PIPE, run
 from typing import List, Tuple
@@ -8,6 +9,11 @@ from typing import List, Tuple
 # Would like to include timezone offset, but not worth the
 # complexity of including pytz/etc.
 TIMESTAMP_FORMAT = '%Y%m%d-%H%M%S%z'
+
+GIT_VERSION_COMMAND = [
+    'git',
+    'describe',
+]
 
 DOCKER = 'docker'
 DOCKER_BUILD_COMMAND_TEMPLATE: List[str] = [
@@ -50,7 +56,23 @@ def print_run(command: List[str], pretend: bool, return_stdout: bool=False):
         if return_stdout:
             return proc.stdout.strip().decode('utf-8')
 
+def write_git_version():
+    path = Path(__file__).parent
+    file_to_write = path / 'hubmap/frontend/src/git-version.json'
+
+    try:
+        proc = run(GIT_VERSION_COMMAND, cwd=str(path), stdout=PIPE, check=True)
+        git_version = proc.stdout.decode('utf-8').strip()
+
+        print('Writing Git revision to', file_to_write)
+        with open(file_to_write, 'w') as f:
+            json.dump({'version': git_version}, f)
+    except Exception as e:
+        # don't care too much; this is best-effort
+        print('Caught', e)
+
 def main(tag_latest: bool, push: bool, pretend: bool):
+    write_git_version()
     directory_of_this_script = Path(__file__).parent
     timestamp = datetime.now().strftime(TIMESTAMP_FORMAT)
     images_to_push = []

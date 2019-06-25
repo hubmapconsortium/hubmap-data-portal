@@ -19,7 +19,7 @@ RUN pip3 install -r /opt/requirements.txt
 FROM ubuntu:18.04 as RELEASE
 
 RUN apt-get update
-RUN apt-get -y install git uwsgi uwsgi-plugin-python3 python3 python3-six python3-idna libpq5
+RUN apt-get -y install uwsgi uwsgi-plugin-python3 python3 python3-six python3-idna libpq5
 RUN rm -rf /var/cache/apt/*
 
 COPY --from=BASE /usr/local/lib/python3.6 /usr/local/lib/python3.6
@@ -32,8 +32,6 @@ RUN mv \
 WORKDIR /opt/hubmap-data-portal/hubmap
 RUN python3 -m compileall .
 RUN python3 -O -m compileall .
-# for frontend
-RUN python3 manage.py gitversion
 
 VOLUME /opt/hubmap-data-portal/static
 
