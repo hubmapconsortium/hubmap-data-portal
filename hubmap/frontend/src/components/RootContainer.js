@@ -6,8 +6,8 @@ import Grid from '@material-ui/core/Grid';
 import grey from '@material-ui/core/colors/grey';
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import StudiesChart from "./StudiesBarChart"
-import StudiesByTissues from './Chart';
+import CellCountByTissueChart from "./CellCountByTissueChart"
+import ImageCountByTissuesChart from './ImageCountByTissueChart';
 import MaterialTableDemo from './MUITable';
 import StudiesBarChart from './BarChart';
 
@@ -54,10 +54,10 @@ function RootContainer() {
           <HumanSvg studies={''} />
         </Grid>
         <Grid item style={{ height: '400px', width: '420px', marginTop: '170px', marginLeft:'20px'}}>
-          <StudiesChart />
+          <CellCountByTissueChart />
         </Grid>
         <Grid item style={{ height: '400px', width: '450px', marginTop: '170px', marginLeft:'20px'}}>
-          <StudiesByTissues />
+          <ImageCountByTissuesChart />
         </Grid>
         <Grid item style={{ height: '450px', width: '900px', marginTop: '-250px', marginLeft:'370px'}}>
           <MaterialTableDemo />

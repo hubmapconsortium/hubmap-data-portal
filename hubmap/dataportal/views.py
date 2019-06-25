@@ -24,8 +24,9 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
-        response.append({"summary" : summary})
+        cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
+        image_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "image_count"))
+        response.append({"summary" : [{ "cell_count" : cell_count_summary},{"image_count": image_count_summary}]})
         return Response(response)
 
     def list(self, request):
@@ -156,12 +157,14 @@ def serialize_multi_dim_counts(data: xr.DataArray):
     df.index.names = dims_to_stack
 
     list_for_frontend = []
+    columns_list = []
+    columns_list.append("Tissue")
+    columns_list.append(data['institution'].sortby(data['institution']).values.tolist())
+    list_for_frontend.append(columns_list)
     for tissue in df.index.levels[0]:
-        list_for_frontend.append(
-            [
-                tissue,
-                df.loc[tissue, :].iloc[:, 0].items()
-            ]
-        )
+        list_for_frontend.append([
+            tissue,
+            (df.loc[tissue, :].iloc[:, 0]).values.tolist()
+        ])
 
     return list_for_frontend
