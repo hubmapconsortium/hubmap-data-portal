@@ -103,28 +103,28 @@ class StudiesBarChart extends React.Component{
           .attr('width', xScale.bandwidth() + 10);
 
           const y = yScale(actual.May2019);
-          const line = chart.append('line')
+          /*const line = chart.append('line')
           .attr('id', 'limit')
           .attr('x1', 0)
           .attr('y1', y)
           .attr('x2', width)
-          .attr('y2', y);
+          .attr('y2', y);*/
 
-          barGroups.append('text')
-          .attr('class', 'divergence')
+          /*barGroups.append('text')
+          //.attr('class', 'divergence')
           .attr('x', a => xScale(a.center) + xScale.bandwidth()/2)
           .attr('y', a => yScale(a.May2019)+30)
           .attr("fill", "white")
           .attr("text-anchor", "middle")
           .text((a, idx) => {
-            const divergence = (a.May2019 - actual.May2019).toFixed(1);
+            //const divergence = (a.May2019 - actual.May2019).toFixed(1);
 
             let text = "";
-            if (divergence > 0) text += "+";
-            text += `${divergence}%`;
+            //if (divergence > 0) text += "+";
+            //text += `${divergence}`;
 
-            return idx !== i ? text : "";
-          })
+            return idx ;
+          })*/
         });
           barGroups.on("mouseleave", function() {
             d3.selectAll(".May2019").attr("opacity", 1);
@@ -133,11 +133,11 @@ class StudiesBarChart extends React.Component{
               .transition()
               .duration(500)
               .attr("opacity", 1)
-              .attr("x", a => xScale(a.center))
+              //.attr("x", a => xScale(a.center))
               .attr("width", xScale.bandwidth());
     
-            chart.selectAll("#limit").remove();
-            chart.selectAll(".divergence").remove();
+            //chart.selectAll("#limit").remove();
+            //chart.selectAll(".divergence").remove();
           });
 
           barGroups
@@ -145,8 +145,9 @@ class StudiesBarChart extends React.Component{
           .attr("class", "May2019")
           .attr("x", a => xScale(a.center) + xScale.bandwidth() / 2)
           .attr("y", a => yScale(a.May2019) + 30)
+          .attr("fill", "#2F4A6D")
           .attr("text-anchor", "middle")
-          .text(a => `${a.May2019}%`);
+          .text(a => `${a.May2019}`);
     
         svg
           .append("text")
@@ -186,7 +187,7 @@ class StudiesBarChart extends React.Component{
         .attr('y', margin/2.4)
         .attr('transform', 'rotate(-90)')
         .attr('text-anchor', 'middle')
-        .attr('Number of experiments (%)');
+        .attr('# of experiments');
         
     }
 
