@@ -19,7 +19,7 @@ from .utils import *
 
 
 class PaginationClass(PageNumberPagination):
-    page_size =  10
+    page_size = 10
     max_page_size = 10
 
 class StudyListView(generics.GenericAPIView):
@@ -159,8 +159,23 @@ def compute_multi_dim_counts(queryset, field_name: str) -> xr.DataArray:
     for study_obj in queryset:
         sel_dict = {label: getattr(study_obj, label).name for label, _ in MULTI_DIM_CLASSES}
         data.loc[sel_dict] += getattr(study_obj, field_name, 0)
-    stacked = data.stack(gridcell = ['tissue', 'institution'])
-    grouped = stacked.groupby('gridcell', squeeze=False).sum().unstack('gridcell')
-    for g in grouped :
-        print(g.unstack()[0], g.unstack())
+
     return data
+
+def serialize_multi_dim_counts(data: xr.DataArray):
+    dims_to_stack = ['tissue', 'institution']
+    stacked = data.stack(gridcell=dims_to_stack)
+    grouped = stacked.groupby('gridcell', squeeze=False).sum().unstack('gridcell')
+    df = grouped.to_dataframe('temp')
+    df.index.names = dims_to_stack
+
+    list_for_frontend = []
+    for tissue in df.index.levels[0]:
+        list_for_frontend.append(
+            [
+                tissue,
+                list(df.loc[tissue, :].iloc[:, 0].items())
+            ]
+        )
+
+    return list_for_frontend
