@@ -90,7 +90,7 @@ class Tissue_svg_colors(views.APIView):
             'pancreas',
             'abdomen',
             'liver',
-            'lungs',
+            'lung',
             'small_intestine',
             'heart',
             'bladder',

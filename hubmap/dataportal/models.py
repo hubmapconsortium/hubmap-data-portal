@@ -8,7 +8,7 @@ class TissueExpressionHeatmap(models.Model):
     of gene expression across the human body.
     """
     kidney_color = models.CharField(max_length=7)
-    lungs_color = models.CharField(max_length=7)
+    lung_color = models.CharField(max_length=7)
     heart_color = models.CharField(max_length=7)
     pancreas_color = models.CharField(max_length=7)
     abdomen_color = models.CharField(max_length=7)

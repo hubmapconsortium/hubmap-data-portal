@@ -15,7 +15,7 @@ const mapStateToProps = state => {
 	}
 };
 
-var pancreas, heart, lungs, smallIntestine, largeIntestine,
+var pancreas, heart, lung, smallIntestine, largeIntestine,
 	abdomen, liver, bladder, kidney, spleen, human;
 
 const cellcount = data;
@@ -60,7 +60,7 @@ function hideToolTip(evt) {
 class HumanAnatomyCard extends React.Component {
 	currentState = {};
 	previousState = {};
-	 
+
 	componentDidMount() {
 
 		try {
@@ -107,10 +107,10 @@ class HumanAnatomyCard extends React.Component {
 				console.log(liver.getAttribute("id"));
 			});
 
-			lungs = document.getElementById('lungs');
-			lungs.setAttributeNS(null, "data-tooltip-text", " " + cellcount[0].tissue + "," + cellcount[0].cells + " experiments," + cellcount[0].gene + " gene");
-			lungs.addEventListener("click", function () {
-				console.log(lungs.getAttribute("id"));
+			lung = document.getElementById('lung');
+			lung.setAttributeNS(null, "data-tooltip-text", " " + cellcount[0].tissue + "," + cellcount[0].cells + " experiments," + cellcount[0].gene + " gene");
+			lung.addEventListener("click", function () {
+				console.log(lung.getAttribute("id"));
 			});
 			smallIntestine = document.getElementById('smallIntestine');
 			smallIntestine.setAttributeNS(null, "data-tooltip-text", " " + cellcount[6].tissue + "," + cellcount[6].cells + " experiments," + cellcount[6].gene + " gene");
@@ -166,27 +166,27 @@ class HumanAnatomyCard extends React.Component {
 						return pancreas.style.fill = color.color;
 					case "liver":
 						return liver.style.fill = color.color;
-					case "lungs":
-						return lungs.style.fill = color.color;
-						
+					case "lung":
+						return lung.style.fill = color.color;
+
 					case "abdomen":
 						return abdomen.style.fill = color.color;
-						
+
 					case "kidney":
 						return kidney.style.fill = color.color;
-						
+
 					case "spleen":
 						return spleen.style.fill = color.color;
-						
+
 					case "small_intestine":
 						return smallIntestine.style.fill = color.color;
-						
+
 					case "large_intestine":
 						return largeIntestine.style.fill = color.color;
-						
+
 					case "bladder":
 						return bladder.style.fill = color.color;
-						
+
 					case "heart":
 						return heart.style.fill = color.color;
 					default:

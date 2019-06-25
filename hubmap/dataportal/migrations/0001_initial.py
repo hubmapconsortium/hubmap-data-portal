@@ -61,7 +61,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('kidney_color', models.CharField(max_length=7)),
-                ('lungs_color', models.CharField(max_length=7)),
+                ('lung_color', models.CharField(max_length=7)),
                 ('heart_color', models.CharField(max_length=7)),
                 ('pancreas_color', models.CharField(max_length=7)),
                 ('abdomen_color', models.CharField(max_length=7)),

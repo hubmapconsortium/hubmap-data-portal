@@ -1,9 +1,9 @@
 const data = [
     {
-        tissue: 'Lungs',
+        tissue: 'Lung',
         cells: 13,
         gene: 'SFTPA1',
-        path: 'lungs',
+        path: 'lung',
     },
     {
         tissue: 'Spleen',

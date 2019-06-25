@@ -1,4 +1,3 @@
-
 import matplotlib.cm
 import numpy as np
 import pandas as pd
@@ -8,7 +7,6 @@ def rgba_float_to_rgb_hex(floats):
     return '#' + ''.join('{:02x}'.format(int(c * 255)) for c in floats[:3])
 
 def setcolorheatmap(hugo_symbol, cd5l):
-
     tissue_colors = {
         f'{name}_color': rgba_float_to_rgb_hex(matplotlib.cm.viridis(expr))
         for name, expr in cd5l.items()
@@ -17,17 +15,16 @@ def setcolorheatmap(hugo_symbol, cd5l):
     tem.save()
     print(tem)
     geneObj = Gene.objects.get_or_create(hugo_symbol=hugo_symbol)[0]
-    geneObj.tissue_expression_heatmap =tem
+    geneObj.tissue_expression_heatmap = tem
     geneObj.save()
 
     print(tissue_colors)
-
 
 LRRN4 = {
     'pancreas': 0.3,
     'abdomen': 0.02,
     'liver': 0.1,
-    'lungs': 1,
+    'lung': 1,
     'smallIntestine': 0,
     'heart': 0.2,
     'bladder': 0.07,

@@ -22,7 +22,7 @@ class TissueExpressionHeatmapSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
         'kidney_color',
-        'lungs_color',
+        'lung_color',
         'heart_color',
         'pancreas_color',
         'abdomen_color',
@@ -34,7 +34,7 @@ class TissueExpressionHeatmapSerializer(serializers.ModelSerializer):
         )
         read_only_fields = (
             'kidney_color',
-            'lungs_color',
+            'lung_color',
             'heart_color',
             'pancreas_color',
             'abdomen_color',
@@ -88,7 +88,7 @@ class GeneSerializer(serializers.ModelSerializer):
         )
         expandable_fields = {'genes': (TissueExpressionHeatmapSerializer,
         { 'kidney_color',
-            'lungs_color',
+            'lung_color',
             'heart_color',
             'pancreas_color',
             'abdomen_color',
