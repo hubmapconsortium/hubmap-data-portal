@@ -22,7 +22,7 @@ function Footer() {
 		<div className={classes.footer}>
 			<footer >
 				<span style={{ display: "inline-block" }}>
-					<h5>&#169; Human Bio Molecular Atlas Program | { GitVersion }</h5>
+					<h5>&#169; Human BioMolecular Atlas Program. Supported by the NIH Common Fund | { GitVersion }</h5>
 				</span>
 			</footer>
 		</div>
