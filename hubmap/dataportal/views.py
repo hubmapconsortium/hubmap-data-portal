@@ -1,25 +1,22 @@
-from json import loads, dumps
+from collections import defaultdict
 
-from rest_framework import generics, status, views
+from rest_framework import generics, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework import status
+from .utils import *
+from .serializers import *
 import matplotlib.cm
-import numpy as np
 import pandas as pd
+import numpy as np
+from json import loads, dumps
 import xarray as xr
 
-from .models import *
-from .serializers import *
-from .utils import *
-
 #TODO: Add OpenApi -> Swagger to rest framework
-#TODO: Build frontend -> more tutorials
 #TODO: Add post request implementations
-#TODO: remove blank models from Get requests in default rest api HTML form
-
 
 class PaginationClass(PageNumberPagination):
-    page_size = 10
+    page_size =  10
     max_page_size = 10
 
 class StudyListView(generics.GenericAPIView):
@@ -27,20 +24,8 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        summary = {"all": [], "summary": [], "grouped": []}
-        result = loads(dumps(response))
-        values = [
-            {"tissue": r['tissue']['name'], "institution" : r['institution']['name'],
-               "image_count": r['image_count'] } if (r.get( 'image_count', '')) else
-            {"tissue": r['tissue']['name'], "institution": r['institution']['name'],
-             "cell_count": r['cell_count'] if (r.get( 'cell_count', '')) else '' } for r in result
-        ]
-        print(values)
-        data = pd.DataFrame.from_records(values).fillna('').groupby(['tissue', 'institution']).first()
-        response.append({"cell_count":data['cell_count'].items()})
-        response.append({"image_count":data['image_count'].items()})
-        xrdata = compute_multi_dim_counts(self.queryset, "cell_count")
-        print(xrdata)
+        summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
+        response.append({"summary" : summary})
         return Response(response)
 
     def list(self, request):
@@ -51,7 +36,7 @@ class StudyListView(generics.GenericAPIView):
         print(serializer.data)
         return self.get_paginated_response(serializer.data)
 
-#TODO : define what fields are modifiable and what can be created
+#TODO : deifne what fields are modifiable and what can be created
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():
@@ -100,6 +85,7 @@ class Tissue_svg_colors(views.APIView):
 
     def get(self, request):
         # These match the Django template fields in `human_body.svg`
+
         organs = [
             'pancreas',
             'abdomen',
@@ -171,10 +157,11 @@ def serialize_multi_dim_counts(data: xr.DataArray):
 
     list_for_frontend = []
     for tissue in df.index.levels[0]:
+        print(df.loc[tissue, :].iloc[:, 0])
         list_for_frontend.append(
             [
                 tissue,
-                list(df.loc[tissue, :].iloc[:, 0].items())
+                df.loc[tissue, :].iloc[:, 0].items()
             ]
         )
 

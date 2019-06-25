@@ -1,8 +1,16 @@
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
-
+const data = {"summary":[["Abdomen",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",0]]],["Bladder",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",0]]],["Colon",[["Caltech",0],["Florida",0],["Stanford",17],["UCSD",0],["Vanderbilt",0]]],["Heart",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",0]]],["Kidney",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",0]]],["LargeIntestine",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",0]]],["Liver",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",18]]],["Lungs",[["Caltech",0],["Florida",0],["Stanford",13],["UCSD",0],["Vanderbilt",13]]],["Pancreas",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",0]]],["SmallIntestine",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",0]]],["Spleen",[["Caltech",0],["Florida",0],["Stanford",0],["UCSD",0],["Vanderbilt",23]]]]};
 class StudiesChart extends PureComponent {
+
     render() {
+        console.log(data);
+        const summary = ["Tissue", ]
+        for (var tissue in summary["summary"])
+        {
+
+        }
+
         return (
             <div className="studieschart" >
                 <Chart id="studiesbyUniversitychart"
@@ -11,7 +19,7 @@ class StudiesChart extends PureComponent {
                     chartType="BarChart"
                     loader={<div>Loading Chart</div>}
                     data={[
-                        ['Center', 'May 2019', 'June 2019'],
+                        ['Tissue', 'Institution', 'cell'],
                         ['Florida', 5, 8],
                         ['Vanderbilt', 8, 22],
                         ['Stanford', 8, 18],

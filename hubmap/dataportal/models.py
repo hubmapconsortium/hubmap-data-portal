@@ -8,7 +8,7 @@ class TissueExpressionHeatmap(models.Model):
     of gene expression across the human body.
     """
     kidney_color = models.CharField(max_length=7)
-    lung_color = models.CharField(max_length=7)
+    lungs_color = models.CharField(max_length=7)
     heart_color = models.CharField(max_length=7)
     pancreas_color = models.CharField(max_length=7)
     abdomen_color = models.CharField(max_length=7)
@@ -19,7 +19,7 @@ class TissueExpressionHeatmap(models.Model):
     spleen_color = models.CharField(max_length=7)
 
     def __str__(self):
-        return 'tissue_colors'
+        return str(self.id)
 
 class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
@@ -125,17 +125,17 @@ class ScRnaSeqStudyBarcoded(ScRnaSeqStudy):
 class SpatialTranscriptomicStudy(Study):
     genes = models.ManyToManyField(Gene)
 
+class ImagingStudy(Study):
+    image_count = models.PositiveIntegerField()
+    preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
+
 @study_type
-class MassCytometryStudy(Study):
+class MassCytometryStudy(ImagingStudy):
+
     class Meta:
         verbose_name = 'Mass Cytometry'
 
     proteins = models.ManyToManyField(Protein)
-    preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
-
-class ImagingStudy(Study):
-    image_count = models.PositiveIntegerField()
-    preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
 
 @study_type
 class SeqFishImagingStudy(ImagingStudy):
@@ -146,4 +146,3 @@ class MicroscopyStudy(ImagingStudy):
     class Meta:
         verbose_name = 'Microscopy'
 
-# then a ForeignKey from Gene to TissueExpressionHeatmap

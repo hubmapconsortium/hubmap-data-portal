@@ -35,14 +35,17 @@ def get_response_for_request(self, request, format=None):
     microscopy = get_microscopy_list(query)
     scrna_atac = get_scrna_atac_list(query)
     seq_fish_imaging = get_seq_fish_imaging_list(query)
-    genes = get_genes_list(query)
-    proteins = get_proteins_list(query)
-    #first set query set
-    self.queryset = list(
-        chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic, genes,
-              proteins))
+    if not query is None:
+        genes = get_genes_list(query)
+        proteins = get_proteins_list(query)
+        self.queryset = list(
+            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic, genes,
+                  proteins))
+    else:
+        #first set query set
+        self.queryset = list(
+            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic))
     self.queryset.sort(key=lambda x: x.id)
-    print(self.queryset)
     #set context
     context = {
         "request": request,
@@ -56,13 +59,13 @@ def get_response_for_request(self, request, format=None):
     mass_cytometry_serializer = MassCytometryStudySerializer(mass_cytometry, many=True, context=context)
     scrna_atac_serializer = ScAtacSeqStudySerializer(scrna_atac, many=True, context=context)
     seq_fish_imaging_serializer = SeqFishImagingStudySerializer(seq_fish_imaging, many=True, context=context)
-    genes_serializer = GeneSerializer(genes, many=True, context=context)
-    proteins_serializer = ProteinSerializer(proteins, many=True, context=context)
     response = scrna_barcorded_serializer.data + scrna_cdna_serializer.data + scrna_atac_serializer.data + \
             microscopy_serializer.data + mass_cytometry_serializer.data + spatial_transcriptomic_serializer.data \
                + seq_fish_imaging_serializer.data
     response.sort(key=lambda x: x['id'])
     if not query is None:
+        genes_serializer = GeneSerializer(genes, many=True, context=context)
+        proteins_serializer = ProteinSerializer(proteins, many=True, context=context)
         response += genes_serializer.data + proteins_serializer.data
     return response
 
@@ -73,7 +76,8 @@ def get_masscytometry_list(query):
         mass_cytometry = MassCytometryStudy.objects.filter(
             Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
             Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
-            | Q(proteins__name__icontains=query) | Q(preview_image__icontains=query))
+            | Q(proteins__name__icontains=query) | Q(preview_image__icontains=query)
+        | Q(image_count__icontains=query))
     return mass_cytometry
 
 def get_scrna_barcorded_list(query):
@@ -83,7 +87,7 @@ def get_scrna_barcorded_list(query):
         scrna_barcorded = ScRnaSeqStudyBarcoded.objects.filter(
             Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
             Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
-            | Q(genes__hugo_symbol__icontains=query))
+            | Q(genes__hugo_symbol__icontains=query) | Q(cell_count__icontains=query))
     return scrna_barcorded
 
 def get_scrna_cdna_list(query):
@@ -93,7 +97,7 @@ def get_scrna_cdna_list(query):
         scrna_cdna = ScRnaSeqStudyCDNA.objects.filter(
             Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
             Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
-            | Q(read_count_aligned__icontains=query))
+            | Q(read_count_aligned__icontains=query) | Q(cell_count__icontains=query))
     return scrna_cdna
 
 def get_scrna_atac_list(query):
@@ -162,4 +166,13 @@ def get_seq_fish_imaging_list(query):
                      Q(institution__name__icontains=query) | Q(creation_time__icontains=query)| Q(image_count__icontains=query)
                      | Q(preview_image__icontains=query))
     return seq_fish_imaging
+
+def flatten(orderedDict):
+    result = list()
+    for item in orderedDict:
+        if isinstance(item, (OrderedDict, list)):
+            result.extend(flatten(item))
+        else:
+            result.append(item)
+    return result
 

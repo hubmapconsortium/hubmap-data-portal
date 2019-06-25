@@ -18,6 +18,34 @@ class InstitutionSerializer(serializers.ModelSerializer):
         )
         model = Institution
 
+class TissueExpressionHeatmapSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+        'kidney_color',
+        'lungs_color',
+        'heart_color',
+        'pancreas_color',
+        'abdomen_color',
+        'liver_color',
+        'smallIntestine_color',
+        'bladder_color',
+        'largeIntestine_color',
+        'spleen_color',
+        )
+        read_only_fields = (
+            'kidney_color',
+            'lungs_color',
+            'heart_color',
+            'pancreas_color',
+            'abdomen_color',
+            'liver_color',
+            'smallIntestine_color',
+            'bladder_color',
+            'largeIntestine_color',
+            'spleen_color',
+        )
+        model = TissueExpressionHeatmap
+
 class TissueSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -42,34 +70,6 @@ class DataTypeSerializer(serializers.ModelSerializer):
         )
         model = DataType
 
-class TissueExpressionHeatmapSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = (
-        'kidney_color',
-        'lung_color',
-        'heart_color',
-        'pancreas_color',
-        'abdomen_color',
-        'liver_color',
-        'smallIntestine_color',
-        'bladder_color',
-        'largeIntestine_color',
-        'spleen_color',
-        )
-        read_only_fields = (
-            'kidney_color',
-            'lung_color',
-            'heart_color',
-            'pancreas_color',
-            'abdomen_color',
-            'liver_color',
-            'smallIntestine_color',
-            'bladder_color',
-            'largeIntestine_color',
-            'spleen_color',
-        )
-        model = TissueExpressionHeatmap
-
 class GeneSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
@@ -77,18 +77,18 @@ class GeneSerializer(serializers.ModelSerializer):
             'hugo_symbol',
             'entrez_id',
             'ensembl_id',
-              'tissue_expression_heatmap',
+            'tissue_expression_heatmap',
         )
         read_only_fields = (
             'id',
             'hugo_symbol',
             'entrez_id',
             'ensembl_id',
-              'tissue_expression_heatmap',
+            'tissue_expression_heatmap',
         )
         expandable_fields = {'genes': (TissueExpressionHeatmapSerializer,
         { 'kidney_color',
-            'lung_color',
+            'lungs_color',
             'heart_color',
             'pancreas_color',
             'abdomen_color',
