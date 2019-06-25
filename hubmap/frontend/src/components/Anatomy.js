@@ -160,7 +160,7 @@ class HumanAnatomyCard extends React.Component {
 			this.previousState = this.currentState;
 			var colors = this.currentState.response;
 			console.log(this.currentState);
-			colors.map(color => {
+			/*colors.map(color => {
 				switch (color.tissue) {
 					case "pancreas":
 						return pancreas.style.fill = color.color;
@@ -192,7 +192,7 @@ class HumanAnatomyCard extends React.Component {
 					default:
 						return;
 				}
-			});
+			});*/
 			console.log(colors);
 		}
 		return (

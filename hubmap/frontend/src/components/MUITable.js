@@ -30,9 +30,9 @@ class MaterialTableDemo extends React.Component {
 		this.state = {
 			columns: [
 				{label: 'Id', name: 'id', filtering: false},
-				{label: 'Experiment type', name: 'study_type'},
+				{label: 'Assay type', name: 'data_type'},
+				//{label: 'Experiment type', name: 'study_type'},
 				{label: 'Institution', name: 'institution'},
-				//{label: 'Data type', name: 'data_type'},
 				{label: 'Tissue', name: 'tissue'},
 			],
 			data: [],
@@ -49,9 +49,9 @@ class MaterialTableDemo extends React.Component {
 			(
 				{
 					'id': study.id,
-					'study_type': study.subclass.model,
+					//'study_type': study.subclass.model,
 					'institution': study.institution.name,
-					//'data_type': study.data_type.name,
+					'data_type': study.data_type.name,
 					'tissue': study.tissue.name,
 				}
 			)
@@ -98,9 +98,9 @@ class MaterialTableDemo extends React.Component {
 			this.previousState = {
 				columns: [
 					{name: 'id',label: 'Id',  type: 'numeric',  display: 'excluded', filter: true, sortDirection: 'asc'},
-					{ name: 'study_type',label: 'Experiment type',  filter: true, },
+					{name: 'data_type', label: 'Assay type', cellStyle: {width:150} ,filter: true, },
+					//{ name: 'study_type',label: 'Experiment type',  filter: true, },
 					{name: 'institution', label: 'Center',  filter: true, },
-					//{name: 'data_type', label: 'Data type', cellStyle: {width:150} ,filter: true, },
 					{name: 'tissue', label: 'Tissue', filter: true,},
 				],
 				data: studydata,

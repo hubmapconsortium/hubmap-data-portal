@@ -157,7 +157,6 @@ def serialize_multi_dim_counts(data: xr.DataArray):
 
     list_for_frontend = []
     for tissue in df.index.levels[0]:
-        print(df.loc[tissue, :].iloc[:, 0])
         list_for_frontend.append(
             [
                 tissue,
