@@ -11,6 +11,7 @@ import ImageCountByTissuesChart from './ImageCountByTissueChart';
 import MaterialTableDemo from './MUITable';
 import StudiesBarChart from './BarChart';
 import ImageCountStackedChart from './d3chart';
+import viridis from '../images/viridis.png'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -51,13 +52,16 @@ function RootContainer() {
         <Grid item style={{height:30}}>
           <NavBar />
         </Grid>
-        <Grid item style={{ height: '700px', width: '320px', marginTop: '110px', marginLeft:'-50px' }} >
+        <Grid item style ={{height: '300px', width: '5px', marginTop: '110px', marginLeft:'-50px' }}>
+        <img src={viridis} style={{  transform:'scale(0.6)', }} alt="Color Map"/>
+        </Grid>
+        <Grid item style={{ height: '700px', width: '320px', marginTop: '110px', marginLeft:'-30px' }} >
           <HumanSvg studies={''} />
         </Grid>
-        <Grid item style={{ height: '400px', width: '420px', marginTop: '170px', marginLeft:'20px'}}>
+        <Grid item style={{ height: '400px', width: '420px', marginTop: '170px', marginLeft:'10px'}}>
           <CellCountByTissueChart />
         </Grid>
-        <Grid item style={{ height: '400px', width: '450px', marginTop: '170px', marginLeft:'20px'}}>
+        <Grid item style={{ height: '400px', width: '450px', marginTop: '170px', marginLeft:'10px'}}>
           <ImageCountByTissuesChart />
         </Grid>
         <Grid item style={{ height: '450px', width: '900px', marginTop: '-250px', marginLeft:'370px'}}>

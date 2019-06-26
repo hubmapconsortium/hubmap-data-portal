@@ -37,15 +37,16 @@ function showToolTip(evt) {
 	var y = (evt.clientY - CTM.f + 20) / CTM.d;
 	tooltip.setAttributeNS(null, "transform", "translate(" + mousex + " " + mousey + ")");
 	tooltip.setAttributeNS(null, "visibility", "visible");
+	console.log(evt.target.getAttributeNS(null, "data-tooltip-text"));
 	var lines = evt.target.getAttributeNS(null, "data-tooltip-text").split(',');
 	tooltipText.firstChild.data = lines[0];
 	console.log(typeof(tooltipText.firstChild));
 	updateText("tspanid", lines[1]);
-	updateText("tspanid2", lines[2]);
+	//updateText("tspanid2", lines[2]);
 	var length = tooltipText.getComputedTextLength();
 
 	for (var i = 0; i < tooltipRects.length; i++) {
-		tooltipRects[i].setAttributeNS(null, "width", length-20 );
+		tooltipRects[i].setAttributeNS(null, "width", length+10 );
 		tooltipRects[i].setAttributeNS(null, "height", 30);
 		tooltipRects[i].setAttributeNS(null, "font-size", 2);
 	}
@@ -69,87 +70,18 @@ class HumanAnatomyCard extends React.Component {
 		try {
 			store.subscribe(() => {this.currentState = store.getState().colorsState;
 			this.studyState = store.getState().studyState;
-		this.geneTissueColorState = store.getState().geneTissueColorState});
+			this.geneTissueColorState = store.getState().geneTissueColorState});
 			console.log(this.studyState);
 			if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS && this.currentState.response !== ""
-				&& this.currentState.type === Constants.GET_TISSUE_COLORS) {
+				&& this.currentState.type === Constants.GET_TISSUE_COLORS) 
+			{
 				console.log('get tissue colors', this.currentState);
 				this.props.dispatch(fetch_colors());
 			}
-			else {
+			else 
+			{
 				this.props.dispatch(in_progress());
 			}
-
-			console.log(this.currentState, this.geneTissueColorState);
-			//first get svg
-			const datatooltip ="";
-			humanSvg = document.getElementById('human');
-			tooltip = humanSvg.getElementById('tooltip');
-			tooltipText = tooltip.getElementsByTagName('text')[0];
-			tooltipRects = tooltip.getElementsByTagName('rect');
-			var pathTriggers = humanSvg.getElementsByClassName('tooltip-trigger');
-			for (var i = 0; i < pathTriggers.length; i++) {
-				pathTriggers[i].addEventListener('mousemove', showToolTip);
-				pathTriggers[i].addEventListener('mouseout', hideToolTip);
-				//pathTriggers[i].addEventListener('mouseover', setHover);
-			}
-
-			pancreas = document.getElementById('pancreas');
-			pancreas.setAttributeNS(null, "data-tooltip-text", " " + cellcount[3].tissue + "," + cellcount[3].cells + " experiments," + cellcount[3].gene + " gene");
-			pancreas.addEventListener("click", async function () {
-				console.log(pancreas.getAttribute("id"));
-				console.log(cellcount);
-			});
-
-			abdomen = document.getElementById('abdomen');
-			abdomen.setAttributeNS(null, "data-tooltip-text", " " + cellcount[8].tissue + "," + cellcount[8].cells + " experiments," + cellcount[8].gene + " gene");
-			abdomen.addEventListener("click", async function () {
-				console.log(abdomen.getAttribute("id"))
-			});
-
-			liver = document.getElementById('liver');
-			liver.setAttributeNS(null, "data-tooltip-text", " " + cellcount[5].tissue + "," + cellcount[5].cells + " experiments," + cellcount[5].gene + " gene");
-			liver.addEventListener("click", function () {
-				console.log(liver.getAttribute("id"));
-			});
-
-			lung = document.getElementById('lung');
-			lung.setAttributeNS(null, "data-tooltip-text", " " + cellcount[0].tissue + "," + cellcount[0].cells + " experiments," + cellcount[0].gene + " gene");
-			lung.addEventListener("click", function () {
-				console.log(lung.getAttribute("id"));
-			});
-			smallIntestine = document.getElementById('smallIntestine');
-			smallIntestine.setAttributeNS(null, "data-tooltip-text", " " + cellcount[6].tissue + "," + cellcount[6].cells + " experiments," + cellcount[6].gene + " gene");
-			smallIntestine.addEventListener("click", function () {
-				console.log(smallIntestine.getAttribute("id"));
-			});
-			heart = document.getElementById('heart');
-			heart.setAttributeNS(null, "data-tooltip-text", " " + cellcount[4].tissue + "," + cellcount[4].cells + " experiments," + cellcount[4].gene + " gene");
-			heart.addEventListener("click", function () {
-				console.log(heart.getAttribute("id"));
-			});
-			bladder = document.getElementById('bladder');
-			bladder.setAttributeNS(null, "data-tooltip-text", " Bladder: , No data");
-			bladder.addEventListener("click", function () {
-				console.log(bladder.getAttribute("id"));
-			});
-			largeIntestine = document.getElementById('largeIntestine');
-			largeIntestine.setAttributeNS(null, "data-tooltip-text", " " + cellcount[7].tissue + "," + cellcount[7].cells + " experiments," + cellcount[7].gene + " gene");
-			largeIntestine.addEventListener("click", function () {
-				console.log(largeIntestine.getAttribute("id"));
-			});
-			kidney = document.getElementById('kidney');
-			kidney.setAttributeNS(null, "data-tooltip-text", " " + cellcount[2].tissue + "," + cellcount[2].cells + " experiments," + cellcount[2].gene + " gene");
-			kidney.addEventListener("click", function () {
-				console.log(kidney.getAttribute("id"));
-			});
-			spleen = document.getElementById('spleen');
-			spleen.setAttributeNS(null, "data-tooltip-text", " " + cellcount[1].tissue + ", " + cellcount[1].cells + " experiments," + cellcount[1].gene + " gene");
-			spleen.addEventListener("click", function () {
-				console.log(spleen.getAttribute("id"));
-			});
-			human = document.getElementById('main');
-			human.setAttributeNS(null, "data-tooltip-text", " #Total, experiments: 248, 9 genes");
 		}
 		catch (e) {
 			console.log(e);
@@ -196,50 +128,139 @@ class HumanAnatomyCard extends React.Component {
 			this.previousState = this.currentState;
 			var colors = this.currentState.response;
 			console.log(this.currentState);
-			/*colors.map(color => {
-				index = this.genetissueArray.findIndex((e) => e.tissue === 'liver');
-			if(index !== -1) 
-			{
+			console.log(this.currentState, this.geneTissueColorState);
+			//first get svg
+			const datatooltip ="";
+			humanSvg = document.getElementById('human');
+			tooltip = humanSvg.getElementById('tooltip');
+			tooltipText = tooltip.getElementsByTagName('text')[0];
+			tooltipRects = tooltip.getElementsByTagName('rect');
+			var pathTriggers = humanSvg.getElementsByClassName('tooltip-trigger');
+			
+			pancreas = document.getElementById('pancreas');
+			pancreas.setAttributeNS(null, "data-tooltip-text", "Pancreas, No gene data available");
+			pancreas.addEventListener("click", async function () {
+				console.log(pancreas.getAttribute("id"));
+				console.log(cellcount);
+			});
+
+			abdomen = document.getElementById('abdomen');
+			abdomen.setAttributeNS(null, "data-tooltip-text", "Abdomen, No gene data available");
+			abdomen.addEventListener("click", async function () {
+				console.log(abdomen.getAttribute("id"))
+			});
+
+			liver = document.getElementById('liver');
+			liver.setAttributeNS(null, "data-tooltip-text", "Liver, No gene data available");
+			liver.addEventListener("click", function () {
+				console.log(liver.getAttribute("id"));
+			});
+
+			lung = document.getElementById('lung');
+			lung.setAttributeNS(null, "data-tooltip-text", "Lung, No gene data available");
+			lung.addEventListener("click", function () {
+				console.log(lung.getAttribute("id"));
+			});
+			smallIntestine = document.getElementById('smallIntestine');
+			smallIntestine.setAttributeNS(null, "data-tooltip-text", "Small Intestine, No gene data available");
+			smallIntestine.addEventListener("click", function () {
+				console.log(smallIntestine.getAttribute("id"));
+			});
+			heart = document.getElementById('heart');
+			heart.setAttributeNS(null, "data-tooltip-text", "Heart, No gene data available");
+			heart.addEventListener("click", function () {
+				console.log(heart.getAttribute("id"));
+			});
+			bladder = document.getElementById('bladder');
+			bladder.setAttributeNS(null, "data-tooltip-text", "Bladder, No gene data available");
+			bladder.addEventListener("click", function () {
+				console.log(bladder.getAttribute("id"));
+			});
+			largeIntestine = document.getElementById('largeIntestine');
+			largeIntestine.setAttributeNS(null, "data-tooltip-text", "Large Intestine, No gene data available");
+			largeIntestine.addEventListener("click", function () {
+				console.log(largeIntestine.getAttribute("id"));
+			});
+			kidney = document.getElementById('kidney');
+			//kidney.setAttributeNS(null, "data-tooltip-text", "Kidney, No gene data available");
+			kidney.addEventListener("click", function () {
+				console.log(kidney.getAttribute("id"));
+			});
+			spleen = document.getElementById('spleen');
+			spleen.setAttributeNS(null, "data-tooltip-text", "Spleen, No gene data available");
+			spleen.addEventListener("click", function () {
+				console.log(spleen.getAttribute("id"));
+			});
+			human = document.getElementById('main');
+			console.log( this.studyState.response.length-1);
+			human.setAttributeNS(null, "data-tooltip-text", " # experiments:"+ (this.studyState.response.length-1).toString()+", 9 genes");
+			for (var i = 0; i < pathTriggers.length; i++) {
+				pathTriggers[i].addEventListener('mousemove', showToolTip);
+				pathTriggers[i].addEventListener('mouseout', hideToolTip);
+				//pathTriggers[i].addEventListener('mouseover', setHover);
+			}
+			this.genetissueArray.map(genetissuepair => {
+				//index = this.genetissueArray.findIndex((e) => e.tissue === genetissuepair.tissue);
+			//if(index !== -1) 
+			/*{
 				console.log(datatooltip, index)
 				datatooltip = this.genetissueArray[index];
 			 } 
 			 else 
 			 {
-				 datatooltip = 'Liver, no data available';
-			}
-				switch (color.tissue) {
+				 datatooltip = 'No data available';
+			}*/
+			console.log(genetissuepair.tissue);
+				switch (genetissuepair.tissue.toLowerCase()) {
 					case "pancreas":
-						return pancreas.style.fill = color.color;
+						 pancreas.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 break;
 					case "liver":
-						return liver.style.fill = color.color;
+						 liver.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 break;
 					case "lung":
-						return lung.style.fill = color.color;
+						 lung.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						 break;
 
 					case "abdomen":
-						return abdomen.style.fill = color.color;
+						 abdomen.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						break;
 
 					case "kidney":
-						return kidney.style.fill = color.color;
+						 kidney.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						 break;
 
 					case "spleen":
-						return spleen.style.fill = color.color;
+						 spleen.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						 break;
 
 					case "small_intestine":
-						return smallIntestine.style.fill = color.color;
+						 smallIntestine.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						 break;
 
 					case "large_intestine":
-						return largeIntestine.style.fill = color.color;
+						 largeIntestine.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						 break;
 
 					case "bladder":
-						return bladder.style.fill = color.color;
+						 bladder.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						 break;
 
 					case "heart":
-						return heart.style.fill = color.color;
+						 heart.setAttributeNS(null, "data-tooltip-text", " "+ genetissuepair.tissue+", # genes: "+ genetissuepair.genescount);
+						 console.log(heart.getAttributeNS(null, "data-tooltip-text"));
+						 break;
 					default:
-						return;
+						break;
 				}
-			});*/
-			console.log(colors);
+			});
 		}
 		return (
 			<ReactComp />

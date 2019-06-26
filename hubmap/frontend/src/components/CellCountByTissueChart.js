@@ -63,7 +63,16 @@ const mapStateToProps = state => {
                     options={{
                         title: '# of Cells per Tissue, by Center',
                         chartArea: { width: '50%', fill: "#fafafa" },
-                        colors: ['#42a5f5', '#ffc400', '#66bb6a','#42a5f5', '#ffc400', '#66bb6a'],
+                        colors: ['#1f77b4',
+                        '#ff7f0e',
+                        '#2ca02c',
+                        '#d62728',
+                        '#9467bd',
+                        '#8c564b',
+                        '#e377c2',
+                        '#7f7f7f',
+                        '#bcbd22',
+                        '#17becf'],
                         isStacked: true,
                         hAxis: {
                             title: 'Total # Cells',
