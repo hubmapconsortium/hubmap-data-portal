@@ -19,6 +19,7 @@ var pancreas, heart, lung, smallIntestine, largeIntestine,
 	abdomen, liver, bladder, kidney, spleen, human;
 
 const cellcount = data;
+var genetissueArray={};
 var humanSvg, tooltip, tooltipText, tooltipRects;
 function updateText(tspanId, txt) {
 	var spanEl = document.getElementById(tspanId);
@@ -60,12 +61,16 @@ function hideToolTip(evt) {
 class HumanAnatomyCard extends React.Component {
 	currentState = {};
 	previousState = {};
-
+	studyState = {};
+	geneTissueColorState = {};
+	
 	componentDidMount() {
 
 		try {
-			store.subscribe(() => this.currentState = store.getState().colorsState);
-			console.log(this.currentState);
+			store.subscribe(() => {this.currentState = store.getState().colorsState;
+			this.studyState = store.getState().studyState;
+		this.geneTissueColorState = store.getState().geneTissueColorState});
+			console.log(this.studyState);
 			if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS && this.currentState.response !== ""
 				&& this.currentState.type === Constants.GET_TISSUE_COLORS) {
 				console.log('get tissue colors', this.currentState);
@@ -75,8 +80,9 @@ class HumanAnatomyCard extends React.Component {
 				this.props.dispatch(in_progress());
 			}
 
-			console.log(this.currentState);
+			console.log(this.currentState, this.geneTissueColorState);
 			//first get svg
+			const datatooltip ="";
 			humanSvg = document.getElementById('human');
 			tooltip = humanSvg.getElementById('tooltip');
 			tooltipText = tooltip.getElementsByTagName('text')[0];
@@ -153,14 +159,54 @@ class HumanAnatomyCard extends React.Component {
 	render() {
 		const { response, error, status, type } = store.getState().colorsState;
 		this.currentState =store.getState().colorsState;
+		this.studyState = store.getState().studyState;
+		this.geneTissueColorState = store.getState().geneTissueColorState;
 		console.log(response, error, status, type);
-		console.log(this.currentState);
+		console.log(this.currentStatem, this.studyState);
+		if (this.studyState !== undefined && this.studyState.response !== undefined 
+			&& this.studyState.status !== "") 
+		{
+			var results = this.studyState.response.response;
+			console.log(this.studyState.response);
+			var tissues = [...new Set(this.studyState.response.slice(0,this.studyState.response.length-1)
+			.map(study => (study.tissue.name) ))];
+
+			this.genetissueArray = this.studyState.response.slice(0,this.studyState.response.length-1)
+			.reduce((arr, study) =>
+				{
+					const index = arr.findIndex((e) =>  e.tissue === study.tissue.name)
+					if(index ===-1)
+					{
+						arr.push(
+						{
+							'tissue': study.tissue.name,
+							'genescount': study.genes !== undefined ? study.genes.length : 0,
+						});
+					}
+					else{
+						arr[index ] = {'tissue': study.tissue.name,'genescount':study.genes !== undefined ? study.genes.length : 0};
+					}
+					return arr;
+				}
+				, []);
+		}
+		console.log(this.genetissueArray);
 		if (response !== "" && response !== undefined
 			&& type === Constants.GET_TISSUE_COLORS) {
 			this.previousState = this.currentState;
 			var colors = this.currentState.response;
 			console.log(this.currentState);
 			/*colors.map(color => {
+				index = this.genetissueArray.findIndex((e) => e.tissue === 'liver');
+			if(index !== -1) 
+			{
+				console.log(datatooltip, index)
+				datatooltip = this.genetissueArray[index];
+			 } 
+			 else 
+			 {
+				 datatooltip = 'Liver, no data available';
+			}
 				switch (color.tissue) {
 					case "pancreas":
 						return pancreas.style.fill = color.color;

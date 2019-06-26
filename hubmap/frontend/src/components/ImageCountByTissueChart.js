@@ -100,8 +100,8 @@ return < ImageCountByTissuesChart size='medium' style={{ maxWidth: '100%'}}
 }
 else
 {
-console.log(status, response, type, store.getState(), this.previousState);
-return (<div>No Experiments</div>)
+    console.log(status, response, type, store.getState(), this.previousState);
+    return (<div>No Experiments</div>)
 }
     }
 }

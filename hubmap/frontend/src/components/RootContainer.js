@@ -10,6 +10,7 @@ import CellCountByTissueChart from "./CellCountByTissueChart"
 import ImageCountByTissuesChart from './ImageCountByTissueChart';
 import MaterialTableDemo from './MUITable';
 import StudiesBarChart from './BarChart';
+import ImageCountStackedChart from './d3chart';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -64,6 +65,9 @@ function RootContainer() {
         </Grid>
         <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft:'0px'}}>
           <StudiesBarChart />
+        </Grid>
+        <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft:'0px'}}>
+          <ImageCountStackedChart />
         </Grid>
         <Footer />
       </Grid>
