@@ -188,7 +188,8 @@ class SearchBox extends React.Component{
                                     tissue.style.setProperty("animation", tissueColorMap[0]+'tissueAnimation'+" 10s linear");
                                     tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
                                     console.log(tissue.style);
-                                    
+                                    var imgelement = document.getElementById("tab10ColorMap");
+                                    imgelement.style.setProperty("display", "block")
                                 }
                                 else
                                 {

@@ -53,7 +53,7 @@ function RootContainer() {
           <NavBar />
         </Grid>
         <Grid item style ={{height: '300px', width: '5px', marginTop: '110px', marginLeft:'-50px' }}>
-        <img src={viridis} style={{  transform:'scale(0.6)', }} alt="Color Map"/>
+        <img id="tab10ColorMap" src={viridis} style={{  transform:'scale(0.6)',WebkitTransform:'scale(0.6)', display:'none' }} alt="Color Map" />
         </Grid>
         <Grid item style={{ height: '700px', width: '320px', marginTop: '110px', marginLeft:'-30px' }} >
           <HumanSvg studies={''} />
