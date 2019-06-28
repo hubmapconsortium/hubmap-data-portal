@@ -13,6 +13,7 @@ TIMESTAMP_FORMAT = '%Y%m%d-%H%M%S%z'
 GIT_VERSION_COMMAND = [
     'git',
     'describe',
+    '--dirty',
 ]
 
 DOCKER = 'docker'
