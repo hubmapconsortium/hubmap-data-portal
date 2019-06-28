@@ -65,7 +65,7 @@ def write_git_version():
         proc = run(GIT_VERSION_COMMAND, cwd=str(path), stdout=PIPE, check=True)
         git_version = proc.stdout.decode('utf-8').strip()
 
-        print('Writing Git revision to', file_to_write)
+        print('Writing Git revision', git_version, 'to', file_to_write)
         with open(file_to_write, 'w') as f:
             json.dump({'version': git_version}, f)
     except Exception as e:
