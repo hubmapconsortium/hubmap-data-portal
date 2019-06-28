@@ -1,5 +1,6 @@
 from os import fspath
 from pathlib import Path
+from subprocess import PIPE, run
 
 # Build paths inside the project like this: BASE_DIR / ...
 BASE_DIR = Path(__file__).absolute().parent.parent
@@ -115,6 +116,29 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# TODO: deduplicate between this and `build_docker_container.py`. That script intended
+#  to be very barebones and only use things in the Python standard library.
+GIT_VERSION_COMMAND = [
+    'git',
+    'describe',
+    '--dirty',
+]
+def get_git_version() -> str:
+    git_version = '[unknown version]'
+
+    path = Path(__file__).parent
+
+    try:
+        proc = run(GIT_VERSION_COMMAND, cwd=str(path), stdout=PIPE, check=True)
+        git_version = proc.stdout.decode('utf-8').strip()
+    except Exception as e:
+        # don't care too much; this is best-effort
+        pass
+
+    return git_version
+
+GIT_VERSION = get_git_version()
 
 # Keep this as the last section of this file!
 try:
