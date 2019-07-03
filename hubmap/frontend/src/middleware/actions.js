@@ -65,7 +65,7 @@ export function fetchAllStudies()
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API );
+            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API ,  { crossdomain: true });
             const count = response.data.length;
             let results = {
                 status: Constants.SUCCESS,
