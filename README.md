@@ -16,6 +16,10 @@ We use PyCharm as development IDE for this prototype.
 `npm install -g create-react-app`
 * Navigate to hubmap/frontend folder and execute following command:
 `npm start`
+* Navigate to hubmap/frontend folder and execute following command:
+`npm run build`
+* Navigate to hubmap/frontend folder and execute following command:
+`npm run prod`
 * Navigate to dataportal folder and run following command
 	to migrate/create databases.
 	`python manage.py makemigrations`
