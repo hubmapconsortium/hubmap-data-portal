@@ -41,7 +41,6 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(1),
     padding: theme.spacing(1, 1, 1, 1),
   },
-
 }));
 
 function RootContainer() {
@@ -52,7 +51,7 @@ function RootContainer() {
         <Grid item style={{height:30}}>
           <NavBar />
         </Grid>
-        <Grid item style ={{height: '300px', width: '5px', marginTop: '110px', marginLeft:'-50px' }}>
+        <Grid item style ={{height: '300px', width: '5px', marginTop: '110px', marginLeft:'-60px' }}>
         <img id="tab10ColorMap" src={viridis} style={{  transform:'scale(0.6)',WebkitTransform:'scale(0.6)', display:'none' }} alt="Color Map" />
         </Grid>
         <Grid item style={{ height: '700px', width: '320px', marginTop: '110px', marginLeft:'-30px' }} >

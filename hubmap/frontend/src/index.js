@@ -7,7 +7,7 @@ import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducer from './middleware/rootReducer'
 import thunk from 'redux-thunk';
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+//import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 
 export const store = createStore(reducer, applyMiddleware(thunk));
 console.log(store.getState());
@@ -17,7 +17,8 @@ ReactDOM.render(
 	document.getElementById('root')
 );
 }
-//module.hot.accept();
+module.hot.accept();
+serviceWorker.unregister();
 if ('serviceWorker' in navigator) {
 	window.addEventListener('load', function() {
 	  navigator.serviceWorker.register('/service-worker.js');
