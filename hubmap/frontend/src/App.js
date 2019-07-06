@@ -1,8 +1,7 @@
 import './App.css';
-import React, {PureComponent} from 'react';
+import React from 'react';
 import RootContainer from './components/RootContainer';
-import { getTissueColorsFromServer, fetchAllStudies, getGeneTissueColors } from './middleware/actions';
-import {connect} from 'react-redux';
+import  {getTissueColorsFromServer, fetchAllStudies, getGeneTissueColors} from './middleware/actions';
 
 //import '@google/model-viewer' ;
 //npm run setup -- --spaceId eo4e2dc0pbyt --deliveryToken H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8 --managementToken CFPAT-nXzmTIQFv4Om1KFSnqn0fS3X7_3YLXDacst4IC52_1M
@@ -11,7 +10,7 @@ import {connect} from 'react-redux';
 *      DONE: Added organs prototype + clickable+rest api!! phew!! */
 
 
-class App extends PureComponent {
+class App extends React.Component {
 
     componentDidMount() {
         this.props.dispatch(fetchAllStudies());
@@ -30,4 +29,4 @@ class App extends PureComponent {
 		);
 	}
 }
-export default connect() (App);
+export default App;

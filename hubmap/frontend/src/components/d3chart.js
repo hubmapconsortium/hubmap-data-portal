@@ -1,10 +1,10 @@
 import React from "react";
 import * as d3 from "d3";
 import "../App.css";
-import { connect } from 'react-redux';
+import  connect from 'react-redux';
 import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../middleware/actions';
 import * as Constants from '../commons/constants';
-import { store } from '../index';
+import store from '../index';
 import  {CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
@@ -203,7 +203,7 @@ class ImageCountStackedChart extends React.Component {
 return < ImageCountStackedChart size='medium' style={{ maxWidth: '100%'}}
         title={<Typography variant='title'>Experiments From HuBMAP Consortium
         {(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
-        />
+        />;
 }
 else
 {
@@ -211,7 +211,7 @@ else
     this.drawChart();
     return ( <div id="chartcontainer">
     <svg id="barchart" ref={svg => (this.svg = svg)} />
-  </div>)
+  </div>);
 }
 }
 }

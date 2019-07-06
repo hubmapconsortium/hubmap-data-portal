@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import fade from '@material-ui/core/styles/colorManipulator';
+import  makeStyles from '@material-ui/core/styles';
+import grey from '@material-ui/core/colors/grey';
 import SvgIcon from '@material-ui/core/SvgIcon';
-import { grey } from "@material-ui/core/colors";
-import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
   root: {

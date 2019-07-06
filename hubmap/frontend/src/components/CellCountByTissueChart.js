@@ -1,9 +1,9 @@
-import React, { PureComponent } from 'react';
-import { Chart } from 'react-google-charts';
-import { connect } from 'react-redux';
+import  React  from 'react';
+import  Chart  from 'react-google-charts';
+import  {connect}  from 'react-redux';
 import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../middleware/actions';
 import * as Constants from '../commons/constants';
-import { store } from '../index';
+import  store  from '../index';
 import  {CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
@@ -18,7 +18,7 @@ const mapStateToProps = state => {
     }
 };
 
-  class CellCountByTissueChart extends PureComponent {
+  class CellCountByTissueChart extends React.Component {
     currentState = {};
 	previousState ={};
     componentDidMount() {
@@ -34,14 +34,16 @@ const mapStateToProps = state => {
         }
 		
     }
-    render() {
-        const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
 
-          if (error) {
-            return <div>Error! {error.message}</div>
+    render() 
+    {
+        const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
+        var returnComponent;
+        if (error) {
+            returnComponent = <div>Error! {error.message}</div>;
 		}
-		
-		else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION 
+        
+        else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION 
 		&&  status === Constants.SUCCESS) 
 		{
             console.log(response[response.length-1]);
@@ -51,7 +53,7 @@ const mapStateToProps = state => {
                 }
                 return arr;
               }, []);
-        return (
+              returnComponent =
             
             <div className="studieschart" >
                 <Chart id="studiesbyUniversitychart"
@@ -98,21 +100,21 @@ const mapStateToProps = state => {
                     // For tests
                     rootProps={{ 'data-testid': '3' }}
                 />
-            </div>
-        );
-                }
-                else if(status === Constants.IN_PROGRESS && response === undefined && type=== Constants.GLOBAL_FETCH_ACTION  )
+            </div>;
+       }
+       else if(status === Constants.IN_PROGRESS && response === undefined && type=== Constants.GLOBAL_FETCH_ACTION  )
 		{
-			return < CellCountByTissueChart size='medium' style={{ maxWidth: '100%'}}
+			returnComponent = < CellCountByTissueChart size='medium' style={{ maxWidth: '100%'}}
 					title={<Typography variant='title'>Experiments From HuBMAP Consortium
 					{(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
-					/>
+					/>;
 		}
 		else
 		{
 			console.log(status, response, type, store.getState(), this.previousState);
-			return (<div>No Experiments</div>)
-		}
+			returnComponent = (<div>No Experiments</div>);
+        }
+        return returnComponent;
     }
 }
 export default connect(mapStateToProps)(CellCountByTissueChart)

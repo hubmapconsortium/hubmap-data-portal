@@ -1,7 +1,7 @@
 import React from "react";
 import '../App.css';
 import GitVersion from '../GitVersion'
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 
 const useStyles = makeStyles(theme => ({

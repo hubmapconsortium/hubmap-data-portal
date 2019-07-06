@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import colorsReducer from './colorsReducer';
 import studiesReducer from './studiesReducer';
 import geneTissueColorResponseReducer from './geneTissueColorsReducer'

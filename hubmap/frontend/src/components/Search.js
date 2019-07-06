@@ -1,16 +1,28 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
-import { fade } from '@material-ui/core/styles/colorManipulator';
+import fade from '@material-ui/core/styles/colorManipulator';
 import grey from '@material-ui/core/colors/grey';
 import data from './data';
 import * as Constants from '../commons/constants';
-import { store } from '../index';
-import { connect } from 'react-redux';
+import store from '../index';
+import {connect} from 'react-redux';
 import { fetch_gene_tissue_colors, in_progress, searchThis, search_studies } from "../middleware/actions";
 import * as Utils from '../commons/utils'
 import SearchIcon from '@material-ui/icons/Search';
 
+const mapStateToProps = state => {
+    console.log(state.geneTissueColorState);
+    return {
+        status: state.geneTissueColorState.status,
+        response: state.geneTissueColorState.response,
+		error: state.geneTissueColorState.error,
+		count: state.geneTissueColorState.count,
+		page: state.geneTissueColorState.page,
+		next: state.geneTissueColorState.next,
+		previous: state.geneTissueColorState.previous,
+    }
+};
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
@@ -64,18 +76,6 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const mapStateToProps = state => {
-    console.log(state.geneTissueColorState);
-    return {
-        status: state.geneTissueColorState.status,
-        response: state.geneTissueColorState.response,
-		error: state.geneTissueColorState.error,
-		count: state.geneTissueColorState.count,
-		page: state.geneTissueColorState.page,
-		next: state.geneTissueColorState.next,
-		previous: state.geneTissueColorState.previous,
-    }
-};
 /***
  * Remove animation from style in element's event handler
  */

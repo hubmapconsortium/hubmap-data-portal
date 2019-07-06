@@ -1,6 +1,6 @@
 import React from "react";
 import Study from "./MUITable";
-import { PureComponent } from 'react';
+import PureComponent from 'react';
 import grey from '@material-ui/core/colors/grey';
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';

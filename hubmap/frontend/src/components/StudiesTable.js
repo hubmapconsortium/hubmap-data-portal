@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import connect from 'react-redux';
 import { fetch_studies, in_progress } from '../controllers/actions';
 import * as Constants from '../commons/constants';
-import { hubmapStore } from '../index';
+import hubmapStore from '../index';
 import MaterialTableDemo from './MUITable';
 
 const mapStateToProps = state => {
