@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
 		color: grey[800],
 	}
 }));
-function Footer() {
+const Footer = () => {
 	const classes = useStyles();
 
 	return (

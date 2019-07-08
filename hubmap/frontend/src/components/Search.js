@@ -5,9 +5,9 @@ import fade from '@material-ui/core/styles/colorManipulator';
 import grey from '@material-ui/core/colors/grey';
 import data from './data';
 import * as Constants from '../commons/constants';
-import store from '../index';
+import * as index from '../index';
 import {connect} from 'react-redux';
-import { fetch_gene_tissue_colors, in_progress, searchThis, search_studies } from "../middleware/actions";
+import * as actions from "../middleware/actions";
 import * as Utils from '../commons/utils'
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -98,15 +98,15 @@ class SearchBox extends React.Component{
     }
     
     componentDidMount(){
-        store.subscribe(() => this.currentState = store.getState().geneTissueColorState);
+        index.store.subscribe(() => this.currentState = index.store.getState().geneTissueColorState);
         if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
         && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
 			console.log(this.currentState);
-            this.props.dispatch(fetch_gene_tissue_colors(this.currentState));
+            this.props.dispatch(actions.fetch_gene_tissue_colors(this.currentState));
         }
         else if(this.currentState.type === Constants.GET_GENE_TISSUE_COLOR_API && this.currentState.status === Constants.IN_PROGRESS)
         {
-            this.props.dispatch(in_progress());
+            this.props.dispatch(actions.in_progress());
         }
     }
 
@@ -129,7 +129,7 @@ class SearchBox extends React.Component{
                         // to set state.person.[firstname|lastname]. event.target.name
                         //required for showing animation
                         this.setState({ ...this.state, ['searchtext']: event.target.value });
-                        console.log(newValue, store.getState());
+                        console.log(newValue, index.store.getState());
                      
                         console.log(event.target.value, this.currentState);
                     }}
@@ -139,8 +139,8 @@ class SearchBox extends React.Component{
                             // Do code here
                                //search for tissue+gene 
                                var searchState = {};
-                        this.props.dispatch(searchThis(this.state.searchtext))
-                        .then(() => {this.searchState = store.getState().searchState;
+                        this.props.dispatch(actions.searchThis(this.state.searchtext))
+                        .then(() => {this.searchState = index.store.getState().searchState;
                             
                             //extract what we need for gene/tissue from search results
                             var results = this.searchState.response !== undefined ?
@@ -200,7 +200,7 @@ class SearchBox extends React.Component{
                                 }                                
                             }
                         });
-                        console.log(store.getState().searchState, this.searchState);
+                        console.log(index.store.getState().searchState, this.searchState);
                             console.log(this.state.searchtext);
                             console.log(this.currentState);
                             ev.preventDefault();

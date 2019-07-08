@@ -1,6 +1,6 @@
 import React from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import HumanAnatomyCard from "./Anatomy";
+import HumanImage from "./HumanImage";
 import SearchBox from "./Search";
 
 
@@ -10,7 +10,7 @@ function MainContent(props) {
         <React.Fragment >
             <CssBaseline />
             <SearchBox />
-            <HumanAnatomyCard />
+            <HumanImage />
         </React.Fragment>
 
     );

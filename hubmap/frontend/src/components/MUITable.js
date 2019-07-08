@@ -2,9 +2,9 @@ import React from 'react';
 import MUIDataTable from "mui-datatables";
 import grey from '@material-ui/core/colors/grey';
 import {connect} from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../middleware/actions';
+import * as actions from '../middleware/actions';
 import * as Constants from '../commons/constants';
-import store from '../index';
+import * as index from '../index';
 import  {CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
@@ -64,15 +64,15 @@ class MaterialTableDemo extends React.Component {
 	}
 
     componentDidMount() {
-        store.subscribe(() => this.currentState = store.getState().studyState);
+        index.store.subscribe(() => this.currentState = index.store.getState().studyState);
         if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
         && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
 			//console.log(this.currentState);
-            this.props.dispatch(fetch_studies(this.currentState));
+            this.props.dispatch(actions.fetch_studies(this.currentState));
         }
         else if(this.currentState.type === Constants.GLOBAL_FETCH_ACTION && this.currentState.status === Constants.IN_PROGRESS)
         {
-            this.props.dispatch(in_progress());
+            this.props.dispatch(actions.in_progress());
         }
 		
     }
@@ -82,10 +82,10 @@ class MaterialTableDemo extends React.Component {
 	 */
 	changePage = (page) => {
 		this.previousState.status= Constants.IN_PROGRESS;
-		this.props.dispatch(fetchNextPageFromStudies(this.previousState.next));
+		this.props.dispatch(actions.fetchNextPageFromStudies(this.previousState.next));
 	}
 	render() {
-		const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
+		const { response, error, status, type, page, count, next, previous } = index.store.getState().studyState;
 
         if (error) {
             return <div>Error! {error.message}</div>
@@ -164,7 +164,7 @@ class MaterialTableDemo extends React.Component {
 		}
 		else
 		{
-			console.log(status, response, type, store.getState(), this.previousState);
+			console.log(status, response, type, index.store.getState(), this.previousState);
 			return (<div>No Experiments</div>)
 		}
 	}

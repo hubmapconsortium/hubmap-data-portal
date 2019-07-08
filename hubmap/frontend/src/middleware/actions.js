@@ -2,7 +2,7 @@
 import axios from 'axios';
 import * as Constants from '../commons/constants';
 
-export const in_progress = () => ({type: Constants.IN_PROGRESS});
+export const in_progress = (type) => ({status: Constants.IN_PROGRESS, type: type});
 /**
  * fills study state props here after any of fetch methods from studies reducer
  * @param {Props object} response 
@@ -63,7 +63,7 @@ export function fetchAllStudies()
 {
     const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch => {
-        dispatch(in_progress());
+        dispatch(in_progress(Constants.GLOBAL_FETCH_ACTION));
         try {
             let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API ,  { crossdomain: true });
             const count = response.data.length;
@@ -93,7 +93,7 @@ export function fetchStudiesFirstPage(page)
     const BASE_API =(window.location.href).replace("3000", "8000");
     console.log(BASE_API+ Constants.GET_STUDIES_PAGINATED_REST_API+page);
     return async dispatch => {
-        dispatch(in_progress());
+        dispatch(in_progress(Constants.GLOBAL_FETCH_ACTION));
         try {
             let response = await axios.get(BASE_API + Constants.GET_STUDIES_PAGINATED_REST_API+page);
             console.log('action',response.data);
@@ -111,7 +111,7 @@ export function fetchStudiesFirstPage(page)
 export function fetchNextPageFromStudies(next) 
 {
     return async dispatch => {
-        dispatch(in_progress());
+        dispatch(in_progress(Constants.GLOBAL_FETCH_ACTION));
         try {
             let response = await axios.get(next);
             return dispatch(fetch_studies(response.data));
@@ -142,7 +142,7 @@ export function getTissueColorsFromServer()
     const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch =>
     {
-        dispatch(in_progress());
+        dispatch(in_progress(Constants.GET_TISSUE_COLORS));
         let response = await axios.get(BASE_API + Constants.GET_TISSUE_COLORS_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
@@ -159,7 +159,7 @@ export function getGeneTissueColors()
     const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch =>
     {
-        dispatch(in_progress());
+        dispatch(in_progress(Constants.GET_GENE_TISSUE_COLORS));
         let response = await axios.get(BASE_API + Constants.GET_GENE_TISSUE_COLOR_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
@@ -175,7 +175,7 @@ export function searchThis(searchTerm)
     const BASE_API =(window.location.href).replace("3000", "8000");
     console.log(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
     return async dispatch => {
-        dispatch(in_progress());
+        dispatch(in_progress(Constants.GLOBAL_SEARCH_ACTION));
         try {
             let response = await axios.get(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
             console.log('action',response.data);

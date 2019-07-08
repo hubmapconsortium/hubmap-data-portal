@@ -12,17 +12,21 @@ const DEFAULT_STATE = {
  * fill in the state object for colors
  */
 export default function geneTissueColorResponseReducer(state = DEFAULT_STATE, action){
-    switch(action.type) {
-         case Constants.GET_GENE_TISSUE_COLORS:
-            return {
-                ...state,
-                response: action.response,
-                type: action.type,
-                status: action.status,
-                error: action.error,
-            };
-            
-        default :
-            return state;
+    if (action !== undefined)
+    {
+        switch(action.type) {
+            case Constants.GET_GENE_TISSUE_COLORS:
+                return {
+                    ...state,
+                    response: action.response,
+                    type: action.type,
+                    status: action.status,
+                    error: action.error,
+                };
+                
+            default :
+                return state;
+        }
     }
+    return state;
 };

@@ -1,103 +1,61 @@
-'use strict';
-// Imports: Dependencies
-const path = require('path');
-require("babel-register");
-const webpack = require('webpack');
-const dotenv = require('dotenv');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-//https://www.npmjs.com/package/react-dev-utils
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
-const fs = require('fs');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var path = require('path');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const env = dotenv.config().parsed;
-const envKeys = Object.keys(env).reduce((prev, next) => {
-  prev[`process.env.${next}`] = JSON.stringify(env[next]);
-  return prev;
-}, {});
-
-const commonPaths = {
-    public: path.resolve(__dirname, './public/'),
-    src: path.resolve(__dirname, './src/'),
-};
-
-// Webpack Configuration
-const config = {
-  
-  
-// Entry
-  
-entry: commonPaths.src+'/index.js',
-  // Output
-  
-output: {
-    path: commonPaths.public,
-    filename: 'bundle.js',
-    publicPath:'/',
-    globalObject: 'this'
-  },
-  devServer: {
-    contentBase: './public/'
-  },
-  // Loaders
-  
-module: {
-    rules : [
-      // JavaScript/JSX Files
+module.exports = {
+  module: {
+    rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: [/node_modules/],
-        include: [commonPaths.src],
-        use: ['babel-loader'],
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader"
+        }
       },
-      // CSS Files
+      {
+        test: /\.less$/,
+        loader: 'less-loader'
+      },
       {
         test: /\.css$/,
-        use: ['css-loader'],
-      },
-      {
-        test: /\.(png|svg|jpg|gif|ico)$/,
-        use: ['file-loader']
+        use:[ 'style-loader','css-loader']
     },
+      {
+        test: /\.(bmp|png|svg|jpg|gif|ico)$/,
+        include: path.resolve(__dirname, "./src/images"),
+        loader: require.resolve('url-loader'),
+        options: {
+          limit: 10000,
+          context: './src/images',
+          name: './static/images/[name].[ext]',
+        },
+      }
     ]
   },
-  resolve: {
-    extensions: ['*', '.js', '.jsx']
+  optimization: {
+    minimize: true,
+    splitChunks: {
+      chunks: 'all'
+    }
   },
-  // Plugins
-  
-plugins: [
-  new webpack.DefinePlugin(envKeys),
-  new HtmlWebpackPlugin(
-    {
-      template: commonPaths.src + '/index.html',
-      inject: true,
-      apiUrl: 'http://localhost:8080',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true,
-        //removeRedundantAttributes: true,
-        useShortDoctype: true,
-        //removeEmptyAttributes: true,
-        //removeStyleLinkTypeAttributes: true,
-        keepClosingSlash: true,
-        minifyJS: true,
-        minifyCSS: true,
-        minifyURLs: true,
-      },
+  entry: {
+    index: './src/index.js'
+  },
+  output: {
+    path: path.resolve(__dirname, './public/'),
+    publicPath: '/',
+    filename: 'static/index_bundle.js',
+    chunkFilename: 'static/js/[name].[contenthash:8].chunk.js'
+    //filename: 'static/index'
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html',
+      favicon: './src/images/favicon.ico',
     }),
-  new InterpolateHtmlPlugin(HtmlWebpackPlugin, 
-    {
-      PUBLIC_URL: '/',
-    }),
-], 
-node: { fs: 'empty' },
-  // Reload On File Change
-  //watch: true,
-  // Development Tools (Map Errors To Source File)
-  devtool: 'source-map',
-  target: 'web',
+    new CopyWebpackPlugin([
+      {from:'./src/images',to:'static/images'} 
+    ]),
+  ]
 };
-
-// Exports
-module.exports = config;

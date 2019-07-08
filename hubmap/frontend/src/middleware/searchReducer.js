@@ -12,16 +12,20 @@ const DEFAULT_STATE = {
  * fill in state object for studies
  */
 export default function studyResponseReducer(state = DEFAULT_STATE, action){
-    switch(action.type) {
-        case Constants.GLOBAL_SEARCH_ACTION:
-            return {
-                ...state,
-                response: action.response,
-                type: action.type,
-                status: action.status,
-                error: action.error,
-            };
-        default :
-            return state;
+    if (action !== undefined)
+    {
+        switch(action.type) {
+            case Constants.GLOBAL_SEARCH_ACTION:
+                return {
+                    ...state,
+                    response: action.response,
+                    type: action.type,
+                    status: action.status,
+                    error: action.error,
+                };
+            default :
+                return state;
+        }
     }
+    return state;
 };

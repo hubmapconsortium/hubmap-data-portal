@@ -2,7 +2,7 @@ import React from 'react';
 import connect from 'react-redux';
 import { fetch_studies, in_progress } from '../controllers/actions';
 import * as Constants from '../commons/constants';
-import hubmapStore from '../index';
+import * as index from '../index';
 import MaterialTableDemo from './MUITable';
 
 const mapStateToProps = state => {
@@ -22,7 +22,7 @@ class StudiesTable extends React.Component {
     previousState ={};
     componentDidMount() {
         console.log('componentDidMount');
-        hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
+        index.store.subscribe(() => this.currentState = index.store.getState());
         if (this.currentState != "" && this.currentState.status != Constants.IN_PROGRESS
         && this.currentState.studies != {} && this.currentState.type == Constants.GLOBAL_FETCH_ACTION) {
             this.props.dispatch(fetch_studies());
