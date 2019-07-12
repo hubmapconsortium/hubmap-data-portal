@@ -1,19 +1,12 @@
 import { ReactComponent as ReactComp } from "../images/Human_body_silhouette_minimal.svg";
 import React from 'react';
 import data from './data';
-import * as actions from "../middleware/actions";
+import * as actions from "../middleware/Actions";
 import * as Constants from '../commons/constants';
 import * as index from '../index';
-import { connect } from 'react-redux';
+import PubSub from 'pubsub-js';
 
-const mapStateToProps = state => {
-	console.log(state.colorsState);
-	return {
-		status: state.colorsState.status,
-		response: state.colorsState.response,
-		error: state.colorsState.error,
-	}
-};
+// TODO: all DOM/window events into HumanSVGEventsHandler
 
 var pancreas, heart, lung, smallIntestine, largeIntestine,
 	abdomen, liver, bladder, kidney, spleen, human;
@@ -60,50 +53,60 @@ function hideToolTip(evt) {
 //console.log(ev);
 //tissue.style.removeProperty("animation");
 class HumanImage extends React.Component {
-	currentState = {};
-	previousState = {};
-	studyState = {};
-	geneTissueColorState = {};
+experimentsSubscriber = function (msg, data) {
+	console.log( msg, data );
+	this.setState({ 
+		...this.state,
+		experiments: data,
+	})
+	};
 	
-	componentDidMount() {
-
-		try {
-			index.store.subscribe(() => {this.currentState = index.store.getState().colorsState;
-			this.studyState = index.store.getState().studyState;
-			this.geneTissueColorState = index.store.getState().geneTissueColorState});
-			console.log(this.studyState);
-			if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS && this.currentState.response !== ""
-				&& this.currentState.type === Constants.GET_TISSUE_COLORS) 
-			{
-				console.log('get tissue colors', this.currentState);
-				this.props.dispatch(actions.fetch_colors());
-			}
-			else 
-			{
-				this.props.dispatch(actions.in_progress());
-			}
-		}
-		catch (e) {
-			console.log(e);
-		}
+	geneTissueSubscriber = function (msg, data) {
+	console.log( msg, data );
+	this.setState({ 
+		...this.state,
+		geneTissueMap: data,
+	})
+	};
+	
+	constructor(props) {
+		super(props);
+		this.state = {
+		experiments : {},
+		geneTissueMap: {}
+		};
 	}
 
+	componentWillReceiveProps(nextProps){
+		console.log(nextProps);
+	  }
+	  componentWillUnmount(){
+		PubSub.unsubscribe(this.geneTissueMapToken);
+		PubSub.unsubscribe(this.experimentsToken);
+		
+	  }
+	
+	componentWillMount(){
+		this.experimentsToken = PubSub.subscribe(Constants.FETCH_EXPERIMENTS_EVENT, 
+		  this.experimentsSubscriber.bind(this));
+		this.geneTissueMapToken =PubSub.subscribe(Constants.FETCH_GENE_TISSUE_MAP_EVENT, 
+		this.geneTissueSubscriber.bind(this));
+		console.log(this.state);
+	  }
+
+	shouldComponentUpdate(props, state){
+		console.log(props, state);
+		return true;
+	 }
+
 	render() {
-		const { response, error, status, type } = index.store.getState().colorsState;
-		this.currentState =index.store.getState().colorsState;
-		this.studyState = index.store.getState().studyState;
-		this.geneTissueColorState = index.store.getState().geneTissueColorState;
-		console.log(response, error, status, type);
-		console.log(this.currentStatem, this.studyState);
-		if (this.studyState !== undefined && this.studyState.response !== undefined 
-			&& this.studyState.status !== "") 
-		{
-			var results = this.studyState.response.response;
-			console.log(this.studyState.response);
-			var tissues = [...new Set(this.studyState.response.slice(0,this.studyState.response.length-1)
+
+			var results = this.state.experiments;
+			console.log(this.state.experiments);
+			var tissues = [...new Set(this.state.experiments.slice(0,this.studyState.response.length-1)
 			.map(study => (study.tissue.name) ))];
 
-			this.genetissueArray = this.studyState.response.slice(0,this.studyState.response.length-1)
+			this.genetissueArray = this.state.experiments.slice(0,this.studyState.response.length-1)
 			.reduce((arr, study) =>
 				{
 					const index = arr.findIndex((e) =>  e.tissue === study.tissue.name)
@@ -121,14 +124,8 @@ class HumanImage extends React.Component {
 					return arr;
 				}
 				, []);
-		}
+		
 		console.log(this.genetissueArray);
-		if (response !== "" && response !== undefined
-			&& type === Constants.GET_TISSUE_COLORS) {
-			this.previousState = this.currentState;
-			var colors = this.currentState.response;
-			console.log(this.currentState);
-			console.log(this.currentState, this.geneTissueColorState);
 			//first get svg
 			const datatooltip ="";
 			humanSvg = document.getElementById('human');
@@ -193,7 +190,7 @@ class HumanImage extends React.Component {
 			});
 			human = document.getElementById('main');
 			console.log( this.studyState.response.length-1);
-			human.setAttributeNS(null, "data-tooltip-text", " # experiments:"+ (this.studyState.response.length-1).toString()+", 9 genes");
+			human.setAttributeNS(null, "data-tooltip-text", " # experiments:"+ (this.state.experiments.length-1).toString()+", 9 genes");
 			for (var i = 0; i < pathTriggers.length; i++) {
 				pathTriggers[i].addEventListener('mousemove', showToolTip);
 				pathTriggers[i].addEventListener('mouseout', hideToolTip);
@@ -261,10 +258,9 @@ class HumanImage extends React.Component {
 						break;
 				}
 			});
-		}
 		return (
 			<ReactComp />
 		);
 	}
 }
-export default connect(mapStateToProps)(HumanImage);
+export default HumanImage;
