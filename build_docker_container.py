@@ -41,8 +41,8 @@ DOCKER_PUSH_COMMAND_TEMPLATE: List[str] = [
 
 # List of (label, filename) tuples
 IMAGES: List[Tuple[str, Path]] = [
-    ('mruffalo/hubmap-data-portal-python', Path('docker/uwsgi+python-env/Dockerfile')),
-    ('mruffalo/hubmap-data-portal-reactjs', Path('docker/reactjs_app/Dockerfile')),
+    ('hubmap/data-portal-python', Path('docker/uwsgi+python-env/Dockerfile')),
+    ('hubmap/data-portal-reactjs', Path('docker/reactjs_app/Dockerfile')),
 ]
 
 def print_run(command: List[str], pretend: bool, return_stdout: bool=False):
