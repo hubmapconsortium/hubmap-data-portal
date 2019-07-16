@@ -8,23 +8,36 @@ models in Django (database, tables) Django-restful framework with reactJS.
 We use PyCharm as development IDE for this prototype.
 
 ## Data portal configuration:
-### Steps to setup ReactJS:
-* Install npm and nodejs:
-```Follow instructions @ https://nodejs.org/en/``` and
-```https://nodejs.org/en/download/```
+### Setup ReactJS:
+* Install npm and nodejs: Follow instructions @ https://nodejs.org/en/ and https://nodejs.org/en/download/
 * Install `create-react-app`:
-`npm install -g create-react-app`
+```
+npm install -g create-react-app
+```
 * Navigate to hubmap/frontend folder and execute following command:
-`npm start`
-* Navigate to dataportal folder and run following command
-	to migrate/create databases.
-	`python manage.py makemigrations`
-	`python manage.py migrate`
-* To access tables and run some SQL commands:
-	`python manage.py shell`
+```
+cd hubmap/frontend
+npm start
+```
 
-### Required software:
-* Check and install python packages [requirements.txt](https://github.com/hubmapconsortium/hubmap-data-portal/blob/sushma-branch/hiveportal/requirements.txt)
+### Setup Python:
+Make sure you are running Python3, and set up a fresh environment with venv or conda; Then:
+
+* Install dependencies:
+```
+pip install hubmap/requirements.txt
+```
+* Run initial database migrations:
+```
+cd hubmap/dataportal
+python manage.py makemigrations
+python manage.py migrate
+```
+* During development, to access tables and run SQL:
+```
+python manage.py shell
+```
+
 
 ### Running the app for development
 
