@@ -10,6 +10,8 @@ SECRET_KEY = get_random_secret_key()
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'data.dev.hubmapconsortium.org',
+    'data.test.hubmapconsortium.org',
     'demo1.hubmapconsortium.org',
 ]
 
