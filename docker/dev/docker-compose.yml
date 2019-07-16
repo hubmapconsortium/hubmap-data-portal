@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=hubmap_db
+      - POSTGRES_USER=hubmap_login
+      - POSTGRES_PASSWORD=dev_password
+    ports:
+      - "5432:5432"
+  django:
+    image: "hubmap/data-portal-python-dev:latest"
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    volumes:
+      - ../..:/opt/hubmap-data-portal
+  react_app:
+    image: "hubmap/data-portal-reactjs-dev:latest"
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    volumes:
+      - ../..:/opt/hubmap-data-portal
+#  nginx:
+#    build: nginx
+#    ports:
+#      - "8000:80"
+#      - "80:80"
+#      - "443:443"
+#    expose:
+#      - 80
+#      - 443
