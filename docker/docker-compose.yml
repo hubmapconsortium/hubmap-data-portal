@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
   uwsgi:
-    image: "mruffalo/hubmap-data-portal-python:latest"
+    image: "hubmap/data-portal-python:latest"
     ports:
       - "5000:5000"
     expose:
@@ -18,7 +18,7 @@ services:
     volumes:
       - /opt/hubmap-data-portal-static:/opt/hubmap-data-portal/static
   react_app:
-    image: "mruffalo/hubmap-data-portal-reactjs:latest"
+    image: "hubmap/data-portal-reactjs:latest"
     ports:
       - "3000:3000"
     expose:
