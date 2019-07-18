@@ -1,27 +1,14 @@
-matrix:
-  include:
-    - language: python
-      python: 3.7
-      env:
-        - DEFAULT_INTERFACE=eth0 # needed to setup django context
-      before_script:
-        - cd hubmap
-      install: 
-        - pip install -r requirements.txt
-      script:
-        - cd ..
-        - python manage.py test
-        
-    include:
-    - language: python
-      python: 3.7
-      before_script:
-        - cd hubmap/dataportal/tests
-      script:
-        - python -m unittest discover
-  include:
-  
-  
-notifications:
-  email:
-    - sushma.ananda13@gmail.com
+language: python
+python: 3.7
+env:
+  - DEFAULT_INTERFACE=eth0 # needed to setup django context
+install:
+  - cd hubmap
+  - pip install -r requirements.txt
+  - cd -
+
+  - cd hubmap/frontend
+  - npm ci
+  - cd -
+script:
+  - ./test.sh
