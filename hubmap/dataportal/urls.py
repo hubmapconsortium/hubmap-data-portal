@@ -9,5 +9,6 @@ urlpatterns = [
     path(r'<int:pk>/', views.StudyDetailView.as_view()),
     url(r'^search/$', views.GlobalSearch.as_view(), name="search"),
     url(r'^colors/', views.Tissue_svg_colors.as_view(), name="colors"),
-        url(r'^genes/$', views.GeneListView.as_view(), name="genes"),
+    url(r'^genes/$', views.GeneListView.as_view(), name="genes"),
+    url(r'^browse', views.FrontendAppView.as_view()),
 ]
