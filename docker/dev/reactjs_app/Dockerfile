@@ -5,4 +5,4 @@ EXPOSE 3000
 VOLUME /opt/hubmap-data-portal
 
 WORKDIR /opt/hubmap-data-portal/hubmap/frontend
-CMD ["npm", "run", "start"]
+CMD ["./npm-install-then-start.sh"]
