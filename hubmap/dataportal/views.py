@@ -155,21 +155,25 @@ def compute_multi_dim_counts(queryset, field_name: str) -> xr.DataArray:
     return data
 
 def serialize_multi_dim_counts(data: xr.DataArray):
-    dims_to_stack = ['tissue', 'institution']
-    stacked = data.stack(gridcell=dims_to_stack)
-    grouped = stacked.groupby('gridcell', squeeze=False).sum().unstack('gridcell')
-    df = grouped.to_dataframe('temp')
-    df.index.names = dims_to_stack
-
     list_for_frontend = []
-    columns_list = []
-    columns_list.append("Tissue")
-    columns_list.append(data['institution'].sortby(data['institution']).values.tolist())
-    list_for_frontend.append(columns_list)
-    for tissue in df.index.levels[0]:
-        list_for_frontend.append([
-            tissue,
-            (df.loc[tissue, :].iloc[:, 0]).values.tolist()
-        ])
+    try:
+        dims_to_stack = ['tissue', 'institution']
+        stacked = data.stack(gridcell=dims_to_stack)
+        grouped = stacked.groupby('gridcell', squeeze=False).sum().unstack('gridcell')
+        df = grouped.to_dataframe('temp')
+        df.index.names = dims_to_stack
+
+        columns_list = ["Tissue"]
+        columns_list.append(data['institution'].sortby(data['institution']).values.tolist())
+        list_for_frontend.append(columns_list)
+        for tissue in df.index.levels[0]:
+            list_for_frontend.append([
+                tissue,
+                (df.loc[tissue, :].iloc[:, 0]).values.tolist()
+            ])
+    except ValueError:
+        # `data.stack` throws a ValueError if `data` is empty.
+        # Correctly return an empty list to the frontend instead of exploding.
+        pass
 
     return list_for_frontend
