@@ -22,8 +22,9 @@ COPY --from=REACT_BUILD \
 
 WORKDIR /opt/hubmap-data-portal/hubmap/frontend
 RUN mv build/index.html templates
+RUN mv build/static/* static
 RUN mv build/* static
-RUN rmdir build
+RUN rm -rf build
 
 RUN mv \
     /opt/hubmap-data-portal/hubmap/hubmap/production_settings.py \
