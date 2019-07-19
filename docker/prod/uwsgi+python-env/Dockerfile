@@ -12,6 +12,10 @@ RUN apt-get update
 RUN apt-get -y install uwsgi uwsgi-plugin-python3 python3 python3-six python3-idna libpq5
 RUN rm -rf /var/cache/apt/*
 
+COPY uwsgi/dataportal.xml /opt/dataportal.xml
+
+COPY . /opt/hubmap-data-portal
+
 COPY --from=REACT_BUILD \
     /opt/hubmap-data-portal/hubmap/frontend/build \
     /opt/hubmap-data-portal/hubmap/frontend/build
@@ -21,9 +25,6 @@ RUN mv build/index.html templates
 RUN mv build/* static
 RUN rmdir build
 
-COPY uwsgi/dataportal.xml /opt/dataportal.xml
-
-COPY . /opt/hubmap-data-portal
 RUN mv \
     /opt/hubmap-data-portal/hubmap/hubmap/production_settings.py \
     /opt/hubmap-data-portal/hubmap/hubmap/local_settings.py

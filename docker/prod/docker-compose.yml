@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
   uwsgi:
-    image: "hubmap/data-portal-python:latest"
+    image: "hubmap/data-portal-python-prod:latest"
     ports:
       - "5000:5000"
     expose:

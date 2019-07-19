@@ -1,16 +1,10 @@
 import json
-from os import fspath
-import os
 from pathlib import Path
 from subprocess import PIPE, run
 
 # Build paths inside the project like this: BASE_DIR / ...
 BASE_DIR = Path(__file__).absolute().parent.parent
-STATIC_ROOT = BASE_DIR / 'static'
-MAIN_PROJECT = os.path.dirname(__file__)
-STATICFILES_DIRS = (
-    os.path.join(MAIN_PROJECT, 'static'),
-)
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -20,7 +14,7 @@ SECRET_KEY = '**53v-%94cnsh08+l(@+)^5$@*u=xsrps!o4k4_r+lnfhjwsh5'
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = []
 
 DATABASES = {
     'default': {
@@ -89,7 +83,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hubmap.wsgi.application'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
