@@ -18,3 +18,10 @@ pushd hubmap/frontend
 CI=true npm test
 popd
 end npm
+
+start docker
+./build_docker_container.py
+pushd docker/
+docker-compose up
+popd
+end docker
