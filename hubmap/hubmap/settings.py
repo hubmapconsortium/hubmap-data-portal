@@ -1,5 +1,4 @@
 import json
-from os import fspath
 from pathlib import Path
 from subprocess import PIPE, run
 
@@ -84,7 +83,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hubmap.wsgi.application'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

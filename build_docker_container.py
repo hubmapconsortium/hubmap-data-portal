@@ -45,6 +45,7 @@ IMAGES: List[Tuple[str, Path]] = [
     ('hubmap/data-portal-reactjs-base', Path('docker/base/reactjs_app/Dockerfile')),
     ('hubmap/data-portal-python-dev', Path('docker/dev/uwsgi+python-env/Dockerfile')),
     ('hubmap/data-portal-reactjs-dev', Path('docker/dev/reactjs_app/Dockerfile')),
+    ('hubmap/data-portal-python-prod', Path('docker/prod/uwsgi+python-env/Dockerfile')),
 ]
 
 def print_run(command: List[str], pretend: bool, return_stdout: bool=False):

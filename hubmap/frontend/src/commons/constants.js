@@ -10,8 +10,8 @@ export const SUCCESS = "SUCCESS";
 export const FAILURE = "FAILURE";
 export const IN_PROGRESS = "IN_PROGRESS";
 
-export const GET_STUDIES_REST_API = 'api/?format=json';
-export const GET_STUDIES_PAGINATED_REST_API = 'api/studies/?format=json&page=';
-export const SEARCH_STUDIES_REST_API = 'api/search/?format=json&search=';
-export const GET_TISSUE_COLORS_API = 'api/colors/?format=json';
-export const GET_GENE_TISSUE_COLOR_API = 'api/genes/?format=json'
+export const GET_STUDIES_REST_API = '?format=json';
+export const GET_STUDIES_PAGINATED_REST_API = 'studies/?format=json&page=';
+export const SEARCH_STUDIES_REST_API = 'search/?format=json&search=';
+export const GET_TISSUE_COLORS_API = 'colors/?format=json';
+export const GET_GENE_TISSUE_COLOR_API = 'genes/?format=json'
