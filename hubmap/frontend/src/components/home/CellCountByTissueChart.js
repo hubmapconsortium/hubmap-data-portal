@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../middleware/actions';
-import * as Constants from '../commons/constants';
-import { store } from '../index';
+import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../../middleware/actions';
+import * as Constants from '../../commons/constants';
+import { store } from '../../index';
 import  {CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
@@ -18,7 +18,7 @@ const mapStateToProps = state => {
     }
 };
 
-class ImageCountByTissuesChart extends PureComponent {
+  class CellCountByTissueChart extends PureComponent {
     currentState = {};
 	previousState ={};
     componentDidMount() {
@@ -37,32 +37,31 @@ class ImageCountByTissuesChart extends PureComponent {
     render() {
         const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
 
-        if (error) {
-          return <div>Error! {error.message}</div>
-      }
-      
-      else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION 
-      &&  status === Constants.SUCCESS) 
-      {
-        let values = response[response.length-1].summary[1].image_count.reduce((arr, h) => {
-            if (h !== undefined) {
-              arr.push([h[0]].concat(h[1]));
-            }
-            return arr;
-          }, []);
+          if (error) {
+            return <div>Error! {error.message}</div>
+		}
+		
+		else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION 
+		&&  status === Constants.SUCCESS) 
+		{
+            console.log(response[response.length-1]);
+            let values = response[response.length-1].summary[0].cell_count.reduce((arr, h) => {
+                if (h !== undefined) {
+                  arr.push([h[0]].concat(h[1]));
+                }
+                return arr;
+              }, []);
         return (
-            <div className="studiesdashboard" id="studiesbyTissueschart" >
-                <Chart
-                    width={'390px'}
+            
+            <div className="studieschart" >
+                <Chart id="studiesbyUniversitychart"
+                    width={'400px'}
                     height={'300px'}
                     chartType="BarChart"
                     loader={<div>Loading Chart</div>}
                     data={values}
-                    rootProps={{ 'data-testid': '6' }}
-                    chartPackages={['corechart', 'controls']}
-
                     options={{
-                        title: '# Images per Tissue, by Center',
+                        title: '# of Cells per Tissue, by Center',
                         chartArea: { width: '50%', fill: "#fafafa" },
                         colors: ['#1f77b4',
                         '#ff7f0e',
@@ -76,7 +75,7 @@ class ImageCountByTissuesChart extends PureComponent {
                         '#17becf'],
                         isStacked: true,
                         hAxis: {
-                            title: 'Total # Images',
+                            title: 'Total # Cells',
                             minValue: 0,
                         },
                         vAxis: {
@@ -95,22 +94,28 @@ class ImageCountByTissuesChart extends PureComponent {
                             },
                         },
                     ]}
+
+                    // For tests
+                    rootProps={{ 'data-testid': '3' }}
                 />
             </div>
         );
+                }
+                else if(status === Constants.IN_PROGRESS && response === undefined && type=== Constants.GLOBAL_FETCH_ACTION  )
+		{
+			return < CellCountByTissueChart size='medium' style={{ maxWidth: '100%'}}
+					title={<Typography variant='title'>Experiments From HuBMAP Consortium
+					{(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
+					/>
+		}
+		else
+		{
+			console.log(status, response, type, store.getState(), this.previousState);
+			return (<div>No Experiments</div>)
+		}
     }
-    else if(status === Constants.IN_PROGRESS && response === undefined && type=== Constants.GLOBAL_FETCH_ACTION  )
-{
-return < ImageCountByTissuesChart size='medium' style={{ maxWidth: '100%'}}
-        title={<Typography variant='title'>Experiments From HuBMAP Consortium
-        {(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
-        />
 }
-else
-{
-    console.log(status, response, type, store.getState(), this.previousState);
-    return (<div>No Experiments</div>)
-}
-    }
-}
-export default connect(mapStateToProps)(ImageCountByTissuesChart);
+export default connect(mapStateToProps)(CellCountByTissueChart)
+//() => (
+  //  <StudiesChart />
+//)

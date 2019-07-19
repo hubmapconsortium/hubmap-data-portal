@@ -4,11 +4,11 @@ import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import grey from '@material-ui/core/colors/grey';
 import data from './data';
-import * as Constants from '../commons/constants';
-import { store } from '../index';
+import * as Constants from '../../commons/constants';
+import { store } from '../../index';
 import { connect } from 'react-redux';
-import { fetch_gene_tissue_colors, in_progress, searchThis, search_studies } from "../middleware/actions";
-import * as Utils from '../commons/utils'
+import { fetch_gene_tissue_colors, in_progress, searchThis, search_studies } from "../../middleware/actions";
+import * as Utils from '../../commons/utils'
 import SearchIcon from '@material-ui/icons/Search';
 
 const useStyles = makeStyles(theme => ({
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         borderBlockColor: grey[800]
     },
     inputRoot: {
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
         color: grey[800],
         borderColor: grey[800],
         width: 150,

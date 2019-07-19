@@ -1,10 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
-import "../App.css";
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../middleware/actions';
-import * as Constants from '../commons/constants';
-import { store } from '../index';
+import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../../middleware/actions';
+import * as Constants from '../../commons/constants';
+import { store } from '../../index';
 import  {CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
@@ -43,7 +42,6 @@ class ImageCountStackedChart extends React.Component {
         if (h !== undefined) {
           arr.push([h[0]].concat(h[1]));
         }
-        console.log(arr);
         return arr;
       }, [])
      data = this.data1.slice(1).map(function(da) {
