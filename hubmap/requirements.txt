@@ -4,7 +4,6 @@ django-cors-headers
 django-filter
 django<2.3
 djangorestframework==3.9.3
-ipython
 matplotlib
 numpy
 pandas
