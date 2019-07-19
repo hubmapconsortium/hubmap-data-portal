@@ -16,9 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from dataportal import views
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),
+    path('', include('frontend.urls')),
 ]
