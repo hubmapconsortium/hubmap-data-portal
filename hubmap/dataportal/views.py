@@ -181,8 +181,9 @@ class FrontendAppView(View):
     """
 
     def get(self, request):
+        print(os.path.join(settings.MAIN_PROJECT,'templates', 'index.html'))
         try:
-            with open(os.path.join(settings.BASE_DIR,'templates', 'index.html')) as f:
+            with open(os.path.join(settings.MAIN_PROJECT,'templates', 'index.html')) as f:
                 return HttpResponse(f.read())
         except FileNotFoundError:
             logging.exception('Production build of app not found')

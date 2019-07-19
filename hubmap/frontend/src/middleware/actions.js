@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 import * as Constants from '../commons/constants';
-
+const BASE_API = "http://localhost:8000/api/";
 export const in_progress = () => ({type: Constants.IN_PROGRESS});
 /**
  * fills study state props here after any of fetch methods from studies reducer
@@ -61,7 +61,7 @@ export function search_studies(response)
  */
 export function fetchAllStudies()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
+    //(window.location.href).replace("browse", "");
     return async dispatch => {
         dispatch(in_progress());
         try {
@@ -90,7 +90,6 @@ export function fetchAllStudies()
  */
 export function fetchStudiesFirstPage(page) 
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
     console.log(BASE_API+ Constants.GET_STUDIES_PAGINATED_REST_API+page);
     return async dispatch => {
         dispatch(in_progress());
@@ -139,7 +138,6 @@ export function fetch_colors(colors)
  */
 export function getTissueColorsFromServer()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch =>
     {
         dispatch(in_progress());
@@ -156,7 +154,6 @@ export function getTissueColorsFromServer()
  */
 export function getGeneTissueColors()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch =>
     {
         dispatch(in_progress());
@@ -172,7 +169,6 @@ export function getGeneTissueColors()
  */
 export function searchThis(searchTerm) 
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
     console.log(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
     return async dispatch => {
         dispatch(in_progress());

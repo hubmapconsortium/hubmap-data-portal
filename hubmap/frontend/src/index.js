@@ -15,5 +15,5 @@ ReactDOM.render(
 	<Provider store={store}><App/></Provider>,
 	document.getElementById('root')
 );
-module.hot.accept();
+//module.hot.accept();
 serviceWorker.unregister();
