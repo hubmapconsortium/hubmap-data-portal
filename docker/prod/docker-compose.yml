@@ -17,12 +17,6 @@ services:
       - 5000
     volumes:
       - /opt/hubmap-data-portal-static:/opt/hubmap-data-portal/static
-  react_app:
-    image: "hubmap/data-portal-reactjs:latest"
-    ports:
-      - "3000:3000"
-    expose:
-      - 3000
 #  nginx:
 #    build: nginx
 #    ports:
