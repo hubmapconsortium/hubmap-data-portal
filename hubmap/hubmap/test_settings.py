@@ -9,7 +9,7 @@ DATABASES = {
         'NAME': 'hubmap_db',
         'USER': 'postgres',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '',
         'PORT': '',
     }
 }
