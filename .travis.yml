@@ -15,7 +15,5 @@ install:
   - cd hubmap/frontend
   - npm ci
   - cd -
-before_script:
-  - psql -c 'create database hubmap_db_test;' -U postgres
 script:
   - ./test.sh

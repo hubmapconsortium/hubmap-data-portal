@@ -6,7 +6,7 @@ instead of one provided by `docker-compose`.
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'hubmap_db_test',
+        'NAME': 'hubmap_db',
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': 'localhost',
