@@ -1,52 +1,50 @@
 from django.test import TestCase
+from rest_framework.test import APIClient
 
-# Create your tests here.
-from django.test import TestCase
-from dataportal.models import *
-from rest_framework.test import APIRequestFactory, RequestsClient
+from .models import *
+from .views import StudyDetailView
 
-from dataportal.views import StudyListView, StudyDetailView
-
-#test coverage: 76% files and 87% lines : 5/25/2019
-#TODO : complete tests
+# TODO : complete tests
 class DataportalModelTest(TestCase):
-
     @classmethod
     def setUpTestData(cls):
-        DataType.objects.create(name="scdna-seq")
-        Tissue.objects.create(name="Brain")
-        Institution.objects.create(name="CMU")
-        ScRnaSeqStudyCDNA.objects.create(data_type_id=1, institution_id=1, tissue_id=1,
-                             read_count_total=60, cell_count=12, read_count_aligned=8)
+        print('Creating test data')
+        dt = DataType.objects.create(name="scdna-seq")
+        t = Tissue.objects.create(name="Brain")
+        i = Institution.objects.create(name="CMU")
+        ScRnaSeqStudyCDNA.objects.create(
+            data_type=dt,
+            institution=i,
+            tissue=t,
+            read_count_total=60,
+            cell_count=12,
+            read_count_aligned=8,
+        )
+        print('Test data created')
 
     def test_subclass(self):
-        study = Study.objects.get(id=1)
+        study = Study.objects.first()
         expected_object_name = f'{study.subclass}'
         self.assertEquals(expected_object_name, 'sc rna seq study cdna')
 
     def test_institution_content(self):
-        study = Study.objects.get(id=1)
+        study = Study.objects.first()
         expected_object_name = f'{study.institution}'
         self.assertEquals(expected_object_name, 'CMU')
 
     def test_django_rest_framework_api(self):
-        client = RequestsClient()
-        response = client.get('http://127.0.0.1:8000/api/')
-        assert response.status_code == 200
-        print(response)
+        client = APIClient()
+        response = client.get('/api/')
+        self.assertEquals(response.status_code, 200)
 
-        client = RequestsClient()
-        response = client.get('http://127.0.0.1:8000/api/1/')
-        assert response.status_code == 200
-        print(response)
+        client = APIClient()
+        response = client.get('/api/1/')
+        self.assertEquals(response.status_code, 200)
 
-        client = RequestsClient()
-        response = client.get('http://127.0.0.1:8000/api/search/?search=Brain')
-        assert response.status_code == 200
-        print(response)
+        client = APIClient()
+        response = client.get('/api/search/?search=Brain')
+        self.assertEquals(response.status_code, 200)
 
     def test_views(self):
-        factory = APIRequestFactory()
-        study = Study.objects.get(id=1)
-        view = StudyDetailView.as_view()
-        print(view)
+        StudyDetailView.as_view()
+        # At the moment, this test "passing" means it doesn't throw an exception
