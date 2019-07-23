@@ -13,11 +13,13 @@ class DataportalModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
+        print('Creating test data')
         DataType.objects.create(name="scdna-seq")
         Tissue.objects.create(name="Brain")
         Institution.objects.create(name="CMU")
         ScRnaSeqStudyCDNA.objects.create(data_type_id=1, institution_id=1, tissue_id=1,
                              read_count_total=60, cell_count=12, read_count_aligned=8)
+        print('Test data created')
 
     def test_subclass(self):
         study = Study.objects.get(id=1)
