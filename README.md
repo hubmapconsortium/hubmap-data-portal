@@ -60,7 +60,7 @@ application. You may want to run `build_docker_container.py` from a fresh checko
 `git clean -dfx; git reset --hard` before building.
 
 ### Running the application through docker-compose
-Run `docker-compose up` in the `docker` directory. This will start all three containers specified in
+Run `docker-compose up` in the `docker/dev` directory. This will start all three containers specified in
 `docker/docker-compose.yml`, and the Postgres container will initially have an empty database.
 Database migrations (including the initial migration which creates the database tables) can be
 applied by running the `run_migrations_in_container.py` script. This script is essentially a wrapper
