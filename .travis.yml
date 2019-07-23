@@ -3,12 +3,17 @@ dist: bionic
 python: 3.6
 env:
   - DEFAULT_INTERFACE=eth0 # needed to setup django context
+services:
+  - postgresql
 install:
   - cd hubmap
   - pip install -r requirements.txt
+  - mv hubmap/test_settings.py hubmap/local_settings.py
   - cd -
   - cd hubmap/frontend
   - npm ci
   - cd -
+before_script:
+  - psql -c 'create database hubmap_db_test;' -U postgres
 script:
   - ./test.sh
