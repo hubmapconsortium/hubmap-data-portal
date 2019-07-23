@@ -3,6 +3,8 @@ dist: bionic
 python: 3.6
 env:
   - DEFAULT_INTERFACE=eth0 # needed to setup django context
+addons:
+  postgresql: 10
 services:
   - postgresql
 install:
