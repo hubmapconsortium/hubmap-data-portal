@@ -1,9 +1,10 @@
+Celery
 Pillow
 bokeh==1.1.0
 django-cors-headers
 django-filter
 django<2.3
-djangorestframework==3.9.3
+djangorestframework==3.10.1
 matplotlib
 numpy
 pandas

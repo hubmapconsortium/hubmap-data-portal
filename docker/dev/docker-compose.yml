@@ -43,6 +43,12 @@ services:
     expose:
       - 9200
       - 9300
+  rabbitmq:
+    image: rabbitmq:3.5
+    ports:
+      - "5672:5672"
+    expose:
+      - 5672
 #  nginx:
 #    build: nginx
 #    ports:
