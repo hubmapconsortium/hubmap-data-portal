@@ -17,6 +17,8 @@ services:
       - 8000
     volumes:
       - ../..:/opt/hubmap-data-portal
+    depends_on:
+      - "postgres"
   react_app:
     image: "hubmap/data-portal-reactjs-dev:latest"
     ports:
