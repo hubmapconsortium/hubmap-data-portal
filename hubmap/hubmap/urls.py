@@ -33,8 +33,12 @@ urlpatterns = [
     url(r'', include('social_django.urls', namespace='social')),
     url(r'^openapi/$', schema_view),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
-    path('swagger-ui/', TemplateView.as_view(
-        template_name='swagger-ui.html',
-        extra_context={'schema_url': 'openapi-schema'}
-    ), name='swagger-ui'),
+    path(
+        'swagger-ui/',
+        TemplateView.as_view(
+            template_name='swagger-ui.html',
+            extra_context={'schema_url': 'openapi-schema'}
+        ),
+        name='swagger-ui',
+    ),
 ]

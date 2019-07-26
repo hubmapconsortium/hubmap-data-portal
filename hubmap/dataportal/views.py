@@ -81,6 +81,12 @@ class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Study.objects.all()
 
     def get_serializer_class(self):
+        """
+        :return: If given a study PK, return a serializer class for that Study
+          subclass. Otherwise return the base Study serializer.
+        """
+        if self.lookup_field not in self.kwargs:
+            return StudySerializer
         return get_serializer_class(self.get_object())
 
     def retrieve(self, request, *args, **kwargs):
