@@ -31,7 +31,7 @@ urlpatterns = [
     path('', include('frontend.urls')),
     url(r'', include('django.contrib.auth.urls')),
     url(r'', include('social_django.urls', namespace='social')),
-    url(r'^openapi/$', schema_view),
+    url(r'^openapi/$', schema_view,name='openapi-schema'),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     path(
         'swagger-ui/',
