@@ -22,7 +22,7 @@ DATABASES = {
         'NAME': 'hubmap_db',
         'USER': 'hubmap_login',
         'PASSWORD': 'dev_password',
-        'HOST': 'postgres',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'dataportal',
     'frontend',
     'django_filters',
+    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +63,17 @@ CORS_ORIGIN_WHITELIST = [
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
+
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
 }
 
 ROOT_URLCONF = 'hubmap.urls'
