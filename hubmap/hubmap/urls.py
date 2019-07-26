@@ -15,9 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
+from rest_framework.schemas import get_schema_view
+from rest_framework.documentation import include_docs_urls
+from django.views.generic import TemplateView
+
+# Create a router and register our viewsets with it.
+API_TITLE = 'HuBMAP UI-backend API'
+API_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
+schema_view = get_schema_view(title=API_TITLE)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),
     path('', include('frontend.urls')),
+    url(r'', include('django.contrib.auth.urls')),
+    url(r'', include('social_django.urls', namespace='social')),
+    url(r'^openapi/$', schema_view),
+    url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+    path('swagger-ui/', TemplateView.as_view(
+        template_name='swagger-ui.html',
+        extra_context={'schema_url': 'openapi-schema'}
+    ), name='swagger-ui'),
 ]

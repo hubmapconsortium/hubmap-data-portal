@@ -1,3 +1,4 @@
+import datetime
 import json
 from pathlib import Path
 from subprocess import PIPE, run
@@ -43,7 +44,6 @@ INSTALLED_APPS = [
     'dataportal',
     'frontend',
     'django_filters',
-    'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -63,17 +63,6 @@ CORS_ORIGIN_WHITELIST = [
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
-
-OAUTH2_PROVIDER = {
-    # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
 }
 
 ROOT_URLCONF = 'hubmap.urls'
@@ -93,6 +82,19 @@ TEMPLATES = [
         },
     },
 ]
+ #SECURITY WARNING: keep the secret key used in production secret!
+#SECRET_KEY = 'g+^rn4oz4$##*i6i=z)!vgwufp)4#q(fx5i*1m_8=7s88=rtdr'
+# Authentication, including Globus SSO
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.globus.GlobusOpenIdConnect',
+    'django.contrib.auth.backends.ModelBackend',
+]
+# for giygas.compbio.cs.cmu.edu, change in the future
+SOCIAL_AUTH_GLOBUS_KEY = '71ae5268-0f79-41ca-ac34-bd2a54eacacc'
+SOCIAL_AUTH_GLOBUS_SECRET = 'aff0CdncPo/BjHdnnszdmj/oxc3S24hdGOoEhUsAxNE='
+SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
+    'access_type': 'offline',
+}
 
 WSGI_APPLICATION = 'hubmap.wsgi.application'
 
