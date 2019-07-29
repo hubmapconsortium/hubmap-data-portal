@@ -186,3 +186,8 @@ export function searchThis(searchTerm)
         }
     }
 }
+
+export function globusSignin()
+{
+    
+}

@@ -279,7 +279,8 @@ function SearchAppBar(props) {
 
                         </Menu>
 
-                        <Button color="inherit" aria-haspopup="true" >Login <AccountCircle className={classes.rightIcon} /></Button>
+                        <Button color="inherit" aria-haspopup="true" ><NavLink to="/login">
+                            Login <AccountCircle className={classes.rightIcon} /></NavLink></Button>
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.grow} />
