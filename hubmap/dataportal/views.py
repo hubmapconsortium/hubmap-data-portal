@@ -1,10 +1,12 @@
 from collections import defaultdict
 
-from rest_framework import generics, views
+from rest_framework import generics, views, versioning
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import status
+
+from fixtures.add_tissuegene_heatmaps2db import setcolorheatmap
 from .utils import *
 from .serializers import *
 import matplotlib.cm
@@ -28,6 +30,7 @@ class PaginationClass(PageNumberPagination):
 class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
     parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
@@ -56,6 +59,7 @@ class StudyListPageView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
     pagination_class = PaginationClass
     parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
@@ -66,6 +70,7 @@ class StudyListPageView(generics.GenericAPIView):
 class GeneListView(generics.GenericAPIView):
     serializer_class = GeneSerializer
     parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_genes(self, request)
@@ -74,6 +79,7 @@ class GeneListView(generics.GenericAPIView):
 class GlobalSearch(generics.ListAPIView):
     serializer_class = StudyListSerializer
     parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
@@ -82,8 +88,15 @@ class GlobalSearch(generics.ListAPIView):
 class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Study.objects.all()
     parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get_serializer_class(self):
+        """
+        :return: If given a study PK, return a serializer class for that Study
+          subclass. Otherwise return the base Study serializer.
+        """
+        if self.lookup_field not in self.kwargs:
+            return StudySerializer
         return get_serializer_class(self.get_object())
 
     def retrieve(self, request, *args, **kwargs):
