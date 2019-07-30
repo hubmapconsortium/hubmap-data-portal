@@ -8,12 +8,13 @@ __pycache__
 media/*
 media
 
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+docker/dev-local
 
 # dependencies
 node_modules
 hubmap/frontend/node_modules
 hubmap/frontend/build
+hubmap/requirements-local.txt
 /.pnp
 .pnp.js
 
