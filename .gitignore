@@ -14,7 +14,6 @@ docker/dev-local
 node_modules
 hubmap/frontend/node_modules
 hubmap/frontend/build
-hubmap/requirements-local.txt
 /.pnp
 .pnp.js
 

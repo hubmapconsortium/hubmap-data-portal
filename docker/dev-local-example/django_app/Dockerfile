@@ -1,6 +1,6 @@
 FROM hubmap/data-portal-python-dev:latest
 
-COPY hubmap/requirements-local.txt /opt
+COPY requirements-local.txt /opt
 RUN pip3 install -r /opt/requirements-local.txt
 
 EXPOSE 8000

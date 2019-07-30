@@ -21,3 +21,9 @@ Usage
 
 Make a copy of this `dev-local-example` named `dev-local` (which is included
 in the top-level `.gitignore`), then modify your new copy as desired.
+
+If `docker-compose up` must build a new container, the working directory of
+`docker build` will be the subdirectory of `dev-local` containing the
+`Dockerfile`. As such, the example `COPY requirements-local.txt /opt` command
+in `django_app/Dockerfile` needs a `requirements-local.txt` file in the
+`django_app` subdirectory.
