@@ -127,6 +127,8 @@ GIT_VERSION_COMMAND = [
     'describe',
     '--dirty',
 ]
+
+
 def get_git_version() -> str:
     """
     Obtains the Git version of the application. Actual output from `git describe`
@@ -158,6 +160,7 @@ def get_git_version() -> str:
         pass
 
     return git_version
+
 
 GIT_VERSION = get_git_version()
 

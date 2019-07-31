@@ -16,34 +16,43 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='DataType',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=250)),
             ],
         ),
         migrations.CreateModel(
             name='Gene',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('entrez_id', models.CharField(blank=True, max_length=50, null=True)),
-                ('hugo_symbol', models.CharField(blank=True, max_length=50, null=True)),
-                ('ensembl_id', models.CharField(blank=True, max_length=50, null=True)),
+                ('hugo_symbol', models.CharField(
+                    blank=True, max_length=50, null=True)),
+                ('ensembl_id', models.CharField(
+                    blank=True, max_length=50, null=True)),
             ],
         ),
         migrations.CreateModel(
             name='Institution',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=250)),
             ],
         ),
         migrations.CreateModel(
             name='Study',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('creation_time', models.DateTimeField(auto_now_add=True)),
-                ('data_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dataportal.DataType')),
-                ('institution', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dataportal.Institution')),
-                ('subclass', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.ContentType')),
+                ('data_type', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='dataportal.DataType')),
+                ('institution', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='dataportal.Institution')),
+                ('subclass', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='contenttypes.ContentType')),
             ],
             options={
                 'verbose_name': 'Study Parent class',
@@ -52,14 +61,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Tissue',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=250)),
             ],
         ),
         migrations.CreateModel(
             name='TissueExpressionHeatmap',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('kidney_color', models.CharField(max_length=7)),
                 ('lung_color', models.CharField(max_length=7)),
                 ('heart_color', models.CharField(max_length=7)),
@@ -75,16 +86,19 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ImagingStudy',
             fields=[
-                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
+                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                   parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
                 ('image_count', models.PositiveIntegerField()),
-                ('preview_image', models.ImageField(blank=True, max_length=500, null=True, upload_to='gallery/%Y/%m/%d')),
+                ('preview_image', models.ImageField(blank=True,
+                                                    max_length=500, null=True, upload_to='gallery/%Y/%m/%d')),
             ],
             bases=('dataportal.study',),
         ),
         migrations.CreateModel(
             name='ScAtacSeqStudy',
             fields=[
-                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
+                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                   parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
                 ('read_count_total', models.PositiveIntegerField()),
                 ('cell_count', models.PositiveIntegerField()),
             ],
@@ -93,7 +107,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ScRnaSeqStudy',
             fields=[
-                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
+                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                   parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
                 ('read_count_total', models.PositiveIntegerField()),
                 ('cell_count', models.PositiveIntegerField()),
             ],
@@ -102,7 +117,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ScThsSeqStudy',
             fields=[
-                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
+                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                   parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
                 ('cell_count', models.PositiveIntegerField()),
                 ('total_read_count', models.PositiveIntegerField()),
             ],
@@ -114,26 +130,31 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='study',
             name='tissue',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dataportal.Tissue'),
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to='dataportal.Tissue'),
         ),
         migrations.CreateModel(
             name='Protein',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(blank=True, max_length=100, null=True)),
                 ('pdb_id', models.CharField(blank=True, max_length=50, null=True)),
-                ('gene', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dataportal.Gene')),
+                ('gene', models.ForeignKey(
+                    on_delete=django.db.models.deletion.CASCADE, to='dataportal.Gene')),
             ],
         ),
         migrations.AddField(
             model_name='gene',
             name='tissue_expression_heatmap',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='dataportal.TissueExpressionHeatmap'),
+            field=models.ForeignKey(
+                null=True, on_delete=django.db.models.deletion.CASCADE, to='dataportal.TissueExpressionHeatmap'),
         ),
         migrations.CreateModel(
             name='MicroscopyStudy',
             fields=[
-                ('imagingstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.ImagingStudy')),
+                ('imagingstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                          parent_link=True, primary_key=True, serialize=False, to='dataportal.ImagingStudy')),
             ],
             options={
                 'verbose_name': 'Microscopy',
@@ -143,7 +164,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ScRnaSeqStudyCDNA',
             fields=[
-                ('scrnaseqstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.ScRnaSeqStudy')),
+                ('scrnaseqstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                           parent_link=True, primary_key=True, serialize=False, to='dataportal.ScRnaSeqStudy')),
                 ('read_count_aligned', models.PositiveIntegerField()),
             ],
             bases=('dataportal.scrnaseqstudy',),
@@ -151,14 +173,16 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SeqFishImagingStudy',
             fields=[
-                ('imagingstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.ImagingStudy')),
+                ('imagingstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                          parent_link=True, primary_key=True, serialize=False, to='dataportal.ImagingStudy')),
             ],
             bases=('dataportal.imagingstudy',),
         ),
         migrations.CreateModel(
             name='SpatialTranscriptomicStudy',
             fields=[
-                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
+                ('study_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                   parent_link=True, primary_key=True, serialize=False, to='dataportal.Study')),
                 ('genes', models.ManyToManyField(to='dataportal.Gene')),
             ],
             bases=('dataportal.study',),
@@ -166,7 +190,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='ScRnaSeqStudyBarcoded',
             fields=[
-                ('scrnaseqstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.ScRnaSeqStudy')),
+                ('scrnaseqstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                           parent_link=True, primary_key=True, serialize=False, to='dataportal.ScRnaSeqStudy')),
                 ('unique_barcode_count', models.PositiveIntegerField()),
                 ('genes', models.ManyToManyField(to='dataportal.Gene')),
             ],
@@ -175,7 +200,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='MassCytometryStudy',
             fields=[
-                ('imagingstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='dataportal.ImagingStudy')),
+                ('imagingstudy_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE,
+                                                          parent_link=True, primary_key=True, serialize=False, to='dataportal.ImagingStudy')),
                 ('proteins', models.ManyToManyField(to='dataportal.Protein')),
             ],
             options={

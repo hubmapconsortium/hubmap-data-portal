@@ -10,7 +10,8 @@ from dataportal.models import Study
 
 class Command(BaseCommand):
     help = ("Output given model to CSV")
-    args= ''
+    args = ''
+
     def handle(self, *args, **options):
         from django.apps import apps
         appname = 'dataportal'
@@ -22,4 +23,3 @@ class Command(BaseCommand):
                 reader = csv.DictReader(csvfile)
                 for row in reader:
                     p = ""
-
