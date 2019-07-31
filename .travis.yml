@@ -1,27 +1,24 @@
-matrix:
-  include:
-    - language: python
-      python: 3.7
-      env:
-        - DEFAULT_INTERFACE=eth0 # needed to setup django context
-      before_script:
-        - cd hubmap
-      install: 
-        - pip install -r requirements.txt
-      script:
-        - cd ..
-        - python manage.py test
-        
-    include:
-    - language: python
-      python: 3.7
-      before_script:
-        - cd hubmap/dataportal/tests
-      script:
-        - python -m unittest discover
-  include:
-  
-  
-notifications:
-  email:
-    - sushma.ananda13@gmail.com
+language: python
+dist: bionic
+python: 3.6
+env:
+  global:
+    - DEFAULT_INTERFACE=eth0 # needed to setup django context
+addons:
+  postgresql: 10
+  apt:
+    packages:
+      - postgresql-10
+      - postgresql-client-10
+services:
+  - postgresql
+install:
+  - cd hubmap
+  - pip install -r requirements.txt
+  - mv hubmap/test_settings.py hubmap/local_settings.py
+  - cd -
+  - cd hubmap/frontend
+  - npm ci
+  - cd -
+script:
+  - ./test.sh

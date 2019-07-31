@@ -1,0 +1,7 @@
+
+# The listed users will automatically be added as reviewers if they match a given pattern.
+# Last match takes precedence.
+# More info: https://help.github.com/en/articles/about-code-owners
+
+* @mruffalo
+hubmap/frontend/src @sushma-ananda

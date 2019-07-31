@@ -25,7 +25,15 @@ DOCKER_MIGRATE_COMMAND_TEMPLATE: List[str] = [
     '{container_id}',
 ]
 
-CONTAINER_LABEL = 'mruffalo/hubmap-data-portal-python'
+CONTAINER_LABEL_BASE = 'hubmap/data-portal-python'
+CONTAINER_SUFFIXES = [
+    'base',
+    'dev',
+    'prod',
+]
+# For local Docker override config
+CONTAINER_LABELS = {'dev-local_django'}
+CONTAINER_LABELS.update(f'{CONTAINER_LABEL_BASE}-{suffix}' for suffix in CONTAINER_SUFFIXES)
 
 def get_running_containers() -> List[str]:
     # Want to return a list instead of this being a generator function,
@@ -40,7 +48,7 @@ def get_running_containers() -> List[str]:
     for line in list_container_output:
         data = json.loads(line)
         image_base = data['Image'].split(':')
-        if image_base[0] == CONTAINER_LABEL:
+        if image_base[0] in CONTAINER_LABELS:
             containers.append(data['ID'])
 
     return containers
@@ -60,7 +68,8 @@ def print_run(command: List[str], pretend: bool, return_stdout: bool=False):
 def main(pretend: bool):
     containers = get_running_containers()
     if not containers:
-        message = f'No containers with label "{CONTAINER_LABEL}" found.'
+        label_str = '\n'.join(f'\t{label}'for label in CONTAINER_LABELS)
+        message = f'No containers found. Tried labels:\n{label_str}'
         raise EnvironmentError(message)
 
     if len(containers) > 1:
