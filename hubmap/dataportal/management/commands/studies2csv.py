@@ -2,8 +2,8 @@ from django.http import HttpResponse
 
 
 def export_to_csv(request):
-    other_fields = [ 'genes', 'proteins', 'preview_image','read_count_total','cell_count',
-                      'total_read_count', 'read_count_aligned', 'unique_barcode_count', ]
+    other_fields = ['genes', 'proteins', 'preview_image', 'read_count_total', 'cell_count',
+                    'total_read_count', 'read_count_aligned', 'unique_barcode_count', ]
     from hiveportal.dataportal.models import Study
     study_model = Study
     meta = study_model._meta

@@ -10,8 +10,10 @@ import matplotlib.cm
 import numpy as np
 import pandas as pd
 
+
 def rgba_float_to_rgb_hex(floats):
     return '#' + ''.join('{:02x}'.format(int(c * 255)) for c in floats[:3])
+
 
 def tissue_svg(request):
     # These match the Django template fields in `human_body.svg`
@@ -37,6 +39,7 @@ def tissue_svg(request):
         hex_values,
         content_type='image/svg+xml',
     )
+
 
 class FrontendAppView(View):
     """
