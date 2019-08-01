@@ -79,8 +79,8 @@ def get_masscytometry_list(query):
         mass_cytometry = MassCytometryStudy.objects.all()
     else:
         mass_cytometry = MassCytometryStudy.objects.filter(
-            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
-            Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
+            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query)
+            | Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
             | Q(proteins__name__icontains=query) | Q(preview_image__icontains=query)
             | Q(image_count__icontains=query))
     return mass_cytometry
@@ -91,8 +91,8 @@ def get_scrna_barcorded_list(query):
         scrna_barcorded = ScRnaSeqStudyBarcoded.objects.all()
     else:
         scrna_barcorded = ScRnaSeqStudyBarcoded.objects.filter(
-            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
-            Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
+            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query)
+            | Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
             | Q(genes__hugo_symbol__icontains=query) | Q(cell_count__icontains=query))
     return scrna_barcorded
 
@@ -102,8 +102,8 @@ def get_scrna_cdna_list(query):
         scrna_cdna = ScRnaSeqStudyCDNA.objects.all()
     else:
         scrna_cdna = ScRnaSeqStudyCDNA.objects.filter(
-            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
-            Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
+            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query)
+            | Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
             | Q(read_count_aligned__icontains=query) | Q(cell_count__icontains=query))
     return scrna_cdna
 
@@ -113,8 +113,8 @@ def get_scrna_atac_list(query):
         scrna_atac = ScAtacSeqStudy.objects.all()
     else:
         scrna_atac = ScAtacSeqStudy.objects.filter(
-            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
-            Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
+            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query)
+            | Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
             | Q(read_count_total__icontains=query) | Q(cell_count__icontains=query))
     return scrna_atac
 
@@ -124,8 +124,8 @@ def get_spatial_transcriptomic_list(query):
         spatial_transcriptomic = SpatialTranscriptomicStudy.objects.all()
     else:
         spatial_transcriptomic = SpatialTranscriptomicStudy.objects.filter(
-            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
-            Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
+            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query)
+            | Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
             | Q(genes__hugo_symbol__icontains=query))
     return spatial_transcriptomic
 
@@ -134,9 +134,10 @@ def get_microscopy_list(query):
     if query is None:
         microscopy = MicroscopyStudy.objects.all()
     else:
-        microscopy = MicroscopyStudy.objects.filter(Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
-                                                    Q(institution__name__icontains=query) | Q(creation_time__icontains=query) | Q(image_count__icontains=query)
-                                                    | Q(preview_image__icontains=query))
+        microscopy = MicroscopyStudy.objects.filter(
+            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query)
+            | Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
+            | Q(image_count__icontains=query) | Q(preview_image__icontains=query))
     return microscopy
 
 
@@ -176,9 +177,10 @@ def get_seq_fish_imaging_list(query):
     if query is None:
         seq_fish_imaging = SeqFishImagingStudy.objects.all()
     else:
-        seq_fish_imaging = SeqFishImagingStudy.objects.filter(Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query) |
-                                                              Q(institution__name__icontains=query) | Q(creation_time__icontains=query) | Q(image_count__icontains=query)
-                                                              | Q(preview_image__icontains=query))
+        seq_fish_imaging = SeqFishImagingStudy.objects.filter(
+            Q(tissue__name__icontains=query) | Q(data_type__name__icontains=query)
+            | Q(institution__name__icontains=query) | Q(creation_time__icontains=query)
+            | Q(image_count__icontains=query) | Q(preview_image__icontains=query))
     return seq_fish_imaging
 
 
