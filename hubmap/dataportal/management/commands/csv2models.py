@@ -2,9 +2,7 @@ import csv
 import os
 from dataportal.models import *
 """Studies Export as CSV"""
-from django.core.management.base import BaseCommand, CommandError
-import sys
-from dataportal.models import Study
+from django.core.management.base import BaseCommand
 
 # TODO: Delete this file, or make it useful.
 # https://github.com/hubmapconsortium/hubmap-data-portal/issues/53

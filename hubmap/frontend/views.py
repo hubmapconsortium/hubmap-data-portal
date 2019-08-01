@@ -1,9 +1,3 @@
-
-from django.http import HttpResponse
-from django.conf import settings
-import os
-import logging
-
 from django.shortcuts import render
 from django.views.generic import View
 import matplotlib.cm

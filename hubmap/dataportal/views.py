@@ -1,5 +1,3 @@
-from collections import defaultdict
-
 from rest_framework import generics, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -9,11 +7,7 @@ from .serializers import *
 import matplotlib.cm
 import pandas as pd
 import numpy as np
-from json import loads, dumps
 import xarray as xr
-from django.views.generic import View
-from django.http import HttpResponse
-from django.conf import settings
 import os
 import logging
 

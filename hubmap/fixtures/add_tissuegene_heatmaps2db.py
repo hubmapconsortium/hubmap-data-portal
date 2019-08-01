@@ -1,6 +1,4 @@
 import matplotlib.cm
-import numpy as np
-import pandas as pd
 from dataportal.models import *
 
 

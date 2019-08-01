@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.serializers import ListSerializer
 
 from .models import *
 #TODO : add create and update and delete, put for all serializers
