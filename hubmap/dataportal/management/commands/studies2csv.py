@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 
+# TODO: Get rid of this? https://github.com/hubmapconsortium/hubmap-data-portal/issues/54
+
 
 def export_to_csv(request):
     other_fields = ['genes', 'proteins', 'preview_image', 'read_count_total', 'cell_count',
@@ -11,12 +13,14 @@ def export_to_csv(request):
     for field in other_fields:
         field_names.append(field)
     response = HttpResponse(content_type="text/csv")
-    response['Content-Distribution'] = 'attachment; filename=studies.csv'.format(meta)
+    response['Content-Distribution'] = 'attachment; filename=studies.csv'.format(meta)  # TODO: meta unused
     writer = csv.writer(response)
 
     writer.writerow(field_names)
     for study in study_model.objects.all().select_subclasses():
-        row = writer.writerow([get_attribute(study, field) for field in field_names])
+        row = writer.writerow(  # noqa: F841 TODO!
+            [get_attribute(study, field) for field in field_names]
+        )
 
     #print(response.__getattribute__('Content-Distribution'))
     return response
