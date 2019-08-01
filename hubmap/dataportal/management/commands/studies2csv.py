@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+import csv
 
 # TODO: Get rid of this? https://github.com/hubmapconsortium/hubmap-data-portal/issues/54
 
@@ -19,7 +20,7 @@ def export_to_csv(request):
     writer.writerow(field_names)
     for study in study_model.objects.all().select_subclasses():
         row = writer.writerow(  # noqa: F841 TODO!
-            [get_attribute(study, field) for field in field_names]
+            [get_attribute(study, field) for field in field_names]  #  noqa: F821 TODO!
         )
 
     #print(response.__getattribute__('Content-Distribution'))
