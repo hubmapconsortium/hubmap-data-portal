@@ -217,7 +217,7 @@ function SearchAppBar(props) {
                         <Button className={classes.button}>
                             <MuiThemeProvider theme={theme}  >
                                 <Typography className={classes.title} noWrap >
-                                    DataPortal
+                                    Data Portal
                     </Typography>
                             </MuiThemeProvider >
                             <NavigationIcon />

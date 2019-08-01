@@ -1,5 +1,4 @@
 import json
-from os import fspath
 from pathlib import Path
 from subprocess import PIPE, run
 
@@ -19,8 +18,12 @@ ALLOWED_HOSTS = []
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': fspath(BASE_DIR / 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'hubmap_db',
+        'USER': 'hubmap_login',
+        'PASSWORD': 'dev_password',
+        'HOST': 'postgres',
+        'PORT': '',
     }
 }
 
@@ -80,7 +83,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hubmap.wsgi.application'
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators

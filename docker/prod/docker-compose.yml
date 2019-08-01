@@ -10,19 +10,13 @@ services:
     ports:
       - "5432:5432"
   uwsgi:
-    image: "hubmap/data-portal-python:latest"
+    image: "hubmap/data-portal-python-prod:latest"
     ports:
       - "5000:5000"
     expose:
       - 5000
     volumes:
       - /opt/hubmap-data-portal-static:/opt/hubmap-data-portal/static
-  react_app:
-    image: "hubmap/data-portal-reactjs:latest"
-    ports:
-      - "3000:3000"
-    expose:
-      - 3000
 #  nginx:
 #    build: nginx
 #    ports:
