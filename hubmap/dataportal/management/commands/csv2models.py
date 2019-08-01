@@ -2,7 +2,6 @@ import csv
 import os
 from dataportal.models import *
 """Studies Export as CSV"""
-import csv
 from django.core.management.base import BaseCommand, CommandError
 import sys
 from dataportal.models import Study

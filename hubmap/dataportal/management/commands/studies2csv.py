@@ -20,7 +20,7 @@ def export_to_csv(request):
     writer.writerow(field_names)
     for study in study_model.objects.all().select_subclasses():
         row = writer.writerow(  # noqa: F841 TODO!
-            [get_attribute(study, field) for field in field_names]  #  noqa: F821 TODO!
+            [get_attribute(study, field) for field in field_names]  # noqa: F821 TODO!
         )
 
     #print(response.__getattribute__('Content-Distribution'))
