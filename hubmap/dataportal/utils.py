@@ -39,7 +39,7 @@ def get_response_for_request(self, request, format=None):
     microscopy = get_microscopy_list(query)
     scrna_atac = get_scrna_atac_list(query)
     seq_fish_imaging = get_seq_fish_imaging_list(query)
-    if not query is None:
+    if query is not None:
         genes = get_genes_list(query)
         proteins = get_proteins_list(query)
         self.queryset = list(
@@ -67,7 +67,7 @@ def get_response_for_request(self, request, format=None):
         microscopy_serializer.data + mass_cytometry_serializer.data + spatial_transcriptomic_serializer.data \
         + seq_fish_imaging_serializer.data
     response.sort(key=lambda x: x['id'])
-    if not query is None:
+    if query is not None:
         genes_serializer = GeneSerializer(genes, many=True, context=context)
         proteins_serializer = ProteinSerializer(proteins, many=True, context=context)
         response += genes_serializer.data + proteins_serializer.data

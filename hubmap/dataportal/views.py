@@ -8,8 +8,6 @@ import matplotlib.cm
 import pandas as pd
 import numpy as np
 import xarray as xr
-import os
-import logging
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Add post request implementations
