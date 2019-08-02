@@ -31,7 +31,9 @@ CONTAINER_SUFFIXES = [
     'dev',
     'prod',
 ]
-CONTAINER_LABELS = {f'{CONTAINER_LABEL_BASE}-{suffix}' for suffix in CONTAINER_SUFFIXES}
+# For local Docker override config
+CONTAINER_LABELS = {'dev-local_django'}
+CONTAINER_LABELS.update(f'{CONTAINER_LABEL_BASE}-{suffix}' for suffix in CONTAINER_SUFFIXES)
 
 def get_running_containers() -> List[str]:
     # Want to return a list instead of this being a generator function,
@@ -66,7 +68,8 @@ def print_run(command: List[str], pretend: bool, return_stdout: bool=False):
 def main(pretend: bool):
     containers = get_running_containers()
     if not containers:
-        message = f'No containers with label "{CONTAINER_LABEL}" found.'
+        label_str = '\n'.join(f'\t{label}'for label in CONTAINER_LABELS)
+        message = f'No containers found. Tried labels:\n{label_str}'
         raise EnvironmentError(message)
 
     if len(containers) > 1:
