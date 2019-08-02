@@ -2,6 +2,9 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import QuerySet
 
+from django.contrib.auth.models import User
+from rest_framework.authtoken.models import Token
+
 class TissueExpressionHeatmap(models.Model):
     """
     Instances of this class provide all of the data to render a heatmap

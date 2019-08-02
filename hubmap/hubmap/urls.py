@@ -19,6 +19,7 @@ from django.conf.urls import url
 from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
 from django.views.generic import TemplateView
+from rest_framework.authtoken import views
 
 # Create a router and register our viewsets with it.
 API_TITLE = 'HuBMAP UI-backend API'
@@ -41,4 +42,5 @@ urlpatterns = [
         ),
         name='swagger-ui',
     ),
+    url(r'^api-token-auth/', views.obtain_auth_token)
 ]
