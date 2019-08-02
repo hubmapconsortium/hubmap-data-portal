@@ -20,7 +20,7 @@ from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
 from django.views.generic import TemplateView
 from rest_framework.authtoken import views
-
+from dataportal import views as dataportal_views
 # Create a router and register our viewsets with it.
 API_TITLE = 'HuBMAP UI-backend API'
 API_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
@@ -29,6 +29,7 @@ schema_view = get_schema_view(title=API_TITLE)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),
+    path('', dataportal_views.globus, name='globus'),
     path('', include('frontend.urls')),
     url(r'', include('django.contrib.auth.urls')),
     url(r'', include('social_django.urls', namespace='social')),

@@ -38,25 +38,12 @@ class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
-    authentication_classes = [SessionAuthentication, BasicAuthentication]
-    permission_classes = [IsAuthenticated]
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
         image_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "image_count"))
         response.append({"summary" : [{ "cell_count" : cell_count_summary},{"image_count": image_count_summary}]})
-        from apt.auth import unicode
-        for user in User.objects.all():
-            print(user)
-            token = Token.objects.get_or_create(user=user)
-            print(token)
-        content = {
-            'user': unicode(request.user),  # `django.contrib.auth.User` instance.
-            'auth': unicode(request.auth),  # None
-        }
-        globus(request)
-
         return Response(response)
 
     def list(self, request):
@@ -217,6 +204,8 @@ def serialize_multi_dim_counts(data: xr.DataArray):
 
     return list_for_frontend
 
+CLIENT_ID = ' 0cf5643e-b093-455d-a4dc-804bf3315361'
+CLIENT_SECRET='3AiDBRmz13PnKbxIAOnbMbYXVWuwoVGcAoo8f2Bax9Y'
 def globus(request):
     uuid = None
     access_token = None
@@ -229,44 +218,8 @@ def globus(request):
     return render(
         request,
         'globus.html',
-        {
-            'uuid': uuid,
-            'access_token': access_token,
-            'refresh_token': refresh_token,
-        },
+        {},
     )
-
-import globus_sdk
-
-CLIENT_ID = '98a823b4-86e8-46a8-86a8-1b2c8d09f3fb'
-def authorize_globus_account( request):
-    client = globus_sdk.NativeAppAuthClient(CLIENT_ID)
-    client.oauth2_start_flow()
-
-    authorize_url = client.oauth2_get_authorize_url()
-    print('Please go to this URL and login: {0}'.format(authorize_url))
-    from apt.auth import unicode
-    for user in User.objects.all():
-        print(user)
-        token = Token.objects.get_or_create(user=user)
-        print(token)
-    content = {
-        'user': unicode(request.user),  # `django.contrib.auth.User` instance.
-        'auth': unicode(request.auth),  # None
-    }
-    # this is to work on Python2 and Python3 -- you can just use raw_input() or
-    # input() for your specific version
-    get_input = getattr(__builtins__, 'raw_input', input)
-    auth_code = get_input(
-        'Please enter the code you get after login here: ').strip()
-    token_response = client.oauth2_exchange_code_for_tokens(auth_code)
-
-    globus_auth_data = token_response.by_resource_server['auth.globus.org']
-    #globus_transfer_data = token_response.by_resource_server['transfer.api.globus.org']
-
-    # most specifically, you want these tokens as strings
-    AUTH_TOKEN = globus_auth_data['access_token']
-    #TRANSFER_TOKEN = globus_transfer_data['access_token']
 
 class CustomAuthToken(ObtainAuthToken):
 

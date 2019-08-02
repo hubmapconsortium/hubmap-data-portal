@@ -117,8 +117,9 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 # for giygas.compbio.cs.cmu.edu, change in the future
-SOCIAL_AUTH_GLOBUS_KEY = '71ae5268-0f79-41ca-ac34-bd2a54eacacc'
-SOCIAL_AUTH_GLOBUS_SECRET = 'aff0CdncPo/BjHdnnszdmj/oxc3S24hdGOoEhUsAxNE='
+SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
+    #'71ae5268-0f79-41ca-ac34-bd2a54eacacc'
+SOCIAL_AUTH_GLOBUS_SECRET = 'fEky8UMfC4ctPA9GwJ00E+aJ2B8uR2DkWHxxcRkStAY='
 SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
     'access_type': 'offline',
 }
