@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'django_filters',
     'rest_framework.authtoken',
     'social_django',
+    'oauth2_provider',
+    'rest_framework_social_oauth2',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -78,18 +81,15 @@ REST_FRAMEWORK = {
     #     # Any other parsers
     # ),
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
-    'DEFAULT_PERMISSION_CLASSES': (
-    'rest_framework.permissions.AllowAny',
-    ),
+    'DEFAULT_PERMISSION_CLASSES': ( 'rest_framework.permissions.AllowAny',),
     'DEFAULT_AUTHENTICATION_CLASSES': [
+       'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+       'rest_framework_social_oauth2.authentication.SocialAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
-OAUTH2_PROVIDER = {
-    # this is the list of available scopes
-    'SCOPES': {'read': 'Read scope', 'write': 'Write scope', 'groups': 'Access to your groups'}
-}
+
 ROOT_URLCONF = 'hubmap.urls'
 
 TEMPLATES = [
@@ -115,14 +115,16 @@ TEMPLATES = [
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.globus.GlobusOpenIdConnect',
     'django.contrib.auth.backends.ModelBackend',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
 ]
+
 # for giygas.compbio.cs.cmu.edu, change in the future
 SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
-    #'71ae5268-0f79-41ca-ac34-bd2a54eacacc'
-SOCIAL_AUTH_GLOBUS_SECRET = 'fEky8UMfC4ctPA9GwJ00E+aJ2B8uR2DkWHxxcRkStAY='
+SOCIAL_AUTH_GLOBUS_SECRET = 'OXy2zqjknh5qjdFaMJJOycQaD1j0nb5LsXHtAcTBxrM='
 SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
     'access_type': 'offline',
 }
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 WSGI_APPLICATION = 'hubmap.wsgi.application'
 

@@ -204,8 +204,6 @@ def serialize_multi_dim_counts(data: xr.DataArray):
 
     return list_for_frontend
 
-CLIENT_ID = ' 0cf5643e-b093-455d-a4dc-804bf3315361'
-CLIENT_SECRET='3AiDBRmz13PnKbxIAOnbMbYXVWuwoVGcAoo8f2Bax9Y'
 def globus(request):
     uuid = None
     access_token = None
@@ -218,19 +216,7 @@ def globus(request):
     return render(
         request,
         'globus.html',
-        {},
+        {       'uuid': uuid,
+                  'access_token': access_token,
+                  'refresh_token': refresh_token},
     )
-
-class CustomAuthToken(ObtainAuthToken):
-
-    def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'email': user.email
-        })
