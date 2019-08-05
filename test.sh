@@ -24,3 +24,9 @@ pushd hubmap/frontend
 CI=true npm test
 popd
 end npm
+
+start eslint
+pushd hubmap/frontend
+CI=true npx eslint .
+popd
+end eslint
