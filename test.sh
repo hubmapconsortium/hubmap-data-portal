@@ -27,6 +27,7 @@ end npm
 
 start eslint
 pushd hubmap/frontend
+# TODO: npx eslint --max-warnings=0 .
 CI=true npx eslint .
 popd
 end eslint
