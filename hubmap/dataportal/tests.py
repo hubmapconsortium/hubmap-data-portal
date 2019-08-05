@@ -5,6 +5,8 @@ from .models import *
 from .views import StudyDetailView
 
 # TODO : complete tests
+
+
 class DataportalModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
