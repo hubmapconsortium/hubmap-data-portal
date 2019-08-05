@@ -1,13 +1,13 @@
-from rest_framework import generics, views
+import matplotlib.cm
+import numpy as np
+import pandas as pd
+import xarray as xr
+from rest_framework import generics, status, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
-from rest_framework import status
-from .utils import *
+
 from .serializers import *
-import matplotlib.cm
-import pandas as pd
-import numpy as np
-import xarray as xr
+from .utils import *
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Add post request implementations

@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from django.views.generic import View
 import matplotlib.cm
 import numpy as np
 import pandas as pd
+from django.shortcuts import render
+from django.views.generic import View
 
 
 def rgba_float_to_rgb_hex(floats):
