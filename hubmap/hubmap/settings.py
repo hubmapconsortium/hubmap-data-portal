@@ -81,10 +81,10 @@ REST_FRAMEWORK = {
     #     # Any other parsers
     # ),
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
-    'DEFAULT_PERMISSION_CLASSES': ( 'rest_framework.permissions.AllowAny',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
     'DEFAULT_AUTHENTICATION_CLASSES': [
-       'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
-       'rest_framework_social_oauth2.authentication.SocialAuthentication',
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',  # django-oauth-toolkit >= 1.0.0
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ]
@@ -101,7 +101,7 @@ TEMPLATES = [
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
-               'django.contrib.auth.context_processors.auth',
+                'django.contrib.auth.context_processors.auth',
                 'social_django.context_processors.backends',
                 'social_django.context_processors.login_redirect',
                 'django.contrib.messages.context_processors.messages',
@@ -109,8 +109,8 @@ TEMPLATES = [
         },
     },
 ]
- #SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = 'g+^rn4oz4$##*i6i=z)!vgwufp)4#q(fx5i*1m_8=7s88=rtdr'
+# SECURITY WARNING: keep the secret key used in production secret!
+# SECRET_KEY = 'g+^rn4oz4$##*i6i=z)!vgwufp)4#q(fx5i*1m_8=7s88=rtdr'
 # Authentication, including Globus SSO
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.globus.GlobusOpenIdConnect',
@@ -171,6 +171,8 @@ GIT_VERSION_COMMAND = [
     'describe',
     '--dirty',
 ]
+
+
 def get_git_version() -> str:
     """
     Obtains the Git version of the application. Actual output from `git describe`
@@ -202,6 +204,7 @@ def get_git_version() -> str:
         pass
 
     return git_version
+
 
 GIT_VERSION = get_git_version()
 

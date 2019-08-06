@@ -17,9 +17,7 @@
 			&nbsp; Last name: {{ user.last_name }}<br/>
 			&nbsp; Date joined: {{ user.date_joined }}<br/>
 			&nbsp; Last login: {{ user.last_login }}<br/>
-			&nbsp; UUID: {{ uuid }}<br>
-			&nbsp; Access token: {{ access_token }}<br/>
-			&nbsp; Refresh token: {{ refresh_token }}<br/>
+			&nbsp;
 			<br/>
 			<a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
 		{% else %}
