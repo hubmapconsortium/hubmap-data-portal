@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:11
+    environment:
+      - POSTGRES_DB=hubmap_db
+      - POSTGRES_USER=hubmap_login
+      - POSTGRES_PASSWORD=dev_password
+    ports:
+      - "5432:5432"
+  django:
+    build: django-app
+    ports:
+      - "8000:8000"
+    expose:
+      - 8000
+    volumes:
+      - ../..:/opt/hubmap-data-portal
+    depends_on:
+      - "postgres"
+  react_app:
+    image: "hubmap/data-portal-reactjs-dev:latest"
+    ports:
+      - "3000:3000"
+    expose:
+      - 3000
+    volumes:
+      - ../..:/opt/hubmap-data-portal
+  neo4j:
+    image: neo4j:3.5
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    expose:
+      - 7474
+      - 7687
+  elasticsearch:
+    image: elasticsearch:7.2.0
+    environment:
+      - discovery.type=single-node
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    expose:
+      - 9200
+      - 9300
+  rabbitmq:
+    image: rabbitmq:3.5
+    ports:
+      - "5672:5672"
+    expose:
+      - 5672
+#  nginx:
+#    build: nginx
+#    ports:
+#      - "8000:80"
+#      - "80:80"
+#      - "443:443"
+#    expose:
+#      - 80
+#      - 443

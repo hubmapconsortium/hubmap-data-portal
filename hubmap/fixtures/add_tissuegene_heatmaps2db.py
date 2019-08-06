@@ -1,10 +1,11 @@
 import matplotlib.cm
-import numpy as np
-import pandas as pd
+
 from dataportal.models import *
+
 
 def rgba_float_to_rgb_hex(floats):
     return '#' + ''.join('{:02x}'.format(int(c * 255)) for c in floats[:3])
+
 
 def setcolorheatmap(hugo_symbol, cd5l):
     tissue_colors = {
@@ -19,6 +20,7 @@ def setcolorheatmap(hugo_symbol, cd5l):
     geneObj.save()
 
     print(tissue_colors)
+
 
 LRRN4 = {
     'pancreas': 0.3,

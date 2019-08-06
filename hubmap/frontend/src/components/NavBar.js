@@ -216,10 +216,10 @@ function SearchAppBar(props) {
                     </IconButton>
                     <div className={classes.sectionDesktop}>
                         <Button className={classes.button}>
-                            <MuiThemeProvider theme={theme}  >
-                                <Typography className={classes.title} noWrap >
-                                <NavLink to="/">DataPortal</NavLink>
-                    </Typography>
+                            <MuiThemeProvider theme={theme}>
+                                <Typography className={classes.title} noWrap>
+                                    <NavLink to="/">Data Portal</NavLink>
+                                </Typography>
                             </MuiThemeProvider >
                             <NavigationIcon />
                         </Button>

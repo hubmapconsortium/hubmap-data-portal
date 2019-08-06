@@ -15,6 +15,7 @@ services:
 install:
   - cd hubmap
   - pip install -r requirements.txt
+  - pip install -r requirements-test.txt
   - mv hubmap/test_settings.py hubmap/local_settings.py
   - cd -
   - cd hubmap/frontend
