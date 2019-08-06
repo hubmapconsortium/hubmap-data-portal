@@ -17,9 +17,9 @@ from .models import (
     TissueExpressionHeatmap
 )
 
-#TODO : add create and update and delete, put for all serializers
+# TODO : add create and update and delete, put for all serializers
 # (all update/add/delete requests for scripts to write metadata to models)
-#TODO: add tests for django restframework
+# TODO: add tests for django restframework
 
 
 class InstitutionSerializer(serializers.ModelSerializer):
@@ -250,7 +250,6 @@ class SpatialTranscriptomicStudySerializer(StudySerializer):
     genes = GeneSerializer(many=True, read_only=True)
 
     class Meta(StudySerializer.Meta):
-        #list_serializer_class = StudyListSerializer
         fields = StudySerializer.Meta.fields + (
             'genes',
         )

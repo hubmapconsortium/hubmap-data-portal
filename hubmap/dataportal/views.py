@@ -20,8 +20,8 @@ from .utils import (
     get_serializer_class
 )
 
-#TODO: Add OpenApi -> Swagger to rest framework
-#TODO: Add post request implementations
+# TODO: Add OpenApi -> Swagger to rest framework
+# TODO: Add post request implementations
 
 
 class PaginationClass(PageNumberPagination):
@@ -51,7 +51,7 @@ class StudyListView(generics.GenericAPIView):
         print(serializer.data)
         return self.get_paginated_response(serializer.data)
 
-#TODO : deifne what fields are modifiable and what can be created
+    # TODO : define what fields are modifiable and what can be created
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():

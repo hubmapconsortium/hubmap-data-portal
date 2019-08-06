@@ -55,7 +55,7 @@ def get_serializer_class(this_study):
 
 def get_response_for_request(self, request, format=None):
     query = self.request.query_params.get('search', None)
-    #get all individual study lists
+    # Get all individual study lists
     scrna_barcorded = get_scrna_barcorded_list(query)
     scrna_cdna = get_scrna_cdna_list(query)
     spatial_transcriptomic = get_spatial_transcriptomic_list(query)
@@ -70,16 +70,16 @@ def get_response_for_request(self, request, format=None):
             chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy,
                   mass_cytometry, spatial_transcriptomic, genes, proteins))
     else:
-        #first set query set
+        # First set query set
         self.queryset = list(
             chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy,
                   mass_cytometry, spatial_transcriptomic))
     self.queryset.sort(key=lambda x: x.id)
-    #set context
+    # Set context
     context = {
         "request": request,
     }
-    #get serializers lists
+    # Get serializers lists
     scrna_barcorded_serializer = ScRnaSeqStudyBarcodedSerializer(
         scrna_barcorded, many=True, context=context)
     scrna_cdna_serializer = ScRnaSeqStudyCDNASerializer(
@@ -186,13 +186,13 @@ def get_genes(self, request):
 
     genes = get_genes_list(query)
     self.queryset = genes
-    #set context
+    # Set context
     context = {
         "request": request,
     }
     print(genes)
     print(GeneSerializer(genes, many=True, context=context))
-    #get serializers lists
+    # Get serializers lists
     response = GeneSerializer(genes, many=True, context=context).data
     return response
 
