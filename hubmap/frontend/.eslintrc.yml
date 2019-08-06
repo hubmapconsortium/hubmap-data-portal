@@ -1,0 +1,18 @@
+extends:
+  - eslint:recommended
+  - plugin:react/recommended
+parserOptions:
+  sourceType: module
+  ecmaVersion: 2018
+env:
+  browser: true
+  es6: true
+rules:
+  no-console: 0 # TODO: [2, { "allow": ["warn", "error"]}]
+  no-undef: 0 # TODO
+  no-extra-semi: 0 # TODO
+  no-unused-vars: 0 # TODO
+  react/prop-types: 0 # TODO
+settings:
+  react:
+    version: detect
