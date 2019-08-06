@@ -23,8 +23,8 @@ class StudiesTable extends React.Component {
     componentDidMount() {
         ('componentDidMount');
         hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
-        if (this.currentState != "" && this.currentState.status != Constants.IN_PROGRESS
-        && this.currentState.studies != {} && this.currentState.type == Constants.GLOBAL_FETCH_ACTION) {
+        if (this.currentState!=="" && this.currentState.status!==Constants.IN_PROGRESS
+        && this.currentState.studies!=={} && this.currentState.type == Constants.GLOBAL_FETCH_ACTION) {
             this.props.dispatch(fetch_studies());
         }
         else if(this.currentState.type == Constants.GLOBAL_FETCH_ACTION && this.currentState.status == Constants.IN_PROGRESS)
@@ -41,7 +41,7 @@ class StudiesTable extends React.Component {
         if (status == Constants.IN_PROGRESS) {
             return <div> Loading...</div>
         }
-        if (response != "" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
+        if (response!=="" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
             this.previousState.response = this.currentState ;
             this.previousState.type = type;
             (response);
@@ -50,7 +50,7 @@ class StudiesTable extends React.Component {
 
                 <MaterialTableDemo studies = {response} /> </div>);
         }
-        /*else if(type != Constants.GLOBAL_FETCH_ACTION && response != "")
+        /*else if(type!==Constants.GLOBAL_FETCH_ACTION && response!=="")
         /{
             (this.previousState);
         }*/

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../../middleware/actions';
+import { fetch_studies, in_progress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import  {CircularProgress, Typography } from '@material-ui/core';
@@ -35,7 +35,7 @@ class ImageCountByTissuesChart extends PureComponent {
 		
     }
     render() {
-        const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
+        const { response, error, status, type, count} = store.getState().studyState;
 
         if (error) {
           return <div>Error! {error.message}</div>
