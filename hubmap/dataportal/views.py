@@ -6,9 +6,8 @@ from rest_framework import generics, status, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from .models import Study
+from .models import Study, DataType
 from .utils import (
-    DataType,
     GeneSerializer,
     Institution,
     StudyListSerializer,
