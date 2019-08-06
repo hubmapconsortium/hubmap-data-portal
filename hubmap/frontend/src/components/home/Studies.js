@@ -47,7 +47,6 @@ class Studies extends React.Component {
     }
 
     getStudiesTable(studies) {
-        (useStyles);
         return (<Paper className={useStyles.root}>
                     <Table className={useStyles.table} title="Studies from HuBMAP Consortium">
                         <TableHead>
@@ -107,7 +106,6 @@ class Studies extends React.Component {
                 </Paper>);
     }
     render() {
-        (this.props.studies);
         return (
                 this.getStudiesTable(this.props.studies)
         );
