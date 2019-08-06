@@ -26,7 +26,8 @@ class Gene(models.Model):
     entrez_id = models.CharField(max_length=50, blank=True, null=True)
     hugo_symbol = models.CharField(max_length=50, blank=True, null=True)
     ensembl_id = models.CharField(max_length=50, blank=True, null=True)
-    tissue_expression_heatmap = models.ForeignKey(TissueExpressionHeatmap, on_delete=models.CASCADE, null=True)
+    tissue_expression_heatmap = models.ForeignKey(
+        TissueExpressionHeatmap, on_delete=models.CASCADE, null=True)
 
     # TODO: any other
 
@@ -143,7 +144,8 @@ class SpatialTranscriptomicStudy(Study):
 
 class ImagingStudy(Study):
     image_count = models.PositiveIntegerField()
-    preview_image = models.ImageField(max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
+    preview_image = models.ImageField(
+        max_length=500, upload_to='gallery/%Y/%m/%d', null=True, blank=True)
 
 
 @study_type

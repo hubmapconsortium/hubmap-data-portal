@@ -6,7 +6,8 @@ from django.db.models import Q
 from .models import *
 from .serializers import *
 
-'''in case we have to use recursive gene/gene expressions/new features, use this. for now: keeping this'''
+# In case we have to use recursive gene/gene expressions/new features, use this.
+# For now: keeping this.
 
 
 class RecursiveSerializer(serializers.Serializer):
@@ -45,29 +46,37 @@ def get_response_for_request(self, request, format=None):
         genes = get_genes_list(query)
         proteins = get_proteins_list(query)
         self.queryset = list(
-            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic, genes,
-                  proteins))
+            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy,
+                  mass_cytometry, spatial_transcriptomic, genes, proteins))
     else:
         #first set query set
         self.queryset = list(
-            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic))
+            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy,
+                  mass_cytometry, spatial_transcriptomic))
     self.queryset.sort(key=lambda x: x.id)
     #set context
     context = {
         "request": request,
     }
     #get serializers lists
-    scrna_barcorded_serializer = ScRnaSeqStudyBarcodedSerializer(scrna_barcorded, many=True, context=context)
-    scrna_cdna_serializer = ScRnaSeqStudyCDNASerializer(scrna_cdna, many=True, context=context)
-    spatial_transcriptomic_serializer = SpatialTranscriptomicStudySerializer(spatial_transcriptomic, many=True,
-                                                                             context=context)
-    microscopy_serializer = MicroscopyStudySerializer(microscopy, many=True, context=context)
-    mass_cytometry_serializer = MassCytometryStudySerializer(mass_cytometry, many=True, context=context)
-    scrna_atac_serializer = ScAtacSeqStudySerializer(scrna_atac, many=True, context=context)
-    seq_fish_imaging_serializer = SeqFishImagingStudySerializer(seq_fish_imaging, many=True, context=context)
-    response = scrna_barcorded_serializer.data + scrna_cdna_serializer.data + scrna_atac_serializer.data + \
-        microscopy_serializer.data + mass_cytometry_serializer.data + spatial_transcriptomic_serializer.data \
-        + seq_fish_imaging_serializer.data
+    scrna_barcorded_serializer = ScRnaSeqStudyBarcodedSerializer(
+        scrna_barcorded, many=True, context=context)
+    scrna_cdna_serializer = ScRnaSeqStudyCDNASerializer(
+        scrna_cdna, many=True, context=context)
+    spatial_transcriptomic_serializer = SpatialTranscriptomicStudySerializer(
+        spatial_transcriptomic, many=True, context=context)
+    microscopy_serializer = MicroscopyStudySerializer(
+        microscopy, many=True, context=context)
+    mass_cytometry_serializer = MassCytometryStudySerializer(
+        mass_cytometry, many=True, context=context)
+    scrna_atac_serializer = ScAtacSeqStudySerializer(
+        scrna_atac, many=True, context=context)
+    seq_fish_imaging_serializer = SeqFishImagingStudySerializer(
+        seq_fish_imaging, many=True, context=context)
+    response = (
+        scrna_barcorded_serializer.data + scrna_cdna_serializer.data
+        + scrna_atac_serializer.data + microscopy_serializer.data + mass_cytometry_serializer.data
+        + spatial_transcriptomic_serializer.data + seq_fish_imaging_serializer.data)
     response.sort(key=lambda x: x['id'])
     if query is not None:
         genes_serializer = GeneSerializer(genes, many=True, context=context)
@@ -171,7 +180,8 @@ def get_proteins_list(query):
     if query is None:
         proteins = Protein.objects.all()
     else:
-        proteins = Protein.objects.filter(Q(name__icontains=query) | Q(gene__hugo_symbol__icontains=query))
+        proteins = Protein.objects.filter(
+            Q(name__icontains=query) | Q(gene__hugo_symbol__icontains=query))
     return proteins
 
 

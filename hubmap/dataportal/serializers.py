@@ -154,7 +154,8 @@ class StudySerializer(serializers.ModelSerializer):
                 return ScRnaSeqStudyCDNASerializer(context=self.context).to_internal_value(data)
             elif data.get('subclass') == "ScRnaSeqStudyCDNASerializer":
                 self.Meta.model = ScRnaSeqStudyBarcoded
-                return ScRnaSeqStudyBarcodedSerializer(context=self.context).to_internal_value(data)
+                return ScRnaSeqStudyBarcodedSerializer(context=self.context)\
+                    .to_internal_value(data)
 
             else:
                 self.Meta.model = Study

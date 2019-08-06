@@ -23,9 +23,13 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
-        image_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "image_count"))
-        response.append({"summary": [{"cell_count": cell_count_summary}, {"image_count": image_count_summary}]})
+        cell_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "cell_count"))
+        image_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "image_count"))
+        response.append({"summary": [
+            {"cell_count": cell_count_summary}, {"image_count": image_count_summary}
+        ]})
         return Response(response)
 
     def list(self, request):
