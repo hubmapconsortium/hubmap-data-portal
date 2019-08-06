@@ -6,8 +6,19 @@ from rest_framework import generics, status, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from .serializers import *
-from .utils import *
+from .models import Study
+from .utils import (
+    DataType,
+    GeneSerializer,
+    Institution,
+    StudyListSerializer,
+    StudySerializer,
+    Tissue,
+    TissueColorSerializer,
+    get_genes,
+    get_response_for_request,
+    get_serializer_class
+)
 
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Add post request implementations
