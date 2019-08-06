@@ -1,4 +1,5 @@
 extends:
+  - react-app
   - eslint:recommended
   - plugin:react/recommended
 parserOptions:
@@ -13,6 +14,7 @@ rules:
   no-extra-semi: 0 # TODO
   no-unused-vars: 0 # TODO
   react/prop-types: 0 # TODO
+  jsx-a11y/anchor-is-valid: 0 # TODO
 settings:
   react:
     version: detect
