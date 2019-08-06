@@ -1,6 +1,21 @@
 from rest_framework import serializers
 
-from .models import *
+from .models import (
+    DataType,
+    Gene,
+    Institution,
+    MassCytometryStudy,
+    MicroscopyStudy,
+    Protein,
+    ScAtacSeqStudy,
+    ScRnaSeqStudyBarcoded,
+    ScRnaSeqStudyCDNA,
+    SeqFishImagingStudy,
+    SpatialTranscriptomicStudy,
+    Study,
+    Tissue,
+    TissueExpressionHeatmap
+)
 
 #TODO : add create and update and delete, put for all serializers
 # (all update/add/delete requests for scripts to write metadata to models)
