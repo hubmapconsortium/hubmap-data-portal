@@ -1,10 +1,9 @@
 import React from "react";
 import * as d3 from "d3";
-import "../App.css";
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../middleware/actions';
-import * as Constants from '../commons/constants';
-import { store } from '../index';
+import { fetch_studies, in_progress } from '../../middleware/actions';
+import * as Constants from '../../commons/constants';
+import { store } from '../../index';
 import  {CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
@@ -13,9 +12,6 @@ const mapStateToProps = state => {
         response: state.studyState.response,
 		error: state.studyState.error,
 		count: state.studyState.count,
-		page: state.studyState.page,
-		next: state.studyState.next,
-		previous: state.studyState.previous,
     }
 };
 class ImageCountStackedChart extends React.Component {
@@ -43,7 +39,6 @@ class ImageCountStackedChart extends React.Component {
         if (h !== undefined) {
           arr.push([h[0]].concat(h[1]));
         }
-        console.log(arr);
         return arr;
       }, [])
      data = this.data1.slice(1).map(function(da) {
@@ -108,7 +103,7 @@ class ImageCountStackedChart extends React.Component {
       .unknown("#ccc");
 
       const svg = d3.select(this.svg);
-    const chart = svg
+    svg
       .append("g")
       .attr("transform", `translate(${margin}, ${margin})`);
 
@@ -183,7 +178,7 @@ class ImageCountStackedChart extends React.Component {
     //return svg.node();
   }
   render() {
-    const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
+    const { response, error, status, type, count} = store.getState().studyState;
 
     if (error) {
       return <div>Error! {error.message}</div>

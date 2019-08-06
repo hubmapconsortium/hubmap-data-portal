@@ -1,9 +1,9 @@
-import { ReactComponent as ReactComp } from "../images/Human_body_silhouette_minimal.svg";
+import { ReactComponent as ReactComp } from "../../images/Human_body_silhouette_minimal.svg";
 import React from 'react';
 import data from './data';
-import { fetch_colors, in_progress } from "../middleware/actions";
-import * as Constants from '../commons/constants';
-import { store } from '../index';
+import { fetch_colors, in_progress } from "../../middleware/actions";
+import * as Constants from '../../commons/constants';
+import { store } from '../../index';
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => {

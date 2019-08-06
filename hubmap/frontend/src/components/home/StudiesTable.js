@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetch_studies, in_progress } from '../controllers/actions';
-import * as Constants from '../commons/constants';
-import { hubmapStore } from '../index';
+import * as Constants from '../../commons/constants';
+import { hubmapStore } from '../../index';
 import MaterialTableDemo from './MUITable';
 
 const mapStateToProps = state => {
-    console.log(state);
     return {
         status: state.status,
         response: state.response,
@@ -21,10 +20,10 @@ class StudiesTable extends React.Component {
     currentState = {};
     previousState ={};
     componentDidMount() {
-        console.log('componentDidMount');
+        ('componentDidMount');
         hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
-        if (this.currentState != "" && this.currentState.status != Constants.IN_PROGRESS
-        && this.currentState.studies != {} && this.currentState.type == Constants.GLOBAL_FETCH_ACTION) {
+        if (this.currentState!=="" && this.currentState.status!==Constants.IN_PROGRESS
+        && this.currentState.studies!=={} && this.currentState.type == Constants.GLOBAL_FETCH_ACTION) {
             this.props.dispatch(fetch_studies());
         }
         else if(this.currentState.type == Constants.GLOBAL_FETCH_ACTION && this.currentState.status == Constants.IN_PROGRESS)
@@ -41,18 +40,16 @@ class StudiesTable extends React.Component {
         if (status == Constants.IN_PROGRESS) {
             return <div> Loading...</div>
         }
-        if (response != "" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
+        if (response!=="" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
             this.previousState.response = this.currentState ;
             this.previousState.type = type;
-            console.log(response);
             return (
                 <div>
-
                 <MaterialTableDemo studies = {response} /> </div>);
         }
-        /*else if(type != Constants.GLOBAL_FETCH_ACTION && response != "")
+        /*else if(type!==Constants.GLOBAL_FETCH_ACTION && response!=="")
         /{
-            console.log(this.previousState);
+            (this.previousState);
         }*/
         else {
             return (<div>no studies </div>);

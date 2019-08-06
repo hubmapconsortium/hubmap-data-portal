@@ -24,7 +24,7 @@ const StyledTableCell = withStyles(theme => ({
   const StyledTableRow = withStyles(theme => ({
     root: {
       '&:nth-of-type(odd)': {
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
       },
     },
   }))(TableRow);
@@ -47,11 +47,10 @@ class Studies extends React.Component {
     }
 
     getStudiesTable(studies) {
-        console.log(useStyles);
         return (<Paper className={useStyles.root}>
                     <Table className={useStyles.table} title="Studies from HuBMAP Consortium">
                         <TableHead>
-                        <TableRow backgroundColor={grey[50]}>
+                        <TableRow backgroundColor={grey[300]}>
                             <StyledTableCell align="right">Id</StyledTableCell>
                             <StyledTableCell align="right">Study type</StyledTableCell>
                             <StyledTableCell align="right">Institution</StyledTableCell>
@@ -107,7 +106,6 @@ class Studies extends React.Component {
                 </Paper>);
     }
     render() {
-        console.log(this.props.studies);
         return (
                 this.getStudiesTable(this.props.studies)
         );

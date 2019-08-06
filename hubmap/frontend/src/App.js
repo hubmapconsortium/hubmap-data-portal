@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 
 
 class App extends PureComponent {
-
+    
     componentDidMount() {
         this.props.dispatch(fetchAllStudies());
         this.props.dispatch(getTissueColorsFromServer());
@@ -20,7 +20,6 @@ class App extends PureComponent {
     }
 
     render() {
-
 		return (
             <div className="App">
 

@@ -22,6 +22,7 @@ import ExploreIcon from '@material-ui/icons/ExploreOutlined';
 import GraphIcon from '@material-ui/icons/BubbleChart';
 import FlowIcon from '@material-ui/icons/TableChart';
 import HelpIcon from '@material-ui/icons/Help';
+import {NavLink, HashRouter} from 'react-router-dom';
 
 import MicroscopeIcon from '../icons/MicroscopeIcon';
 
@@ -50,12 +51,12 @@ const useStyles = makeStyles(theme => ({
     },
     root: {
         flexGrow: 1,
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
         color: grey[800],
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
         color: grey[800],
     },
     title: {
@@ -66,10 +67,10 @@ const useStyles = makeStyles(theme => ({
         display: 'none',
         [theme.breakpoints.up('sm')]: {
             display: 'block',
-            backgroundColor: grey[50],
+            backgroundColor: grey[300],
             color: grey[800],
         },
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
         color: grey[800],
     },
     search: {
@@ -101,7 +102,7 @@ const useStyles = makeStyles(theme => ({
         color: grey[800],
     },
     inputRoot: {
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
         color: grey[800],
         borderColor: grey[800],
         width: 300,
@@ -123,10 +124,10 @@ const useStyles = makeStyles(theme => ({
         display: 'none',
         [theme.breakpoints.up('md')]: {
             display: 'flex',
-            backgroundColor: grey[50],
+            backgroundColor: grey[300],
             color: grey[800],
         },
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
         color: grey[800],
         marginLeft: -33,
         marginTop: -20,
@@ -137,7 +138,7 @@ const useStyles = makeStyles(theme => ({
         [theme.breakpoints.up('md')]: {
             display: 'flex',
         },
-        backgroundColor: grey[50],
+        backgroundColor: grey[300],
         color: grey[800],
         marginLeft: 105,
     },
@@ -204,7 +205,7 @@ function SearchAppBar(props) {
 
     return (
         <div className={classes.root}>
-            <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[50] }} height={30} width={'100%'}>
+            <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[300] }} height={30} width={'100%'}>
                 <Toolbar>
                     <IconButton
                         edge="start"
@@ -215,10 +216,10 @@ function SearchAppBar(props) {
                     </IconButton>
                     <div className={classes.sectionDesktop}>
                         <Button className={classes.button}>
-                            <MuiThemeProvider theme={theme}  >
-                                <Typography className={classes.title} noWrap >
-                                    Data Portal
-                    </Typography>
+                            <MuiThemeProvider theme={theme}>
+                                <Typography className={classes.title} noWrap>
+                                    <NavLink to="/">Data Portal</NavLink>
+                                </Typography>
                             </MuiThemeProvider >
                             <NavigationIcon />
                         </Button>
@@ -237,12 +238,12 @@ function SearchAppBar(props) {
                             keepMounted
                             open={Boolean(anchorEl)}
                             onClose={handleClose}>
-                            <MenuItem onClick={handleClose}>Data Analysis
-                        <GraphIcon className={classes.rightIcon} /></MenuItem>
-                            <MenuItem onClick={handleClose}>Studies
-                        <LibraryIcon className={classes.rightIcon} /></MenuItem>
-                            <MenuItem onClick={handleClose}>Pipelines
-                        <FlowIcon className={classes.rightIcon} /></MenuItem>
+                            <MenuItem onClick={handleClose}><NavLink to="/dataanalysis"> Data Analysis
+                        <GraphIcon className={classes.rightIcon} /></NavLink></MenuItem>
+                            <MenuItem onClick={handleClose}><NavLink to="/experiments">Experiments
+                        <LibraryIcon className={classes.rightIcon} /></NavLink></MenuItem>
+                            <MenuItem onClick={handleClose}><NavLink to="/pipelines">Pipelines
+                        <FlowIcon className={classes.rightIcon} /></NavLink></MenuItem>
                         </Menu>
 
 
@@ -273,7 +274,8 @@ function SearchAppBar(props) {
                         <MicroscopeIcon className={classes.rightIcon} /></MenuItem>
                             <MenuItem onClick={handleCloseHelp}>Data Download
                         <CloudDownloadIcon className={classes.rightIcon} /></MenuItem>
-                            <MenuItem onClick={handleCloseHelp}>User FAQs</MenuItem>
+                            <MenuItem onClick={handleCloseHelp}><NavLink to="/userfaqs">User FAQs
+                            </NavLink></MenuItem>
 
                         </Menu>
 
