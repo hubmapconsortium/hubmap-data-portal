@@ -2,11 +2,33 @@ from collections import OrderedDict
 from itertools import chain
 
 from django.db.models import Q
+from rest_framework import serializers
 
-from .models import *
-from .serializers import *
+from .models import (
+    Gene,
+    MassCytometryStudy,
+    MicroscopyStudy,
+    Protein,
+    ScAtacSeqStudy,
+    ScRnaSeqStudyBarcoded,
+    ScRnaSeqStudyCDNA,
+    SeqFishImagingStudy,
+    SpatialTranscriptomicStudy
+)
+from .serializers import (
+    GeneSerializer,
+    MassCytometryStudySerializer,
+    MicroscopyStudySerializer,
+    ProteinSerializer,
+    ScAtacSeqStudySerializer,
+    ScRnaSeqStudyBarcodedSerializer,
+    ScRnaSeqStudyCDNASerializer,
+    SeqFishImagingStudySerializer,
+    SpatialTranscriptomicStudySerializer
+)
 
-'''in case we have to use recursive gene/gene expressions/new features, use this. for now: keeping this'''
+# In case we have to use recursive gene/gene expressions/new features, use this.
+# For now: keeping this.
 
 
 class RecursiveSerializer(serializers.Serializer):
@@ -33,7 +55,7 @@ def get_serializer_class(this_study):
 
 def get_response_for_request(self, request, format=None):
     query = self.request.query_params.get('search', None)
-    #get all individual study lists
+    # Get all individual study lists
     scrna_barcorded = get_scrna_barcorded_list(query)
     scrna_cdna = get_scrna_cdna_list(query)
     spatial_transcriptomic = get_spatial_transcriptomic_list(query)
@@ -45,29 +67,37 @@ def get_response_for_request(self, request, format=None):
         genes = get_genes_list(query)
         proteins = get_proteins_list(query)
         self.queryset = list(
-            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic, genes,
-                  proteins))
+            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy,
+                  mass_cytometry, spatial_transcriptomic, genes, proteins))
     else:
-        #first set query set
+        # First set query set
         self.queryset = list(
-            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy, mass_cytometry, spatial_transcriptomic))
+            chain(scrna_barcorded, scrna_cdna, scrna_atac, microscopy,
+                  mass_cytometry, spatial_transcriptomic))
     self.queryset.sort(key=lambda x: x.id)
-    #set context
+    # Set context
     context = {
         "request": request,
     }
-    #get serializers lists
-    scrna_barcorded_serializer = ScRnaSeqStudyBarcodedSerializer(scrna_barcorded, many=True, context=context)
-    scrna_cdna_serializer = ScRnaSeqStudyCDNASerializer(scrna_cdna, many=True, context=context)
-    spatial_transcriptomic_serializer = SpatialTranscriptomicStudySerializer(spatial_transcriptomic, many=True,
-                                                                             context=context)
-    microscopy_serializer = MicroscopyStudySerializer(microscopy, many=True, context=context)
-    mass_cytometry_serializer = MassCytometryStudySerializer(mass_cytometry, many=True, context=context)
-    scrna_atac_serializer = ScAtacSeqStudySerializer(scrna_atac, many=True, context=context)
-    seq_fish_imaging_serializer = SeqFishImagingStudySerializer(seq_fish_imaging, many=True, context=context)
-    response = scrna_barcorded_serializer.data + scrna_cdna_serializer.data + scrna_atac_serializer.data + \
-        microscopy_serializer.data + mass_cytometry_serializer.data + spatial_transcriptomic_serializer.data \
-        + seq_fish_imaging_serializer.data
+    # Get serializers lists
+    scrna_barcorded_serializer = ScRnaSeqStudyBarcodedSerializer(
+        scrna_barcorded, many=True, context=context)
+    scrna_cdna_serializer = ScRnaSeqStudyCDNASerializer(
+        scrna_cdna, many=True, context=context)
+    spatial_transcriptomic_serializer = SpatialTranscriptomicStudySerializer(
+        spatial_transcriptomic, many=True, context=context)
+    microscopy_serializer = MicroscopyStudySerializer(
+        microscopy, many=True, context=context)
+    mass_cytometry_serializer = MassCytometryStudySerializer(
+        mass_cytometry, many=True, context=context)
+    scrna_atac_serializer = ScAtacSeqStudySerializer(
+        scrna_atac, many=True, context=context)
+    seq_fish_imaging_serializer = SeqFishImagingStudySerializer(
+        seq_fish_imaging, many=True, context=context)
+    response = (
+        scrna_barcorded_serializer.data + scrna_cdna_serializer.data
+        + scrna_atac_serializer.data + microscopy_serializer.data + mass_cytometry_serializer.data
+        + spatial_transcriptomic_serializer.data + seq_fish_imaging_serializer.data)
     response.sort(key=lambda x: x['id'])
     if query is not None:
         genes_serializer = GeneSerializer(genes, many=True, context=context)
@@ -156,13 +186,13 @@ def get_genes(self, request):
 
     genes = get_genes_list(query)
     self.queryset = genes
-    #set context
+    # Set context
     context = {
         "request": request,
     }
     print(genes)
     print(GeneSerializer(genes, many=True, context=context))
-    #get serializers lists
+    # Get serializers lists
     response = GeneSerializer(genes, many=True, context=context).data
     return response
 
@@ -171,7 +201,8 @@ def get_proteins_list(query):
     if query is None:
         proteins = Protein.objects.all()
     else:
-        proteins = Protein.objects.filter(Q(name__icontains=query) | Q(gene__hugo_symbol__icontains=query))
+        proteins = Protein.objects.filter(
+            Q(name__icontains=query) | Q(gene__hugo_symbol__icontains=query))
     return proteins
 
 

@@ -6,11 +6,17 @@ from rest_framework import generics, status, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 
-from .serializers import *
-from .utils import *
+from .models import DataType, Institution, Study, Tissue
+from .serializers import (
+    GeneSerializer,
+    StudyListSerializer,
+    StudySerializer,
+    TissueColorSerializer
+)
+from .utils import get_genes, get_response_for_request, get_serializer_class
 
-#TODO: Add OpenApi -> Swagger to rest framework
-#TODO: Add post request implementations
+# TODO: Add OpenApi -> Swagger to rest framework
+# TODO: Add post request implementations
 
 
 class PaginationClass(PageNumberPagination):
@@ -23,9 +29,13 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
-        image_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "image_count"))
-        response.append({"summary": [{"cell_count": cell_count_summary}, {"image_count": image_count_summary}]})
+        cell_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "cell_count"))
+        image_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "image_count"))
+        response.append({"summary": [
+            {"cell_count": cell_count_summary}, {"image_count": image_count_summary}
+        ]})
         return Response(response)
 
     def list(self, request):
@@ -36,7 +46,7 @@ class StudyListView(generics.GenericAPIView):
         print(serializer.data)
         return self.get_paginated_response(serializer.data)
 
-#TODO : deifne what fields are modifiable and what can be created
+    # TODO : define what fields are modifiable and what can be created
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():

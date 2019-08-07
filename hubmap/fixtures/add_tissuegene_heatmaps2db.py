@@ -1,6 +1,6 @@
 import matplotlib.cm
 
-from dataportal.models import *
+from dataportal.models import Gene, TissueExpressionHeatmap
 
 
 def rgba_float_to_rgb_hex(floats):

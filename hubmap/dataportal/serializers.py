@@ -1,10 +1,25 @@
 from rest_framework import serializers
 
-from .models import *
+from .models import (
+    DataType,
+    Gene,
+    Institution,
+    MassCytometryStudy,
+    MicroscopyStudy,
+    Protein,
+    ScAtacSeqStudy,
+    ScRnaSeqStudyBarcoded,
+    ScRnaSeqStudyCDNA,
+    SeqFishImagingStudy,
+    SpatialTranscriptomicStudy,
+    Study,
+    Tissue,
+    TissueExpressionHeatmap
+)
 
-#TODO : add create and update and delete, put for all serializers
+# TODO : add create and update and delete, put for all serializers
 # (all update/add/delete requests for scripts to write metadata to models)
-#TODO: add tests for django restframework
+# TODO: add tests for django restframework
 
 
 class InstitutionSerializer(serializers.ModelSerializer):
@@ -154,7 +169,8 @@ class StudySerializer(serializers.ModelSerializer):
                 return ScRnaSeqStudyCDNASerializer(context=self.context).to_internal_value(data)
             elif data.get('subclass') == "ScRnaSeqStudyBarcodedSerializer":
                 self.Meta.model = ScRnaSeqStudyBarcoded
-                return ScRnaSeqStudyBarcodedSerializer(context=self.context).to_internal_value(data)
+                return ScRnaSeqStudyBarcodedSerializer(context=self.context)\
+                    .to_internal_value(data)
 
             else:
                 self.Meta.model = Study
@@ -234,7 +250,6 @@ class SpatialTranscriptomicStudySerializer(StudySerializer):
     genes = GeneSerializer(many=True, read_only=True)
 
     class Meta(StudySerializer.Meta):
-        #list_serializer_class = StudyListSerializer
         fields = StudySerializer.Meta.fields + (
             'genes',
         )
