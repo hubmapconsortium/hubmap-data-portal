@@ -1,6 +1,4 @@
 import React from "react";
-import Study from "./home/MUITable";
-import { PureComponent } from 'react';
 import grey from '@material-ui/core/colors/grey';
 import PropTypes from 'prop-types';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
@@ -47,7 +45,6 @@ class Studies extends React.Component {
     }
 
     getStudiesTable(studies) {
-        (useStyles);
         return (<Paper className={useStyles.root}>
                     <Table className={useStyles.table} title="Studies from HuBMAP Consortium">
                         <TableHead>
@@ -107,7 +104,6 @@ class Studies extends React.Component {
                 </Paper>);
     }
     render() {
-        (this.props.studies);
         return (
                 this.getStudiesTable(this.props.studies)
         );

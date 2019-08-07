@@ -22,7 +22,8 @@ from django.http import HttpResponse
 from django.conf import settings
 import os
 import logging
-
+from .decorators import   user_has_view_permissions
+from django.contrib.auth.decorators import login_required
 #TODO: Add OpenApi -> Swagger to rest framework
 #TODO: Add post request implementations
 from rest_framework.authtoken.models import Token
@@ -39,6 +40,7 @@ class StudyListView(generics.GenericAPIView):
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
 
+    @user_has_view_permissions
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
@@ -46,6 +48,7 @@ class StudyListView(generics.GenericAPIView):
         response.append({"summary" : [{ "cell_count" : cell_count_summary},{"image_count": image_count_summary}]})
         return Response(response)
 
+    @user_has_view_permissions
     def list(self, request):
         queryset = self.get_queryset()
         page = self.paginate_queryset(queryset, request)
@@ -55,6 +58,7 @@ class StudyListView(generics.GenericAPIView):
         return self.get_paginated_response(serializer.data)
 
 #TODO : deifne what fields are modifiable and what can be created
+    @user_has_view_permissions
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():
@@ -68,6 +72,7 @@ class StudyListPageView(generics.GenericAPIView):
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
 
+    @user_has_view_permissions
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         paginated_queryset = self.paginate_queryset(response)
@@ -79,6 +84,7 @@ class GeneListView(generics.GenericAPIView):
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
 
+    @user_has_view_permissions
     def get(self, request, format=None):
         response = get_genes(self, request)
         return Response(response)

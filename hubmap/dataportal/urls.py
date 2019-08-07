@@ -43,6 +43,8 @@ urlpatterns = [
     url(r'^search/$', views.GlobalSearch.as_view(), name="search"),
     url(r'^colors/', views.Tissue_svg_colors.as_view(), name="colors"),
     url(r'^genes/$', views.GeneListView.as_view(), name="genes"),
+    #url(r'', include('django.contrib.auth.urls')),
+    #url(r'', include('social_django.urls', namespace='social')),
     #path('users/', UserList.as_view()),
     #path('users/<pk>/', UserDetails.as_view()),
     #path('groups/', GroupList.as_view()),

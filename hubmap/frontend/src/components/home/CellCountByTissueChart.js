@@ -12,9 +12,6 @@ const mapStateToProps = state => {
         response: state.studyState.response,
 		error: state.studyState.error,
 		count: state.studyState.count,
-		page: state.studyState.page,
-		next: state.studyState.next,
-		previous: state.studyState.previous,
     }
 };
 
@@ -35,7 +32,7 @@ const mapStateToProps = state => {
 		
     }
     render() {
-        const { response, error, status, type, page, count, next, previous } = store.getState().studyState;
+        const { response, error, status, type, count } = store.getState().studyState;
 
           if (error) {
             return <div>Error! {error.message}</div>

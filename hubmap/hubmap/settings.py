@@ -120,7 +120,7 @@ AUTHENTICATION_BACKENDS = [
 
 # for giygas.compbio.cs.cmu.edu, change in the future
 SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
-SOCIAL_AUTH_GLOBUS_SECRET = 'OXy2zqjknh5qjdFaMJJOycQaD1j0nb5LsXHtAcTBxrM='
+SOCIAL_AUTH_GLOBUS_SECRET = 'gEfGGE09nMMjwZxWafL+2/M3UqcGl9czSL72H+O1xuU='
 SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
     'access_type': 'offline',
 }
