@@ -1,18 +1,26 @@
+from functools import wraps
+
 from django.core.exceptions import PermissionDenied
 from django.core.exceptions import *
 
-from dataportal import views
+from . import views
 from .models import *
 from django.contrib.auth.models import *
 
+ALLOWED_GROUPS = [
+    'dataportal_admin',
+    'dataportal_db_admin',
+]
 
 def user_has_view_permissions(function):
+    @wraps(function)
     def wrap(request, *args, **kwargs):
         print(request)
-        if hasattr(request, "user") :
-            user = User.objects.get(request.user)
-            if user.groups.get(permissions__group__name__exact='dataportal_admin') | \
-                    user.groups.get(permissions__group__name__exact='dataportal_db_admin') :#request.user.get_credentials('globus' is None):
+        if hasattr(request, "user"):
+            if any(
+                request.user.groups.filter(permissions__group__name__exact=group)
+                for group in ALLOWED_GROUPS
+            ):
                 return function(request, *args, **kwargs)
             else:
                 print("user exists")
@@ -21,8 +29,4 @@ def user_has_view_permissions(function):
             print("user does not exists", request)
             raise PermissionDenied
 
-    wrap.__doc__ = function.__doc__
-    wrap.__name__ = function.__name__
     return wrap
-
-

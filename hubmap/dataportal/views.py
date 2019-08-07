@@ -21,17 +21,18 @@ from django.http import HttpResponse
 from django.conf import settings
 import os
 import logging
-from .decorators import   user_has_view_permissions
+from .decorators import user_has_view_permissions
 from django.contrib.auth.decorators import login_required
-#TODO: Add OpenApi -> Swagger to rest framework
-#TODO: Add post request implementations
+from django.utils.decorators import method_decorator
+# TODO: Add OpenApi -> Swagger to rest framework
+# TODO: Add post request implementations
 from rest_framework.authtoken.models import Token
 
-#token = Token.objects.create(user='admin')
-#print(token.key)
+# token = Token.objects.create(user='admin')
+# print(token.key)
 
 class PaginationClass(PageNumberPagination):
-    page_size =  10
+    page_size = 10
     max_page_size = 10
 
 class StudyListView(generics.GenericAPIView):
@@ -39,16 +40,13 @@ class StudyListView(generics.GenericAPIView):
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
 
-    @login_required(login_url='/login/globus/', redirect_field_name='?next')
-    #@user_has_view_permissions
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
         image_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "image_count"))
-        response.append({"summary" : [{ "cell_count" : cell_count_summary},{"image_count": image_count_summary}]})
+        response.append({"summary": [{"cell_count": cell_count_summary}, {"image_count": image_count_summary}]})
         return Response(response)
 
-    @user_has_view_permissions
     def list(self, request):
         queryset = self.get_queryset()
         page = self.paginate_queryset(queryset, request)
@@ -57,8 +55,8 @@ class StudyListView(generics.GenericAPIView):
         print(serializer.data)
         return self.get_paginated_response(serializer.data)
 
-#TODO : deifne what fields are modifiable and what can be created
-    @user_has_view_permissions
+    # TODO : define what fields are modifiable and what can be created
+    @method_decorator(login_required)
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():
@@ -72,7 +70,6 @@ class StudyListPageView(generics.GenericAPIView):
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
 
-    @user_has_view_permissions
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         paginated_queryset = self.paginate_queryset(response)
@@ -138,7 +135,7 @@ class Tissue_svg_colors(views.APIView):
         ]
         vec = pd.Series(np.random.random(len(organs)), index=organs)
         values = [
-            {"tissue": tissue, "color" : rgba_float_to_rgb_hex(matplotlib.cm.viridis(expr))}
+            {"tissue": tissue, "color": rgba_float_to_rgb_hex(matplotlib.cm.viridis(expr))}
             for tissue, expr in vec.items()
         ]
         print(values)
@@ -222,7 +219,9 @@ def globus(request):
     return render(
         request,
         'globus.html',
-        {       'uuid': uuid,
-                  'access_token': access_token,
-                  'refresh_token': refresh_token},
+        {
+            'uuid': uuid,
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+        },
     )

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import path
 from django.conf.urls import *
 from django.contrib import admin
@@ -43,6 +44,7 @@ urlpatterns = [
     url(r'^search/$', views.GlobalSearch.as_view(), name="search"),
     url(r'^colors/', views.Tissue_svg_colors.as_view(), name="colors"),
     url(r'^genes/$', views.GeneListView.as_view(), name="genes"),
+    path(r'protected/', login_required(views.StudyListView.as_view())),
     #url(r'', include('django.contrib.auth.urls')),
     #url(r'', include('social_django.urls', namespace='social')),
     #path('users/', UserList.as_view()),
