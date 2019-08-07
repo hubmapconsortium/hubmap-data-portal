@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
   django:
-    build: django-app
+    build: django_app
     ports:
       - "8000:8000"
     expose:
