@@ -40,7 +40,8 @@ class StudyListView(generics.GenericAPIView):
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
 
-    @user_has_view_permissions
+    @login_required(login_url='/login/globus/', redirect_field_name='?next')
+    #@user_has_view_permissions
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))

@@ -19,7 +19,7 @@ def user_has_view_permissions(function):
                 raise PermissionDenied
         else:
             print("user does not exists", request)
-            views.globus(request)
+            raise PermissionDenied
 
     wrap.__doc__ = function.__doc__
     wrap.__name__ = function.__name__
