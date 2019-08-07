@@ -1,5 +1,8 @@
 # HuBMAP Data Portal
 
+- [Development instance](https://data.dev.hubmapconsortium.org/)
+- [Test instance](https://data.test.hubmapconsortium.org/)
+
 ## About
 This is a work-in-progress HuBMAP data portal.
 
