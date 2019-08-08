@@ -11,7 +11,6 @@ import ExperimentsComponent from '../pages/Experiments';
 import PipelinesComponent from '../pages/Pipelines';
 import HomeComponent from '../pages/HomeComponent';
 import GlobusSignIn from '../pages/GlobusSignin';
-import {NavLink} from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -54,11 +53,9 @@ function RootContainer() {
     <Route exact path="/userfaqs" component={UserFAQsComponent}/>
     <Route exact path="/experiments" component={ExperimentsComponent}/>
     <Route exact path="/pipelines" component={PipelinesComponent}/>
-    <Route exact to="http://localhost:8000/auth/login/globus/" component={() => {
-      window.location.href='http://localhost:8000/auth/login/globus/';
-      return null;
-    }} />
+    <Route exact to="login/" component={GlobusSignIn} />
     <Route exact path="/" component={HomeComponent} />
+    <Route exact path="/loggedin/" component={HomeComponent} />
     <Footer />
     </Container>
     </BrowserRouter >

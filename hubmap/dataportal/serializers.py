@@ -307,3 +307,15 @@ class StudyListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Study
         fields = '__all__'
+
+class UserLoggedInSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = (
+            'id',
+            'first_name',
+            'last_name',
+            'username',
+            'groups',
+        )
+        model = User

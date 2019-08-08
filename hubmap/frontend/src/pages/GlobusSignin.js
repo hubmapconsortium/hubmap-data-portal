@@ -52,26 +52,24 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function handleClick()
-{
-  //window.location.href='https://localhost:8000/login/globus/?next=';
-}
-export default function GlobusSignIn() {
+function GlobusSignIn() {
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs" style={{marginTop:120}}>
       <CssBaseline />
-      < a href='http://localhost:8000/login/globus/?next=' target='_blank'>
-      <Button color={"inherit"} backgroundColor={grey[300]} width={300} height={300} onClick={handleClick.bind(this)}>
+      
+      {/* < a href='http://localhost:8000/auth/login/globus/' target='_blank'>
+      <Button color={"inherit"} backgroundColor={grey[300]} width={300} height={300} >
         <img src={GlobusIcon} alt='icon' />
-        <Typography>Sign in </Typography>
         </Button>
         </a>
         
        <Box mt={5}>
         <HuBMAP />
-      </Box>
+      </Box> */}
     </Container>
   );
 }
+
+export default GlobusSignIn;

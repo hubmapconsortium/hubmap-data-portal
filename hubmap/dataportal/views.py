@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render
 from rest_framework import generics, views, versioning
 from rest_framework.authtoken.views import ObtainAuthToken
@@ -17,7 +18,7 @@ import numpy as np
 from json import loads, dumps
 import xarray as xr
 from django.views.generic import View
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
 import os
 import logging
@@ -211,17 +212,46 @@ def globus(request):
     uuid = None
     access_token = None
     refresh_token = None
+    if not hasattr(request, 'user'):
+        request.user = AnonymousUser
+        return render(
+            request,
+            'globus.html',
+            {
+                'uuid': uuid,
+                'access_token': access_token,
+                'refresh_token': refresh_token,
+            },
+        )
     if request.user.is_authenticated:
+        response = HttpResponseRedirect('http://localhost:3000/loggedin/')
         uuid = request.user.social_auth.get(provider='globus').uid
         social = request.user.social_auth
         access_token = social.get(provider='globus').extra_data['access_token']
         refresh_token = social.get(provider='globus').extra_data['refresh_token']
-    return render(
-        request,
-        'globus.html',
-        {
-            'uuid': uuid,
-            'access_token': access_token,
-            'refresh_token': refresh_token,
-        },
-    )
+        response.set_cookie('first_name', request.user.first_name)
+        response.set_cookie('last_name', request.user.last_name)
+        response.set_cookie('email', request.user.email)
+    return response
+
+class GlobusUserAuth(generics.GenericAPIView):
+    serializer_class = UserLoggedInSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
+    queryset = User.objects.all()
+
+    def get(self, request, format=None):
+        if not hasattr(request, 'user'):
+            request.user = AnonymousUser
+        if request.user.is_authenticated:
+            uuid = request.user.social_auth.get(provider='globus').uid
+            social = request.user.social_auth
+            access_token = social.get(provider='globus').extra_data['access_token']
+            refresh_token = social.get(provider='globus').extra_data['refresh_token']
+        context = {
+            "request": request,
+        }
+        response = UserLoggedInSerializer(request.user).data
+        return Response(response)
+
+

@@ -32,6 +32,7 @@ urlpatterns = [
     path('', dataportal_views.globus, name='globus'),
     path('', include('frontend.urls')),
     url(r'', include('django.contrib.auth.urls')),
+    path('loggedin/', dataportal_views.GlobusUserAuth.as_view(), name='loggedin'),
     url(r'^auth/', include('rest_framework_social_oauth2.urls')),
     url(r'^openapi/$', schema_view,name='openapi-schema'),
     url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),

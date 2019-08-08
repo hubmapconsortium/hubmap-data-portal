@@ -22,9 +22,10 @@ import ExploreIcon from '@material-ui/icons/ExploreOutlined';
 import GraphIcon from '@material-ui/icons/BubbleChart';
 import FlowIcon from '@material-ui/icons/TableChart';
 import HelpIcon from '@material-ui/icons/Help';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 
 import MicroscopeIcon from '../icons/MicroscopeIcon';
+import LoggedInStatus from './home/LoggedInStatus';
 
 const theme = createMuiTheme({
     typography: {
@@ -164,6 +165,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+
 function SearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -212,7 +214,9 @@ function SearchAppBar(props) {
         setAnchorEl1(event.currentTarget);
     }
 
+
     return (
+        
         <div className={classes.root}>
             <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[300] }} height={30} width={'100%'}>
                 <Toolbar>
@@ -282,8 +286,8 @@ function SearchAppBar(props) {
                         </Menu>
                         </div>
                         <div className={classes.sectionMenuDesktop} >
-                        <Button color={grey[300]} aria-haspopup="true" component={NavLink} to='/login'>
-                            Login <AccountCircle className={classes.rightIcon} /></Button>
+ 
+                        <LoggedInStatus />
                         </div>
                     <div className={classes.grow} />
                     <div className={classes.grow} />

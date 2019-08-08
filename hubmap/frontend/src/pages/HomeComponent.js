@@ -42,14 +42,18 @@ const useStyles = makeStyles(theme => ({
 
 }));
 class HomeComponent extends React.Component{
+
+
 componentDidMount()
 {
   actions.fetchAllStudies();
   actions.getGeneTissueColors();
   actions.getGeneTissueColors();
+
 }
     render(){
-        return (
+
+      return (
       <Grid container className={useStyles.root} spacing={8} margin-top="20px">
       <Grid item style={{height:30}}>
       </Grid>

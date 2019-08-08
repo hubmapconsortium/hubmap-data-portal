@@ -92,7 +92,7 @@ REST_FRAMEWORK = {
 
 ROOT_URLCONF = 'hubmap.urls'
 LOGIN_URL='/login/globus/'
-LOGIN_REDIRECT_URL='/'
+LOGIN_REDIRECT_URL='http://localhost:3000/loggedin/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
