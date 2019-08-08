@@ -92,6 +92,7 @@ REST_FRAMEWORK = {
 
 ROOT_URLCONF = 'hubmap.urls'
 LOGIN_URL='/login/globus/'
+LOGIN_REDIRECT_URL='/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

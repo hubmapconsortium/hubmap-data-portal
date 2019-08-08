@@ -46,28 +46,30 @@ const useStyles = makeStyles(theme => ({
   },
   avatar: {
     margin: theme.spacing(2),
-    height:180,
+    height:160,
     width:160,
     backgroundColor: "inherit"
   },
 }));
 
+function handleClick()
+{
+  //window.location.href='https://localhost:8000/login/globus/?next=';
+}
 export default function GlobusSignIn() {
   const classes = useStyles();
 
   return (
     <Container component="main" maxWidth="xs" style={{marginTop:120}}>
       <CssBaseline />
-      <div className={classes.paper}>
-      <Button color={"inherit"} backgroundColor={grey[300]} component={NavLink} to='/login/globus/?next='>
-        <Avatar className={classes.avatar}>
-          <img src={GlobusIcon} alt='icon'  />
-        </Avatar>
-        Sign in
+      < a href='http://localhost:8000/login/globus/?next=' target='_blank'>
+      <Button color={"inherit"} backgroundColor={grey[300]} width={300} height={300} onClick={handleClick.bind(this)}>
+        <img src={GlobusIcon} alt='icon' />
+        <Typography>Sign in </Typography>
         </Button>
+        </a>
         
-      </div>
-      <Box mt={5}>
+       <Box mt={5}>
         <HuBMAP />
       </Box>
     </Container>
