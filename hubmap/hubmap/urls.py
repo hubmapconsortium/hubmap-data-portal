@@ -18,10 +18,12 @@ from django.urls import path, include
 from django.conf.urls import url
 from rest_framework.schemas import get_schema_view
 from rest_framework.documentation import include_docs_urls
+from django.conf import settings
 from django.views.generic import TemplateView
 from rest_framework.authtoken import views
 from dataportal import views as dataportal_views
-# Create a router and register our viewsets with it.
+
+
 API_TITLE = 'HuBMAP UI-backend API'
 API_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
 schema_view = get_schema_view(title=API_TITLE)
@@ -31,11 +33,11 @@ urlpatterns = [
     path('api/', include('dataportal.urls')),
     path('', dataportal_views.globus, name='globus'),
     path('', include('frontend.urls')),
-    url(r'', include('django.contrib.auth.urls')),
+    path('', include('django.contrib.auth.urls')),
     path('loggedin/', dataportal_views.GlobusUserAuth.as_view(), name='loggedin'),
-    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
-    url(r'^openapi/$', schema_view,name='openapi-schema'),
-    url(r'^docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+    path(f'{settings.AUTH_URL_PREFIX}/', include('rest_framework_social_oauth2.urls')),
+    path('openapi/', schema_view, name='openapi-schema'),
+    path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
     path(
         'swagger-ui/',
         TemplateView.as_view(
@@ -44,5 +46,5 @@ urlpatterns = [
         ),
         name='swagger-ui',
     ),
-    url(r'^api-token-auth/', views.obtain_auth_token)
+    path('api-token-auth/', views.obtain_auth_token),
 ]

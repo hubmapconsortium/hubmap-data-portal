@@ -39,12 +39,12 @@ class GroupList(generics.ListAPIView):
 
 urlpatterns = [
     path('', views.StudyListView.as_view()),
-    path(r'experiments/', views.StudyListPageView.as_view()),
-    path(r'<int:pk>/', views.StudyDetailView.as_view()),
-    url(r'^search/$', views.GlobalSearch.as_view(), name="search"),
-    url(r'^colors/', views.Tissue_svg_colors.as_view(), name="colors"),
-    url(r'^genes/$', views.GeneListView.as_view(), name="genes"),
-    path(r'protected/', login_required(views.StudyListView.as_view(), login_url='/auth/login/globus/')),
+    path('experiments/', views.StudyListPageView.as_view()),
+    path('<int:pk>/', views.StudyDetailView.as_view()),
+    path('^search/', views.GlobalSearch.as_view(), name="search"),
+    path('^colors/', views.Tissue_svg_colors.as_view(), name="colors"),
+    path('^genes/', views.GeneListView.as_view(), name="genes"),
+    path('protected/', login_required(views.StudyListView.as_view())),
     #url(r'', include('django.contrib.auth.urls')),
     #url(r'', include('social_django.urls', namespace='social')),
     #path('users/', UserList.as_view()),

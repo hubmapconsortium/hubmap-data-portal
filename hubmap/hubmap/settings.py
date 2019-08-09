@@ -91,8 +91,12 @@ REST_FRAMEWORK = {
 }
 
 ROOT_URLCONF = 'hubmap.urls'
-LOGIN_URL='/login/globus/'
-LOGIN_REDIRECT_URL='http://localhost:3000/loggedin/'
+
+AUTH_URL_PREFIX = 'auth'
+DEFAULT_SOCIAL_AUTH_PROVIDER = 'globus'
+LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'
+
+LOGIN_REDIRECT_URL = 'http://localhost:3000/loggedin/'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
