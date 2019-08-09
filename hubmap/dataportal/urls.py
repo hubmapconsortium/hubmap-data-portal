@@ -44,7 +44,7 @@ urlpatterns = [
     url(r'^search/$', views.GlobalSearch.as_view(), name="search"),
     url(r'^colors/', views.Tissue_svg_colors.as_view(), name="colors"),
     url(r'^genes/$', views.GeneListView.as_view(), name="genes"),
-    path(r'protected/', login_required(views.StudyListView.as_view())),
+    path(r'protected/', login_required(views.StudyListView.as_view(), login_url='/auth/login/globus/')),
     #url(r'', include('django.contrib.auth.urls')),
     #url(r'', include('social_django.urls', namespace='social')),
     #path('users/', UserList.as_view()),
