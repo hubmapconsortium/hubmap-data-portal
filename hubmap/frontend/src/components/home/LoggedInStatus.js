@@ -7,7 +7,7 @@ import grey from '@material-ui/core/colors/grey';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircleSharp from '@material-ui/icons/AccountCircleSharp';
@@ -210,7 +210,10 @@ export default function LoggedInStatus()
                                  <MenuItem  > Globus email: {email}
                         <AccountCircleSharp className={classes.rightIcon} /></MenuItem>
                             <MenuItem onClick={handleClose} >
-                                <a href='http://localhost:8000/logout/?next=/' target='__blank' style={{textDecoration:'none'}}>
+                                <a href='http://localhost:8000/logout/?next=/' target='__blank' style={{textDecoration:'none'}} onClick={()=> {
+                                    window.location.href='http://localhost:3000';
+                                    return null; 
+                                }}>
                                 Logout from Globus
                         <AccountCircleSharp className={classes.rightIcon} /></a></MenuItem>
                        
