@@ -18,7 +18,7 @@
 			&nbsp; Date joined: {{ user.date_joined }}<br/>
 			&nbsp; Last login: {{ user.last_login }}<br/>
 			&nbsp;	request path: {{ request.path }} <br/>
-            {% url 'social:begin' 'globus' %}?next={{ request.path }}
+            {% url 'logout' %}?next={{ request.path }}
 			<br/>
 			<a href="{% url 'logout' %}?next={{ request.path }}">Logout</a>
 		{% else %}

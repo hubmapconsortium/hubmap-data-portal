@@ -29,12 +29,14 @@ from django.utils.decorators import method_decorator
 # TODO: Add post request implementations
 from rest_framework.authtoken.models import Token
 
+
 # token = Token.objects.create(user='admin')
 # print(token.key)
 
 class PaginationClass(PageNumberPagination):
     page_size = 10
     max_page_size = 10
+
 
 class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
@@ -65,6 +67,7 @@ class StudyListView(generics.GenericAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class StudyListPageView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
     pagination_class = PaginationClass
@@ -77,6 +80,7 @@ class StudyListPageView(generics.GenericAPIView):
         paginated_response = self.get_paginated_response(paginated_queryset)
         return paginated_response
 
+
 class GeneListView(generics.GenericAPIView):
     serializer_class = GeneSerializer
     parser_classes = [JSONParser]
@@ -87,6 +91,7 @@ class GeneListView(generics.GenericAPIView):
         response = get_genes(self, request)
         return Response(response)
 
+
 class GlobalSearch(generics.ListAPIView):
     serializer_class = StudyListSerializer
     parser_classes = [JSONParser]
@@ -95,6 +100,7 @@ class GlobalSearch(generics.ListAPIView):
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         return Response(response)
+
 
 class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Study.objects.all()
@@ -114,8 +120,10 @@ class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
         serializer = self.get_serializer(self.get_object().get_subclass_object())
         return Response(serializer.data)
 
+
 def rgba_float_to_rgb_hex(floats):
     return '#' + ''.join('{:02x}'.format(int(c * 255)) for c in floats[:3])
+
 
 class Tissue_svg_colors(views.APIView):
 
@@ -145,6 +153,7 @@ class Tissue_svg_colors(views.APIView):
             results
         )
 
+
 # Each label (element 0 in tuples) has multiple meanings/functions.
 # 1. it will be a dimension of the `xr.DataArray` returned by
 #    `compute_multi_dim_counts`.
@@ -155,6 +164,7 @@ MULTI_DIM_CLASSES = [
     ('institution', Institution),
     ('data_type', DataType),
 ]
+
 
 def compute_multi_dim_counts(queryset, field_name: str) -> xr.DataArray:
     """
@@ -184,6 +194,7 @@ def compute_multi_dim_counts(queryset, field_name: str) -> xr.DataArray:
 
     return data
 
+
 def serialize_multi_dim_counts(data: xr.DataArray):
     list_for_frontend = []
     try:
@@ -208,22 +219,15 @@ def serialize_multi_dim_counts(data: xr.DataArray):
 
     return list_for_frontend
 
+
 def globus(request):
     uuid = None
     access_token = None
     refresh_token = None
     if not hasattr(request, 'user'):
         request.user = AnonymousUser
-        return render(
-            request,
-            'globus.html',
-            {
-                'uuid': uuid,
-                'access_token': access_token,
-                'refresh_token': refresh_token,
-            },
-        )
-    if request.user.is_authenticated:
+
+    elif request.user.is_authenticated:
         response = HttpResponseRedirect('http://localhost:3000/loggedin/')
         uuid = request.user.social_auth.get(provider='globus').uid
         social = request.user.social_auth
@@ -232,7 +236,16 @@ def globus(request):
         response.set_cookie('first_name', request.user.first_name)
         response.set_cookie('last_name', request.user.last_name)
         response.set_cookie('email', request.user.email)
-    return response
+        return response
+    return render(
+        request,
+        'globus.html',
+        {
+            'uuid': uuid,
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+        },
+    )
 
 class GlobusUserAuth(generics.GenericAPIView):
     serializer_class = UserLoggedInSerializer
@@ -253,5 +266,3 @@ class GlobusUserAuth(generics.GenericAPIView):
         }
         response = UserLoggedInSerializer(request.user).data
         return Response(response)
-
-

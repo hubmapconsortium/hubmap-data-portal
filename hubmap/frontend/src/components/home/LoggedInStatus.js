@@ -209,8 +209,10 @@ export default function LoggedInStatus()
                             onClose={handleClose}>
                                  <MenuItem  > Globus email: {email}
                         <AccountCircleSharp className={classes.rightIcon} /></MenuItem>
-                            <MenuItem onClick={handleClose} component={NavLink} to="/logout" >Logout from Globus
-                        <AccountCircleSharp className={classes.rightIcon} /></MenuItem>
+                            <MenuItem onClick={handleClose} >
+                                <a href='http://localhost:8000/logout/?next=/' target='__blank' style={{textDecoration:'none'}}>
+                                Logout from Globus
+                        <AccountCircleSharp className={classes.rightIcon} /></a></MenuItem>
                        
                         </Menu>
             </div>
