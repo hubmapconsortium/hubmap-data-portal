@@ -25,8 +25,6 @@ import logging
 from .decorators import user_has_view_permissions
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-# TODO: Add OpenApi -> Swagger to rest framework
-# TODO: Add post request implementations
 from rest_framework.authtoken.models import Token
 
 
@@ -86,7 +84,6 @@ class GeneListView(generics.GenericAPIView):
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
 
-    @user_has_view_permissions
     def get(self, request, format=None):
         response = get_genes(self, request)
         return Response(response)
@@ -266,3 +263,11 @@ class GlobusUserAuth(generics.GenericAPIView):
         }
         response = UserLoggedInSerializer(request.user).data
         return Response(response)
+
+def logout(request):
+    response = HttpResponseRedirect('http://localhost:8000/logout/')
+    response.delete_cookie('first_name')
+    response.delete_cookie('last_name')
+    response.delete_cookie('email')
+    print('logout')
+    return response
