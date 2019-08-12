@@ -43,35 +43,6 @@ After all services are started, the Django REST API is available at
 To experiment with local modifications to the development Docker container,
 see `docker/dev-local-example/README.md`.
 
-### Manual setup (without Docker)
-
-#### ReactJS:
-* Install npm and nodejs:
-```Follow instructions @ https://nodejs.org/en/``` and
-```https://nodejs.org/en/download/```
-* Install `create-react-app`:
-`npm install -g create-react-app`
-* Navigate to hubmap/frontend folder and execute following command:
-`npm start`
-* Navigate to dataportal folder and run following command
-	to migrate/create databases.
-	`python manage.py makemigrations`
-	`python manage.py migrate`
-* To access tables and run some SQL commands:
-	`python manage.py shell`
-
-#### Python packages:
-* Check and install python packages [requirements.txt](https://github.com/hubmapconsortium/hubmap-data-portal/blob/sushma-branch/hiveportal/requirements.txt)
-
-#### Running the app:
-
-* Execute following command: `python manage.py runserver`
-* To access basic reactjs app, navigate to hubmap/frontend folder and execute following command: `npm start`
-* Alternately, if you'd like to run vis HTTPS url: `set HTTPS=true&&npm start`
-
-* Access the Django REST API at: `http://127.0.0.1:8000/api`
-* Access the ReactJS app at: `http://127.0.0.1:3000`
-
 ### Running in production via `docker-compose`
 The current production configuration for this application runs most pieces of the application
 through `docker-compose`. This includes the Python/Django backend app via `uwsgi`, and
