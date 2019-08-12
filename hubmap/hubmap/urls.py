@@ -20,6 +20,7 @@ from django.views.generic import TemplateView
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
+
 from dataportal import views as dataportal_views
 
 API_TITLE = 'HuBMAP UI-backend API'

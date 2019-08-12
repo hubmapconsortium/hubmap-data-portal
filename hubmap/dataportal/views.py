@@ -3,33 +3,34 @@ import numpy as np
 import pandas as pd
 import xarray as xr
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import AnonymousUser, Group
+from django.contrib.auth.views import auth_logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from rest_framework import generics, status, versioning, views
+from rest_framework import generics, permissions, status, versioning, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from rest_framework import permissions
+
 from hubmap import settings
-from .models import Study, Institution, Tissue, DataType
-from django.contrib.auth.models import Group
-from django.contrib.auth.views import auth_logout
+
+from .models import DataType, Institution, Study, Tissue
 from .serializers import (
     GeneSerializer,
+    GroupSerializer,
+    LoggedInUserSerializer,
     StudyListSerializer,
     StudySerializer,
     TissueColorSerializer,
-    LoggedInUserSerializer,
-    UserSerializer,
-    GroupSerializer,
-    User)
+    User,
+    UserSerializer
+)
 from .utils import get_genes, get_response_for_request, get_serializer_class
-
 
 # TODO: Add OpenApi -> Swagger to rest framework
 # TODO: Add post request implementations
+
 
 class PaginationClass(PageNumberPagination):
     page_size = 10

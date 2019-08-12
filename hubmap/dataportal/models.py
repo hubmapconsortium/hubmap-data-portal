@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
+
 class TissueExpressionHeatmap(models.Model):
     """
     Instances of this class provide all of the data to render a heatmap

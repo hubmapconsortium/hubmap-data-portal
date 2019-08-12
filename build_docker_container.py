@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
+import json
 from argparse import ArgumentParser
 from datetime import datetime
-import json
 from pathlib import Path
 from subprocess import PIPE, run
 from typing import List, Tuple

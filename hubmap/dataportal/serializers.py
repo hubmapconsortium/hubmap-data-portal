@@ -1,5 +1,6 @@
-from rest_framework import serializers
 from django.contrib.auth.models import Group, User
+from rest_framework import serializers
+
 from .models import (
     DataType,
     Gene,
@@ -14,13 +15,13 @@ from .models import (
     SpatialTranscriptomicStudy,
     Study,
     Tissue,
-    TissueExpressionHeatmap,
+    TissueExpressionHeatmap
 )
-
 
 # TODO : add create and update and delete, put for all serializers
 # (all update/add/delete requests for scripts to write metadata to models)
 # TODO: add tests for django restframework
+
 
 class InstitutionSerializer(serializers.ModelSerializer):
     class Meta:
