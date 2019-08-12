@@ -14,8 +14,10 @@ from .models import (
     SpatialTranscriptomicStudy,
     Study,
     Tissue,
-    TissueExpressionHeatmap
+    TissueExpressionHeatmap,
+    User,
 )
+
 
 # TODO : add create and update and delete, put for all serializers
 # (all update/add/delete requests for scripts to write metadata to models)
@@ -169,7 +171,7 @@ class StudySerializer(serializers.ModelSerializer):
                 return ScRnaSeqStudyCDNASerializer(context=self.context).to_internal_value(data)
             elif data.get('subclass') == "ScRnaSeqStudyBarcodedSerializer":
                 self.Meta.model = ScRnaSeqStudyBarcoded
-                return ScRnaSeqStudyBarcodedSerializer(context=self.context)\
+                return ScRnaSeqStudyBarcodedSerializer(context=self.context) \
                     .to_internal_value(data)
 
             else:
@@ -277,7 +279,7 @@ class MassCytometryStudySerializer(StudySerializer):
         read_only_fields = StudySerializer.Meta.read_only_fields + (
             'proteins',
         )
-        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image', )
+        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image',)
         expandable_fields = {'proteins': (GeneSerializer, {'id', 'name', 'pdb_id', 'gene', })}
         model = MassCytometryStudy
 
@@ -296,7 +298,7 @@ class MicroscopyStudySerializer(StudySerializer):
         read_only_fields = StudySerializer.Meta.read_only_fields + (
             'image_count',
         )
-        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image', )
+        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image',)
         model = MicroscopyStudy
 
     def create(self, validated_data):
@@ -314,7 +316,7 @@ class SeqFishImagingStudySerializer(StudySerializer):
         read_only_fields = StudySerializer.Meta.read_only_fields + (
             'image_count',
         )
-        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image', )
+        write_only_fields = StudySerializer.Meta.write_only_fields + ('preview_image',)
         model = SeqFishImagingStudy
 
     def create(self, validated_data):
@@ -342,8 +344,8 @@ class StudyListSerializer(serializers.ModelSerializer):
         model = Study
         fields = '__all__'
 
-class UserLoggedInSerializer(serializers.ModelSerializer):
 
+class UserLoggedInSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
