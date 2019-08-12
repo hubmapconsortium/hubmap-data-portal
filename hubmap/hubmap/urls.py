@@ -28,6 +28,9 @@ API_TITLE = 'HuBMAP UI-backend API'
 API_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
 schema_view = get_schema_view(title=API_TITLE)
 
+from django.urls import include, path
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),

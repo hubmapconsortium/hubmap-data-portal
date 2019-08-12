@@ -5,6 +5,9 @@ from django.contrib import admin
 admin.autodiscover()
 from django.contrib.auth.models import User, Group
 from django.contrib import admin
+from django.conf.urls import url
+from django.urls import path
+
 from . import views
 
 from rest_framework import generics, permissions, serializers

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../../middleware/actions';
+import { fetch_studies, in_progress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import  {CircularProgress, Typography } from '@material-ui/core';

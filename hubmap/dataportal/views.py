@@ -13,9 +13,8 @@ from rest_framework.permissions import IsAuthenticated
 from .utils import *
 from .serializers import *
 import matplotlib.cm
-import pandas as pd
 import numpy as np
-from json import loads, dumps
+import pandas as pd
 import xarray as xr
 from django.views.generic import View
 from django.http import HttpResponse, HttpResponseRedirect
@@ -27,9 +26,22 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from rest_framework.authtoken.models import Token
 
+from rest_framework import generics, status, views
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
 
-# token = Token.objects.create(user='admin')
-# print(token.key)
+from .models import DataType, Institution, Study, Tissue, User
+from .serializers import (
+    GeneSerializer,
+    StudyListSerializer,
+    StudySerializer,
+    TissueColorSerializer
+)
+from .utils import get_genes, get_response_for_request, get_serializer_class
+
+
+# TODO: Add OpenApi -> Swagger to rest framework
+# TODO: Add post request implementations
 
 class PaginationClass(PageNumberPagination):
     page_size = 10
@@ -43,9 +55,13 @@ class StudyListView(generics.GenericAPIView):
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
-        image_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "image_count"))
-        response.append({"summary": [{"cell_count": cell_count_summary}, {"image_count": image_count_summary}]})
+        cell_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "cell_count"))
+        image_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "image_count"))
+        response.append({"summary": [
+            {"cell_count": cell_count_summary}, {"image_count": image_count_summary}
+        ]})
         return Response(response)
 
     def list(self, request):
@@ -244,6 +260,7 @@ def globus(request):
         },
     )
 
+
 class GlobusUserAuth(generics.GenericAPIView):
     serializer_class = UserLoggedInSerializer
     parser_classes = [JSONParser]
@@ -263,6 +280,7 @@ class GlobusUserAuth(generics.GenericAPIView):
         }
         response = UserLoggedInSerializer(request.user).data
         return Response(response)
+
 
 def logout(request):
     print("logout")

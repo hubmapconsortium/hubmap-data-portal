@@ -6,7 +6,6 @@ import { hubmapStore } from '../../index';
 import MaterialTableDemo from './MUITable';
 
 const mapStateToProps = state => {
-    (state);
     return {
         status: state.status,
         response: state.response,
@@ -41,16 +40,14 @@ class StudiesTable extends React.Component {
         if (status===Constants.IN_PROGRESS) {
             return <div> Loading...</div>
         }
-        if (response !=="" && response !== undefined && type== Constants.GLOBAL_FETCH_ACTION) {
+        if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION) {
             this.previousState.response = this.currentState ;
             this.previousState.type = type;
-            (response);
             return (
                 <div>
-
                 <MaterialTableDemo studies = {response} /> </div>);
         }
-        /*else if(type !==Constants.GLOBAL_FETCH_ACTION && response !=="")
+        /*else if(type !== Constants.GLOBAL_FETCH_ACTION && response !== "")
         /{
             (this.previousState);
         }*/

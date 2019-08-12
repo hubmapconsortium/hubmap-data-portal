@@ -1,10 +1,10 @@
+from django.core.management.utils import get_random_secret_key
 from pathlib import Path
 
 print('Loading production settings')
 
 # TODO: figure out how to store this securely while sharing containers;
 #   this doesn't scale when running this app across multiple containers
-from django.core.management.utils import get_random_secret_key
 SECRET_KEY = get_random_secret_key()
 
 DEBUG = False

@@ -102,7 +102,7 @@ class ImageCountStackedChart extends React.Component {
       .unknown("#ccc");
 
       const svg = d3.select(this.svg);
-    const chart = svg
+    svg
       .append("g")
       .attr("transform", `translate(${margin}, ${margin})`);
 
@@ -111,7 +111,7 @@ class ImageCountStackedChart extends React.Component {
     var tooltip = svg.append("g")
     .attr("class", "tooltip")
     .style("display", "none");
-      
+
   tooltip.append("rect")
     .attr("width", 60)
     .attr("height", 20)
@@ -143,13 +143,13 @@ class ImageCountStackedChart extends React.Component {
         d3.select(this)
         .transition()
         .duration(100)
-        .attr('opacity', 0.6);   
+        .attr('opacity', 0.6);
       })
       .on('mouseover', function (actual , i){
         tooltip.style("display", null);
       })
       .on('mouseout', function (actual , i){
-        tooltip.style("display", "none"); 
+        tooltip.style("display", "none");
       })
       .on('onmousemove', function(d) {
         var CTM = svg.getScreenCTM();
@@ -182,9 +182,9 @@ class ImageCountStackedChart extends React.Component {
     if (error) {
       return <div>Error! {error.message}</div>
   }
-  
-  else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION 
-  &&  status === Constants.SUCCESS) 
+
+  else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION
+  &&  status === Constants.SUCCESS)
   {
     return (
       <div id="chartcontainer">

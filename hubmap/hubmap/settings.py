@@ -215,7 +215,7 @@ GIT_VERSION = get_git_version()
 
 # Keep this as the last section of this file!
 try:
-    from .local_settings import *
+    from .local_settings import *  # noqa F401 ("imported but unused")
 except ImportError:
     pass
 # This must be run after loading local_settings

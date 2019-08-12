@@ -1,10 +1,12 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 
-from .models import *
+from .models import DataType, Institution, ScRnaSeqStudyCDNA, Study, Tissue
 from .views import StudyDetailView
 
 # TODO : complete tests
+
+
 class DataportalModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):

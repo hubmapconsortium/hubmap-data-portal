@@ -216,7 +216,7 @@ function SearchAppBar(props) {
 
 
     return (
-        
+
         <div className={classes.root}>
             <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[300] }} height={30} width={'100%'}>
                 <Toolbar>
@@ -227,9 +227,19 @@ function SearchAppBar(props) {
                         aria-label="Open drawer"
                         href="/">
                         {img}
-                        
+
                     </IconButton>
 
+                    <div className={classes.sectionDesktop}>
+                        <Button className={classes.button}>
+                            <MuiThemeProvider theme={theme}>
+                                <Typography className={classes.title} noWrap>
+                                    <NavLink to="/">Data Portal</NavLink>
+                                </Typography>
+                            </MuiThemeProvider >
+                            <NavigationIcon />
+                        </Button>
+                    </div>
                     <div className={classes.grow} />
 
                     <div className={classes.sectionMenuDesktop} >
@@ -286,7 +296,7 @@ function SearchAppBar(props) {
                         </Menu>
                         </div>
                         <div className={classes.sectionMenuDesktop} >
- 
+
                         <LoggedInStatus />
                         </div>
                     <div className={classes.grow} />
