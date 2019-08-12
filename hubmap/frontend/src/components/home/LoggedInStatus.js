@@ -1,13 +1,10 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
-import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import grey from '@material-ui/core/colors/grey';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
-import { NavLink, Redirect } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircleSharp from '@material-ui/icons/AccountCircleSharp';
@@ -15,26 +12,6 @@ import AccountCircleSharp from '@material-ui/icons/AccountCircleSharp';
 var cookies = new Cookies();
 
 var email = cookies.get('email');
-var first_name = cookies.get('first_name');
-var last_name = cookies.get('last_name');
-const theme = createMuiTheme({
-    typography: {
-        // Use the system font instead of the default Roboto font.
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-            '"Impact"',
-        ].join(','),
-    },
-});
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -158,25 +135,6 @@ const useStyles = makeStyles(theme => ({
 export default function LoggedInStatus() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
-    const [anchorEl1, setAnchorEl1] = React.useState(null);
-    const isMenuOpen = Boolean(anchorEl);
-    const isHelpMenuOpen = Boolean(anchorEl1);
-
-    function handleMenuOpen(event) {
-        setAnchorEl(event.currentTarget);
-    }
-
-    function handleHelpMenuOpen(event) {
-        setAnchorEl1(event.currentTarget);
-    }
-
-    function handleMenuClose() {
-        setAnchorEl(null);
-    }
-
-    function handleHelpMenuClose() {
-        setAnchorEl1(null);
-    }
 
     function handleClose() {
         setAnchorEl(null);
@@ -185,29 +143,22 @@ export default function LoggedInStatus() {
     function handleCloseLogout() {
         setAnchorEl(null);
         email = '';
-        first_name = '';
-        last_name = '';
-        console.log('logout'+email==='');
     }
 
     function handleClick(event) {
         setAnchorEl(event.currentTarget);
     }
-    function handleHelpClick(event) {
-        setAnchorEl1(event.currentTarget);
-    }
-    console.log(email==='', email);
+
     if (email === '' || email === undefined) {
-        console.log("logout");
-    
+
         return (
             <div className={classes.sectionMenuDesktop} >
-        <a href='http://localhost:8000/auth/login/globus/?next=/' target='__blank' style={{ textDecoration: 'none' }}>
+                <a href='http://localhost:8000/auth/login/globus/?next=/' target='__blank' style={{ textDecoration: 'none' }}>
 
-            <Button color={grey[300]} aria-haspopup="true" >
-                Login<AccountCircle className={classes.rightIcon} /></Button>
-        </a>
-        </div>
+                    <Button color={grey[300]} aria-haspopup="true" >
+                        Login<AccountCircle className={classes.rightIcon} /></Button>
+                </a>
+            </div>
         )
     }
     else {
@@ -226,7 +177,7 @@ export default function LoggedInStatus() {
                         <AccountCircleSharp className={classes.rightIcon} />
                     </MenuItem>
                     <MenuItem onClick={handleCloseLogout} >
-                        <a href='http://localhost:8000/logout/globus/' target='__self' style={{ textDecoration: 'none' }} onClick={() => {
+                        <a href='http://localhost:8000/logout/globus/' target='__blank' style={{ textDecoration: 'none' }} onClick={() => {
                             console.log('logout')
                             window.location.href = 'http://localhost:3000';
                             return null;

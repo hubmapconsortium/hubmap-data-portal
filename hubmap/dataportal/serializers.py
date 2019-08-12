@@ -15,7 +15,6 @@ from .models import (
     Study,
     Tissue,
     TissueExpressionHeatmap,
-    User,
 )
 
 
@@ -344,7 +343,7 @@ class StudyListSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
+class LoggedInUserSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
@@ -355,10 +354,12 @@ class UserSerializer(serializers.ModelSerializer):
         )
         model = User
 
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('username', 'email', "first_name", "last_name")
+
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:

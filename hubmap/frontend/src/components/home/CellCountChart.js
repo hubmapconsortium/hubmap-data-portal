@@ -4,7 +4,7 @@ import "./App.css";
 
 const sample = [
   { center: "Florida", cellcount: 5, },
-  { center: "Vanderbilt", cellcount: 8,},
+  { center: "Vanderbilt", cellcount: 8, },
   { center: "Stanford", cellcount: 8, },
   { center: "Caltech", cellcount: 5, },
   { center: "UCSD", cellcount: 5, }

@@ -1,4 +1,3 @@
-import datetime
 import json
 from pathlib import Path
 from subprocess import PIPE, run
@@ -70,16 +69,6 @@ CORS_ORIGIN_WHITELIST = [
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
-    # 'DEFAULT_RENDERER_CLASSES': (
-    #     'djangorestframework_camel_case.render.CamelCaseJSONRenderer',
-    #     # Any other renders
-    # ),
-    #
-    # 'DEFAULT_PARSER_CLASSES': (
-    #     # If you use MultiPartFormParser or FormParser, we also have a camel case version
-    #     'djangorestframework_camel_case.parser.CamelCaseJSONParser',
-    #     # Any other parsers
-    # ),
     'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -95,8 +84,9 @@ ROOT_URLCONF = 'hubmap.urls'
 AUTH_URL_PREFIX = 'auth'
 DEFAULT_SOCIAL_AUTH_PROVIDER = 'globus'
 LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'
-
-LOGIN_REDIRECT_URL = 'http://localhost:3000/loggedin/'
+FRONTEND_URL = 'http://localhost:3000/'
+LOGOUT_REDIRECT_URL = 'http://localhost:3000/'
+LOGIN_REDIRECT_URL = f'/{FRONTEND_URL}'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

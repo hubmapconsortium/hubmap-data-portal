@@ -8,11 +8,9 @@ export const in_progress = () => ({type: Constants.IN_PROGRESS});
  * @param {Props object} response 
  */
 export function fetch_studies(response) {
-    console.log(response.page);
     return {
     status: Constants.SUCCESS,
     response: response.results,
-    count: response.count,
     page: response.page,
     next: response.next,
     previous: response.previous,
@@ -39,7 +37,6 @@ export const fetch_studies_error = error =>{
  * @param {Props object} response 
  */
 export function fetch_gene_tissue_colors(response) {
-    console.log(response);
     return {
         response: response,
         status:Constants.SUCCESS,
@@ -61,11 +58,10 @@ export function search_studies(response)
  */
 export function fetchAllStudies()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API );
+            let response = await axios.get(Constants.GET_STUDIES_REST_API );
             const count = response.data.length;
             let results = {
                 status: Constants.SUCCESS,
@@ -76,7 +72,6 @@ export function fetchAllStudies()
                 previous: '',
                 type: Constants.GLOBAL_FETCH_ACTION,
             }
-            console.log(results);
             return dispatch(fetch_studies(results));
         }
         catch (error) {
@@ -90,13 +85,10 @@ export function fetchAllStudies()
  */
 export function fetchStudiesFirstPage(page) 
 {
-    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
-    console.log(BASE_API+ Constants.GET_STUDIES_PAGINATED_REST_API+page);
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API + Constants.GET_STUDIES_PAGINATED_REST_API+page);
-            console.log('action',response.data);
+            let response = await axios.get(Constants.GET_STUDIES_PAGINATED_REST_API+page);
             return dispatch(fetch_studies(response.data));
         }
         catch (error) {
@@ -139,11 +131,10 @@ export function fetch_colors(colors)
  */
 export function getTissueColorsFromServer()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
     return async dispatch =>
     {
         dispatch(in_progress());
-        let response = await axios.get(BASE_API + Constants.GET_TISSUE_COLORS_API);
+        let response = await axios.get( Constants.GET_TISSUE_COLORS_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
         return dispatch(fetch_colors(response.data));
@@ -156,11 +147,10 @@ export function getTissueColorsFromServer()
  */
 export function getGeneTissueColors()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
     return async dispatch =>
     {
         dispatch(in_progress());
-        let response = await axios.get(BASE_API + Constants.GET_GENE_TISSUE_COLOR_API);
+        let response = await axios.get(Constants.GET_GENE_TISSUE_COLOR_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
         return dispatch(fetch_gene_tissue_colors(response.data));
@@ -172,13 +162,10 @@ export function getGeneTissueColors()
  */
 export function searchThis(searchTerm) 
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
-    console.log(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
-            console.log('action',response.data);
+            let response = await axios.get( Constants.SEARCH_STUDIES_REST_API+searchTerm);
             return dispatch(search_studies(response.data));
         }
         catch (error) {

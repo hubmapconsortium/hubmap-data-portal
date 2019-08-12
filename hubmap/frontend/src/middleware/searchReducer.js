@@ -3,7 +3,7 @@ import * as Constants from '../commons/constants';
 //define DEFAULT state, so it is never "undefined".
 const DEFAULT_STATE = {
     type: '',
-    status:'',
+    status: '',
     response: {},
     error: null,
 };
@@ -11,8 +11,8 @@ const DEFAULT_STATE = {
 /***
  * fill in state object for studies
  */
-export default function studyResponseReducer(state = DEFAULT_STATE, action){
-    switch(action.type) {
+export default function studyResponseReducer(state = DEFAULT_STATE, action) {
+    switch (action.type) {
         case Constants.GLOBAL_SEARCH_ACTION:
             return {
                 ...state,
@@ -21,7 +21,7 @@ export default function studyResponseReducer(state = DEFAULT_STATE, action){
                 status: action.status,
                 error: action.error,
             };
-        default :
+        default:
             return state;
     }
 };

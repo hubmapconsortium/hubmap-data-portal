@@ -11,14 +11,18 @@ from rest_framework import generics, status, versioning, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-from rest_framework import generics, permissions, serializers
-from .models import  Study, Institution, Tissue,DataType
-from django.contrib.auth.models import Group, User
+from rest_framework import permissions
+
+from hubmap import settings
+from .models import Study, Institution, Tissue, DataType
+from django.contrib.auth.models import Group
+from django.contrib.auth.views import auth_logout
 from .serializers import (
     GeneSerializer,
     StudyListSerializer,
     StudySerializer,
     TissueColorSerializer,
+    LoggedInUserSerializer,
     UserSerializer,
     GroupSerializer,
     User
@@ -227,7 +231,7 @@ def globus(request):
         request.user = AnonymousUser
 
     elif request.user.is_authenticated:
-        response = HttpResponseRedirect('http://localhost:3000/loggedin/')
+        response = HttpResponseRedirect('http://localhost:3000/')
         uuid = request.user.social_auth.get(provider='globus').uid
         social = request.user.social_auth
         access_token = social.get(provider='globus').extra_data['access_token']
@@ -257,25 +261,24 @@ class GlobusUserAuth(generics.GenericAPIView):
         if not hasattr(request, 'user'):
             request.user = AnonymousUser
         if request.user.is_authenticated:
-            uuid = request.user.social_auth.get(provider='globus').uid
-            social = request.user.social_auth
-            access_token = social.get(provider='globus').extra_data['access_token']
-            refresh_token = social.get(provider='globus').extra_data['refresh_token']
-        context = {
-            "request": request,
-        }
-        response = UserSerializer(request.user).data
+            # uuid = request.user.social_auth.get(provider='globus').uid
+            # social = request.user.social_auth
+            # access_token = social.get(provider='globus').extra_data['access_token']
+            # refresh_token = social.get(provider='globus').extra_data['refresh_token']
+            response = LoggedInUserSerializer(request.user).data
         return Response(response)
 
 
 def logout(request):
-    print("logout")
-    response = HttpResponseRedirect('http://localhost:8000/logout/')
+    if request.user.is_authenticated:
+        auth_logout(request)
+    response = HttpResponseRedirect(settings.LOGOUT_REDIRECT_URL)
     response.delete_cookie('first_name')
     response.delete_cookie('last_name')
     response.delete_cookie('email')
     print('logout')
     return response
+
 
 # Create the API views
 class UserList(generics.ListCreateAPIView):

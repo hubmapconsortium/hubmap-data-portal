@@ -2,27 +2,24 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import grey from '@material-ui/core/colors/grey';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import HubmapLogo from "../images/HuBMAP-Retina-Logo-Color.png";
 import posed from 'react-pose';
 import { Button } from '@material-ui/core';
-import NavigationIcon from '@material-ui/icons/NavigateNext';
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import LibraryIcon from '@material-ui/icons/LibraryBooks';
 import ExploreIcon from '@material-ui/icons/ExploreOutlined';
 import GraphIcon from '@material-ui/icons/BubbleChart';
 import FlowIcon from '@material-ui/icons/TableChart';
 import HelpIcon from '@material-ui/icons/Help';
-import {NavLink, Link} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import MicroscopeIcon from '../icons/MicroscopeIcon';
 import LoggedInStatus from './home/LoggedInStatus';
@@ -170,9 +167,7 @@ function SearchAppBar(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl1, setAnchorEl1] = React.useState(null);
-    const isMenuOpen = Boolean(anchorEl);
-    const isHelpMenuOpen = Boolean(anchorEl1);
-    const Img = posed.img({
+    posed.img({
         pressable: true,
         init: { scale: 1 },
         press: { scale: 0.8 }
@@ -182,22 +177,6 @@ function SearchAppBar(props) {
         width: 200,
         resizeMode: 'contain',
     }} src={HubmapLogo} alt="Logo" />;
-
-    function handleMenuOpen(event) {
-        setAnchorEl(event.currentTarget);
-    }
-
-    function handleHelpMenuOpen(event) {
-        setAnchorEl1(event.currentTarget);
-    }
-
-    function handleMenuClose() {
-        setAnchorEl(null);
-    }
-
-    function handleHelpMenuClose() {
-        setAnchorEl1(null);
-    }
 
     function handleClose() {
         setAnchorEl(null);
@@ -213,8 +192,6 @@ function SearchAppBar(props) {
     function handleHelpClick(event) {
         setAnchorEl1(event.currentTarget);
     }
-
-
     return (
 
         <div className={classes.root}>
@@ -229,17 +206,6 @@ function SearchAppBar(props) {
                         {img}
 
                     </IconButton>
-
-                    <div className={classes.sectionDesktop}>
-                        <Button className={classes.button}>
-                            <MuiThemeProvider theme={theme}>
-                                <Typography className={classes.title} noWrap>
-                                    <NavLink to="/">Data Portal</NavLink>
-                                </Typography>
-                            </MuiThemeProvider >
-                            <NavigationIcon />
-                        </Button>
-                    </div>
                     <div className={classes.grow} />
 
                     <div className={classes.sectionMenuDesktop} >
@@ -262,8 +228,8 @@ function SearchAppBar(props) {
                         <FlowIcon className={classes.rightIcon} /></MenuItem>
                         </Menu>
 
-                        </div>
-                        <div className={classes.sectionMenuDesktop} >
+                    </div>
+                    <div className={classes.sectionMenuDesktop} >
                         <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} color={grey[300]} >
                             Help
                         <HelpIcon className={classes.rightIcon} />
@@ -294,11 +260,11 @@ function SearchAppBar(props) {
                             </MenuItem>
 
                         </Menu>
-                        </div>
-                        <div className={classes.sectionMenuDesktop} >
+                    </div>
+                    <div className={classes.sectionMenuDesktop} >
 
                         <LoggedInStatus />
-                        </div>
+                    </div>
                     <div className={classes.grow} />
                     <div className={classes.grow} />
                     <div className={classes.grow} />

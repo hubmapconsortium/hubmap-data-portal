@@ -11,41 +11,40 @@ const mapStateToProps = state => {
         response: state.response,
         error: state.error,
         count: 0,
-        page:0,
+        page: 0,
         next: "",
         previous: "",
     }
 };
 class StudiesTable extends React.Component {
     currentState = {};
-    previousState ={};
+    previousState = {};
     componentDidMount() {
         ('componentDidMount');
         hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
-        if (this.currentState !=="" && this.currentState.status !==Constants.IN_PROGRESS
-        && this.currentState.studies !=={} && this.currentState.type===Constants.GLOBAL_FETCH_ACTION) {
+        if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
+            && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
             this.props.dispatch(fetch_studies());
         }
-        else if(this.currentState.type===Constants.GLOBAL_FETCH_ACTION && this.currentState.status===Constants.IN_PROGRESS)
-        {
+        else if (this.currentState.type === Constants.GLOBAL_FETCH_ACTION && this.currentState.status === Constants.IN_PROGRESS) {
             this.props.dispatch(in_progress());
         }
     }
 
     render() {
-        const { response, error, status, type , page, count, next, previous} = this.currentState;
+        const { response, error, status, type, page, count, next, previous } = this.currentState;
         if (error) {
             return <div>Error! {error.message}</div>
         }
-        if (status===Constants.IN_PROGRESS) {
+        if (status === Constants.IN_PROGRESS) {
             return <div> Loading...</div>
         }
         if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION) {
-            this.previousState.response = this.currentState ;
+            this.previousState.response = this.currentState;
             this.previousState.type = type;
             return (
                 <div>
-                <MaterialTableDemo studies = {response} /> </div>);
+                    <MaterialTableDemo studies={response} /> </div>);
         }
         /*else if(type !== Constants.GLOBAL_FETCH_ACTION && response !== "")
         /{
