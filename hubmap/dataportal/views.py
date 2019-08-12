@@ -1,44 +1,38 @@
+import logging
+import os
 from collections import defaultdict
 
-from django.contrib.auth.models import AnonymousUser
-from django.shortcuts import render
-from rest_framework import generics, views, versioning
-from rest_framework.authtoken.views import ObtainAuthToken
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.parsers import JSONParser
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework.authentication import SessionAuthentication, BasicAuthentication
-from rest_framework.permissions import IsAuthenticated
-from .utils import *
-from .serializers import *
 import matplotlib.cm
 import numpy as np
 import pandas as pd
 import xarray as xr
-from django.views.generic import View
-from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
-import os
-import logging
-from .decorators import user_has_view_permissions
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.utils.decorators import method_decorator
+from django.views.generic import View
+from rest_framework import generics, status, versioning, views
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
 from rest_framework.authtoken.models import Token
-
-from rest_framework import generics, status, views
+from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from .decorators import user_has_view_permissions
 from .models import DataType, Institution, Study, Tissue, User
+from .serializers import *
 from .serializers import (
     GeneSerializer,
     StudyListSerializer,
     StudySerializer,
     TissueColorSerializer
 )
+from .utils import *
 from .utils import get_genes, get_response_for_request, get_serializer_class
-
 
 # TODO: Add OpenApi -> Swagger to rest framework
 # TODO: Add post request implementations

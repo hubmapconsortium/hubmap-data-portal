@@ -1,11 +1,11 @@
 from functools import wraps
 
-from django.core.exceptions import PermissionDenied
+from django.contrib.auth.models import *
 from django.core.exceptions import *
+from django.core.exceptions import PermissionDenied
 
 from . import views
 from .models import *
-from django.contrib.auth.models import *
 
 ALLOWED_GROUPS = [
     'dataportal_admin',

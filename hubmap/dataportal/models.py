@@ -1,9 +1,8 @@
+from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-
-
-from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
+
 
 class TissueExpressionHeatmap(models.Model):
     """

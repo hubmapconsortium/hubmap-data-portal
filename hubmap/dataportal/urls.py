@@ -1,17 +1,17 @@
-from django.contrib.auth.decorators import login_required
-from django.urls import path
 from django.conf.urls import *
-from django.contrib import admin
-admin.autodiscover()
-from django.contrib.auth.models import User, Group
-from django.contrib import admin
 from django.conf.urls import url
+from django.contrib import admin
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group, User
 from django.urls import path
+from rest_framework import generics, permissions, serializers
+from rest_framework.authtoken import views as authtoken_views
 
 from . import views
 
-from rest_framework import generics, permissions, serializers
-from rest_framework.authtoken import views as authtoken_views
+admin.autodiscover()
+
+
 # first we define the serializers
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
