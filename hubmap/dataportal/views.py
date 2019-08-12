@@ -12,7 +12,6 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import permissions
-
 from hubmap import settings
 from .models import Study, Institution, Tissue, DataType
 from django.contrib.auth.models import Group
@@ -25,8 +24,7 @@ from .serializers import (
     LoggedInUserSerializer,
     UserSerializer,
     GroupSerializer,
-    User
-)
+    User)
 from .utils import get_genes, get_response_for_request, get_serializer_class
 
 

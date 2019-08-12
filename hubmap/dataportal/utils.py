@@ -1,9 +1,7 @@
 from collections import OrderedDict
 from itertools import chain
-
 from django.db.models import Q
 from rest_framework import serializers
-
 from .models import (
     Gene,
     MassCytometryStudy,
@@ -26,8 +24,6 @@ from .serializers import (
     SeqFishImagingStudySerializer,
     SpatialTranscriptomicStudySerializer
 )
-
-
 # In case we have to use recursive gene/gene expressions/new features, use this.
 # For now: keeping this.
 
