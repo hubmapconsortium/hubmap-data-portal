@@ -1,22 +1,22 @@
 import React from 'react';
 import Cookies from 'universal-cookie';
-import {Component} from 'react';
+import { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import AccountCircle from '@material-ui/icons/AccountCircleOutlined';
 import grey from '@material-ui/core/colors/grey';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
-import {NavLink, Redirect} from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircleSharp from '@material-ui/icons/AccountCircleSharp';
 
-const cookies = new Cookies();
+var cookies = new Cookies();
 
-const email = cookies.get('email');
-const first_name = cookies.get('first_name');
-const last_name = cookies.get('last_name');
+var email = cookies.get('email');
+var first_name = cookies.get('first_name');
+var last_name = cookies.get('last_name');
 const theme = createMuiTheme({
     typography: {
         // Use the system font instead of the default Roboto font.
@@ -155,8 +155,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function LoggedInStatus()
-{   
+export default function LoggedInStatus() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorEl1, setAnchorEl1] = React.useState(null);
@@ -183,8 +182,12 @@ export default function LoggedInStatus()
         setAnchorEl(null);
     }
 
-    function handleCloseHelp() {
-        setAnchorEl1(null);
+    function handleCloseLogout() {
+        setAnchorEl(null);
+        email = '';
+        first_name = '';
+        last_name = '';
+        console.log('logout'+email==='');
     }
 
     function handleClick(event) {
@@ -193,40 +196,47 @@ export default function LoggedInStatus()
     function handleHelpClick(event) {
         setAnchorEl1(event.currentTarget);
     }
+    console.log(email==='', email);
+    if (email === '' || email === undefined) {
+        console.log("logout");
+    
+        return (
+            <div className={classes.sectionMenuDesktop} >
+        <a href='http://localhost:8000/auth/login/globus/?next=/' target='__blank' style={{ textDecoration: 'none' }}>
 
-    if(email !== '')
-    {
-        return ( 
-            <div className={classes.sectionMenuDesktop} >               
-        <Button color={grey[300]} aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
-        Logged in <AccountCircle className={classes.rightIcon} />
-        </Button>
-        <Menu
-                            id="loggedin-menu"
-                            anchorEl={anchorEl}
-                            keepMounted
-                            open={Boolean(anchorEl)}
-                            onClose={handleClose}>
-                                 <MenuItem  > Globus email: {email}
-                        <AccountCircleSharp className={classes.rightIcon} /></MenuItem>
-                            <MenuItem onClick={handleClose} >
-                                <a href='http://localhost:8000/logout/?next=/' target='__blank' style={{textDecoration:'none'}} onClick={()=> {
-                                    window.location.href='http://localhost:3000';
-                                    return null; 
-                                }}>
-                                Logout from Globus
+            <Button color={grey[300]} aria-haspopup="true" >
+                Login<AccountCircle className={classes.rightIcon} /></Button>
+        </a>
+        </div>
+        )
+    }
+    else {
+        return (
+            <div className={classes.sectionMenuDesktop} >
+                <Button color={grey[300]} aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
+                    Logged in <AccountCircle className={classes.rightIcon} />
+                </Button>
+                <Menu
+                    id="loggedin-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}>
+                    <MenuItem  > Globus email: {email}
+                        <AccountCircleSharp className={classes.rightIcon} />
+                    </MenuItem>
+                    <MenuItem onClick={handleCloseLogout} >
+                        <a href='http://localhost:8000/logout/globus/' target='__self' style={{ textDecoration: 'none' }} onClick={() => {
+                            console.log('logout')
+                            window.location.href = 'http://localhost:3000';
+                            return null;
+                        }}>
+                            Logout from Globus
                         <AccountCircleSharp className={classes.rightIcon} /></a></MenuItem>
-                       
-                        </Menu>
+
+                </Menu>
             </div>
         )
     }
-    else
-    {
-        return (<a href='http://localhost:8000/auth/login/globus/' target='__blank' style={{textDecoration:'none'}}>
 
-        <Button color={grey[300]} aria-haspopup="true" >
-        Login<AccountCircle className={classes.rightIcon} /></Button>
-             </a>)
-    }
 }

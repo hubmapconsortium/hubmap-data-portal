@@ -61,7 +61,7 @@ export function search_studies(response)
  */
 export function fetchAllStudies()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
+    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
     return async dispatch => {
         dispatch(in_progress());
         try {
@@ -90,7 +90,7 @@ export function fetchAllStudies()
  */
 export function fetchStudiesFirstPage(page) 
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
+    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
     console.log(BASE_API+ Constants.GET_STUDIES_PAGINATED_REST_API+page);
     return async dispatch => {
         dispatch(in_progress());
@@ -139,7 +139,7 @@ export function fetch_colors(colors)
  */
 export function getTissueColorsFromServer()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
+    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
     return async dispatch =>
     {
         dispatch(in_progress());
@@ -156,7 +156,7 @@ export function getTissueColorsFromServer()
  */
 export function getGeneTissueColors()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
+    const BASE_API =(window.location.href).replace("3000", "8000").replace("loggedin/","");
     return async dispatch =>
     {
         dispatch(in_progress());

@@ -94,9 +94,9 @@ class HumanAnatomyCard extends React.Component {
 		this.studyState = store.getState().studyState;
 		this.geneTissueColorState = store.getState().geneTissueColorState;
 		console.log(response, error, status, type);
-		console.log(this.currentStatem, this.studyState);
+		console.log(this.studyState.response, this.studyState.status);
 		if (this.studyState !== undefined && this.studyState.response !== undefined 
-			&& this.studyState.status !== "") 
+			&& this.studyState.status !== Constants.FAILURE && this.studyState.status!== "" ) 
 		{
 			var results = this.studyState.response.response;
 			console.log(this.studyState.response);
@@ -199,7 +199,9 @@ class HumanAnatomyCard extends React.Component {
 				pathTriggers[i].addEventListener('mouseout', hideToolTip);
 				//pathTriggers[i].addEventListener('mouseover', setHover);
 			}
-			this.genetissueArray.map(genetissuepair => {
+			if (this.genetissueArray != null) 
+			{
+				this.genetissueArray.map(genetissuepair => {
 				//index = this.genetissueArray.findIndex((e) => e.tissue === genetissuepair.tissue);
 			//if(index !== -1) 
 			/*{
@@ -260,7 +262,9 @@ class HumanAnatomyCard extends React.Component {
 					default:
 						break;
 				}
+			
 			});
+		}
 		}
 		return (
 			<ReactComp />

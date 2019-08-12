@@ -58,7 +58,6 @@ function GlobusSignIn() {
   return (
     <Container component="main" maxWidth="xs" style={{marginTop:120}}>
       <CssBaseline />
-      
       {/* < a href='http://localhost:8000/auth/login/globus/' target='_blank'>
       <Button color={"inherit"} backgroundColor={grey[300]} width={300} height={300} >
         <img src={GlobusIcon} alt='icon' />

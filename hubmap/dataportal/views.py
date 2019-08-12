@@ -265,6 +265,7 @@ class GlobusUserAuth(generics.GenericAPIView):
         return Response(response)
 
 def logout(request):
+    print("logout")
     response = HttpResponseRedirect('http://localhost:8000/logout/')
     response.delete_cookie('first_name')
     response.delete_cookie('last_name')
