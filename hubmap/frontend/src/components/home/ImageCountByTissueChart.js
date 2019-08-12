@@ -46,7 +46,7 @@ class ImageCountByTissuesChart extends PureComponent {
             return (
                 <div className="studiesdashboard" id="studiesbyTissueschart" >
                     <Chart
-                        width={'390px'}
+                        width={'420px'}
                         height={'300px'}
                         chartType="BarChart"
                         loader={<div>Loading Chart</div>}

@@ -9,6 +9,7 @@ ALLOWED_GROUPS = [
 
 
 def user_has_view_permissions(function):
+    """example code for group-based access control for the REST API calls."""
     @wraps(function)
     def wrap(request, *args, **kwargs):
         print(request)

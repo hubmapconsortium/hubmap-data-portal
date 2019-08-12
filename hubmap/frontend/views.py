@@ -3,6 +3,10 @@ import numpy as np
 import pandas as pd
 from django.shortcuts import render
 from django.views.generic import View
+from django.contrib.auth.models import AnonymousUser, Group
+from django.http import HttpResponseRedirect
+
+from hubmap import settings
 
 
 def rgba_float_to_rgb_hex(floats):
@@ -44,3 +48,31 @@ class FrontendAppView(View):
     def get(self, request):
         # Might not exist.
         return render(request, 'index.html')
+
+def globus(request):
+    uuid = None
+    access_token = None
+    refresh_token = None
+    if not hasattr(request, 'user'):
+        request.user = AnonymousUser
+
+    elif request.user.is_authenticated:
+        response = HttpResponseRedirect(settings.FRONTEND_URL)
+        uuid = request.user.social_auth.get(provider='globus').uid
+        social = request.user.social_auth
+        access_token = social.get(provider='globus').extra_data['access_token']
+        refresh_token = social.get(provider='globus').extra_data['refresh_token']
+        response.set_cookie('first_name', request.user.first_name)
+        response.set_cookie('last_name', request.user.last_name)
+        response.set_cookie('email', request.user.email)
+        return response
+    return render(
+        request,
+        'globus.html',
+        {
+            'uuid': uuid,
+            'access_token': access_token,
+            'refresh_token': refresh_token,
+        },
+    )
+

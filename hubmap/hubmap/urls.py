@@ -23,21 +23,18 @@ from rest_framework.schemas import get_schema_view
 
 from dataportal import views as dataportal_views
 
-API_TITLE = 'HuBMAP UI-backend API'
-API_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
-schema_view = get_schema_view(title=API_TITLE)
+schema_view = get_schema_view(title=settings.OPENAPI_TITLE)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),
-    path('', dataportal_views.globus, name='globus'),
     path('', include('frontend.urls')),
+    path('logout/', dataportal_views.logout, name='logout'),
     path('', include('django.contrib.auth.urls')),
     path('loggedin/', dataportal_views.GlobusUserAuth.as_view(), name='loggedin'),
     path(f'{settings.AUTH_URL_PREFIX}/', include('rest_framework_social_oauth2.urls')),
-    path('logout/globus/', dataportal_views.logout, name='logout'),
     path('openapi/', schema_view, name='openapi-schema'),
-    path('docs/', include_docs_urls(title=API_TITLE, description=API_DESCRIPTION)),
+    path('docs/', include_docs_urls(title=settings.OPENAPI_TITLE, description=settings.OPENAPI_DESCRIPTION)),
     path(
         'swagger-ui/',
         TemplateView.as_view(

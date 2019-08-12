@@ -47,7 +47,7 @@ class CellCountByTissueChart extends PureComponent {
 
                 <div className="studieschart" >
                     <Chart id="studiesbyUniversitychart"
-                        width={'400px'}
+                        width={'420px'}
                         height={'300px'}
                         chartType="BarChart"
                         loader={<div>Loading Chart</div>}

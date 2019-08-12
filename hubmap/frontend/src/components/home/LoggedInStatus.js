@@ -153,7 +153,7 @@ export default function LoggedInStatus() {
 
         return (
             <div className={classes.sectionMenuDesktop} >
-                <a href='http://localhost:8000/auth/login/globus/?next=/' target='__blank' style={{ textDecoration: 'none' }}>
+                <a href='http://localhost:8000/login/' target='__blank' style={{ textDecoration: 'none' }}>
 
                     <Button color={grey[300]} aria-haspopup="true" >
                         Login<AccountCircle className={classes.rightIcon} /></Button>
@@ -177,7 +177,7 @@ export default function LoggedInStatus() {
                         <AccountCircleSharp className={classes.rightIcon} />
                     </MenuItem>
                     <MenuItem onClick={handleCloseLogout} >
-                        <a href='http://localhost:8000/logout/globus/' target='__blank' style={{ textDecoration: 'none' }} onClick={() => {
+                        <a href='http://localhost:8000/logout/' target='__blank' style={{ textDecoration: 'none' }} onClick={() => {
                             console.log('logout')
                             window.location.href = 'http://localhost:3000';
                             return null;

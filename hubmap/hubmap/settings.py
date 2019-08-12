@@ -23,7 +23,7 @@ DATABASES = {
         'USER': 'hubmap_login',
         'PASSWORD': 'dev_password',
         'HOST': 'postgres',
-        'PORT': '5432',
+        'PORT': '',
     }
 }
 
@@ -87,6 +87,8 @@ LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'
 FRONTEND_URL = 'http://localhost:3000/'
 LOGOUT_REDIRECT_URL = 'http://localhost:3000/'
 LOGIN_REDIRECT_URL = f'/{FRONTEND_URL}'
+OPENAPI_TITLE = 'HuBMAP UI-backend API'
+OPENAPI_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -104,8 +106,7 @@ TEMPLATES = [
         },
     },
 ]
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'g+^rn4oz4$##*i6i=z)!vgwufp)4#q(fx5i*1m_8=7s88=rtdr'
+
 # Authentication, including Globus SSO
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.globus.GlobusOpenIdConnect',
@@ -113,7 +114,7 @@ AUTHENTICATION_BACKENDS = [
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
 ]
 
-# for giygas.compbio.cs.cmu.edu, change in the future
+# for test globus app configuration, change in the future
 SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
 SOCIAL_AUTH_GLOBUS_SECRET = 'gEfGGE09nMMjwZxWafL+2/M3UqcGl9czSL72H+O1xuU='
 SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {

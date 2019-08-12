@@ -61,10 +61,10 @@ class HomeComponent extends React.Component {
         <Grid item style={{ height: '700px', width: '320px', marginTop: '120px', marginLeft: '-150px' }} >
           <HumanSvg studies={''} />
         </Grid>
-        <Grid item style={{ height: '400px', width: '420px', marginTop: '180px', marginLeft: '120px' }}>
+        <Grid item style={{ height: '420px', width: '420px', marginTop: '180px', marginLeft: '120px' }}>
           <CellCountByTissueChart />
         </Grid>
-        <Grid item style={{ height: '400px', width: '450px', marginTop: '180px', marginLeft: '30px' }}>
+        <Grid item style={{ height: '420px', width: '450px', marginTop: '180px', marginLeft: '30px' }}>
           <ImageCountByTissuesChart />
         </Grid>
         <Grid item style={{ height: '450px', width: '900px', marginTop: '-250px', marginLeft: '370px' }}>
