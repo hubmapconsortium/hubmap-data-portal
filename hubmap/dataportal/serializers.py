@@ -1,5 +1,5 @@
 from rest_framework import serializers
-
+from django.contrib.auth.models import Group, User
 from .models import (
     DataType,
     Gene,
@@ -22,7 +22,6 @@ from .models import (
 # TODO : add create and update and delete, put for all serializers
 # (all update/add/delete requests for scripts to write metadata to models)
 # TODO: add tests for django restframework
-
 
 class InstitutionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -345,7 +344,7 @@ class StudyListSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserLoggedInSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         fields = (
             'id',
@@ -355,3 +354,13 @@ class UserLoggedInSerializer(serializers.ModelSerializer):
             'groups',
         )
         model = User
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email', "first_name", "last_name")
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ("name",)

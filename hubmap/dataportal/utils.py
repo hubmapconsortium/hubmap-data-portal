@@ -30,7 +30,6 @@ from .serializers import (
 # In case we have to use recursive gene/gene expressions/new features, use this.
 # For now: keeping this.
 
-
 class RecursiveSerializer(serializers.Serializer):
     def to_representation(self, value):
         serializer = self.parent.parent.__class__(value, context=self.context)

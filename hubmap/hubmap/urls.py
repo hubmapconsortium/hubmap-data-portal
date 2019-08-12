@@ -14,21 +14,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
-from django.conf.urls import url
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
-
 from dataportal import views as dataportal_views
 
 API_TITLE = 'HuBMAP UI-backend API'
 API_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
 schema_view = get_schema_view(title=API_TITLE)
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),

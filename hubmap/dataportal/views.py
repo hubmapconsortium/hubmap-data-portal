@@ -1,38 +1,30 @@
-import logging
-import os
-from collections import defaultdict
-
 import matplotlib.cm
 import numpy as np
 import pandas as pd
 import xarray as xr
-from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.decorators import method_decorator
-from django.views.generic import View
 from rest_framework import generics, status, versioning, views
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
-from rest_framework.authtoken.models import Token
-from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
-from .decorators import user_has_view_permissions
-from .models import DataType, Institution, Study, Tissue, User
-from .serializers import *
+from rest_framework import generics, permissions, serializers
+from .models import  Study, Institution, Tissue,DataType
+from django.contrib.auth.models import Group, User
 from .serializers import (
     GeneSerializer,
     StudyListSerializer,
     StudySerializer,
-    TissueColorSerializer
+    TissueColorSerializer,
+    UserSerializer,
+    GroupSerializer,
+    User
 )
-from .utils import *
 from .utils import get_genes, get_response_for_request, get_serializer_class
+
 
 # TODO: Add OpenApi -> Swagger to rest framework
 # TODO: Add post request implementations
@@ -256,7 +248,7 @@ def globus(request):
 
 
 class GlobusUserAuth(generics.GenericAPIView):
-    serializer_class = UserLoggedInSerializer
+    serializer_class = UserSerializer
     parser_classes = [JSONParser]
     versioning_class = versioning.QueryParameterVersioning
     queryset = User.objects.all()
@@ -272,7 +264,7 @@ class GlobusUserAuth(generics.GenericAPIView):
         context = {
             "request": request,
         }
-        response = UserLoggedInSerializer(request.user).data
+        response = UserSerializer(request.user).data
         return Response(response)
 
 
@@ -284,3 +276,22 @@ def logout(request):
     response.delete_cookie('email')
     print('logout')
     return response
+
+# Create the API views
+class UserList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetails(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class GroupList(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    required_scopes = ['groups']
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer
