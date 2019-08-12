@@ -1,10 +1,10 @@
 import matplotlib.cm
 import numpy as np
 import pandas as pd
+from django.contrib.auth.models import AnonymousUser
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views.generic import View
-from django.contrib.auth.models import AnonymousUser, Group
-from django.http import HttpResponseRedirect
 
 from hubmap import settings
 
@@ -49,6 +49,7 @@ class FrontendAppView(View):
         # Might not exist.
         return render(request, 'index.html')
 
+
 def globus(request):
     uuid = None
     access_token = None
@@ -75,4 +76,3 @@ def globus(request):
             'refresh_token': refresh_token,
         },
     )
-

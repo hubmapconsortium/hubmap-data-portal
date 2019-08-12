@@ -14,7 +14,7 @@ end flake8
 
 start python
 pushd hubmap
-python manage.py test
+python3 manage.py test
 # TODO: Django tests
 popd
 end python
