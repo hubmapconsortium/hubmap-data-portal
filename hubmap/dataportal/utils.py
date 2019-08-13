@@ -13,7 +13,7 @@ from .models import (
     ScRnaSeqStudyBarcoded,
     ScRnaSeqStudyCDNA,
     SeqFishImagingStudy,
-    SpatialTranscriptomicStudy
+    SpatialTranscriptomicStudy,
 )
 from .serializers import (
     GeneSerializer,
@@ -24,7 +24,7 @@ from .serializers import (
     ScRnaSeqStudyBarcodedSerializer,
     ScRnaSeqStudyCDNASerializer,
     SeqFishImagingStudySerializer,
-    SpatialTranscriptomicStudySerializer
+    SpatialTranscriptomicStudySerializer,
 )
 
 # In case we have to use recursive gene/gene expressions/new features, use this.
