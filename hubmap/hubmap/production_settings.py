@@ -15,10 +15,8 @@ ALLOWED_HOSTS = [
     'data.test.hubmapconsortium.org',
     'demo1.hubmapconsortium.org',
 ]
-AUTH_URL_PREFIX = 'auth'
-DEFAULT_SOCIAL_AUTH_PROVIDER = 'globus'
-LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'
-LOGIN_REDIRECT_URL = f'/'
+
+FRONTEND_URL = '/'
 
 DATABASES = {
     'default': {
@@ -35,11 +33,3 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
 
 STATIC_ROOT = Path('/opt/hubmap-data-portal/static')
-
-# change the following keys/client_id, from Globus App configuration
-# Configure here: https://developers.globus.org
-SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
-SOCIAL_AUTH_GLOBUS_SECRET = 'gEfGGE09nMMjwZxWafL+2/M3UqcGl9czSL72H+O1xuU='
-SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
-    'access_type': 'offline',
-}

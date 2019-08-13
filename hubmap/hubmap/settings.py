@@ -27,6 +27,9 @@ DATABASES = {
     }
 }
 
+# Location of the React app. Overriden to '/' for production
+FRONTEND_URL = 'http://localhost:3000/'
+
 # /!!! for development, overridden in `production_settings.py` by Docker container build
 
 # Application definition
@@ -80,13 +83,11 @@ REST_FRAMEWORK = {
 }
 
 ROOT_URLCONF = 'hubmap.urls'
-REACT_APP_DIR = Path(Path(__file__).absolute().parent.parent, 'frontend')
+REACT_APP_DIR = BASE_DIR / 'frontend'
 AUTH_URL_PREFIX = 'auth'
 DEFAULT_SOCIAL_AUTH_PROVIDER = 'globus'
 LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'
-FRONTEND_URL = 'http://localhost:3000/'
-LOGOUT_REDIRECT_URL = 'http://localhost:3000/'
-LOGIN_REDIRECT_URL = f'/{FRONTEND_URL}'
+
 OPENAPI_TITLE = 'HuBMAP UI-backend API'
 OPENAPI_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
 TEMPLATES = [
@@ -209,6 +210,10 @@ try:
     from .local_settings import *  # noqa F401 ("imported but unused")
 except ImportError:
     pass
-# This must be run after loading local_settings
+# Sometimes we do need to define settings in terms of other settings, so
+# this is a good place to do so, after override settings are loaded.
+# Shouldn't define any constants after this though
 CORS_ORIGIN_WHITELIST.extend(f'https://{host}' for host in ALLOWED_HOSTS)
+LOGIN_REDIRECT_URL = FRONTEND_URL
+LOGOUT_REDIRECT_URL = FRONTEND_URL
 # Do not add anything after this

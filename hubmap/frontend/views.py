@@ -44,11 +44,11 @@ def tissue_svg(request):
 
 class FrontendAppView(View):
     """
-    Serves the compiled frontend entry point. Not intended to be reachable
-    except in production
+    Serves the compiled frontend entry point. In production, the index.html
+    template referenced here is the result of the React app build. In development,
+    just show a link that says "you probably want to look at the React dev server
+    instead."
     """
-    index_file_path = Path(settings.REACT_APP_DIR, 'build', 'index.html')
-
     def get(self, request):
         return render(request, 'index.html')
 

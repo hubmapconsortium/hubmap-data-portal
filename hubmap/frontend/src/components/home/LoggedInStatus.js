@@ -153,7 +153,7 @@ export default function LoggedInStatus() {
 
         return (
             <div className={classes.sectionMenuDesktop} >
-                <a href='http://localhost:8000/login/' target='__blank' style={{ textDecoration: 'none' }}>
+                <a href='http://localhost:8000/auth/login/globus/' style={{ textDecoration: 'none' }}>
 
                     <Button color={grey[300]} aria-haspopup="true" >
                         Login<AccountCircle className={classes.rightIcon} /></Button>
