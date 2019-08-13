@@ -3,9 +3,10 @@
 describe('HuBMAP', () => {
   before(() => {
     cy.server();
-    cy.route('http://localhost:8000/api/?format=json', 'fixture:base.json');
-    cy.route('http://localhost:8000/api/colors/?format=json', 'fixture:colors.json');
-    cy.route('http://localhost:8000/api/genes/?format=json', 'fixture:genes.json');
+    const api = 'http://localhost:8000/api';
+    cy.route(`${api}/?format=json`, 'fixture:base.json');
+    cy.route(`${api}/colors/?format=json`, 'fixture:colors.json');
+    cy.route(`${api}/genes/?format=json`, 'fixture:genes.json');
   });
 
   it('Has a homepage', () => {
