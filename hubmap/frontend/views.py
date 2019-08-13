@@ -1,14 +1,13 @@
-import logging
 from pathlib import Path
 
 import matplotlib.cm
 import numpy as np
 import pandas as pd
 from django.contrib.auth.models import AnonymousUser
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import engines
-from django.views.generic import View, TemplateView
+from django.views.generic import TemplateView, View
 
 from hubmap import settings
 
@@ -51,13 +50,8 @@ class FrontendAppView(View):
     index_file_path = Path(settings.REACT_APP_DIR, 'build', 'index.html')
 
     def get(self, request):
-        # Might not exist.
-        # try:
-        #     with open(self.index_file_path) as f:
-        #         return  HttpResponse(f.read());
-        # except FileNotFoundError:
-        #     logging.exception('Production build for React App not found')
-            return render(request, 'index.html')
+        return render(request, 'index.html')
+
 
 def globus(request):
     uuid = None
@@ -95,4 +89,4 @@ def catchall_dev(request, upstream=settings.FRONTEND_URL):
 
 
 catchall_prod = TemplateView.as_view(template_name='index.html')
-#catchall = catchall_dev if settings.DEBUG else catchall_prod
+# catchall = catchall_dev if settings.DEBUG else catchall_prod

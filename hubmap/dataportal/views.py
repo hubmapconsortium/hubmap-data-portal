@@ -289,6 +289,7 @@ def login(request):
     print('logout')
     return response
 
+
 # Create the API views
 class UserList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
