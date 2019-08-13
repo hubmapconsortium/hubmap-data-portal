@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AccountCircleSharp from '@material-ui/icons/AccountCircleSharp';
+import API_URL from '../../commons/apiAdapter';
 
 var cookies = new Cookies();
 
@@ -153,7 +154,7 @@ export default function LoggedInStatus() {
 
         return (
             <div className={classes.sectionMenuDesktop} >
-                <a href='http://localhost:8000/auth/login/globus/' style={{ textDecoration: 'none' }}>
+                <a href={API_URL+'auth/login/globus/'} style={{ textDecoration: 'none' }}>
 
                     <Button color={grey[300]} aria-haspopup="true" >
                         Login<AccountCircle className={classes.rightIcon} /></Button>
@@ -177,7 +178,7 @@ export default function LoggedInStatus() {
                         <AccountCircleSharp className={classes.rightIcon} />
                     </MenuItem>
                     <MenuItem onClick={handleCloseLogout} >
-                        <a href='http://localhost:8000/logout/' style={{ textDecoration: 'none' }}>
+                        <a href={API_URL + 'logout/'} style={{ textDecoration: 'none' }}>
                             Logout from Globus
                         <AccountCircleSharp className={classes.rightIcon} /></a></MenuItem>
                 </Menu>
