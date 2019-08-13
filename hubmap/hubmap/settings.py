@@ -30,6 +30,10 @@ DATABASES = {
 # Location of the React app. Overriden to '/' for production
 FRONTEND_URL = 'http://localhost:3000/'
 
+# for test globus app configuration
+SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
+SOCIAL_AUTH_GLOBUS_SECRET = 'gEfGGE09nMMjwZxWafL+2/M3UqcGl9czSL72H+O1xuU='
+
 # /!!! for development, overridden in `production_settings.py` by Docker container build
 
 # Application definition
@@ -116,13 +120,10 @@ AUTHENTICATION_BACKENDS = [
     'rest_framework_social_oauth2.backends.DjangoOAuth2',
 ]
 
-# for test globus app configuration, change in the future
-SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
-SOCIAL_AUTH_GLOBUS_SECRET = 'gEfGGE09nMMjwZxWafL+2/M3UqcGl9czSL72H+O1xuU='
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
     'access_type': 'offline',
 }
-SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 WSGI_APPLICATION = 'hubmap.wsgi.application'
 
