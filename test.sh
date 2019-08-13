@@ -6,17 +6,6 @@ start() { echo travis_fold':'start:$1; echo $1; }
 end() { set +v; echo travis_fold':'end:$1; echo; echo; }
 die() { set +v; echo "$*" 1>&2 ; exit 1; }
 
-start cypress
-# TODO: Move end-to-end tests to end of the list when stable.
-pushd hubmap/frontend
-npm start &
-SERVER_PID=$!
-$(npm bin)/wait-on http://localhost:3000
-$(npm bin)/cypress run
-kill $SERVER_PID
-popd
-end cypress
-
 start flake8
 pushd hubmap
 flake8
@@ -42,3 +31,13 @@ pushd hubmap/frontend
 CI=true npx eslint .
 popd
 end eslint
+
+start cypress
+pushd hubmap/frontend
+npm start &
+SERVER_PID=$!
+$(npm bin)/wait-on http://localhost:3000
+$(npm bin)/cypress run
+kill $SERVER_PID
+popd
+end cypress
