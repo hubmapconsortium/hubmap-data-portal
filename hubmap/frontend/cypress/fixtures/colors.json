@@ -1,0 +1,42 @@
+[
+  {
+    "tissue": "pancreas",
+    "color": "#440255"
+  },
+  {
+    "tissue": "abdomen",
+    "color": "#460b5e"
+  },
+  {
+    "tissue": "liver",
+    "color": "#267f8e"
+  },
+  {
+    "tissue": "lung",
+    "color": "#5bc862"
+  },
+  {
+    "tissue": "small_intestine",
+    "color": "#f3e51e"
+  },
+  {
+    "tissue": "heart",
+    "color": "#38568b"
+  },
+  {
+    "tissue": "bladder",
+    "color": "#218e8c"
+  },
+  {
+    "tissue": "large_intestine",
+    "color": "#470f62"
+  },
+  {
+    "tissue": "kidney",
+    "color": "#86d449"
+  },
+  {
+    "tissue": "spleen",
+    "color": "#3e4989"
+  }
+]
