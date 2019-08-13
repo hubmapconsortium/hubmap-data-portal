@@ -13,11 +13,31 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import include, path
+from django.views.generic import TemplateView
+from rest_framework.authtoken import views
+from rest_framework.documentation import include_docs_urls
+from rest_framework.schemas import get_schema_view
+
+schema_view = get_schema_view(title=settings.OPENAPI_TITLE)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),
     path('', include('frontend.urls')),
+    path(f'{settings.AUTH_URL_PREFIX}/', include('rest_framework_social_oauth2.urls')),
+    path('openapi/', schema_view, name='openapi-schema'),
+    path('docs/', include_docs_urls(title=settings.OPENAPI_TITLE,
+                                    description=settings.OPENAPI_DESCRIPTION)),
+    path(
+        'swagger-ui/',
+        TemplateView.as_view(
+            template_name='swagger-ui.html',
+            extra_context={'schema_url': 'openapi-schema'},
+        ),
+        name='swagger-ui',
+    ),
+    path('api-token-auth/', views.obtain_auth_token),
 ]

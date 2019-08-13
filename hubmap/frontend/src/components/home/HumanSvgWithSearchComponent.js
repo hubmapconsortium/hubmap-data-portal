@@ -1,6 +1,6 @@
 import React from "react";
 import CssBaseline from '@material-ui/core/CssBaseline';
-import HumanAnatomyCard from "./Anatomy";
+import HumanAnatomyCard from "./HumanSvgComponent";
 import SearchBox from "./Search";
 
 

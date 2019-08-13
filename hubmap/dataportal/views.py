@@ -1,37 +1,56 @@
-from collections import defaultdict
-
-from rest_framework import generics, views
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.response import Response
-from rest_framework import status
-from .utils import *
-from .serializers import *
 import matplotlib.cm
-import pandas as pd
 import numpy as np
-from json import loads, dumps
+import pandas as pd
 import xarray as xr
-from django.views.generic import View
-from django.http import HttpResponse
-from django.conf import settings
-import os
-import logging
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser, Group
+from django.utils.decorators import method_decorator
+from rest_framework import generics, permissions, status, versioning, views
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
 
-#TODO: Add OpenApi -> Swagger to rest framework
-#TODO: Add post request implementations
+from .models import DataType, Institution, Study, Tissue
+from .serializers import (
+    GeneSerializer,
+    GroupSerializer,
+    LoggedInUserSerializer,
+    StudyListSerializer,
+    StudySerializer,
+    TissueColorSerializer,
+    User,
+    UserSerializer,
+)
+from .utils import get_genes, get_response_for_request, get_serializer_class
+
+# TODO: Add OpenApi -> Swagger to rest framework
+# TODO: Add post request implementations
+
 
 class PaginationClass(PageNumberPagination):
-    page_size =  10
+    page_size = 10
     max_page_size = 10
+
 
 class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
-        cell_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "cell_count"))
-        image_count_summary = serialize_multi_dim_counts(compute_multi_dim_counts(self.queryset, "image_count"))
-        response.append({"summary" : [{ "cell_count" : cell_count_summary},{"image_count": image_count_summary}]})
+        cell_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "cell_count"))
+        image_count_summary = serialize_multi_dim_counts(
+            compute_multi_dim_counts(self.queryset, "image_count"))
+        response.append(
+            {
+                "summary": [
+                    {"cell_count": cell_count_summary},
+                    {"image_count": image_count_summary},
+                ],
+            },
+        )
         return Response(response)
 
     def list(self, request):
@@ -42,7 +61,8 @@ class StudyListView(generics.GenericAPIView):
         print(serializer.data)
         return self.get_paginated_response(serializer.data)
 
-#TODO : deifne what fields are modifiable and what can be created
+    # TODO : define what fields are modifiable and what can be created
+    @method_decorator(login_required)
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():
@@ -50,9 +70,12 @@ class StudyListView(generics.GenericAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class StudyListPageView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
     pagination_class = PaginationClass
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
@@ -60,32 +83,49 @@ class StudyListPageView(generics.GenericAPIView):
         paginated_response = self.get_paginated_response(paginated_queryset)
         return paginated_response
 
+
 class GeneListView(generics.GenericAPIView):
     serializer_class = GeneSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_genes(self, request)
         return Response(response)
 
+
 class GlobalSearch(generics.ListAPIView):
     serializer_class = StudyListSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
         return Response(response)
 
+
 class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Study.objects.all()
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get_serializer_class(self):
+        """
+        :return: If given a study PK, return a serializer class for that Study
+          subclass. Otherwise return the base Study serializer.
+        """
+        if self.lookup_field not in self.kwargs:
+            return StudySerializer
         return get_serializer_class(self.get_object())
 
     def retrieve(self, request, *args, **kwargs):
         serializer = self.get_serializer(self.get_object().get_subclass_object())
         return Response(serializer.data)
 
+
 def rgba_float_to_rgb_hex(floats):
     return '#' + ''.join('{:02x}'.format(int(c * 255)) for c in floats[:3])
+
 
 class Tissue_svg_colors(views.APIView):
 
@@ -106,14 +146,13 @@ class Tissue_svg_colors(views.APIView):
         ]
         vec = pd.Series(np.random.random(len(organs)), index=organs)
         values = [
-            {"tissue": tissue, "color" : rgba_float_to_rgb_hex(matplotlib.cm.viridis(expr))}
+            {"tissue": tissue, "color": rgba_float_to_rgb_hex(matplotlib.cm.viridis(expr))}
             for tissue, expr in vec.items()
         ]
         print(values)
         results = TissueColorSerializer(values, many=True).data
-        return Response(
-            results
-        )
+        return Response(results)
+
 
 # Each label (element 0 in tuples) has multiple meanings/functions.
 # 1. it will be a dimension of the `xr.DataArray` returned by
@@ -125,6 +164,7 @@ MULTI_DIM_CLASSES = [
     ('institution', Institution),
     ('data_type', DataType),
 ]
+
 
 def compute_multi_dim_counts(queryset, field_name: str) -> xr.DataArray:
     """
@@ -154,6 +194,7 @@ def compute_multi_dim_counts(queryset, field_name: str) -> xr.DataArray:
 
     return data
 
+
 def serialize_multi_dim_counts(data: xr.DataArray):
     list_for_frontend = []
     try:
@@ -169,7 +210,7 @@ def serialize_multi_dim_counts(data: xr.DataArray):
         for tissue in df.index.levels[0]:
             list_for_frontend.append([
                 tissue,
-                (df.loc[tissue, :].iloc[:, 0]).values.tolist()
+                (df.loc[tissue, :].iloc[:, 0]).values.tolist(),
             ])
     except ValueError:
         # `data.stack` throws a ValueError if `data` is empty.
@@ -177,3 +218,37 @@ def serialize_multi_dim_counts(data: xr.DataArray):
         pass
 
     return list_for_frontend
+
+
+class GlobusUserAuth(generics.GenericAPIView):
+    serializer_class = UserSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
+    queryset = User.objects.all()
+
+    def get(self, request, format=None):
+        if not hasattr(request, 'user'):
+            request.user = AnonymousUser
+        if request.user.is_authenticated:
+            response = LoggedInUserSerializer(request.user).data
+        return Response(response)
+
+
+# Create the API views
+class UserList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetails(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class GroupList(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    required_scopes = ['groups']
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer

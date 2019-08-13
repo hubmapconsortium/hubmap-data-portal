@@ -22,16 +22,18 @@
     "react-google-charts": "^3.0.13",
     "react-pose": "^4.0.8",
     "react-redux": "^7.0.3",
-    "react-router-dom": "^5.0.0",
+    "react-router": "^5.0.1",
+    "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "source-map-explorer": "^2.0.0",
-    "three": "^0.104.0"
+    "three": "^0.104.0",
+    "universal-cookie": "^4.0.2"
   },
   "scripts": {
     "analyze": "source-map-explorer 'build/static/js/*.js'",
-    "start": "react-scripts start",
+    "start": "REACT_APP_STAGE=dev react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

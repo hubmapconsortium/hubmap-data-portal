@@ -1,17 +1,15 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import HumanSvg from "./HumanSvg";
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import grey from '@material-ui/core/colors/grey';
 import Footer from "./Footer";
 import NavBar from "./NavBar";
-import CellCountByTissueChart from "./CellCountByTissueChart"
-import ImageCountByTissuesChart from './ImageCountByTissueChart';
-import MaterialTableDemo from './MUITable';
-import StudiesBarChart from './BarChart';
-import ImageCountStackedChart from './d3chart';
-import viridis from '../images/viridis.png'
+import { Route, BrowserRouter } from 'react-router-dom';
+import DataAnalysisComponent from '../pages/DataAnalysis';
+import UserFAQsComponent from '../pages/UserFAQs';
+import ExperimentsComponent from '../pages/Experiments';
+import PipelinesComponent from '../pages/Pipelines';
+import HomePage from '../pages/HomePage';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     width: "320px",
     height: "650px",
     border: '0px solid #fafafa',
-    backgroundColor: grey[50],
+    backgroundColor: grey[300],
     color: grey[800],
     marginTop: theme.spacing(1),
     padding: theme.spacing(1, 1, 1, 1),
@@ -36,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     width: "420px",
     height: "650px",
     border: '0px solid #fafafa',
-    backgroundColor: grey[50],
+    backgroundColor: grey[300],
     color: grey[800],
     marginTop: theme.spacing(1),
     padding: theme.spacing(1, 1, 1, 1),
@@ -45,37 +43,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function RootContainer() {
-  const classes = useStyles();
   return (
-    <Container xl="true" component="div" style={{ height: '1600px' }} >
-      <Grid container className={classes.root} spacing={8} margin-top="20px">
-        <Grid item style={{height:30}}>
-          <NavBar />
-        </Grid>
-        <Grid item style ={{height: '300px', width: '5px', marginTop: '110px', marginLeft:'-50px' }}>
-        <img id="tab10ColorMap" src={viridis} style={{  transform:'scale(0.6)',WebkitTransform:'scale(0.6)', display:'none' }} alt="Color Map" />
-        </Grid>
-        <Grid item style={{ height: '700px', width: '320px', marginTop: '110px', marginLeft:'-30px' }} >
-          <HumanSvg studies={''} />
-        </Grid>
-        <Grid item style={{ height: '400px', width: '420px', marginTop: '170px', marginLeft:'10px'}}>
-          <CellCountByTissueChart />
-        </Grid>
-        <Grid item style={{ height: '400px', width: '450px', marginTop: '170px', marginLeft:'10px'}}>
-          <ImageCountByTissuesChart />
-        </Grid>
-        <Grid item style={{ height: '450px', width: '900px', marginTop: '-250px', marginLeft:'370px'}}>
-          <MaterialTableDemo />
-        </Grid>
-        <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft:'0px'}}>
-          <StudiesBarChart />
-        </Grid>
-        <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft:'0px'}}>
-          <ImageCountStackedChart />
-        </Grid>
+    <BrowserRouter >
+      <NavBar />
+      <Container xl="true" component="div" style={{ height: '1600px' }} >
+        <Route exact path="/dataanalysis" component={DataAnalysisComponent} />
+        <Route exact path="/userfaqs" component={UserFAQsComponent} />
+        <Route exact path="/experiments" component={ExperimentsComponent} />
+        <Route exact path="/pipelines" component={PipelinesComponent} />
+        <Route exact path="/" component={HomePage} />
         <Footer />
-      </Grid>
-    </Container>
+      </Container>
+    </BrowserRouter >
   );
 }
 export default RootContainer;

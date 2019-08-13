@@ -5,7 +5,7 @@
   height: auto !important;
   height: 100%;
   margin: 0 auto -40px;
-  background-color: #fafafa;
+  background-color: #eeeeee;
 }
 
 .App-logo {
@@ -121,11 +121,11 @@ background-color: #fafafa;
   margin-top: 100px;
 }
 
-.studieschart{
+.experimentschart{
 
 }
 
-.studiesdashboard{
+.experimentsdashboard{
 }
 
 #tooltip {

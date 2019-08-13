@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from argparse import ArgumentParser
 import json
+from argparse import ArgumentParser
 from subprocess import PIPE, run
 from typing import List
 

@@ -1,11 +1,14 @@
 from pathlib import Path
 
+from django.core.management.utils import get_random_secret_key
+
 print('Loading production settings')
 
-# TODO: figure out how to store this securely while sharing containers;
-#   this doesn't scale when running this app across multiple containers
-from django.core.management.utils import get_random_secret_key
-SECRET_KEY = get_random_secret_key()
+SECRET_PATH = Path('/opt/secret')
+
+# Static secret key is required
+with open(SECRET_PATH / 'django_secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
 
 DEBUG = False
 
@@ -15,6 +18,8 @@ ALLOWED_HOSTS = [
     'demo1.hubmapconsortium.org',
 ]
 
+FRONTEND_URL = '/'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -23,7 +28,7 @@ DATABASES = {
         'PASSWORD': 'SFz0C96otU0i6Cgy3BP3tE7n5SEgt2Dj',
         'HOST': 'postgres',
         'PORT': '',
-    }
+    },
 }
 
 CSRF_COOKIE_SECURE = True

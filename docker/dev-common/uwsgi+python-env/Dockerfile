@@ -11,10 +11,17 @@ RUN apt-get -y install \
     python3-dev \
     python3-pip
 
-RUN pip3 install -U pip setuptools
+RUN pip3 install -U pip setuptools wheel
 
 COPY hubmap/requirements-dev.txt /opt
 RUN pip3 install -r /opt/requirements-dev.txt
+COPY hubmap/requirements-test.txt /opt
+RUN pip3 install -r /opt/requirements-test.txt
+
+# It's nice to have Python available through the `python` executable,
+# so `manage.py` can be run directly, and so you don't need to change the
+# default interpreter in PyCharm. Not important for production though.
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 EXPOSE 8000
 
