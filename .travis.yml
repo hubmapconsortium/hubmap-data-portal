@@ -10,6 +10,14 @@ addons:
     packages:
       - postgresql-10
       - postgresql-client-10
+      - libgconf-2-4 # For Cypress
+cache:
+  # Caches $HOME/.npm when npm ci is default script command
+  # Caches node_modules in all other cases
+  npm: true
+  directories:
+    # We also need to cache folder with Cypress binary
+    - ~/.cache
 services:
   - postgresql
 install:
