@@ -6,7 +6,7 @@ import grey from '@material-ui/core/colors/grey';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import { connect } from 'react-redux';
-import { fetch_gene_tissue_colors, in_progress, searchThis } from "../../middleware/actions";
+import { get_gene_tissue_colors, in_progress, searchThis } from "../../middleware/actions";
 import * as Utils from '../../commons/utils'
 
 const useStyles = makeStyles(theme => ({
@@ -94,8 +94,8 @@ class SearchBox extends React.Component {
     componentDidMount() {
         store.subscribe(() => this.currentState = store.getState().geneTissueColorState);
         if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
-            && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
-            this.props.dispatch(fetch_gene_tissue_colors(this.currentState));
+            && this.currentState.response !== {} && this.currentState.type === Constants.GET_EXPERIMENTS) {
+            this.props.dispatch(get_gene_tissue_colors(this.currentState));
         }
         else if (this.currentState.type === Constants.GET_GENE_TISSUE_COLOR_API && this.currentState.status === Constants.IN_PROGRESS) {
             this.props.dispatch(in_progress());

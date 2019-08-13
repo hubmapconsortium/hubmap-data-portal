@@ -6,7 +6,7 @@ import grey from '@material-ui/core/colors/grey';
 import CellCountByTissueChart from "../components/home/CellCountByTissueChart"
 import ImageCountByTissuesChart from '../components/home/ImageCountByTissueChart';
 import MaterialTableDemo from '../components/home/MUITable';
-import StudiesBarChart from '../components/home/BarChart';
+import ExperimentsBarChart from '../components/home/BarChart';
 import ImageCountStackedChart from '../components/home/D3chart';
 import viridis from '../images/viridis.png'
 import * as actions from '../middleware/actions';
@@ -44,10 +44,8 @@ const useStyles = makeStyles(theme => ({
 class HomeComponent extends React.Component {
 
   componentDidMount() {
-    actions.fetchAllStudies();
+    actions.getAllExperiments();
     actions.getGeneTissueColors();
-    actions.getGeneTissueColors();
-
   }
   render() {
 
@@ -59,7 +57,7 @@ class HomeComponent extends React.Component {
           <img id="tab10ColorMap" src={viridis} style={{ transform: 'scale(0.6)', WebkitTransform: 'scale(0.6)', display: 'none' }} alt="Color Map" />
         </Grid>
         <Grid item style={{ height: '700px', width: '320px', marginTop: '120px', marginLeft: '-150px' }} >
-          <HumanSvg studies={''} />
+          <HumanSvg experiments={''} />
         </Grid>
         <Grid item style={{ height: '420px', width: '420px', marginTop: '180px', marginLeft: '120px' }}>
           <CellCountByTissueChart />
@@ -71,7 +69,7 @@ class HomeComponent extends React.Component {
           <MaterialTableDemo />
         </Grid>
         <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft: '0px' }}>
-          <StudiesBarChart />
+          <ExperimentsBarChart />
         </Grid>
         <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft: '0px' }}>
           <ImageCountStackedChart />

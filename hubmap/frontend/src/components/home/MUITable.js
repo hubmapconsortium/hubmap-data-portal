@@ -2,19 +2,19 @@ import React from 'react';
 import MUIDataTable from "mui-datatables";
 import grey from '@material-ui/core/colors/grey';
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress, fetchNextPageFromStudies } from '../../middleware/actions';
+import { get_experiments, in_progress, getNextPageFromExperiments } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import { CircularProgress, Typography } from '@material-ui/core';
 
 const mapStateToProps = state => {
 	return {
-		status: state.studyState.status,
-		response: state.studyState.response,
-		error: state.studyState.error,
-		page: state.studyState.page,
-		next: state.studyState.next,
-		previous: state.studyState.previous,
+		status: state.experimentState.status,
+		response: state.experimentState.response,
+		error: state.experimentState.error,
+		page: state.experimentState.page,
+		next: state.experimentState.next,
+		previous: state.experimentState.previous,
 	}
 };
 class MaterialTableDemo extends React.Component {
@@ -61,12 +61,12 @@ class MaterialTableDemo extends React.Component {
 	}
 
 	componentDidMount() {
-		store.subscribe(() => this.currentState = store.getState().studyState);
+		store.subscribe(() => this.currentState = store.getState().experimentState);
 		if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
-			&& this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
-			this.props.dispatch(fetch_studies(this.currentState));
+			&& this.currentState.response !== {} && this.currentState.type === Constants.GET_EXPERIMENTS) {
+			this.props.dispatch(get_experiments(this.currentState));
 		}
-		else if (this.currentState.type === Constants.GLOBAL_FETCH_ACTION && this.currentState.status === Constants.IN_PROGRESS) {
+		else if (this.currentState.type === Constants.GET_EXPERIMENTS && this.currentState.status === Constants.IN_PROGRESS) {
 			this.props.dispatch(in_progress());
 		}
 
@@ -77,16 +77,16 @@ class MaterialTableDemo extends React.Component {
 	 */
 	changePage = (page) => {
 		this.previousState.status = Constants.IN_PROGRESS;
-		this.props.dispatch(fetchNextPageFromStudies(this.previousState.next));
+		this.props.dispatch(getNextPageFromExperiments(this.previousState.next));
 	}
 	render() {
-		const { response, error, status, type, page, next, previous } = store.getState().studyState;
+		const { response, error, status, type, page, next, previous } = store.getState().experimentState;
 
 		if (error) {
 			return <div>Error! {error.message}</div>
 		}
 
-		else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION
+		else if (response !== "" && response !== undefined && type === Constants.GET_EXPERIMENTS
 			&& status === Constants.SUCCESS) {
 			var studydata = this.getFromData(response);
 			this.previousState = {
@@ -148,7 +148,7 @@ class MaterialTableDemo extends React.Component {
 				/>
 			);
 		}
-		else if (status === Constants.IN_PROGRESS && response === undefined && type === Constants.GLOBAL_FETCH_ACTION) {
+		else if (status === Constants.IN_PROGRESS && response === undefined && type === Constants.GET_EXPERIMENTS) {
 			return < MUIDataTable size='medium' style={{ maxWidth: '100%' }}
 				title={<Typography variant='title'>Experiments From HuBMAP Consortium
 					{(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}</Typography>}

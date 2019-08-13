@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetch_studies, in_progress } from '../controllers/actions';
+import { get_experiments, in_progress } from '../controllers/actions';
 import * as Constants from '../../commons/constants';
 import { hubmapStore } from '../../index';
 import MaterialTableDemo from './MUITable';
@@ -16,17 +16,17 @@ const mapStateToProps = state => {
         previous: "",
     }
 };
-class StudiesTable extends React.Component {
+class ExperimentsTable extends React.Component {
     currentState = {};
     previousState = {};
     componentDidMount() {
         ('componentDidMount');
         hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
         if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
-            && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
-            this.props.dispatch(fetch_studies());
+            && this.currentState.response !== {} && this.currentState.type === Constants.GET_EXPERIMENTS) {
+            this.props.dispatch(get_experiments());
         }
-        else if (this.currentState.type === Constants.GLOBAL_FETCH_ACTION && this.currentState.status === Constants.IN_PROGRESS) {
+        else if (this.currentState.type === Constants.GET_EXPERIMENTS && this.currentState.status === Constants.IN_PROGRESS) {
             this.props.dispatch(in_progress());
         }
     }
@@ -39,21 +39,21 @@ class StudiesTable extends React.Component {
         if (status === Constants.IN_PROGRESS) {
             return <div> Loading...</div>
         }
-        if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION) {
+        if (response !== "" && response !== undefined && type === Constants.GET_EXPERIMENTS) {
             this.previousState.response = this.currentState;
             this.previousState.type = type;
             return (
                 <div>
-                    <MaterialTableDemo studies={response} /> </div>);
+                    <MaterialTableDemo experiments={response} /> </div>);
         }
-        /*else if(type !== Constants.GLOBAL_FETCH_ACTION && response !== "")
+        /*else if(type !== Constants.GET_EXPERIMENTS && response !== "")
         /{
             (this.previousState);
         }*/
         else {
-            return (<div>no studies </div>);
+            return (<div>no experiments </div>);
         }
     };
 }
 
-export default connect(mapStateToProps)(StudiesTable);
+export default connect(mapStateToProps)(ExperimentsTable);

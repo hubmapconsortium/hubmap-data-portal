@@ -9,11 +9,11 @@ const DEFAULT_STATE = {
 };
 
 /***
- * fill in state object for studies
+ * fill in state object for experiments
  */
-export default function studyResponseReducer(state = DEFAULT_STATE, action) {
+export default function searchResponseReducer(state = DEFAULT_STATE, action) {
     switch (action.type) {
-        case Constants.GLOBAL_SEARCH_ACTION:
+        case Constants.SEARCH_EXPERIMENTS:
             return {
                 ...state,
                 response: action.response,

@@ -1,6 +1,6 @@
 import { ReactComponent as ReactComp } from "../../images/Human_body_silhouette_minimal.svg";
 import React from 'react';
-import { fetch_colors, in_progress } from "../../middleware/actions";
+import { get_colors, in_progress } from "../../middleware/actions";
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import { connect } from 'react-redux';
@@ -55,7 +55,7 @@ function hideToolTip(evt) {
 class HumanAnatomyCard extends React.Component {
 	currentState = {};
 	previousState = {};
-	studyState = {};
+	experimentState = {};
 	geneTissueColorState = {};
 
 	componentDidMount() {
@@ -63,12 +63,12 @@ class HumanAnatomyCard extends React.Component {
 		try {
 			store.subscribe(() => {
 			this.currentState = store.getState().colorsState;
-				this.studyState = store.getState().studyState;
+				this.experimentState = store.getState().experimentState;
 				this.geneTissueColorState = store.getState().geneTissueColorState
 			});
 			if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS && this.currentState.response !== ""
 				&& this.currentState.type === Constants.GET_TISSUE_COLORS) {
-				this.props.dispatch(fetch_colors());
+				this.props.dispatch(get_colors());
 			}
 			else {
 				this.props.dispatch(in_progress());
@@ -82,12 +82,12 @@ class HumanAnatomyCard extends React.Component {
 	render() {
 		const { response, error, status, type } = store.getState().colorsState;
 		this.currentState = store.getState().colorsState;
-		this.studyState = store.getState().studyState;
+		this.experimentState = store.getState().experimentState;
 		this.geneTissueColorState = store.getState().geneTissueColorState;
-		if (this.studyState !== undefined && this.studyState.response !== undefined
-			&& this.studyState.status !== Constants.FAILURE && this.studyState.status !== "") {
+		if (this.experimentState !== undefined && this.experimentState.response !== undefined
+			&& this.experimentState.status !== Constants.FAILURE && this.experimentState.status !== "") {
 
-			this.genetissueArray = this.studyState.response.slice(0, this.studyState.response.length - 1)
+			this.genetissueArray = this.experimentState.response.slice(0, this.experimentState.response.length - 1)
 				.reduce((arr, study) => {
 					const index = arr.findIndex((e) => e.tissue === study.tissue.name)
 					if (index === -1) {
@@ -158,7 +158,7 @@ class HumanAnatomyCard extends React.Component {
 			spleen.addEventListener("click", function () {
 			});
 			human = document.getElementById('main');
-			human.setAttributeNS(null, "data-tooltip-text", " # experiments:" + (this.studyState.response.length - 1).toString() + ", 9 genes");
+			human.setAttributeNS(null, "data-tooltip-text", " # experiments:" + (this.experimentState.response.length - 1).toString() + ", 9 genes");
 			for (var i = 0; i < pathTriggers.length; i++) {
 				pathTriggers[i].addEventListener('mousemove', showToolTip);
 				pathTriggers[i].addEventListener('mouseout', hideToolTip);

@@ -1,6 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
-import { fetch_studies, in_progress } from '../../middleware/actions';
+import { get_experiments, in_progress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import { CircularProgress, Typography } from '@material-ui/core';
@@ -43,12 +43,13 @@ class ImageCountStackedChart extends React.Component {
     };
   })
   componentDidMount() {
-    store.subscribe(() => this.currentState = store.getState().studyState);
+    store.subscribe(() => this.currentState = store.getState().experimentState);
     if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
-      && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
-      this.props.dispatch(fetch_studies(this.currentState));
+      && this.currentState.response !== {} 
+      && this.currentState.type === Constants.GET_EXPERIMENTS) {
+      this.props.dispatch(get_experiments(this.currentState));
     }
-    else if (this.currentState.type === Constants.GLOBAL_FETCH_ACTION && this.currentState.status === Constants.IN_PROGRESS) {
+    else if (this.currentState.type === Constants.GET_EXPERIMENTS && this.currentState.status === Constants.IN_PROGRESS) {
       this.props.dispatch(in_progress());
     }
     this.drawChart();
@@ -163,13 +164,13 @@ class ImageCountStackedChart extends React.Component {
     //return svg.node();
   }
   render() {
-    const { response, error, status, type } = store.getState().studyState;
+    const { response, error, status, type } = store.getState().experimentState;
 
     if (error) {
       return <div>Error! {error.message}</div>
     }
 
-    else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION
+    else if (response !== "" && response !== undefined && type === Constants.GET_EXPERIMENTS
       && status === Constants.SUCCESS) {
       return (
         <div id="chartcontainer">
@@ -177,7 +178,7 @@ class ImageCountStackedChart extends React.Component {
         </div>
       );
     }
-    else if (status === Constants.IN_PROGRESS && response === undefined && type === Constants.GLOBAL_FETCH_ACTION) {
+    else if (status === Constants.IN_PROGRESS && response === undefined && type === Constants.GET_EXPERIMENTS) {
       return < ImageCountStackedChart size='medium' style={{ maxWidth: '100%' }}
         title={<Typography variant='title'>Experiments From HuBMAP Consortium
         {(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}</Typography>}

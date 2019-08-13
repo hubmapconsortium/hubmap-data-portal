@@ -9,7 +9,7 @@ const sample = [
   { center: 'UCSD', May2019: 5, June2019: 18 },
 ];
 
-class StudiesBarChart extends React.Component {
+class ExperimentsBarChart extends React.Component {
 
   componentDidMount() {
     this.drawChart();
@@ -166,4 +166,4 @@ class StudiesBarChart extends React.Component {
   }
 }
 
-export default StudiesBarChart;
+export default ExperimentsBarChart;

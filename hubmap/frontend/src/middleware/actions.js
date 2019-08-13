@@ -4,23 +4,23 @@ import * as Constants from '../commons/constants';
 
 export const in_progress = () => ({type: Constants.IN_PROGRESS});
 /**
- * fills study state props here after any of fetch methods from studies reducer
+ * fills study state props here after any of get methods from experiments reducer
  * @param {Props object} response 
  */
-export function fetch_studies(response) {
+export function get_experiments(response) {
     return {
     status: Constants.SUCCESS,
     response: response.results,
     page: response.page,
     next: response.next,
     previous: response.previous,
-    type: Constants.GLOBAL_FETCH_ACTION,}
+    type: Constants.GET_EXPERIMENTS,}
 }
 
 /***
- * Fills error details returned by any of fetch methods from studies reducer
+ * Fills error details returned by any of get methods from experiments reducer
  */
-export const fetch_studies_error = error =>{
+export const get_experiments_error = error =>{
     return {
     status: Constants.FAILURE,
     response: {},
@@ -29,14 +29,14 @@ export const fetch_studies_error = error =>{
     page:0,
     next: "",
     previous: "",
-    type: Constants.GLOBAL_FETCH_ACTION,}
+    type: Constants.GET_EXPERIMENTS,}
 }
 
 /**
- * fills study state props here after any of fetch methods from studies reducer
+ * fills study state props here after any of get methods from experiments reducer
  * @param {Props object} response 
  */
-export function fetch_gene_tissue_colors(response) {
+export function get_gene_tissue_colors(response) {
     return {
         response: response,
         status:Constants.SUCCESS,
@@ -44,24 +44,24 @@ export function fetch_gene_tissue_colors(response) {
 }
 
 /***
- * Search studies by REST filter api
+ * Search experiments by REST filter api
  */
-export function search_studies(response) 
+export function search_experiments(response) 
 {
-    return {type: Constants.GLOBAL_SEARCH_ACTION,
+    return {type: Constants.SEARCH_EXPERIMENTS,
         response: response,
         status:Constants.SUCCESS,}
 }
 
 /***
- * Fetch all studies from REST api
+ * Fetch all experiments from REST api
  */
-export function fetchAllStudies()
+export function getAllExperiments()
 {
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(Constants.GET_STUDIES_REST_API );
+            let response = await axios.get(Constants.GET_EXPERIMENTS_REST_API );
             const count = response.data.length;
             let results = {
                 status: Constants.SUCCESS,
@@ -70,46 +70,47 @@ export function fetchAllStudies()
                 page: 0,
                 next: '',
                 previous: '',
-                type: Constants.GLOBAL_FETCH_ACTION,
+                type: Constants.GET_EXPERIMENTS,
             }
-            return dispatch(fetch_studies(results));
+            console.log(results);
+            return dispatch(get_experiments(results));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
 }
 
 /***
- * Fetch studies by page
+ * Fetch experiments by page
  */
-export function fetchStudiesFirstPage(page) 
+export function getExperimentsFirstPage(page) 
 {
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(Constants.GET_STUDIES_PAGINATED_REST_API+page);
-            return dispatch(fetch_studies(response.data));
+            let response = await axios.get(Constants.GET_EXPERIMENTS_PAGINATED_REST_API+page);
+            return dispatch(get_experiments(response.data));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
 }
 
 /***
- * Fetch next page from studies
+ * Fetch next page from experiments
  */
-export function fetchNextPageFromStudies(next) 
+export function getNextPageFromExperiments(next) 
 {
     return async dispatch => {
         dispatch(in_progress());
         try {
             let response = await axios.get(next);
-            return dispatch(fetch_studies(response.data));
+            return dispatch(get_experiments(response.data));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
 }
@@ -117,7 +118,7 @@ export function fetchNextPageFromStudies(next)
 /**
  * Fill colors response from REST api
  */
-export function fetch_colors(colors) 
+export function get_colors(colors) 
 {
     return {
         response: colors,
@@ -137,7 +138,8 @@ export function getTissueColorsFromServer()
         let response = await axios.get( Constants.GET_TISSUE_COLORS_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
-        return dispatch(fetch_colors(response.data));
+        console.log(response);
+        return dispatch(get_colors(response.data));
 	}
 }
 
@@ -153,23 +155,24 @@ export function getGeneTissueColors()
         let response = await axios.get(Constants.GET_GENE_TISSUE_COLOR_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
-        return dispatch(fetch_gene_tissue_colors(response.data));
+        console.log(response);
+        return dispatch(get_gene_tissue_colors(response.data));
 	}
 }
 
 /***
- * Fetch studies by page
+ * Search experiments
  */
 export function searchThis(searchTerm) 
 {
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get( Constants.SEARCH_STUDIES_REST_API+searchTerm);
-            return dispatch(search_studies(response.data));
+            let response = await axios.get( Constants.SEARCH_EXPERIMENTS_REST_API+searchTerm);
+            return dispatch(search_experiments(response.data));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
 }
