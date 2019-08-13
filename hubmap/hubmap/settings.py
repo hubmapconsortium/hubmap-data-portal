@@ -87,6 +87,7 @@ REACT_APP_DIR = BASE_DIR / 'frontend'
 AUTH_URL_PREFIX = 'auth'
 DEFAULT_SOCIAL_AUTH_PROVIDER = 'globus'
 LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'
+LOGIN_REDIRECT_URL = '/loggedin/'
 
 OPENAPI_TITLE = 'HuBMAP UI-backend API'
 OPENAPI_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
@@ -214,6 +215,5 @@ except ImportError:
 # this is a good place to do so, after override settings are loaded.
 # Shouldn't define any constants after this though
 CORS_ORIGIN_WHITELIST.extend(f'https://{host}' for host in ALLOWED_HOSTS)
-LOGIN_REDIRECT_URL = FRONTEND_URL
 LOGOUT_REDIRECT_URL = FRONTEND_URL
 # Do not add anything after this

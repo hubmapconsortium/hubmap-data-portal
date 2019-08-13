@@ -1,15 +1,14 @@
-from pathlib import Path
-
 import matplotlib.cm
 import numpy as np
 import pandas as pd
+from django.core.exceptions import PermissionDenied
+from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.views import auth_logout
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.template import engines
 from django.views.generic import TemplateView, View
-
-from hubmap import settings
 
 
 def rgba_float_to_rgb_hex(floats):
@@ -53,40 +52,25 @@ class FrontendAppView(View):
         return render(request, 'index.html')
 
 
-def globus(request):
-    uuid = None
-    access_token = None
-    refresh_token = None
+def set_user_cookie(request):
     if not hasattr(request, 'user'):
         request.user = AnonymousUser
 
     elif request.user.is_authenticated:
         response = HttpResponseRedirect(settings.FRONTEND_URL)
-        uuid = request.user.social_auth.get(provider='globus').uid
-        social = request.user.social_auth
-        access_token = social.get(provider='globus').extra_data['access_token']
-        refresh_token = social.get(provider='globus').extra_data['refresh_token']
         response.set_cookie('first_name', request.user.first_name)
         response.set_cookie('last_name', request.user.last_name)
         response.set_cookie('email', request.user.email)
         return response
-    return render(
-        request,
-        'globus.html',
-        {
-            'uuid': uuid,
-            'access_token': access_token,
-            'refresh_token': refresh_token,
-        },
-    )
+
+    raise PermissionDenied('Must be logged in to set cookies')
 
 
-def catchall_dev(request, upstream=settings.FRONTEND_URL):
-    upstream_url = upstream + request.path
-    response = request.get(upstream_url)
-    content = engines['django'].from_string(response.text).render()
-    return HttpResponse(content)
-
-
-catchall_prod = TemplateView.as_view(template_name='index.html')
-# catchall = catchall_dev if settings.DEBUG else catchall_prod
+def logout(request):
+    if request.user.is_authenticated:
+        auth_logout(request)
+    response = HttpResponseRedirect(settings.LOGOUT_REDIRECT_URL)
+    response.delete_cookie('first_name')
+    response.delete_cookie('last_name')
+    response.delete_cookie('email')
+    return response
