@@ -53,6 +53,7 @@
     ]
   },
   "devDependencies": {
-    "cypress": "^3.4.1"
+    "cypress": "^3.4.1",
+    "wait-on": "^3.3.0"
   }
 }
