@@ -2,6 +2,7 @@ import matplotlib.cm
 import numpy as np
 import pandas as pd
 import xarray as xr
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import AnonymousUser, Group
 from django.contrib.auth.views import auth_logout
@@ -12,8 +13,6 @@ from rest_framework import generics, permissions, status, versioning, views
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
-
-from hubmap import settings
 
 from .models import DataType, Institution, Study, Tissue
 from .serializers import (
@@ -275,7 +274,6 @@ def logout(request):
     response.delete_cookie('first_name')
     response.delete_cookie('last_name')
     response.delete_cookie('email')
-    print('logout')
     return response
 
 
