@@ -177,17 +177,11 @@ export default function LoggedInStatus() {
                         <AccountCircleSharp className={classes.rightIcon} />
                     </MenuItem>
                     <MenuItem onClick={handleCloseLogout} >
-                        <a href='http://localhost:8000/logout/' target='__blank' style={{ textDecoration: 'none' }} onClick={() => {
-                            console.log('logout')
-                            window.location.href = 'http://localhost:3000';
-                            return null;
-                        }}>
+                        <a href='http://localhost:8000/logout/' style={{ textDecoration: 'none' }}>
                             Logout from Globus
                         <AccountCircleSharp className={classes.rightIcon} /></a></MenuItem>
-
                 </Menu>
             </div>
         )
     }
-
 }
