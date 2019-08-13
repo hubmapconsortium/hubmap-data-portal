@@ -24,7 +24,7 @@ DATABASES = {
         'PASSWORD': 'dev_password',
         'HOST': 'postgres',
         'PORT': '',
-    }
+    },
 }
 
 # /!!! for development, overridden in `production_settings.py` by Docker container build
