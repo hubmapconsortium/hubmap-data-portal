@@ -27,3 +27,23 @@ If `docker-compose up` must build a new container, the working directory of
 `Dockerfile`. As such, the example `COPY requirements-local.txt /opt` command
 in `django_app/Dockerfile` needs a `requirements-local.txt` file in the
 `django_app` subdirectory.
+
+Example
+-------
+
+Creating a new local Docker config with `scikit-learn` in addition to the
+existing packages:
+
+(start in the `docker` directory)
+
+```
+$ cp -r dev-local-example dev-local
+$ cd dev-local
+$ echo scikit-learn > django_app/requirements-local.txt
+$ docker-compose up
+```
+
+Subsequent modifications to `requirements-local.txt` will not be reflected in
+the Django application container automatically. To rebuild that container,
+either run `docker-compose build` or remove the existing `dev-local_django`
+image.
