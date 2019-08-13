@@ -3,22 +3,21 @@ import * as Constants from '../commons/constants';
 //define DEFAULT state, so it is never "undefined".
 const DEFAULT_STATE = {
     type: '',
-    status:'',
+    status: '',
     response: {},
     count: 0,
-    page:0,
+    page: 0,
     next: "",
     previous: "",
     error: null,
 };
 
 /***
- * fill in state object for studies
+ * fill in state object for experiments
  */
-export default function studyResponseReducer(state = DEFAULT_STATE, action){
-    switch(action.type) {
-        case Constants.GLOBAL_FETCH_ACTION:
-            console.log(state.page);
+export default function experimentsReducer(state = DEFAULT_STATE, action) {
+    switch (action.type) {
+        case Constants.GET_EXPERIMENTS:
             return {
                 ...state,
                 response: action.response,
@@ -30,7 +29,7 @@ export default function studyResponseReducer(state = DEFAULT_STATE, action){
                 next: action.next,
                 previous: action.previous,
             };
-        default :
+        default:
             return state;
     }
 };

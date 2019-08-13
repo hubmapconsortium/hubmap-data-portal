@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from django.core.management.utils import get_random_secret_key
+
 print('Loading production settings')
 
 SECRET_PATH = Path('/opt/secret')
@@ -15,6 +17,8 @@ ALLOWED_HOSTS = [
     'data.test.hubmapconsortium.org',
     'demo1.hubmapconsortium.org',
 ]
+
+FRONTEND_URL = '/'
 
 DATABASES = {
     'default': {

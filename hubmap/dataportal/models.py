@@ -88,6 +88,7 @@ class Study(models.Model):
     def get_class_name(self):
         return self.subclass.name
 
+
 # class Sample(models.Model):
 #     study = models.ForeignKey(Study, on_delete=models.CASCADE)
 #     name = models.CharField(max_length=150, default='default')
@@ -150,7 +151,6 @@ class ImagingStudy(Study):
 
 @study_type
 class MassCytometryStudy(ImagingStudy):
-
     class Meta:
         verbose_name = 'Mass Cytometry'
 

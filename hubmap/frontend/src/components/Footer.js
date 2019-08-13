@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
 		left: 0,
 		bottom: 0,
 		width: "100%",
-		height: 40,
+		height: 80,
 		backgroundColor: grey[300],
 		color: grey[800],
 	}
@@ -22,7 +22,7 @@ function Footer() {
 		<div className={classes.footer}>
 			<footer >
 				<span style={{ display: "inline-block" }}>
-					<h5>&#169; Human BioMolecular Atlas Program. Supported by the NIH Common Fund | { GitVersion }</h5>
+					<h5>&#169; Human BioMolecular Atlas Program. Supported by the NIH Common Fund | {GitVersion}</h5>
 				</span>
 			</footer>
 		</div>

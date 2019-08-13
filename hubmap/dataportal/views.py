@@ -2,16 +2,24 @@ import matplotlib.cm
 import numpy as np
 import pandas as pd
 import xarray as xr
-from rest_framework import generics, status, views
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import AnonymousUser, Group
+from django.utils.decorators import method_decorator
+from rest_framework import generics, permissions, status, versioning, views
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 
 from .models import DataType, Institution, Study, Tissue
 from .serializers import (
     GeneSerializer,
+    GroupSerializer,
+    LoggedInUserSerializer,
     StudyListSerializer,
     StudySerializer,
     TissueColorSerializer,
+    User,
+    UserSerializer,
 )
 from .utils import get_genes, get_response_for_request, get_serializer_class
 
@@ -26,6 +34,8 @@ class PaginationClass(PageNumberPagination):
 
 class StudyListView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
@@ -52,6 +62,7 @@ class StudyListView(generics.GenericAPIView):
         return self.get_paginated_response(serializer.data)
 
     # TODO : define what fields are modifiable and what can be created
+    @method_decorator(login_required)
     def post(self, request, format=None):
         serializer = StudySerializer(data=request.data)
         if serializer.is_valid():
@@ -63,6 +74,8 @@ class StudyListView(generics.GenericAPIView):
 class StudyListPageView(generics.GenericAPIView):
     serializer_class = StudyListSerializer
     pagination_class = PaginationClass
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
@@ -73,6 +86,8 @@ class StudyListPageView(generics.GenericAPIView):
 
 class GeneListView(generics.GenericAPIView):
     serializer_class = GeneSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_genes(self, request)
@@ -81,6 +96,8 @@ class GeneListView(generics.GenericAPIView):
 
 class GlobalSearch(generics.ListAPIView):
     serializer_class = StudyListSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get(self, request, format=None):
         response = get_response_for_request(self, request, format)
@@ -89,8 +106,16 @@ class GlobalSearch(generics.ListAPIView):
 
 class StudyDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Study.objects.all()
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
 
     def get_serializer_class(self):
+        """
+        :return: If given a study PK, return a serializer class for that Study
+          subclass. Otherwise return the base Study serializer.
+        """
+        if self.lookup_field not in self.kwargs:
+            return StudySerializer
         return get_serializer_class(self.get_object())
 
     def retrieve(self, request, *args, **kwargs):
@@ -193,3 +218,37 @@ def serialize_multi_dim_counts(data: xr.DataArray):
         pass
 
     return list_for_frontend
+
+
+class GlobusUserAuth(generics.GenericAPIView):
+    serializer_class = UserSerializer
+    parser_classes = [JSONParser]
+    versioning_class = versioning.QueryParameterVersioning
+    queryset = User.objects.all()
+
+    def get(self, request, format=None):
+        if not hasattr(request, 'user'):
+            request.user = AnonymousUser
+        if request.user.is_authenticated:
+            response = LoggedInUserSerializer(request.user).data
+        return Response(response)
+
+
+# Create the API views
+class UserList(generics.ListCreateAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetails(generics.RetrieveAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class GroupList(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    required_scopes = ['groups']
+    queryset = Group.objects.all()
+    serializer_class = GroupSerializer

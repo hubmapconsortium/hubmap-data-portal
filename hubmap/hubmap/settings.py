@@ -27,6 +27,9 @@ DATABASES = {
     },
 }
 
+# Location of the React app. Overriden to '/' for production
+FRONTEND_URL = 'http://localhost:3000/'
+
 # /!!! for development, overridden in `production_settings.py` by Docker container build
 
 # Application definition
@@ -43,9 +46,14 @@ INSTALLED_APPS = [
     'dataportal',
     'frontend',
     'django_filters',
+    'rest_framework.authtoken',
+    'social_django',
+    'oauth2_provider',
+    'rest_framework_social_oauth2',
 ]
 
 MIDDLEWARE = [
+    'django.middleware.gzip.GZipMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -54,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -62,10 +71,26 @@ CORS_ORIGIN_WHITELIST = [
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.NamespaceVersioning',
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.AllowAny',),
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework_social_oauth2.authentication.SocialAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
 }
 
 ROOT_URLCONF = 'hubmap.urls'
+REACT_APP_DIR = BASE_DIR / 'frontend'
+AUTH_URL_PREFIX = 'auth'
+DEFAULT_SOCIAL_AUTH_PROVIDER = 'globus'
+LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'
+LOGIN_REDIRECT_URL = '/loggedin/'
 
+OPENAPI_TITLE = 'HuBMAP UI-backend API'
+OPENAPI_DESCRIPTION = 'A Web API for viewing HuBMAP Consortium experiments data.'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -76,11 +101,28 @@ TEMPLATES = [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
+# Authentication, including Globus SSO
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.globus.GlobusOpenIdConnect',
+    'django.contrib.auth.backends.ModelBackend',
+    'rest_framework_social_oauth2.backends.DjangoOAuth2',
+]
+
+# for test globus app configuration, change in the future
+SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
+SOCIAL_AUTH_GLOBUS_SECRET = 'gEfGGE09nMMjwZxWafL+2/M3UqcGl9czSL72H+O1xuU='
+SOCIAL_AUTH_GLOBUS_AUTH_EXTRA_ARGUMENTS = {
+    'access_type': 'offline',
+}
+SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
 WSGI_APPLICATION = 'hubmap.wsgi.application'
 
@@ -169,6 +211,9 @@ try:
     from .local_settings import *  # noqa F401 ("imported but unused")
 except ImportError:
     pass
-# This must be run after loading local_settings
+# Sometimes we do need to define settings in terms of other settings, so
+# this is a good place to do so, after override settings are loaded.
+# Shouldn't define any constants after this though
 CORS_ORIGIN_WHITELIST.extend(f'https://{host}' for host in ALLOWED_HOSTS)
+LOGOUT_REDIRECT_URL = FRONTEND_URL
 # Do not add anything after this

@@ -1,8 +1,8 @@
 import './App.css';
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import RootContainer from './components/RootContainer';
-import { getTissueColorsFromServer, fetchAllStudies, getGeneTissueColors } from './middleware/actions';
-import {connect} from 'react-redux';
+import { getTissueColorsFromServer, getAllExperiments, getGeneTissueColors } from './middleware/actions';
+import { connect } from 'react-redux';
 
 //import '@google/model-viewer' ;
 //npm run setup -- --spaceId eo4e2dc0pbyt --deliveryToken H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8 --managementToken CFPAT-nXzmTIQFv4Om1KFSnqn0fS3X7_3YLXDacst4IC52_1M
@@ -12,21 +12,21 @@ import {connect} from 'react-redux';
 
 
 class App extends PureComponent {
-    
+
     componentDidMount() {
-        this.props.dispatch(fetchAllStudies());
+        this.props.dispatch(getAllExperiments());
         this.props.dispatch(getTissueColorsFromServer());
         this.props.dispatch(getGeneTissueColors());
     }
 
     render() {
-		return (
+        return (
             <div className="App">
 
                 <RootContainer />
-			</div>
+            </div>
 
-		);
-	}
+        );
+    }
 }
-export default connect() (App);
+export default connect()(App);
