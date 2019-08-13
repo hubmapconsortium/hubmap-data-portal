@@ -26,7 +26,7 @@ DATABASES = {
         'PASSWORD': 'SFz0C96otU0i6Cgy3BP3tE7n5SEgt2Dj',
         'HOST': 'postgres',
         'PORT': '',
-    }
+    },
 }
 
 CSRF_COOKIE_SECURE = True

@@ -24,7 +24,7 @@ DATABASES = {
         'PASSWORD': 'dev_password',
         'HOST': 'postgres',
         'PORT': '',
-    }
+    },
 }
 
 # Location of the React app. Overriden to '/' for production

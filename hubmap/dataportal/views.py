@@ -19,7 +19,7 @@ from .serializers import (
     StudySerializer,
     TissueColorSerializer,
     User,
-    UserSerializer
+    UserSerializer,
 )
 from .utils import get_genes, get_response_for_request, get_serializer_class
 
@@ -43,9 +43,14 @@ class StudyListView(generics.GenericAPIView):
             compute_multi_dim_counts(self.queryset, "cell_count"))
         image_count_summary = serialize_multi_dim_counts(
             compute_multi_dim_counts(self.queryset, "image_count"))
-        response.append({"summary": [
-            {"cell_count": cell_count_summary}, {"image_count": image_count_summary}
-        ]})
+        response.append(
+            {
+                "summary": [
+                    {"cell_count": cell_count_summary},
+                    {"image_count": image_count_summary},
+                ],
+            },
+        )
         return Response(response)
 
     def list(self, request):
@@ -146,9 +151,7 @@ class Tissue_svg_colors(views.APIView):
         ]
         print(values)
         results = TissueColorSerializer(values, many=True).data
-        return Response(
-            results
-        )
+        return Response(results)
 
 
 # Each label (element 0 in tuples) has multiple meanings/functions.
@@ -207,7 +210,7 @@ def serialize_multi_dim_counts(data: xr.DataArray):
         for tissue in df.index.levels[0]:
             list_for_frontend.append([
                 tissue,
-                (df.loc[tissue, :].iloc[:, 0]).values.tolist()
+                (df.loc[tissue, :].iloc[:, 0]).values.tolist(),
             ])
     except ValueError:
         # `data.stack` throws a ValueError if `data` is empty.
