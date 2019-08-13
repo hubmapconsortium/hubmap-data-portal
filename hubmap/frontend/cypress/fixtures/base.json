@@ -1,0 +1,912 @@
+[
+  {
+    "id": 1,
+    "subclass": {
+      "id": 23,
+      "app_label": "dataportal",
+      "model": "masscytometrystudy"
+    },
+    "institution": {
+      "id": 1,
+      "name": "Florida"
+    },
+    "data_type": {
+      "id": 4,
+      "name": "Imaging Mass Spec."
+    },
+    "tissue": {
+      "id": 17,
+      "name": "Breast"
+    },
+    "creation_time": "2019-06-19T18:17:05.418000Z",
+    "proteins": [],
+    "preview_image": null
+  },
+  {
+    "id": 2,
+    "subclass": {
+      "id": 23,
+      "app_label": "dataportal",
+      "model": "masscytometrystudy"
+    },
+    "institution": {
+      "id": 2,
+      "name": "Vanderbilt"
+    },
+    "data_type": {
+      "id": 5,
+      "name": "Microscopy"
+    },
+    "tissue": {
+      "id": 6,
+      "name": "Kidney"
+    },
+    "creation_time": "2019-06-19T18:17:27.245000Z",
+    "proteins": [],
+    "preview_image": null
+  },
+  {
+    "id": 3,
+    "subclass": {
+      "id": 18,
+      "app_label": "dataportal",
+      "model": "microscopystudy"
+    },
+    "institution": {
+      "id": 3,
+      "name": "Stanford"
+    },
+    "data_type": {
+      "id": 6,
+      "name": "CODEX"
+    },
+    "tissue": {
+      "id": 18,
+      "name": "Small Bowel"
+    },
+    "creation_time": "2019-06-19T18:17:51.184000Z",
+    "image_count": 6,
+    "preview_image": null
+  },
+  {
+    "id": 4,
+    "subclass": {
+      "id": 18,
+      "app_label": "dataportal",
+      "model": "microscopystudy"
+    },
+    "institution": {
+      "id": 4,
+      "name": "Caltech"
+    },
+    "data_type": {
+      "id": 8,
+      "name": "seqFISH"
+    },
+    "tissue": {
+      "id": 7,
+      "name": "Liver"
+    },
+    "creation_time": "2019-06-19T18:18:07.568000Z",
+    "image_count": 8,
+    "preview_image": null
+  },
+  {
+    "id": 5,
+    "subclass": {
+      "id": 13,
+      "app_label": "dataportal",
+      "model": "imagingstudy"
+    },
+    "institution": {
+      "id": 2,
+      "name": "Vanderbilt"
+    },
+    "data_type": {
+      "id": 4,
+      "name": "Imaging Mass Spec."
+    },
+    "tissue": {
+      "id": 10,
+      "name": "Spleen"
+    },
+    "creation_time": "2019-06-19T18:18:59.121000Z",
+    "read_count_total": 18,
+    "cell_count": 23
+  },
+  {
+    "id": 6,
+    "subclass": {
+      "id": 13,
+      "app_label": "dataportal",
+      "model": "imagingstudy"
+    },
+    "institution": {
+      "id": 3,
+      "name": "Stanford"
+    },
+    "data_type": {
+      "id": 2,
+      "name": "sc-rnaseq"
+    },
+    "tissue": {
+      "id": 5,
+      "name": "Colon"
+    },
+    "creation_time": "2019-06-19T18:19:29.921000Z",
+    "read_count_total": 11,
+    "cell_count": 17
+  },
+  {
+    "id": 7,
+    "subclass": {
+      "id": 22,
+      "app_label": "dataportal",
+      "model": "scrnaseqstudybarcoded"
+    },
+    "institution": {
+      "id": 2,
+      "name": "Vanderbilt"
+    },
+    "data_type": {
+      "id": 1,
+      "name": "sc-proteomics"
+    },
+    "tissue": {
+      "id": 7,
+      "name": "Liver"
+    },
+    "creation_time": "2019-06-19T18:20:44.941000Z",
+    "unique_barcode_count": 2,
+    "genes": [
+      {
+        "id": 5,
+        "hugo_symbol": "CD5L",
+        "entrez_id": "922",
+        "ensembl_id": "ENSG00000073754",
+        "tissue_expression_heatmap": {
+          "id": 10,
+          "kidney_color": "#470f62",
+          "lung_color": "#29788e",
+          "heart_color": "#45085b",
+          "pancreas_color": "#460b5e",
+          "abdomen_color": "#45085b",
+          "liver_color": "#440357",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#45085b",
+          "largeIntestine_color": "#440357",
+          "spleen_color": "#fde724"
+        }
+      },
+      {
+        "id": 8,
+        "hugo_symbol": "LRRC10",
+        "entrez_id": "376132",
+        "ensembl_id": "ENSG00000198812",
+        "tissue_expression_heatmap": {
+          "id": 14,
+          "kidney_color": "#471265",
+          "lung_color": "#20908c",
+          "heart_color": "#440255",
+          "pancreas_color": "#482374",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      }
+    ],
+    "read_count_total": 4,
+    "cell_count": 18
+  },
+  {
+    "id": 8,
+    "subclass": {
+      "id": 22,
+      "app_label": "dataportal",
+      "model": "scrnaseqstudybarcoded"
+    },
+    "institution": {
+      "id": 3,
+      "name": "Stanford"
+    },
+    "data_type": {
+      "id": 2,
+      "name": "sc-rnaseq"
+    },
+    "tissue": {
+      "id": 8,
+      "name": "Lung"
+    },
+    "creation_time": "2019-06-19T18:21:08.987000Z",
+    "unique_barcode_count": 4,
+    "genes": [
+      {
+        "id": 5,
+        "hugo_symbol": "CD5L",
+        "entrez_id": "922",
+        "ensembl_id": "ENSG00000073754",
+        "tissue_expression_heatmap": {
+          "id": 10,
+          "kidney_color": "#470f62",
+          "lung_color": "#29788e",
+          "heart_color": "#45085b",
+          "pancreas_color": "#460b5e",
+          "abdomen_color": "#45085b",
+          "liver_color": "#440357",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#45085b",
+          "largeIntestine_color": "#440357",
+          "spleen_color": "#fde724"
+        }
+      },
+      {
+        "id": 6,
+        "hugo_symbol": "OR5AK2",
+        "entrez_id": "390181",
+        "ensembl_id": "ENSG00000181273",
+        "tissue_expression_heatmap": {
+          "id": 12,
+          "kidney_color": "#471265",
+          "lung_color": "#22a784",
+          "heart_color": "#440154",
+          "pancreas_color": "#482374",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#22a784"
+        }
+      }
+    ],
+    "read_count_total": 8,
+    "cell_count": 13
+  },
+  {
+    "id": 9,
+    "subclass": {
+      "id": 19,
+      "app_label": "dataportal",
+      "model": "scrnaseqstudycdna"
+    },
+    "institution": {
+      "id": 2,
+      "name": "Vanderbilt"
+    },
+    "data_type": {
+      "id": 3,
+      "name": "sc-rnaseq-cdna"
+    },
+    "tissue": {
+      "id": 8,
+      "name": "Lung"
+    },
+    "creation_time": "2019-06-19T18:21:38.030000Z",
+    "read_count_aligned": 6,
+    "read_count_total": 11,
+    "cell_count": 13
+  },
+  {
+    "id": 11,
+    "subclass": {
+      "id": 20,
+      "app_label": "dataportal",
+      "model": "seqfishimagingstudy"
+    },
+    "institution": {
+      "id": 5,
+      "name": "UCSD"
+    },
+    "data_type": {
+      "id": 1,
+      "name": "sc-proteomics"
+    },
+    "tissue": {
+      "id": 8,
+      "name": "Lung"
+    },
+    "creation_time": "2019-06-19T18:25:53.411000Z",
+    "image_count": 13,
+    "preview_image": null
+  },
+  {
+    "id": 13,
+    "subclass": {
+      "id": 21,
+      "app_label": "dataportal",
+      "model": "spatialtranscriptomicstudy"
+    },
+    "institution": {
+      "id": 2,
+      "name": "Vanderbilt"
+    },
+    "data_type": {
+      "id": 1,
+      "name": "sc-proteomics"
+    },
+    "tissue": {
+      "id": 6,
+      "name": "Kidney"
+    },
+    "creation_time": "2019-06-19T18:26:43.214000Z",
+    "genes": [
+      {
+        "id": 9,
+        "hugo_symbol": "LRRN4",
+        "entrez_id": null,
+        "ensembl_id": null,
+        "tissue_expression_heatmap": {
+          "id": 15,
+          "kidney_color": "#29788e",
+          "lung_color": "#440255",
+          "heart_color": "#404387",
+          "pancreas_color": "#345e8d",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "subclass": {
+      "id": 21,
+      "app_label": "dataportal",
+      "model": "spatialtranscriptomicstudy"
+    },
+    "institution": {
+      "id": 4,
+      "name": "Caltech"
+    },
+    "data_type": {
+      "id": 1,
+      "name": "sc-proteomics"
+    },
+    "tissue": {
+      "id": 10,
+      "name": "Spleen"
+    },
+    "creation_time": "2019-06-19T18:27:09.042000Z",
+    "genes": [
+      {
+        "id": 6,
+        "hugo_symbol": "OR5AK2",
+        "entrez_id": "390181",
+        "ensembl_id": "ENSG00000181273",
+        "tissue_expression_heatmap": {
+          "id": 12,
+          "kidney_color": "#471265",
+          "lung_color": "#22a784",
+          "heart_color": "#440154",
+          "pancreas_color": "#482374",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#22a784"
+        }
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "subclass": {
+      "id": 21,
+      "app_label": "dataportal",
+      "model": "spatialtranscriptomicstudy"
+    },
+    "institution": {
+      "id": 3,
+      "name": "Stanford"
+    },
+    "data_type": {
+      "id": 1,
+      "name": "sc-proteomics"
+    },
+    "tissue": {
+      "id": 8,
+      "name": "Lung"
+    },
+    "creation_time": "2019-06-20T20:47:44.764000Z",
+    "genes": [
+      {
+        "id": 5,
+        "hugo_symbol": "CD5L",
+        "entrez_id": "922",
+        "ensembl_id": "ENSG00000073754",
+        "tissue_expression_heatmap": {
+          "id": 10,
+          "kidney_color": "#470f62",
+          "lung_color": "#29788e",
+          "heart_color": "#45085b",
+          "pancreas_color": "#460b5e",
+          "abdomen_color": "#45085b",
+          "liver_color": "#440357",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#45085b",
+          "largeIntestine_color": "#440357",
+          "spleen_color": "#fde724"
+        }
+      },
+      {
+        "id": 6,
+        "hugo_symbol": "OR5AK2",
+        "entrez_id": "390181",
+        "ensembl_id": "ENSG00000181273",
+        "tissue_expression_heatmap": {
+          "id": 12,
+          "kidney_color": "#471265",
+          "lung_color": "#22a784",
+          "heart_color": "#440154",
+          "pancreas_color": "#482374",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#22a784"
+        }
+      },
+      {
+        "id": 8,
+        "hugo_symbol": "LRRC10",
+        "entrez_id": "376132",
+        "ensembl_id": "ENSG00000198812",
+        "tissue_expression_heatmap": {
+          "id": 14,
+          "kidney_color": "#471265",
+          "lung_color": "#20908c",
+          "heart_color": "#440255",
+          "pancreas_color": "#482374",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      },
+      {
+        "id": 9,
+        "hugo_symbol": "LRRN4",
+        "entrez_id": null,
+        "ensembl_id": null,
+        "tissue_expression_heatmap": {
+          "id": 15,
+          "kidney_color": "#29788e",
+          "lung_color": "#440255",
+          "heart_color": "#404387",
+          "pancreas_color": "#345e8d",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "subclass": {
+      "id": 21,
+      "app_label": "dataportal",
+      "model": "spatialtranscriptomicstudy"
+    },
+    "institution": {
+      "id": 4,
+      "name": "Caltech"
+    },
+    "data_type": {
+      "id": 1,
+      "name": "sc-proteomics"
+    },
+    "tissue": {
+      "id": 9,
+      "name": "Pancreas"
+    },
+    "creation_time": "2019-06-21T19:56:27.715000Z",
+    "genes": [
+      {
+        "id": 9,
+        "hugo_symbol": "LRRN4",
+        "entrez_id": null,
+        "ensembl_id": null,
+        "tissue_expression_heatmap": {
+          "id": 15,
+          "kidney_color": "#29788e",
+          "lung_color": "#440255",
+          "heart_color": "#404387",
+          "pancreas_color": "#345e8d",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "subclass": {
+      "id": 21,
+      "app_label": "dataportal",
+      "model": "spatialtranscriptomicstudy"
+    },
+    "institution": {
+      "id": 3,
+      "name": "Stanford"
+    },
+    "data_type": {
+      "id": 1,
+      "name": "sc-proteomics"
+    },
+    "tissue": {
+      "id": 16,
+      "name": "Heart"
+    },
+    "creation_time": "2019-06-21T19:56:59.605000Z",
+    "genes": [
+      {
+        "id": 7,
+        "hugo_symbol": "NPPA",
+        "entrez_id": "4878",
+        "ensembl_id": "ENSG00000175206",
+        "tissue_expression_heatmap": {
+          "id": 13,
+          "kidney_color": "#471265",
+          "lung_color": "#481d6f",
+          "heart_color": "#440255",
+          "pancreas_color": "#482374",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      },
+      {
+        "id": 8,
+        "hugo_symbol": "LRRC10",
+        "entrez_id": "376132",
+        "ensembl_id": "ENSG00000198812",
+        "tissue_expression_heatmap": {
+          "id": 14,
+          "kidney_color": "#471265",
+          "lung_color": "#20908c",
+          "heart_color": "#440255",
+          "pancreas_color": "#482374",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      },
+      {
+        "id": 9,
+        "hugo_symbol": "LRRN4",
+        "entrez_id": null,
+        "ensembl_id": null,
+        "tissue_expression_heatmap": {
+          "id": 15,
+          "kidney_color": "#29788e",
+          "lung_color": "#440255",
+          "heart_color": "#404387",
+          "pancreas_color": "#345e8d",
+          "abdomen_color": "#45085b",
+          "liver_color": "#482374",
+          "smallIntestine_color": "#440154",
+          "bladder_color": "#48196b",
+          "largeIntestine_color": "#482374",
+          "spleen_color": "#45085b"
+        }
+      }
+    ]
+  },
+  {
+    "summary": [
+      {
+        "cell_count": [
+          [
+            "Tissue",
+            [
+              "Caltech",
+              "Florida",
+              "Stanford",
+              "UCSD",
+              "Vanderbilt"
+            ]
+          ],
+          [
+            "Abdomen",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Bladder",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Breast",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Colon",
+            [
+              0,
+              0,
+              17,
+              0,
+              0
+            ]
+          ],
+          [
+            "Heart",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Kidney",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "LargeIntestine",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Liver",
+            [
+              0,
+              0,
+              0,
+              0,
+              18
+            ]
+          ],
+          [
+            "Lung",
+            [
+              0,
+              0,
+              13,
+              0,
+              13
+            ]
+          ],
+          [
+            "Pancreas",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Small Bowel",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "SmallIntestine",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Spleen",
+            [
+              0,
+              0,
+              0,
+              0,
+              23
+            ]
+          ]
+        ]
+      },
+      {
+        "image_count": [
+          [
+            "Tissue",
+            [
+              "Caltech",
+              "Florida",
+              "Stanford",
+              "UCSD",
+              "Vanderbilt"
+            ]
+          ],
+          [
+            "Abdomen",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Bladder",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Breast",
+            [
+              0,
+              22,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Colon",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Heart",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Kidney",
+            [
+              0,
+              0,
+              0,
+              0,
+              12
+            ]
+          ],
+          [
+            "LargeIntestine",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Liver",
+            [
+              8,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Lung",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Pancreas",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Small Bowel",
+            [
+              0,
+              0,
+              6,
+              0,
+              0
+            ]
+          ],
+          [
+            "SmallIntestine",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ],
+          [
+            "Spleen",
+            [
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          ]
+        ]
+      }
+    ]
+  }
+]

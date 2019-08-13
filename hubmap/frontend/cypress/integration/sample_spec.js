@@ -2,6 +2,9 @@
 // TODO: Configure eslint to recognize cy as a global.
 describe('HuBMAP', function() {
   it('Has a homepage', function() {
+    cy.server();
+    cy.route('http://localhost:8000/api/?format=json', 'fixture:base.json'); 
+
     cy.visit('http://localhost:3000');
 
     // Header:
