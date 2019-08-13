@@ -1,14 +1,13 @@
 import matplotlib.cm
 import numpy as np
 import pandas as pd
-from django.core.exceptions import PermissionDenied
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.views import auth_logout
-from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import PermissionDenied
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from django.template import engines
-from django.views.generic import TemplateView, View
+from django.views.generic import View
 
 
 def rgba_float_to_rgb_hex(floats):
