@@ -34,6 +34,7 @@ RUN python3 -m compileall .
 RUN python3 -O -m compileall .
 
 VOLUME /opt/hubmap-data-portal/static
+VOLUME /opt/secret
 
 EXPOSE 5000
 
