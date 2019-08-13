@@ -9,7 +9,7 @@ RUN npm run build
 FROM hubmap/data-portal-python-base:latest
 
 RUN apt-get update
-RUN apt-get -y install uwsgi uwsgi-plugin-python3 python3 python3-six python3-idna libpq5
+RUN apt-get -y install uwsgi uwsgi-plugin-python3
 RUN rm -rf /var/cache/apt/*
 
 COPY uwsgi/dataportal.xml /opt/dataportal.xml
@@ -34,7 +34,6 @@ RUN python3 -m compileall .
 RUN python3 -O -m compileall .
 
 VOLUME /opt/hubmap-data-portal/static
-VOLUME /opt/secret
 
 EXPOSE 5000
 
