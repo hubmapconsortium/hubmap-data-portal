@@ -1,14 +1,15 @@
 /* eslint no-undef: 0 */
 // TODO: Configure eslint to recognize "cy" as a global.
-describe('HuBMAP', function() {
-  beforeAll(() => {
+describe('HuBMAP', () => {
+  before(() => {
     cy.server();
     cy.route('http://localhost:8000/api/?format=json', 'fixture:base.json');
     cy.route('http://localhost:8000/api/colors/?format=json', 'fixture:colors.json');
     cy.route('http://localhost:8000/api/genes/?format=json', 'fixture:genes.json');
   });
-  it('Has a homepage', function() {
-    cy.visit('http://localhost:3000');
+
+  it('Has a homepage', () => {
+    cy.visit('/');
 
     // Header:
     cy.contains('Browse');
