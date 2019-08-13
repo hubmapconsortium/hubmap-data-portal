@@ -15,3 +15,4 @@ export const GET_EXPERIMENTS_PAGINATED_REST_API = 'api/experiments/?format=json&
 export const SEARCH_EXPERIMENTS_REST_API = 'api/search/?format=json&search=';
 export const GET_TISSUE_COLORS_API = 'api/colors/?format=json';
 export const GET_GENE_TISSUE_COLOR_API = 'api/genes/?format=json'
+

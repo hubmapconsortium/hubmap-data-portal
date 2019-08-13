@@ -53,8 +53,8 @@ class HomeComponent extends React.Component {
       <Grid container className={useStyles.root} spacing={8} margin-top="20px">
         <Grid item style={{ height: 30 }}>
         </Grid>
-        <Grid item style={{ height: '300px', width: '5px', marginTop: '120px', marginLeft: '-50px' }}>
-          <img id="tab10ColorMap" src={viridis} style={{ transform: 'scale(0.6)', WebkitTransform: 'scale(0.6)', display: 'none' }} alt="Color Map" />
+        <Grid item style={{ height: '300px', width: '10px', marginTop: '120px', marginLeft: '-150px' }}>
+          <img id="tab10ColorMap" src={viridis} style={{ transform: 'scale(0.6)', WebkitTransform: 'scale(0.6)', display: 'none', marginLeft:'-150px' }} alt="Color Map" />
         </Grid>
         <Grid item style={{ height: '700px', width: '320px', marginTop: '120px', marginLeft: '-150px' }} >
           <HumanSvg experiments={''} />
@@ -65,7 +65,7 @@ class HomeComponent extends React.Component {
         <Grid item style={{ height: '420px', width: '450px', marginTop: '180px', marginLeft: '30px' }}>
           <ImageCountByTissuesChart />
         </Grid>
-        <Grid item style={{ height: '450px', width: '900px', marginTop: '-250px', marginLeft: '370px' }}>
+        <Grid item style={{ height: '450px', width: '900px', marginTop: '-250px', marginLeft: '290px' }}>
           <MaterialTableDemo />
         </Grid>
         <Grid item style={{ height: '700px', width: '1200px', marginTop: '250px', marginLeft: '0px' }}>

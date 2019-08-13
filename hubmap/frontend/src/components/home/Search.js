@@ -141,7 +141,7 @@ class SearchBox extends React.Component {
                                         }
                                         return arr;
                                     }, []);
-
+                                    console.log(tissues);
                                     let heatmap = results.reduce((arr, h) => {
                                         if (h.hugo_symbol !== undefined) {
                                             var colors = JSON.stringify(h.tissue_expression_heatmap);
@@ -159,7 +159,7 @@ class SearchBox extends React.Component {
                                         }
                                         return arr;
                                     }, []);
-
+                                    console.log(heatmap);
                                     for (var i = 0; i < heatmap.length; i++) {
                                         var tissueColorMap = heatmap[i].split(':');
                                         if (new Set(tissues).has(tissueColorMap[0])) {
@@ -171,14 +171,17 @@ class SearchBox extends React.Component {
                                             tissue.addEventListener("animationend", animationEnd);
                                             tissue.style.setProperty("animation", tissueColorMap[0] + 'tissueAnimation' + " 10s linear");
                                             tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
-                                            var imgelement = document.getElementById("tab10ColorMap");
-                                            imgelement.style.setProperty("display", "block")
+                                            console.log(tissue);
+
                                         }
                                         else {
                                             var tissue1 = document.getElementById(tissueColorMap[0]);
                                             tissue1.style.setProperty("fill", `${tissueColorMap[1]}`);
                                             //tissue.style.setProperty("opacity", "0.2");
                                         }
+                                        var imgelement = document.getElementById("tab10ColorMap");
+                                        console.log(imgelement);
+                                        imgelement.style.setProperty("display", "block")
                                     }
                                 });
                             ev.preventDefault();

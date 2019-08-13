@@ -80,7 +80,7 @@ REST_FRAMEWORK = {
 }
 
 ROOT_URLCONF = 'hubmap.urls'
-
+REACT_APP_DIR = Path(Path(__file__).absolute().parent.parent, 'frontend')
 AUTH_URL_PREFIX = 'auth'
 DEFAULT_SOCIAL_AUTH_PROVIDER = 'globus'
 LOGIN_URL = f'/{AUTH_URL_PREFIX}/login/{DEFAULT_SOCIAL_AUTH_PROVIDER}/'

@@ -1,6 +1,7 @@
 
 import axios from 'axios';
 import * as Constants from '../commons/constants';
+import API_URL from '../commons/apiAdapter';
 
 export const in_progress = () => ({type: Constants.IN_PROGRESS});
 /**
@@ -61,7 +62,7 @@ export function getAllExperiments()
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(Constants.GET_EXPERIMENTS_REST_API );
+            let response = await axios.get(API_URL+Constants.GET_EXPERIMENTS_REST_API );
             const count = response.data.length;
             let results = {
                 status: Constants.SUCCESS,
@@ -89,7 +90,7 @@ export function getExperimentsFirstPage(page)
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(Constants.GET_EXPERIMENTS_PAGINATED_REST_API+page);
+            let response = await axios.get(API_URL+Constants.GET_EXPERIMENTS_PAGINATED_REST_API+page);
             return dispatch(get_experiments(response.data));
         }
         catch (error) {
@@ -106,7 +107,7 @@ export function getNextPageFromExperiments(next)
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(next);
+            let response = await axios.get(API_URL+next);
             return dispatch(get_experiments(response.data));
         }
         catch (error) {
@@ -135,7 +136,7 @@ export function getTissueColorsFromServer()
     return async dispatch =>
     {
         dispatch(in_progress());
-        let response = await axios.get( Constants.GET_TISSUE_COLORS_API);
+        let response = await axios.get( API_URL+Constants.GET_TISSUE_COLORS_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
         console.log(response);
@@ -152,7 +153,7 @@ export function getGeneTissueColors()
     return async dispatch =>
     {
         dispatch(in_progress());
-        let response = await axios.get(Constants.GET_GENE_TISSUE_COLOR_API);
+        let response = await axios.get(API_URL+Constants.GET_GENE_TISSUE_COLOR_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
         console.log(response);
@@ -168,7 +169,7 @@ export function searchThis(searchTerm)
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get( Constants.SEARCH_EXPERIMENTS_REST_API+searchTerm);
+            let response = await axios.get(API_URL+ Constants.SEARCH_EXPERIMENTS_REST_API+searchTerm);
             return dispatch(search_experiments(response.data));
         }
         catch (error) {

@@ -149,8 +149,9 @@ class HumanAnatomyCard extends React.Component {
 			largeIntestine.setAttributeNS(null, "data-tooltip-text", "Large Intestine, No gene data available");
 			largeIntestine.addEventListener("click", function () {
 			});
+			console.log(largeIntestine.getAttribute("data-tooltip-text"));
 			kidney = document.getElementById('kidney');
-			//kidney.setAttributeNS(null, "data-tooltip-text", "Kidney, No gene data available");
+			kidney.setAttributeNS(null, "data-tooltip-text", "Kidney, No gene data available");
 			kidney.addEventListener("click", function () {
 			});
 			spleen = document.getElementById('spleen');

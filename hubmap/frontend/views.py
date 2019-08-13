@@ -1,10 +1,14 @@
+import logging
+from pathlib import Path
+
 import matplotlib.cm
 import numpy as np
 import pandas as pd
 from django.contrib.auth.models import AnonymousUser
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
-from django.views.generic import View
+from django.template import engines
+from django.views.generic import View, TemplateView
 
 from hubmap import settings
 
@@ -44,11 +48,16 @@ class FrontendAppView(View):
     Serves the compiled frontend entry point. Not intended to be reachable
     except in production
     """
+    index_file_path = Path(settings.REACT_APP_DIR, 'build', 'index.html')
 
     def get(self, request):
         # Might not exist.
-        return render(request, 'index.html')
-
+        # try:
+        #     with open(self.index_file_path) as f:
+        #         return  HttpResponse(f.read());
+        # except FileNotFoundError:
+        #     logging.exception('Production build for React App not found')
+            return render(request, 'index.html')
 
 def globus(request):
     uuid = None
@@ -76,3 +85,14 @@ def globus(request):
             'refresh_token': refresh_token,
         },
     )
+
+
+def catchall_dev(request, upstream=settings.FRONTEND_URL):
+    upstream_url = upstream + request.path
+    response = request.get(upstream_url)
+    content = engines['django'].from_string(response.text).render()
+    return HttpResponse(content)
+
+
+catchall_prod = TemplateView.as_view(template_name='index.html')
+#catchall = catchall_dev if settings.DEBUG else catchall_prod

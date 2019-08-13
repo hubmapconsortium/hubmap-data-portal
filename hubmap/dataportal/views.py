@@ -279,6 +279,16 @@ def logout(request):
     return response
 
 
+def login(request):
+    if request.user.is_authenticated:
+        auth_logout(request)
+    response = HttpResponseRedirect(settings.LOGOUT_REDIRECT_URL)
+    response.delete_cookie('first_name')
+    response.delete_cookie('last_name')
+    response.delete_cookie('email')
+    print('logout')
+    return response
+
 # Create the API views
 class UserList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticated]
