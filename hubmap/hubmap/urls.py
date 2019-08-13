@@ -21,17 +21,12 @@ from rest_framework.authtoken import views
 from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
 
-from dataportal import views as dataportal_views
-
 schema_view = get_schema_view(title=settings.OPENAPI_TITLE)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),
     path('', include('frontend.urls')),
-    path('logout/', dataportal_views.logout, name='logout'),
-    path('', include('django.contrib.auth.urls')),
-    path('loggedin/', dataportal_views.GlobusUserAuth.as_view(), name='loggedin'),
     path(f'{settings.AUTH_URL_PREFIX}/', include('rest_framework_social_oauth2.urls')),
     path('openapi/', schema_view, name='openapi-schema'),
     path('docs/', include_docs_urls(title=settings.OPENAPI_TITLE,
