@@ -10,12 +10,29 @@ This uses sample data and data types and creates basic models in Django
 (database, tables), provides a REST API via Django REST framework, and has
 a front-end interface written in ReactJS.
 
-## Setup
+## Development
 
 The application is packaged in Docker containers for production deployment,
 and we recommend running through Docker for local development also.
 
-### Local development with Docker
+### Quick start
+
+After cloning the repo and cd'ing into it:
+```bash
+cd docker/dev-common
+docker-compose pull # Only needed if you have old images.
+docker-compose up
+```
+When [http://localhost:3000/] is up, then in a new terminal:
+```
+run_migrations_in_container.py
+# TODO: Load sample data into DB
+```
+
+Revisit [http://localhost:3000/] and it should show the sample data.
+
+### Details
+
 Run `docker-compose up` in the `docker/dev-common` directory. This will
 download pre-built Docker containers for development, and start all services
 listed in `docker/dev-common/docker-compose.yml`. The local copy of this
