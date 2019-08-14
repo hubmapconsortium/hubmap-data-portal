@@ -120,14 +120,13 @@ class SearchBox extends React.Component {
                         // here it's using the "name" value set on the TextField
                         // to set state.person.[firstname|lastname]. event.target.name
                         //required for showing animation
-                        this.setState({ ...this.state, ['searchtext']: event.target.value });
+                        this.setState({ ...this.state, 'searchtext': event.target.value });
 
                     }}
                     onKeyPress={(ev) => {
                         if (ev.key === 'Enter') {
                             // Do code here
-                            //search for tissue+gene 
-                            var searchState = {};
+                            //search for tissue+gene
                             this.props.dispatch(searchThis(this.state.searchtext))
                                 .then(() => {
                                     this.searchState = store.getState().searchState;
@@ -169,7 +168,7 @@ class SearchBox extends React.Component {
                                     100% {fill: ${tissueColorMap[1]}; opacity: 1;}`);
                                             tissue.style.removeProperty("animation");
                                             tissue.addEventListener("animationend", animationEnd);
-                                            tissue.style.setProperty("animation", tissueColorMap[0] + 'tissueAnimation' + " 10s linear");
+                                            tissue.style.setProperty("animation", `${tissueColorMap[0]}tissueAnimation 10s linear`);
                                             tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
                                             console.log(tissue);
 
