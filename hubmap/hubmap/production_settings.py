@@ -1,14 +1,27 @@
+import json
 from pathlib import Path
-
-from django.core.management.utils import get_random_secret_key
 
 print('Loading production settings')
 
-# TODO: figure out how to store this securely while sharing containers;
-#   this doesn't scale when running this app across multiple containers
-SECRET_KEY = get_random_secret_key()
+SECRET_PATH = Path('/opt/secret')
 
 DEBUG = False
+
+# Static secret key is required
+with open(SECRET_PATH / 'django_secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
+
+SOCIAL_AUTH_GLOBUS_KEY = ''
+SOCIAL_AUTH_GLOBUS_SECRET = ''
+
+try:
+    with open(SECRET_PATH / 'globus.json') as f:
+        globus_secrets = json.load(f)
+        SOCIAL_AUTH_GLOBUS_KEY = globus_secrets['key']
+        SOCIAL_AUTH_GLOBUS_SECRET = globus_secrets['secret']
+except FileNotFoundError:
+    # TODO: decide how critical this should be, and log this instead of printing
+    print('No Globus secret data found')
 
 ALLOWED_HOSTS = [
     'data.dev.hubmapconsortium.org',
