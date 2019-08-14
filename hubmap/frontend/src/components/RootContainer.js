@@ -11,42 +11,11 @@ import ExperimentsComponent from '../pages/Experiments';
 import PipelinesComponent from '../pages/Pipelines';
 import HomePage from '../pages/HomePage';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  humanClass:
-  {
-    marginTop: "-30px",
-  },
-  humanPaper: {
-    flex: 1,
-    width: "320px",
-    height: "650px",
-    border: '0px solid #fafafa',
-    backgroundColor: grey[300],
-    color: grey[800],
-    marginTop: theme.spacing(1),
-    padding: theme.spacing(1, 1, 1, 1),
-  },
-  chartPaper: {
-    flex: 1,
-    width: "420px",
-    height: "650px",
-    border: '0px solid #fafafa',
-    backgroundColor: grey[300],
-    color: grey[800],
-    marginTop: theme.spacing(1),
-    padding: theme.spacing(1, 1, 1, 1),
-  },
-
-}));
-
 function RootContainer() {
   return (
     <BrowserRouter >
       <NavBar />
-      <Container xl="true" component="div" style={{ height: '1600px' }} >
+      <Container xl="true" component="div" className="gridContainer" style={{ height: '100%', flexGrow: 1 }} >
         <Route exact path="/dataanalysis" component={DataAnalysisComponent} />
         <Route exact path="/userfaqs" component={UserFAQsComponent} />
         <Route exact path="/experiments" component={ExperimentsComponent} />

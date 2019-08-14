@@ -14,30 +14,11 @@ import * as actions from '../middleware/actions';
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    backgroundColor: grey[300],
   },
   humanClass:
   {
     marginTop: "-30px",
-  },
-  humanPaper: {
-    flex: 1,
-    width: "320px",
-    height: "650px",
-    border: '0px solid #fafafa',
-    backgroundColor: grey[300],
-    color: grey[800],
-    marginTop: theme.spacing(1),
-    padding: theme.spacing(1, 1, 1, 1),
-  },
-  chartPaper: {
-    flex: 1,
-    width: "420px",
-    height: "650px",
-    border: '0px solid #fafafa',
-    backgroundColor: grey[300],
-    color: grey[800],
-    marginTop: theme.spacing(1),
-    padding: theme.spacing(1, 1, 1, 1),
   },
 
 }));
@@ -50,8 +31,8 @@ class HomeComponent extends React.Component {
   render() {
 
     return (
-      <Grid container className={useStyles.root} spacing={8} margin-top="20px">
-        <Grid item style={{ height: 30 }}>
+      <Grid container className={useStyles.root} spacing={8} margin-top="20px" height="100%">
+        <Grid item style={{ height: 30, flex:1 }}>
         </Grid>
         <Grid item style={{ height: '300px', width: '10px', marginTop: '120px', marginLeft: '-150px' }}>
           <img id="tab10ColorMap" src={viridis} style={{ transform: 'scale(0.6)', WebkitTransform: 'scale(0.6)', display: 'none', marginLeft:'-150px' }} alt="Color Map" />
