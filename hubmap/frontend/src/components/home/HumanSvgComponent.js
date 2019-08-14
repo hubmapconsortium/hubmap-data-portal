@@ -80,7 +80,7 @@ class HumanAnatomyCard extends React.Component {
 	}
 
 	render() {
-		const { response, error, status, type } = store.getState().colorsState;
+		const { response, error, type } = store.getState().colorsState;
 		this.currentState = store.getState().colorsState;
 		this.experimentState = store.getState().experimentState;
 		this.geneTissueColorState = store.getState().geneTissueColorState;
@@ -166,14 +166,14 @@ class HumanAnatomyCard extends React.Component {
 				//pathTriggers[i].addEventListener('mouseover', setHover);
 			}
 			if (this.genetissueArray != null) {
-				this.genetissueArray.map(genetissuepair => {
+				this.genetissueArray.forEach(genetissuepair => {
 					//index = this.genetissueArray.findIndex((e) => e.tissue === genetissuepair.tissue);
-					//if(index !== -1) 
+					//if(index !== -1)
 					/*{
 						console.log(datatooltip, index)
 						datatooltip = this.genetissueArray[index];
-					 } 
-					 else 
+					 }
+					 else
 					 {
 						 datatooltip = 'No data available';
 					}*/
