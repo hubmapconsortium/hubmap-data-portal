@@ -55,7 +55,7 @@
   },
   "devDependencies": {
     "cypress": "^3.4.1",
-    "wait-on": "^3.3.0"
+    "wait-on": "^3.3.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^2.18.2",
