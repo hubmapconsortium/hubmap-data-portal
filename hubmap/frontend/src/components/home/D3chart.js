@@ -1,66 +1,56 @@
 import React from "react";
 import * as d3 from "d3";
-import { connect } from 'react-redux';
-import { fetch_studies, in_progress } from '../../middleware/actions';
+import { get_experiments, in_progress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
-import  {CircularProgress, Typography } from '@material-ui/core';
+import { CircularProgress, Typography } from '@material-ui/core';
 
-const mapStateToProps = state => {
-    return {
-        status: state.studyState.status,
-        response: state.studyState.response,
-		error: state.studyState.error,
-		count: state.studyState.count,
-    }
-};
 class ImageCountStackedChart extends React.Component {
-        currentState = {};
-	previousState ={};
-    sample1 = [
-        {
-          image_count: [
-            ["Tissue", ["Caltech", "Florida", "Stanford", "UCSD", "Vanderbilt"]],
-            ["Abdomen", [6, 13, 22, 33, 0]],
-            ["Bladder", [0, 12, 0, 0, 0]],
-            ["Colon", [0, 12, 0, 30, 0]],
-            ["Heart", [0, 21, 19, 0, 0]],
-            ["Kidney", [0, 0, 15, 0, 12]],
-            ["LargeIntestine", [0, 27, 0, 0, 0]],
-            ["Liver", [8, 0, 19, 11, 0]],
-            ["Lungs", [0, 22, 0, 17, 0]],
-            ["Pancreas", [0, 0, 6, 0, 0]],
-            ["SmallIntestine", [0, 0, 0, 0, 0]],
-            ["Spleen", [0, 0, 0, 0, 0]]
-          ]
-        }
-      ]
-    data1 = this.sample1[0].image_count.reduce((arr, h) => {
-        if (h !== undefined) {
-          arr.push([h[0]].concat(h[1]));
-        }
-        return arr;
-      }, [])
-     data = this.data1.slice(1).map(function(da) {
-        return {
-          tissue: da[0],
-          Caltech: da[1],
-          Florida: da[2],
-          Stanford: da[3],
-          UCSD: da[4],
-          Vanderbilt: da[5]
-        };
-      })
-  componentDidMount() {
-    store.subscribe(() => this.currentState = store.getState().studyState);
-    if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
-    && this.currentState.studies !== {} && this.currentState.type === Constants.GLOBAL_FETCH_ACTION) {
-        console.log(this.currentState);
-        this.props.dispatch(fetch_studies(this.currentState));
-    }
-    else if(this.currentState.type === Constants.GLOBAL_FETCH_ACTION && this.currentState.status === Constants.IN_PROGRESS)
+  currentState = {};
+  previousState = {};
+  sample1 = [
     {
-        this.props.dispatch(in_progress());
+      image_count: [
+        ["Tissue", ["Caltech", "Florida", "Stanford", "UCSD", "Vanderbilt"]],
+        ["Abdomen", [6, 13, 22, 33, 0]],
+        ["Bladder", [0, 12, 0, 0, 0]],
+        ["Colon", [0, 12, 0, 30, 0]],
+        ["Heart", [0, 21, 19, 0, 0]],
+        ["Kidney", [0, 0, 15, 0, 12]],
+        ["LargeIntestine", [0, 27, 0, 0, 0]],
+        ["Liver", [8, 0, 19, 11, 0]],
+        ["Lungs", [0, 22, 0, 17, 0]],
+        ["Pancreas", [0, 0, 6, 0, 0]],
+        ["SmallIntestine", [0, 0, 0, 0, 0]],
+        ["Spleen", [0, 0, 0, 0, 0]]
+      ]
+    }
+  ]
+  data1 = this.sample1[0].image_count.reduce((arr, h) => {
+    if (h !== undefined) {
+      arr.push([h[0]].concat(h[1]));
+    }
+    return arr;
+  }, [])
+  data = this.data1.slice(1).map(function (da) {
+    return {
+      tissue: da[0],
+      Caltech: da[1],
+      Florida: da[2],
+      Stanford: da[3],
+      UCSD: da[4],
+      Vanderbilt: da[5]
+    };
+  })
+  componentDidMount() {
+    store.subscribe(() => this.currentState = store.getState().experimentState);
+    if (this.currentState !== "" && this.currentState.status !== Constants.IN_PROGRESS
+      && this.currentState.response !== {} 
+      && this.currentState.type === Constants.GET_EXPERIMENTS) {
+      this.props.dispatch(get_experiments(this.currentState));
+    }
+    else if (this.currentState.type === Constants.GET_EXPERIMENTS && this.currentState.status === Constants.IN_PROGRESS) {
+      this.props.dispatch(in_progress());
     }
     this.drawChart();
   }
@@ -86,8 +76,8 @@ class ImageCountStackedChart extends React.Component {
     const series = d3
       .stack()
       .keys(["Tissue", "Caltech", "Florida", "Stanford", "UCSD", "Vanderbilt"])(
-      this.data.slice(1)
-    );
+        this.data.slice(1)
+      );
     const x = d3
       .scaleLinear()
       .domain([0, d3.max(series, d => d3.max(d, d => d[1]))])
@@ -102,7 +92,7 @@ class ImageCountStackedChart extends React.Component {
       )
       .unknown("#ccc");
 
-      const svg = d3.select(this.svg);
+    const svg = d3.select(this.svg);
     svg
       .append("g")
       .attr("transform", `translate(${margin}, ${margin})`);
@@ -110,21 +100,21 @@ class ImageCountStackedChart extends React.Component {
     //d3.create("svg").attr("viewBox", [0, 0, width, height]);
 
     var tooltip = svg.append("g")
-    .attr("class", "tooltip")
-    .style("display", "none");
-      
-  tooltip.append("rect")
-    .attr("width", 60)
-    .attr("height", 20)
-    .attr("fill", "black")
-    .style("opacity", 0.5);
+      .attr("class", "tooltip")
+      .style("display", "none");
 
-  tooltip.append("text")
-    .attr("x", 5)
-    .attr("dy", "1.2em")
-    .style("text-anchor", "middle")
-    .attr("font-size", "12px")
-    .attr("font-weight", "bold");
+    tooltip.append("rect")
+      .attr("width", 60)
+      .attr("height", 20)
+      .attr("fill", "black")
+      .style("opacity", 0.5);
+
+    tooltip.append("text")
+      .attr("x", 5)
+      .attr("dy", "1.2em")
+      .style("text-anchor", "middle")
+      .attr("font-size", "12px")
+      .attr("font-weight", "bold");
     svg
       .append("g")
       .selectAll("g")
@@ -138,31 +128,27 @@ class ImageCountStackedChart extends React.Component {
       .attr("y", (d, i) => y(d.data.tissue))
       .attr("width", d => x(d[1]) - x(d[0]))
       .attr("height", y.bandwidth())
-      .on('mouseenter', function (actual , i)
-      {
-        d3.selectAll(".tissue", ).attr("opacity", 0);
+      .on('mouseenter', function (actual, i) {
+        d3.selectAll(".tissue").attr("opacity", 0);
         d3.select(this)
-        .transition()
-        .duration(100)
-        .attr('opacity', 0.6);   
+          .transition()
+          .duration(100)
+          .attr('opacity', 0.6);
       })
-      .on('mouseover', function (actual , i){
+      .on('mouseover', function (actual, i) {
         tooltip.style("display", null);
       })
-      .on('mouseout', function (actual , i){
-        tooltip.style("display", "none"); 
+      .on('mouseout', function (actual, i) {
+        tooltip.style("display", "none");
       })
-      .on('onmousemove', function(d) {
+      .on('onmousemove', function (d) {
         var CTM = svg.getScreenCTM();
         var mousex = (d.clientX - CTM.e + 6) / CTM.a;
         var mousey = (d.clientY - CTM.f + 20) / CTM.d;
-        var xPosition = d3.mouse(this)[0] - 5;
-        var yPosition = d3.mouse(this)[1] - 5;
         tooltip.attr("transform", `translate(" + ${mousex} + "," + ${mousey} + ")`);
-        console.log(d[1]-d[0]);
-        tooltip.select("text").text(d[1]-d[0]);
+        tooltip.select("text").text(d[1] - d[0]);
       })
-      .on("mouseleave", function() {
+      .on("mouseleave", function () {
         d3.selectAll(".May2019").attr("opacity", 1);
 
         d3.select(this)
@@ -178,36 +164,32 @@ class ImageCountStackedChart extends React.Component {
     //return svg.node();
   }
   render() {
-    const { response, error, status, type, count} = store.getState().studyState;
+    const { response, error, status, type } = store.getState().experimentState;
 
     if (error) {
       return <div>Error! {error.message}</div>
-  }
-  
-  else if (response !== "" && response !== undefined && type === Constants.GLOBAL_FETCH_ACTION 
-  &&  status === Constants.SUCCESS) 
-  {
-    return (
-      <div id="chartcontainer">
-        <svg id="barchart" ref={svg => (this.svg = svg)} />
-      </div>
-    );
-  }
-  else if(status === Constants.IN_PROGRESS && response === undefined && type=== Constants.GLOBAL_FETCH_ACTION  )
-{
-return < ImageCountStackedChart size='medium' style={{ maxWidth: '100%'}}
+    }
+
+    else if (response !== "" && response !== undefined && type === Constants.GET_EXPERIMENTS
+      && status === Constants.SUCCESS) {
+      return (
+        <div id="chartcontainer">
+          <svg id="barchart" ref={svg => (this.svg = svg)} />
+        </div>
+      );
+    }
+    else if (status === Constants.IN_PROGRESS && response === undefined && type === Constants.GET_EXPERIMENTS) {
+      return < ImageCountStackedChart size='medium' style={{ maxWidth: '100%' }}
         title={<Typography variant='title'>Experiments From HuBMAP Consortium
-        {(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{marginLeft: 15, position: 'relative', top: 4}} />}</Typography> }
-        />
-}
-else
-{
-    console.log(status, response, type, store.getState(), this.previousState);
-    this.drawChart();
-    return ( <div id="chartcontainer">
-    <svg id="barchart" ref={svg => (this.svg = svg)} />
-  </div>)
-}
-}
+        {(status === Constants.IN_PROGRESS) && <CircularProgress size={24} style={{ marginLeft: 15, position: 'relative', top: 4 }} />}</Typography>}
+      />
+    }
+    else {
+      this.drawChart();
+      return (<div id="chartcontainer">
+        <svg id="barchart" ref={svg => (this.svg = svg)} />
+      </div>)
+    }
+  }
 }
 export default ImageCountStackedChart;

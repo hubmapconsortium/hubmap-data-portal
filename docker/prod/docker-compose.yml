@@ -17,6 +17,7 @@ services:
       - 5000
     volumes:
       - /opt/hubmap-data-portal-static:/opt/hubmap-data-portal/static
+      - /opt/secret:/opt/secret
 #  nginx:
 #    build: nginx
 #    ports:

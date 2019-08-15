@@ -19,7 +19,7 @@ RUN pip3 install -r /opt/requirements.txt
 FROM ubuntu:18.04 as RELEASE
 
 RUN apt-get update
-RUN apt-get -y install python3 python3-six python3-idna libpq5
+RUN apt-get -y install python3 python3-six python3-idna python3-pkg-resources libpq5
 RUN rm -rf /var/cache/apt/*
 
 COPY --from=BASE /usr/local/lib/python3.6 /usr/local/lib/python3.6

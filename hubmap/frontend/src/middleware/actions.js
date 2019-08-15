@@ -1,28 +1,27 @@
 
 import axios from 'axios';
 import * as Constants from '../commons/constants';
+import API_URL from '../commons/apiAdapter';
 
 export const in_progress = () => ({type: Constants.IN_PROGRESS});
 /**
- * fills study state props here after any of fetch methods from studies reducer
+ * fills study state props here after any of get methods from experiments reducer
  * @param {Props object} response 
  */
-export function fetch_studies(response) {
-    console.log(response.page);
+export function get_experiments(response) {
     return {
     status: Constants.SUCCESS,
     response: response.results,
-    count: response.count,
     page: response.page,
     next: response.next,
     previous: response.previous,
-    type: Constants.GLOBAL_FETCH_ACTION,}
+    type: Constants.GET_EXPERIMENTS,}
 }
 
 /***
- * Fills error details returned by any of fetch methods from studies reducer
+ * Fills error details returned by any of get methods from experiments reducer
  */
-export const fetch_studies_error = error =>{
+export const get_experiments_error = error =>{
     return {
     status: Constants.FAILURE,
     response: {},
@@ -31,15 +30,14 @@ export const fetch_studies_error = error =>{
     page:0,
     next: "",
     previous: "",
-    type: Constants.GLOBAL_FETCH_ACTION,}
+    type: Constants.GET_EXPERIMENTS,}
 }
 
 /**
- * fills study state props here after any of fetch methods from studies reducer
+ * fills study state props here after any of get methods from experiments reducer
  * @param {Props object} response 
  */
-export function fetch_gene_tissue_colors(response) {
-    console.log(response);
+export function get_gene_tissue_colors(response) {
     return {
         response: response,
         status:Constants.SUCCESS,
@@ -47,25 +45,24 @@ export function fetch_gene_tissue_colors(response) {
 }
 
 /***
- * Search studies by REST filter api
+ * Search experiments by REST filter api
  */
-export function search_studies(response) 
+export function search_experiments(response) 
 {
-    return {type: Constants.GLOBAL_SEARCH_ACTION,
+    return {type: Constants.SEARCH_EXPERIMENTS,
         response: response,
         status:Constants.SUCCESS,}
 }
 
 /***
- * Fetch all studies from REST api
+ * Fetch all experiments from REST api
  */
-export function fetchAllStudies()
+export function getAllExperiments()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API +Constants.GET_STUDIES_REST_API );
+            let response = await axios.get(API_URL+Constants.GET_EXPERIMENTS_REST_API );
             const count = response.data.length;
             let results = {
                 status: Constants.SUCCESS,
@@ -74,50 +71,47 @@ export function fetchAllStudies()
                 page: 0,
                 next: '',
                 previous: '',
-                type: Constants.GLOBAL_FETCH_ACTION,
+                type: Constants.GET_EXPERIMENTS,
             }
             console.log(results);
-            return dispatch(fetch_studies(results));
+            return dispatch(get_experiments(results));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
 }
 
 /***
- * Fetch studies by page
+ * Fetch experiments by page
  */
-export function fetchStudiesFirstPage(page) 
+export function getExperimentsFirstPage(page) 
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
-    console.log(BASE_API+ Constants.GET_STUDIES_PAGINATED_REST_API+page);
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API + Constants.GET_STUDIES_PAGINATED_REST_API+page);
-            console.log('action',response.data);
-            return dispatch(fetch_studies(response.data));
+            let response = await axios.get(API_URL+Constants.GET_EXPERIMENTS_PAGINATED_REST_API+page);
+            return dispatch(get_experiments(response.data));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
 }
 
 /***
- * Fetch next page from studies
+ * Fetch next page from experiments
  */
-export function fetchNextPageFromStudies(next) 
+export function getNextPageFromExperiments(next) 
 {
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(next);
-            return dispatch(fetch_studies(response.data));
+            let response = await axios.get(API_URL+next);
+            return dispatch(get_experiments(response.data));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
 }
@@ -125,7 +119,7 @@ export function fetchNextPageFromStudies(next)
 /**
  * Fill colors response from REST api
  */
-export function fetch_colors(colors) 
+export function get_colors(colors) 
 {
     return {
         response: colors,
@@ -139,14 +133,14 @@ export function fetch_colors(colors)
  */
 export function getTissueColorsFromServer()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch =>
     {
         dispatch(in_progress());
-        let response = await axios.get(BASE_API + Constants.GET_TISSUE_COLORS_API);
+        let response = await axios.get( API_URL+Constants.GET_TISSUE_COLORS_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
-        return dispatch(fetch_colors(response.data));
+        console.log(response);
+        return dispatch(get_colors(response.data));
 	}
 }
 
@@ -156,33 +150,35 @@ export function getTissueColorsFromServer()
  */
 export function getGeneTissueColors()
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
     return async dispatch =>
     {
         dispatch(in_progress());
-        let response = await axios.get(BASE_API + Constants.GET_GENE_TISSUE_COLOR_API);
+        let response = await axios.get(API_URL+Constants.GET_GENE_TISSUE_COLOR_API);
         // wait 3 seconds
         await (new Promise((resolve, reject) => setTimeout(resolve, 2000)));
-        return dispatch(fetch_gene_tissue_colors(response.data));
+        console.log(response);
+        return dispatch(get_gene_tissue_colors(response.data));
 	}
 }
 
 /***
- * Fetch studies by page
+ * Search experiments
  */
 export function searchThis(searchTerm) 
 {
-    const BASE_API =(window.location.href).replace("3000", "8000");
-    console.log(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
     return async dispatch => {
         dispatch(in_progress());
         try {
-            let response = await axios.get(BASE_API+ Constants.SEARCH_STUDIES_REST_API+searchTerm);
-            console.log('action',response.data);
-            return dispatch(search_studies(response.data));
+            let response = await axios.get(API_URL+ Constants.SEARCH_EXPERIMENTS_REST_API+searchTerm);
+            return dispatch(search_experiments(response.data));
         }
         catch (error) {
-            return dispatch(fetch_studies_error(error));
+            return dispatch(get_experiments_error(error));
         }
     }
+}
+
+export function globusSignin()
+{
+    
 }
