@@ -32,7 +32,7 @@ class ExperimentsTable extends React.Component {
     }
 
     render() {
-        const { response, error, status, type, page, count, next, previous } = this.currentState;
+        const { response, error, status, type } = this.currentState;
         if (error) {
             return <div>Error! {error.message}</div>
         }

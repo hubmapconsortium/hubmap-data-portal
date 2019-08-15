@@ -1,7 +1,7 @@
-export { addAnimationToStyle as addAnimationToStyle };
+export { addAnimationToStyle };
 let dynamicStyles = null;
 export default function addAnimationToStyle(animationName, animationSteps) {
-    // add style 
+    // add style
     if (!dynamicStyles) {
         dynamicStyles = document.createElement('style');
         dynamicStyles.type = 'text/css';

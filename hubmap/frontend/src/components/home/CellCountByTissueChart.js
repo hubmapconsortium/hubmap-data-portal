@@ -29,7 +29,7 @@ class CellCountByTissueChart extends PureComponent {
 
     }
     render() {
-        const { response, error, status, type, count } = store.getState().experimentState;
+        const { response, error, status, type } = store.getState().experimentState;
 
         if (error) {
             return <div>Error! {error.message}</div>

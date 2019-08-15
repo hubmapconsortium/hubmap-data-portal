@@ -1,6 +1,8 @@
 import React from "react";
 
 function Header() {
+	/* eslint jsx-a11y/anchor-is-valid: 0 */
+	// TODO: Change <a> to <button>?
 	return (
 		<nav>
 			<span style={{ display: "inline-block" }}>
