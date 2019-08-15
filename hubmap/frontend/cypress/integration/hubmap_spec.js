@@ -32,4 +32,4 @@ describe('HuBMAP', () => {
     // Footer:
     cy.contains('Supported by the NIH Common Fund');
   });
-})
+});

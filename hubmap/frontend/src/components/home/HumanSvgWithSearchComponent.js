@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import HumanAnatomyCard from "./HumanSvgComponent";
-import SearchBox from "./Search";
+import HumanAnatomyCard from './HumanSvgComponent';
+import SearchBox from './Search';
 
 
 function MainContent(props) {
-    return (
+  return (
 
-        <React.Fragment >
-            <CssBaseline />
-            <SearchBox />
-            <HumanAnatomyCard />
-        </React.Fragment>
+    <>
+      <CssBaseline />
+      <SearchBox />
+      <HumanAnatomyCard />
+    </>
 
-    );
+  );
 }
 export default MainContent;
