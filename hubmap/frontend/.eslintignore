@@ -1,3 +1,5 @@
+cypress/integration-examples
+
 # TODO: These all have "Parsing error: Unexpected token ="
 src/components/home/CellCountByTissueChart.js
 src/components/home/D3chart.js
