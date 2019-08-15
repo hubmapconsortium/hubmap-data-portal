@@ -14,27 +14,27 @@ parserOptions:
 plugins:
   - react
 rules:
-  camelcase # TODO
-  class-methods-use-this # TODO
-  func-names # TODO
-  global-require # TODO
-  import/no-extraneous-dependencies # TODO
-  import/no-mutable-exports # TODO
-  import/no-named-as-default # TODO
-  import/no-named-as-default-member # TODO
-  import/no-unresolved # TODO
-  import/prefer-default-export # TODO
-  max-len # TODO
-  no-console # TODO
-  no-plusplus # TODO
-  no-return-assign # TODO
-  no-undef # TODO
-  no-unused-expressions # TODO
-  no-unused-vars # TODO
-  no-use-before-define # TODO
-  react/destructuring-assignment # TODO
-  react/forbid-prop-types # TODO
-  react/jsx-filename-extension # TODO
-  react/jsx-props-no-spreading # TODO
-  react/prefer-stateless-function # TODO
-  react/prop-types # TODO
+  camelcase: 0 # TODO
+  class-methods-use-this: 0 # TODO
+  func-names: 0 # TODO
+  global-require: 0 # TODO
+  import/no-extraneous-dependencies: 0 # TODO
+  import/no-mutable-exports: 0 # TODO
+  import/no-named-as-default: 0 # TODO
+  import/no-named-as-default-member: 0 # TODO
+  import/no-unresolved: 0 # TODO
+  import/prefer-default-export: 0 # TODO
+  max-len: 0 # TODO
+  no-console: 0 # TODO
+  no-plusplus: 0 # TODO
+  no-return-assign: 0 # TODO
+  no-undef: 0 # TODO
+  no-unused-expressions: 0 # TODO
+  no-unused-vars: 0 # TODO
+  no-use-before-define: 0 # TODO
+  react/destructuring-assignment: 0 # TODO
+  react/forbid-prop-types: 0 # TODO
+  react/jsx-filename-extension: 0 # TODO
+  react/jsx-props-no-spreading: 0 # TODO
+  react/prefer-stateless-function: 0 # TODO
+  react/prop-types: 0 # TODO
