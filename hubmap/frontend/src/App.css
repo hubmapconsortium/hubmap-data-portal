@@ -27,6 +27,8 @@ body{
   width:100%;
   display: flex; 
   justify-content: space-around;
+  -moz-box-flex: inherit;
+  resize: both;
 }
 
 .App-header {

@@ -141,48 +141,38 @@ class SearchBox extends React.Component {
                                         }
                                         return arr;
                                     }, []);
-                                    console.log(tissues);
                                     let heatmap = results.reduce((arr, h) => {
                                         if (h.hugo_symbol !== undefined) {
-                                            var colors = JSON.stringify(h.tissue_expression_heatmap);
-                                            var res = colors.split(",");
-                                            res.slice(1, res.length).map(h1 => {
-                                                if (!h1.includes('"id:"')) {
-                                                    arr.push(
-                                                        h1.substr(1, h1.indexOf("_") - 1) +
-                                                        ":" +
-                                                        h1.substr(h1.indexOf(":") + 2, 7)
-                                                    );
-                                                }
-                                                return arr;
-                                            });
+                                          arr = Object.entries(h.tissue_expression_heatmap);
                                         }
                                         return arr;
-                                    }, []);
-                                    console.log(heatmap);
-                                    for (var i = 0; i < heatmap.length; i++) {
-                                        var tissueColorMap = heatmap[i].split(':');
-                                        if (new Set(tissues).has(tissueColorMap[0])) {
-                                            var tissue = document.getElementById(tissueColorMap[0]);
-                                            Utils.addAnimationToStyle(tissueColorMap[0] + 'tissueAnimation',
-                                                `0% {fill: ${tissueColorMap[1]}; opacity: 0;}
-                                    100% {fill: ${tissueColorMap[1]}; opacity: 1;}`);
-                                            tissue.style.removeProperty("animation");
-                                            tissue.addEventListener("animationend", animationEnd);
-                                            tissue.style.setProperty("animation", tissueColorMap[0] + 'tissueAnimation' + " 10s linear");
-                                            tissue.style.setProperty("fill", `${tissueColorMap[1]}`);
-                                            console.log(tissue);
-
-                                        }
-                                        else {
-                                            var tissue1 = document.getElementById(tissueColorMap[0]);
-                                            tissue1.style.setProperty("fill", `${tissueColorMap[1]}`);
-                                            //tissue.style.setProperty("opacity", "0.2");
-                                        }
-                                        var imgelement = document.getElementById("tab10ColorMap");
-                                        console.log(imgelement);
-                                        imgelement.style.setProperty("display", "block")
-                                    }
+                                      }, []);
+                                      heatmap.forEach(function(entry) {
+                                          
+                                        tissues.forEach(function(tissue){
+                                            if(entry[0].includes(tissue))
+                                            {
+                                              var tissueElement = document.getElementById(tissue);
+                                              const animationName = tissue + 'tissueAnimation';
+                                              Utils.addAnimationToStyle(animationName,
+                                                  `0% {fill: ${entry[1]}; opacity: 0;}
+                                                    100% {fill: ${entry[1]}; opacity: 1;}`);
+                                                    tissueElement.style.removeProperty("animation");
+                                                    tissueElement.addEventListener("animationend", animationEnd);
+                                                    tissueElement.style.setProperty("animation", tissue + 'tissueAnimation' + " 10s linear");
+                                                    tissueElement.style.setProperty("fill", `${entry[1]}`);
+                                              console.log(tissueElement);
+                                            }
+                                            else
+                                            {
+                                                var tissue1 = document.getElementById(tissue);
+                                                tissue1.style.setProperty("fill", `${entry[1]}`);
+                                            }
+                                          });
+                                      });
+                                    var imgelement = document.getElementById("tab10ColorMap");
+                                    console.log(imgelement);
+                                    imgelement.style.setProperty("display", "block")
                                 });
                             ev.preventDefault();
                         }
@@ -190,7 +180,6 @@ class SearchBox extends React.Component {
                     onAnimationStart={(ev) => {
                         if (ev.key === 'Enter') {
                             // Do code here
-
                             ev.preventDefault();
                         }
                     }}
