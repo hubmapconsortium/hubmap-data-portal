@@ -1,5 +1,4 @@
 import React from 'react';
-import Anatomogram from 'anatomogram';
 
 class ExperimentsComponent extends React.Component {
     render() {

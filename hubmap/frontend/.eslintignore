@@ -1,0 +1,14 @@
+cypress/integration-examples
+
+# TODO: These all have "Parsing error: Unexpected token ="
+src/components/home/CellCountByTissueChart.js
+src/components/home/D3chart.js
+src/components/home/HumanSvgComponent.js
+src/components/home/ImageCountByTissueChart.js
+src/components/home/MUITable.js
+src/components/home/Search.js
+src/components/home/Studies.js
+src/components/home/StudiesTable.js
+src/components/Experiments.js
+src/components/home/Experiments.js
+src/components/home/ExperimentsTable.js

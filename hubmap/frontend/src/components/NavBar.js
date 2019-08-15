@@ -7,7 +7,6 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { makeStyles } from '@material-ui/core/styles';
 import SearchIcon from '@material-ui/icons/Search';
 import grey from '@material-ui/core/colors/grey';
-import { createMuiTheme } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import HubmapLogo from "../images/HuBMAP-Retina-Logo-Color.png";
@@ -24,24 +23,6 @@ import { NavLink } from 'react-router-dom';
 import MicroscopeIcon from '../icons/MicroscopeIcon';
 import LoggedInStatus from './home/LoggedInStatus';
 
-const theme = createMuiTheme({
-    typography: {
-        // Use the system font instead of the default Roboto font.
-        fontFamily: [
-            '-apple-system',
-            'BlinkMacSystemFont',
-            '"Segoe UI"',
-            'Roboto',
-            '"Helvetica Neue"',
-            'Arial',
-            'sans-serif',
-            '"Apple Color Emoji"',
-            '"Segoe UI Emoji"',
-            '"Segoe UI Symbol"',
-            '"Impact"',
-        ].join(','),
-    },
-});
 
 const useStyles = makeStyles(theme => ({
     grow: {

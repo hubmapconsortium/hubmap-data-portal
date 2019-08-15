@@ -1,5 +1,5 @@
 import * as d3 from 'd3';
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { Element } from 'react-faux-dom';
 import '../App.css';
 import data from './data';

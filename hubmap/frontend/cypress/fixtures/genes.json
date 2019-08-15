@@ -1,0 +1,97 @@
+[
+  {
+    "id": 5,
+    "hugo_symbol": "CD5L",
+    "entrez_id": "922",
+    "ensembl_id": "ENSG00000073754",
+    "tissue_expression_heatmap": {
+      "id": 10,
+      "kidney_color": "#470f62",
+      "lung_color": "#29788e",
+      "heart_color": "#45085b",
+      "pancreas_color": "#460b5e",
+      "abdomen_color": "#45085b",
+      "liver_color": "#440357",
+      "smallIntestine_color": "#440154",
+      "bladder_color": "#45085b",
+      "largeIntestine_color": "#440357",
+      "spleen_color": "#fde724"
+    }
+  },
+  {
+    "id": 6,
+    "hugo_symbol": "OR5AK2",
+    "entrez_id": "390181",
+    "ensembl_id": "ENSG00000181273",
+    "tissue_expression_heatmap": {
+      "id": 12,
+      "kidney_color": "#471265",
+      "lung_color": "#22a784",
+      "heart_color": "#440154",
+      "pancreas_color": "#482374",
+      "abdomen_color": "#45085b",
+      "liver_color": "#482374",
+      "smallIntestine_color": "#440154",
+      "bladder_color": "#48196b",
+      "largeIntestine_color": "#482374",
+      "spleen_color": "#22a784"
+    }
+  },
+  {
+    "id": 7,
+    "hugo_symbol": "NPPA",
+    "entrez_id": "4878",
+    "ensembl_id": "ENSG00000175206",
+    "tissue_expression_heatmap": {
+      "id": 13,
+      "kidney_color": "#471265",
+      "lung_color": "#481d6f",
+      "heart_color": "#440255",
+      "pancreas_color": "#482374",
+      "abdomen_color": "#45085b",
+      "liver_color": "#482374",
+      "smallIntestine_color": "#440154",
+      "bladder_color": "#48196b",
+      "largeIntestine_color": "#482374",
+      "spleen_color": "#45085b"
+    }
+  },
+  {
+    "id": 8,
+    "hugo_symbol": "LRRC10",
+    "entrez_id": "376132",
+    "ensembl_id": "ENSG00000198812",
+    "tissue_expression_heatmap": {
+      "id": 14,
+      "kidney_color": "#471265",
+      "lung_color": "#20908c",
+      "heart_color": "#440255",
+      "pancreas_color": "#482374",
+      "abdomen_color": "#45085b",
+      "liver_color": "#482374",
+      "smallIntestine_color": "#440154",
+      "bladder_color": "#48196b",
+      "largeIntestine_color": "#482374",
+      "spleen_color": "#45085b"
+    }
+  },
+  {
+    "id": 9,
+    "hugo_symbol": "LRRN4",
+    "entrez_id": null,
+    "ensembl_id": null,
+    "tissue_expression_heatmap": {
+      "id": 15,
+      "kidney_color": "#29788e",
+      "lung_color": "#440255",
+      "heart_color": "#404387",
+      "pancreas_color": "#345e8d",
+      "abdomen_color": "#45085b",
+      "liver_color": "#482374",
+      "smallIntestine_color": "#440154",
+      "bladder_color": "#48196b",
+      "largeIntestine_color": "#482374",
+      "spleen_color": "#45085b"
+    }
+  }
+]

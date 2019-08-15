@@ -1,7 +1,5 @@
 import React from 'react';
 import Container from '@material-ui/core/Container';
-import { makeStyles } from '@material-ui/core/styles';
-import grey from '@material-ui/core/colors/grey';
 import Footer from "./Footer";
 import NavBar from "./NavBar";
 import { Route, BrowserRouter } from 'react-router-dom';

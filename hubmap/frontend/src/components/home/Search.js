@@ -120,14 +120,13 @@ class SearchBox extends React.Component {
                         // here it's using the "name" value set on the TextField
                         // to set state.person.[firstname|lastname]. event.target.name
                         //required for showing animation
-                        this.setState({ ...this.state, ['searchtext']: event.target.value });
+                        this.setState({ ...this.state, 'searchtext': event.target.value });
 
                     }}
                     onKeyPress={(ev) => {
                         if (ev.key === 'Enter') {
                             // Do code here
-                            //search for tissue+gene 
-                            var searchState = {};
+                            //search for tissue+gene
                             this.props.dispatch(searchThis(this.state.searchtext))
                                 .then(() => {
                                     this.searchState = store.getState().searchState;
@@ -172,8 +171,8 @@ class SearchBox extends React.Component {
                                       });
                                     var imgelement = document.getElementById("tab10ColorMap");
                                     console.log(imgelement);
-                                    imgelement.style.setProperty("display", "block")
-                                });
+                                    imgelement.style.setProperty("display", "block");
+                                    }, []);
                             ev.preventDefault();
                         }
                     }}
