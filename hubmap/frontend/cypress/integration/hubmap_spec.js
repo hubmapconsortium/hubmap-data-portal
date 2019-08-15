@@ -1,7 +1,7 @@
 /* eslint no-undef: 0 */
 // TODO: Configure eslint to recognize "cy" as a global.
 describe('HuBMAP', () => {
-  before(() => {
+  beforeEach(() => {
     cy.server();
     const api = 'http://localhost:8000/api';
     cy.route(`${api}/?format=json`, 'fixture:base.json');
@@ -31,5 +31,24 @@ describe('HuBMAP', () => {
 
     // Footer:
     cy.contains('Supported by the NIH Common Fund');
+  });
+
+  it('Has a working browse menu', () => {
+    cy.visit('/');
+    cy.contains('Browse').click();
+    cy.contains('Data Analysis').click();
+
+    cy.location('pathname').should('eq', '/dataanalysis')
+    cy.contains('Search by Tissue'); // TODO: more
+    cy.contains('Browse').click();
+    cy.contains('Experiments').click();
+
+    cy.location('pathname').should('eq', '/experiments')
+    cy.contains('Experiments'); // TODO: more
+    cy.contains('Browse').click();
+    cy.contains('Pipelines').click();
+
+    cy.location('pathname').should('eq', '/pipelines')
+    cy.contains('Pipelines'); // TODO: more
   });
 })
