@@ -21,7 +21,7 @@ import HelpIcon from '@material-ui/icons/Help';
 import { NavLink } from 'react-router-dom';
 
 import MicroscopeIcon from '../icons/MicroscopeIcon';
-import LoggedInStatus from './home/LoggedInStatus';
+import LogInStatus from './home/LogInStatus';
 
 
 const useStyles = makeStyles(theme => ({
@@ -244,7 +244,7 @@ function SearchAppBar(props) {
                     </div>
                     <div className={classes.sectionMenuDesktop} >
 
-                        <LoggedInStatus />
+                        <LogInStatus />
                     </div>
                     <div className={classes.grow} />
                     <div className={classes.grow} />

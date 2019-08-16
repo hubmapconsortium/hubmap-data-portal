@@ -133,7 +133,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function LoggedInStatus() {
+export default function LogInStatus() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -154,7 +154,7 @@ export default function LoggedInStatus() {
 
         return (
             <div className={classes.sectionMenuDesktop} >
-                <a href={API_URL+'auth/login/globus/'} style={{ textDecoration: 'none' }}>
+                <a id="login" href={API_URL+'auth/login/globus/'} style={{ textDecoration: 'none' }}>
 
                     <Button color={grey[300]} aria-haspopup="true" >
                         Login<AccountCircle className={classes.rightIcon} /></Button>
@@ -165,7 +165,7 @@ export default function LoggedInStatus() {
     else {
         return (
             <div className={classes.sectionMenuDesktop} >
-                <Button color={grey[300]} aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
+                <Button color={grey[300]} id="button-menu" aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
                     Logged in <AccountCircle className={classes.rightIcon} />
                 </Button>
                 <Menu
@@ -174,11 +174,11 @@ export default function LoggedInStatus() {
                     keepMounted
                     open={Boolean(anchorEl)}
                     onClose={handleClose}>
-                    <MenuItem  > Globus email: {email}
+                    <MenuItem  id="loggedinemail"> Globus email: {email}
                         <AccountCircleSharp className={classes.rightIcon} />
                     </MenuItem>
-                    <MenuItem onClick={handleCloseLogout} >
-                        <a href={API_URL + 'logout/'} style={{ textDecoration: 'none' }}>
+                    <MenuItem onClick={handleCloseLogout} id="logout-menuitem">
+                        <a id="logout" href={API_URL + 'logout/'} style={{ textDecoration: 'none' }}>
                             Logout from Globus
                         <AccountCircleSharp className={classes.rightIcon} /></a></MenuItem>
                 </Menu>
