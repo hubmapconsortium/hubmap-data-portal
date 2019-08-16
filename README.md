@@ -16,6 +16,9 @@ The application is packaged in Docker containers for production deployment,
 and we recommend running through Docker for local development also.
 
 ### Local development with Docker
+
+[![container diagram](https://docs.google.com/drawings/d/e/2PACX-1vQEu2FPtJeuNscKahs8WrHbNFUcgwE-PXwEzV0XJ1aDiKm2th_XE822gOd1zmVm1APsehElyEjJGkHk/pub?w=600&h=300)](https://docs.google.com/drawings/d/1vw0EJSVPZprQU8HMZKJrjnFTKRWHXlVzCbJBetOODSg/edit)
+
 Run `docker-compose up` in the `docker/dev-common` directory. This will
 download pre-built Docker containers for development, and start all services
 listed in `docker/dev-common/docker-compose.yml`. The local copy of this
