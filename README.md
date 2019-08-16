@@ -25,13 +25,13 @@ cd docker/dev-common
 docker-compose pull # Only needed if you have old images.
 docker-compose up
 ```
-When [http://localhost:3000/] is up, then in a new terminal:
+When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new terminal:
 ```
 run_migrations_in_container.py
 # TODO: Load sample data into DB
 ```
 
-Revisit [http://localhost:3000/] and it should show the sample data.
+Revisit [`localhost:3000`](http://localhost:3000/) and it should show the sample data.
 
 ### Details
 
