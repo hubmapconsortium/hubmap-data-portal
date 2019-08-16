@@ -1,6 +1,6 @@
 import React from "react";
 import * as d3 from "d3";
-import "./App.css";
+import "./App.scss";
 
 const sample = [
   { center: "Florida", cellcount: 5, },
