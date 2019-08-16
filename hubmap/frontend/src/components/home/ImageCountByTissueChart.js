@@ -44,7 +44,7 @@ class ImageCountByTissuesChart extends PureComponent {
                 return arr;
             }, []);
             return (
-                <div className="experimentsdashboard" id="experimentsbyTissueschart" >
+                <div className="experiments-dashboard" >
                     <Chart
                         width={'420px'}
                         height={'300px'}

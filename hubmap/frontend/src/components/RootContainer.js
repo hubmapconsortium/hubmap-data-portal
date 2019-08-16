@@ -13,7 +13,7 @@ function RootContainer() {
   return (
     <BrowserRouter >
       <NavBar />
-      <Container xl="true" component="div" style={{ height: '1600px' }} >
+      <Container xl="true" component="div" className="gridContainer" style={{ height: '100vh', flexGrow: 1 }} >
         <Route exact path="/dataanalysis" component={DataAnalysisComponent} />
         <Route exact path="/userfaqs" component={UserFAQsComponent} />
         <Route exact path="/experiments" component={ExperimentsComponent} />
