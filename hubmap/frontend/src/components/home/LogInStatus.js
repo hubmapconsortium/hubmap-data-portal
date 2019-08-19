@@ -174,7 +174,7 @@ export default function LogInStatus() {
                     keepMounted
                     open={Boolean(anchorEl)}
                     onClose={handleClose}>
-                    <MenuItem  id="loggedinemail"> Globus email: {email}
+                    <MenuItem id="loggedinemail"> Globus email: {email}
                         <AccountCircleSharp className={classes.rightIcon} />
                     </MenuItem>
                     <MenuItem onClick={handleCloseLogout} id="logout-menuitem">
