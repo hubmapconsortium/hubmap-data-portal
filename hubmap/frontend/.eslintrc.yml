@@ -6,6 +6,7 @@ extends:
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
+parser: babel-eslint
 parserOptions:
   ecmaFeatures:
     jsx: true
@@ -110,3 +111,26 @@ rules:
   react/prefer-stateless-function: 0 # TODO
   react/prop-types: 0 # TODO
   react/self-closing-comp: 0 # TODO
+  # Reported after adding babel-eslint:
+  comma-style: 0 # TODO
+  function-paren-newline: 0 # TODO
+  implicit-arrow-linebreak: 0 # TODO
+  import/named: 0 # TODO
+  import/no-cycle: 0 # TODO
+  lines-around-directive: 0 # TODO
+  no-empty-function: 0 # TODO
+  no-param-reassign: 0 # TODO
+  no-shadow: 0 # TODO
+  one-var-declaration-per-line: 0 # TODO
+  one-var: 0 # TODO
+  operator-linebreak: 0 # TODO
+  prefer-arrow-callback: 0 # TODO
+  prefer-destructuring: 0 # TODO
+  quote-props: 0 # TODO
+  react/jsx-boolean-value: 0 # TODO
+  react/no-access-state-in-setstate: 0 # TODO
+  react/no-unused-state: 0 # TODO
+  react/require-default-props: 0 # TODO
+  react/sort-comp: 0 # TODO
+  react/state-in-constructor: 0 # TODO
+  semi-spacing: 0 # TODO
