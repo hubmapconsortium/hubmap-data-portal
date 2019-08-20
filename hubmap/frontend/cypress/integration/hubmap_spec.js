@@ -38,17 +38,17 @@ describe('HuBMAP', () => {
 
     cy.contains('Browse').click();
     cy.contains('Data Analysis').click();
-    cy.location('pathname').should('eq', '/dataanalysis')
+    cy.location('pathname').should('eq', '/dataanalysis');
     cy.contains('Search by Tissue'); // TODO: more tests
 
     cy.contains('Browse').click();
     cy.contains('Experiments').click();
-    cy.location('pathname').should('eq', '/experiments')
+    cy.location('pathname').should('eq', '/experiments');
     cy.contains('Experiments'); // TODO: more tests
 
     cy.contains('Browse').click();
     cy.contains('Pipelines').click();
-    cy.location('pathname').should('eq', '/pipelines')
+    cy.location('pathname').should('eq', '/pipelines');
     cy.contains('Pipelines'); // TODO: more tests
   });
 
