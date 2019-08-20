@@ -16,7 +16,21 @@
 
 body{
   height: 100%;
+  width:100%;
+  font-family: 'Open Sans', sans-serif;
+  background-color: #eeeeee;
 }
+
+.gridContainer{
+  background-color: #eeeeee;
+  height: 100%;
+  width:100%;
+  display: flex; 
+  justify-content: space-around;
+  -moz-box-flex: inherit;
+  resize: both;
+}
+
 .App-header {
   background-color: #282c34;
   display: flex;
@@ -121,13 +135,6 @@ background-color: #fafafa;
   margin-top: 100px;
 }
 
-.experimentschart{
-
-}
-
-.experimentsdashboard{
-}
-
 #tooltip {
   dominant-baseline: hanging;
   z-index: 1;
@@ -161,11 +168,6 @@ shape-rendering: crispEdges;
 fill: none;
 stroke: #ccc;
 shape-rendering: crispEdges;
-}
-
-
-body {
-  font-family: 'Open Sans', sans-serif;
 }
 
 div#layout {
