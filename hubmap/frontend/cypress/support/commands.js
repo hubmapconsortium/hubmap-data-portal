@@ -1,4 +1,4 @@
-import { cyan } from "@material-ui/core/colors";
+import { cyan } from '@material-ui/core/colors';
 
 // ***********************************************
 // This example commands.js shows you how to
@@ -25,4 +25,3 @@ import { cyan } from "@material-ui/core/colors";
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-

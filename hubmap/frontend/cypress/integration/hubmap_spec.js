@@ -10,13 +10,13 @@ describe('HuBMAP', () => {
     cy.route(`${api}/?format=json`, 'fixture:base.json');
     cy.route(`${api}/colors/?format=json`, 'fixture:colors.json');
     cy.route(`${api}/genes/?format=json`, 'fixture:genes.json');
-    //since redirect urls ( multiple HTTP 303/304) are not intercepted by route, are not recommended in cypress.
-    cy.setCookie('email', 'test@gmail.com')
+    // since redirect urls ( multiple HTTP 303/304) are not intercepted by route, are not recommended in cypress.
+    cy.setCookie('email', 'test@gmail.com');
   });
 
   after(() => {
     cy.server()
-    .clearCookie('email')
+      .clearCookie('email');
     const api = 'http://localhost:8000/';
     cy.route(`${api}/api/?format=json`, 'fixture:base.json');
     cy.route(`${api}/api/colors/?format=json`, 'fixture:colors.json');
@@ -24,7 +24,7 @@ describe('HuBMAP', () => {
     cy.visit('/');
     cy.contains('Login');
     Cypress.Cookies.debug(false);
-  })
+  });
 
   it('Has a homepage', () => {
     cy.visit('/');
@@ -54,12 +54,11 @@ describe('HuBMAP', () => {
     cy.getCookie('email').should('exist');
 
     // UI should reflect this user being logged in
-    cy.get('#loggedinemail').should('contain', 'test@gmail.com').should('exist')
-    cy.get('#loggedin-menu').children().get('#logout-menuitem').should('exist')
+    cy.get('#loggedinemail').should('contain', 'test@gmail.com').should('exist');
+    cy.get('#loggedin-menu').children().get('#logout-menuitem').should('exist');
     cy.get('#loggedin-menu').children().get('#logout-menuitem')
       .children()
       .get('#logout')
       .should('exist');
   });
-
-})
+});

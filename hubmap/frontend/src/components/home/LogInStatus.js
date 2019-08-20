@@ -10,179 +10,191 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircleSharp from '@material-ui/icons/AccountCircleSharp';
 import API_URL from '../../commons/apiAdapter';
 
-var cookies = new Cookies();
+const cookies = new Cookies();
 
-var email = cookies.get('email');
+let email = cookies.get('email');
 
-const useStyles = makeStyles(theme => ({
-    grow: {
-        flexGrow: 0.2,
+const useStyles = makeStyles((theme) => ({
+  grow: {
+    flexGrow: 0.2,
+  },
+  root: {
+    flexGrow: 1,
+    backgroundColor: grey[300],
+    color: grey[800],
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    backgroundColor: grey[300],
+    color: grey[300],
+  },
+  title: {
+    flexGrow: 2,
+    fontSize: 12,
+    fontVariant: 'H3',
+    fontFamily: 'Impact',
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+      backgroundColor: grey[300],
+      color: grey[800],
     },
-    root: {
-        flexGrow: 1,
-        backgroundColor: grey[300],
-        color: grey[800],
+    backgroundColor: grey[300],
+    color: grey[800],
+  },
+  search: {
+    position: 'relative',
+    border: '1px solid #424242',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.black, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.black, 0.25),
+      border: '1px solid #424242',
     },
-    menuButton: {
-        marginRight: theme.spacing(2),
-        backgroundColor: grey[300],
-        color: grey[300],
+    marginRight: theme.spacing(1.5),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(1),
+      width: 'auto',
     },
-    title: {
-        flexGrow: 2,
-        fontSize: 12,
-        fontVariant: "H3",
-        fontFamily: "Impact",
-        display: 'none',
-        [theme.breakpoints.up('sm')]: {
-            display: 'block',
-            backgroundColor: grey[300],
-            color: grey[800],
-        },
-        backgroundColor: grey[300],
-        color: grey[800],
-    },
-    search: {
-        position: 'relative',
-        border: '1px solid #424242',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.black, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.black, 0.25),
-            border: '1px solid #424242',
-        },
-        marginRight: theme.spacing(1.5),
-        marginLeft: 0,
+    borderBlockColor: grey[800],
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: grey[800],
+  },
+  inputRoot: {
+    backgroundColor: grey[300],
+    color: grey[800],
+    borderColor: grey[800],
+    width: 400,
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    // transition: theme.transitions.create('width'),
+    width: '100%',
+    marginLeft: 8,
+    flex: 1,
+    [theme.breakpoints.up('sm')]: {
+      width: 400,
+      '&:focus': {
         width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            marginLeft: theme.spacing(1),
-            width: 'auto',
-        },
-        borderBlockColor: grey[800]
+      },
     },
-    searchIcon: {
-        width: theme.spacing(7),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: grey[800],
+  },
+  sectionDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
+      backgroundColor: grey[300],
+      color: grey[800],
     },
-    inputRoot: {
-        backgroundColor: grey[300],
-        color: grey[800],
-        borderColor: grey[800],
-        width: 400,
-    },
-    inputInput: {
-        padding: theme.spacing(1, 1, 1, 7),
-        //transition: theme.transitions.create('width'),
-        width: '100%',
-        marginLeft: 8,
-        flex: 1,
-        [theme.breakpoints.up('sm')]: {
-            width: 400,
-            '&:focus': {
-                width: '100%',
-            },
-        },
-    },
-    sectionDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'flex',
-            backgroundColor: grey[300],
-            color: grey[800],
-        },
-        backgroundColor: grey[300],
-        color: grey[800],
-        marginLeft: -33,
-        marginTop: -20,
-    },
+    backgroundColor: grey[300],
+    color: grey[800],
+    marginLeft: -33,
+    marginTop: -20,
+  },
 
-    sectionIconDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'flex',
-        },
-        backgroundColor: grey[300],
-        color: grey[800],
-        marginLeft: 105,
+  sectionIconDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
     },
-    sectionMenuDesktop: {
-        display: 'none',
-        [theme.breakpoints.up('md')]: {
-            display: 'flex',
-        },
-        backgroundColor: grey[300],
-        color: grey[800],
-        marginLeft: 40,
+    backgroundColor: grey[300],
+    color: grey[800],
+    marginLeft: 105,
+  },
+  sectionMenuDesktop: {
+    display: 'none',
+    [theme.breakpoints.up('md')]: {
+      display: 'flex',
     },
-    button: {
-        marginTop: 36,
-        marginLeft: 17,
-        margin: theme.spacing(1),
-    },
-    input: {
-        display: 'none',
-    },
-    rightIcon: {
-        marginLeft: theme.spacing(1),
-    },
+    backgroundColor: grey[300],
+    color: grey[800],
+    marginLeft: 40,
+  },
+  button: {
+    marginTop: 36,
+    marginLeft: 17,
+    margin: theme.spacing(1),
+  },
+  input: {
+    display: 'none',
+  },
+  rightIcon: {
+    marginLeft: theme.spacing(1),
+  },
 }));
 
 export default function LogInStatus() {
-    const classes = useStyles();
-    const [anchorEl, setAnchorEl] = React.useState(null);
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
-    function handleClose() {
-        setAnchorEl(null);
-    }
+  function handleClose() {
+    setAnchorEl(null);
+  }
 
-    function handleCloseLogout() {
-        setAnchorEl(null);
-        email = '';
-    }
+  function handleCloseLogout() {
+    setAnchorEl(null);
+    email = '';
+  }
 
-    function handleClick(event) {
-        setAnchorEl(event.currentTarget);
-    }
+  function handleClick(event) {
+    setAnchorEl(event.currentTarget);
+  }
 
-    if (email === '' || email === undefined) {
-
-        return (
-            <div className={classes.sectionMenuDesktop} >
-                <a id="globuslogin" href={API_URL+'auth/login/globus/'} style={{ textDecoration: 'none' }}>
-
-                    <Button color={grey[300]} aria-haspopup="true" id="button-login" >
-                        Login<AccountCircle className={classes.rightIcon} /></Button>
-                </a>
-            </div>
-        )
-    }
-    else {
-        return (
-            <div className={classes.sectionMenuDesktop} >
-                <Button color={grey[300]} id="button-menu" aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
-                    Logged in <AccountCircle className={classes.rightIcon} />
-                </Button>
-                <Menu
-                    id="loggedin-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}>
-                    <MenuItem id="loggedinemail"> Globus email: {email}
-                        <AccountCircleSharp className={classes.rightIcon} />
-                    </MenuItem>
-                    <MenuItem onClick={handleCloseLogout} id="logout-menuitem">
-                        <a id="logout" href={API_URL + 'logout/'} style={{ textDecoration: 'none' }}>
+  if (email === '' || email === undefined) {
+    return (
+      <div className={classes.sectionMenuDesktop}>
+        <a id="globuslogin" href={`${API_URL}auth/login/globus/`} style={{ textDecoration: 'none' }}>
+          <Button color={grey[300]} aria-haspopup="true" id="button-login">
+                        Login
+            <AccountCircle className={classes.rightIcon} />
+          </Button>
+        </a>
+      </div>
+    );
+  }
+  return (
+    <div className={classes.sectionMenuDesktop}>
+      <Button
+        color={grey[300]}
+        id="button-menu"
+        aria-controls="browse-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+          Logged in
+        {' '}
+        <AccountCircle className={classes.rightIcon} />
+      </Button>
+      <Menu
+        id="loggedin-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem id="loggedinemail">
+          {' '}
+Globus email:
+          {email}
+          <AccountCircleSharp className={classes.rightIcon} />
+        </MenuItem>
+        <MenuItem onClick={handleCloseLogout} id="logout-menuitem">
+          <a id="logout" href={`${API_URL}logout/`} style={{ textDecoration: 'none' }}>
                             Logout from Globus
-                        <AccountCircleSharp className={classes.rightIcon} /></a></MenuItem>
-                </Menu>
-            </div>
-        )
-    }
+            <AccountCircleSharp className={classes.rightIcon} />
+          </a>
+        </MenuItem>
+      </Menu>
+    </div>
+  );
 }
