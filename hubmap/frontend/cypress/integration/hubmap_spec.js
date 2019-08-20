@@ -24,7 +24,9 @@ describe('HuBMAP', () => {
     // Header:
     cy.contains('Browse');
     cy.contains('Help');
-    cy.contains('Logged in');
+    cy.contains('Logged in').click();
+    cy.contains('Globus email: test@gmail.com');
+    cy.contains('Logout from Globus');
 
     // Charts:
     cy.contains('# of Cells per Tissue, by Center');
