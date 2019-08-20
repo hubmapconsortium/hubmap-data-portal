@@ -1,12 +1,21 @@
 /* eslint no-undef: 0 */
 // TODO: Configure eslint to recognize "cy" as a global.
 describe('HuBMAP', () => {
-  before(() => {
+  beforeEach(() => {
     cy.server();
     const api = 'http://localhost:8000/api';
     cy.route(`${api}/?format=json`, 'fixture:base.json');
     cy.route(`${api}/colors/?format=json`, 'fixture:colors.json');
     cy.route(`${api}/genes/?format=json`, 'fixture:genes.json');
+    // Mocking the OAuth response and iframe interaction is hard,
+    // but the UI really just depends on this cookie:
+    cy.setCookie('email', 'test@gmail.com')
+  });
+
+  it('Handles un-logged in', () => {
+    cy.clearCookie('email', 'test@gmail.com');
+    cy.visit('/');
+    cy.contains('Login');
   });
 
   it('Has a homepage', () => {
@@ -15,7 +24,7 @@ describe('HuBMAP', () => {
     // Header:
     cy.contains('Browse');
     cy.contains('Help');
-    cy.contains('Login');
+    cy.contains('Logged in');
 
     // Charts:
     cy.contains('# of Cells per Tissue, by Center');
