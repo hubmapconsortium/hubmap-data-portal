@@ -146,10 +146,10 @@ class SearchBox extends React.Component {
                                         }
                                         return arr;
                                       }, []);
-                                      heatmap.forEach(function(entry) {
+                                      heatmap.forEach(function (entry) {
                                           
-                                        tissues.forEach(function(tissue){
-                                            if(entry[0].includes(tissue))
+                                        tissues.forEach(function (tissue) {
+                                            if (entry[0].includes(tissue))
                                             {
                                               var tissueElement = document.getElementById(tissue);
                                               const animationName = tissue + 'tissueAnimation';
@@ -158,7 +158,7 @@ class SearchBox extends React.Component {
                                                     100% {fill: ${entry[1]}; opacity: 1;}`);
                                                     tissueElement.style.removeProperty("animation");
                                                     tissueElement.addEventListener("animationend", animationEnd);
-                                                    tissueElement.style.setProperty("animation", tissue + 'tissueAnimation' + " 10s linear");
+                                                    tissueElement.style.setProperty("animation", tissue + "tissueAnimation 10s linear");
                                                     tissueElement.style.setProperty("fill", `${entry[1]}`);
                                               console.log(tissueElement);
                                             }

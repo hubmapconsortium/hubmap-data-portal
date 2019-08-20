@@ -68,7 +68,7 @@ class Experiments extends React.Component {
                   <StyledTableCell align="right">{experiment.Unique_barcode_count}</StyledTableCell>
                   <StyledTableCell align="right">{experiment.read_count_total?experiment.read_count_total:null}</StyledTableCell>
                   <StyledTableCell align="right">{experiment.read_count_aligned?experiment.read_count_aligned:null}</StyledTableCell>
-                  <StyledTableCell align="right">{experiment.image_count? experiment._image_count:null}</StyledTableCell>
+                  <StyledTableCell align="right">{experiment.image_count? experiment.image_count:null}</StyledTableCell>
               </StyledTableRow>
             ))
 

@@ -24,7 +24,7 @@ describe('The Login Page',  () =>{
     Cypress.Cookies.debug(false);
   })
 
-  it('sets auth cookie when logging in via form submission', () => {
+  it.skip('sets auth cookie when logging in via form submission', () => {
     cy.visit('/');
     cy.contains('Login');
 
