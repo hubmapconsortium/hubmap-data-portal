@@ -1,5 +1,3 @@
-/* eslint no-undef: 0 */
-// TODO: Configure eslint to recognize "cy" as a global.
 describe('HuBMAP', () => {
   before(() => {
     cy.server();
