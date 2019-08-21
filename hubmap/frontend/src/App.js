@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import RootContainer from './components/RootContainer';

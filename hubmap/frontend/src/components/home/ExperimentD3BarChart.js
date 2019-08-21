@@ -1,7 +1,7 @@
 import * as d3 from 'd3';
 import { Component } from 'react';
 import { Element } from 'react-faux-dom';
-import '../App.css';
+import '../App.scss';
 import data from './data';
 
 class StudyD3BarChart extends Component {
