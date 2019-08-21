@@ -10,13 +10,11 @@ const sample = [
 ];
 
 class ExperimentsBarChart extends React.Component {
-
   componentDidMount() {
     this.drawChart();
   }
 
   drawChart() {
-
     const margin = 60;
     const width = 1000 - 2 * margin;
     const height = 600 - 2 * margin;
@@ -57,30 +55,30 @@ class ExperimentsBarChart extends React.Component {
       .append('g');
 
     barGroups
-      .append("rect")
+      .append('rect')
       .attr('class', 'bar')
-      .attr("x", (s) => xScale(s.center))
-      .attr("y", (s) => yScale(s.May2019))
-      .attr("height", (s) => height - yScale(s.May2019))
-      .attr("width", xScale.bandwidth())
+      .attr('x', (s) => xScale(s.center))
+      .attr('y', (s) => yScale(s.May2019))
+      .attr('height', (s) => height - yScale(s.May2019))
+      .attr('width', xScale.bandwidth())
       .on('mouseenter', function (actual, i) {
-        d3.selectAll(".May2019").attr("opacity", 0);
+        d3.selectAll('.May2019').attr('opacity', 0);
         d3.select(this)
           .transition()
           .duration(300)
           .attr('opacity', 0.6)
-          .attr('x', a => xScale(a.center) - 5)
+          .attr('x', (a) => xScale(a.center) - 5)
           .attr('width', xScale.bandwidth() + 10);
 
-        //const y = yScale(actual.May2019);
-        /*const line = chart.append('line')
+        // const y = yScale(actual.May2019);
+        /* const line = chart.append('line')
         .attr('id', 'limit')
         .attr('x1', 0)
         .attr('y1', y)
         .attr('x2', width)
-        .attr('y2', y);*/
+        .attr('y2', y); */
 
-        /*barGroups.append('text')
+        /* barGroups.append('text')
         //.attr('class', 'divergence')
         .attr('x', a => xScale(a.center) + xScale.bandwidth()/2)
         .attr('y', a => yScale(a.May2019)+30)
@@ -94,63 +92,63 @@ class ExperimentsBarChart extends React.Component {
           //text += `${divergence}`;
 
           return idx ;
-        })*/
+        }) */
       });
-    barGroups.on("mouseleave", function () {
-      d3.selectAll(".May2019").attr("opacity", 1);
+    barGroups.on('mouseleave', function () {
+      d3.selectAll('.May2019').attr('opacity', 1);
 
       d3.select(this)
         .transition()
         .duration(500)
-        .attr("opacity", 1)
-        //.attr("x", a => xScale(a.center))
-        .attr("width", xScale.bandwidth());
+        .attr('opacity', 1)
+        // .attr("x", a => xScale(a.center))
+        .attr('width', xScale.bandwidth());
 
-      //chart.selectAll("#limit").remove();
-      //chart.selectAll(".divergence").remove();
+      // chart.selectAll("#limit").remove();
+      // chart.selectAll(".divergence").remove();
     });
 
     barGroups
-      .append("text")
-      .attr("class", "May2019")
-      .attr("x", a => xScale(a.center) + xScale.bandwidth() / 2)
-      .attr("y", a => yScale(a.May2019) + 30)
-      .attr("fill", "#2F4A6D")
-      .attr("text-anchor", "middle")
-      .text(a => `${a.May2019}`);
+      .append('text')
+      .attr('class', 'May2019')
+      .attr('x', (a) => xScale(a.center) + xScale.bandwidth() / 2)
+      .attr('y', (a) => yScale(a.May2019) + 30)
+      .attr('fill', '#2F4A6D')
+      .attr('text-anchor', 'middle')
+      .text((a) => `${a.May2019}`);
 
     svg
-      .append("text")
-      .attr("class", "label")
-      .attr("x", -(height / 2) - margin)
-      .attr("y", margin / 2.4)
-      .attr("transform", "rotate(-90)")
-      .attr("text-anchor", "middle")
-      .text("# Experiments");
+      .append('text')
+      .attr('class', 'label')
+      .attr('x', -(height / 2) - margin)
+      .attr('y', margin / 2.4)
+      .attr('transform', 'rotate(-90)')
+      .attr('text-anchor', 'middle')
+      .text('# Experiments');
 
     svg
-      .append("text")
-      .attr("class", "label")
-      .attr("x", width / 2 + margin)
-      .attr("y", height + margin * 1.7)
-      .attr("text-anchor", "middle")
-      .text("Center");
+      .append('text')
+      .attr('class', 'label')
+      .attr('x', width / 2 + margin)
+      .attr('y', height + margin * 1.7)
+      .attr('text-anchor', 'middle')
+      .text('Center');
 
     svg
-      .append("text")
-      .attr("class", "title")
-      .attr("x", width / 2 + margin)
-      .attr("y", 40)
-      .attr("text-anchor", "middle")
-      .text("Experiments by Center");
+      .append('text')
+      .attr('class', 'title')
+      .attr('x', width / 2 + margin)
+      .attr('y', 40)
+      .attr('text-anchor', 'middle')
+      .text('Experiments by Center');
 
     svg
-      .append("text")
-      .attr("class", "source")
-      .attr("x", width - margin / 2)
-      .attr("y", height + margin * 1.7)
-      .attr("text-anchor", "start")
-      .text("Source: HuBMAP Consortium, 2019");
+      .append('text')
+      .attr('class', 'source')
+      .attr('x', width - margin / 2)
+      .attr('y', height + margin * 1.7)
+      .attr('text-anchor', 'start')
+      .text('Source: HuBMAP Consortium, 2019');
 
     svg.append('text')
       .attr('x', -(height / 2) - margin)
@@ -158,11 +156,10 @@ class ExperimentsBarChart extends React.Component {
       .attr('transform', 'rotate(-90)')
       .attr('text-anchor', 'middle')
       .attr('# of experiments');
-
   }
 
   render() {
-    return <div id='chartcontainer'><svg id='barchart' ref={svg => this.svg = svg} /></div>;
+    return <div id="chartcontainer"><svg id="barchart" ref={(svg) => this.svg = svg} /></div>;
   }
 }
 
