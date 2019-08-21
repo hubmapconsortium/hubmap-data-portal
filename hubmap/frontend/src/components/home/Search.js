@@ -1,3 +1,16 @@
+// TODO!
+/* eslint-disable camelcase */
+/* eslint-disable import/no-cycle */
+/* eslint-disable max-len */
+/* eslint-disable no-console */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-useless-concat */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';

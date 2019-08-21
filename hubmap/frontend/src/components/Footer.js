@@ -1,3 +1,6 @@
+// TODO!
+/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import '../App.scss';
 import { makeStyles } from '@material-ui/core/styles';

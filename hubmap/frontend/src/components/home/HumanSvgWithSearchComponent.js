@@ -1,3 +1,7 @@
+// TODO!
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-unused-vars */
+
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import HumanAnatomyCard from './HumanSvgComponent';

@@ -1,3 +1,6 @@
+// TODO!
+/* eslint-disable react/prefer-stateless-function */
+
 import React from 'react';
 
 class UserFAQsComponent extends React.Component {

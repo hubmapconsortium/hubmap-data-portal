@@ -1,3 +1,17 @@
+// TODO!
+/* eslint-disable camelcase */
+/* eslint-disable import/no-cycle */
+/* eslint-disable max-len */
+/* eslint-disable no-console */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-param-reassign */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-tabs */
+/* eslint-disable no-unused-vars */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { ReactComponent as ReactComp } from '../../images/Human_body_silhouette_minimal.svg';

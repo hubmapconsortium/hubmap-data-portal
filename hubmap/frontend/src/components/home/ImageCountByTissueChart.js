@@ -1,3 +1,11 @@
+// TODO!
+/* eslint-disable camelcase */
+/* eslint-disable import/no-cycle */
+/* eslint-disable max-len */
+/* eslint-disable no-return-assign */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
+
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 import { connect } from 'react-redux';

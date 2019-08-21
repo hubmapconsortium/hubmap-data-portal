@@ -1,3 +1,7 @@
+// TODO!
+/* eslint-disable no-plusplus */
+/* eslint-disable no-use-before-define */
+
 export { addAnimationToStyle };
 let dynamicStyles = null;
 export default function addAnimationToStyle(animationName, animationSteps) {

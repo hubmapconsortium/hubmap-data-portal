@@ -1,3 +1,7 @@
+// TODO!
+/* eslint-disable no-return-assign */
+/* eslint-disable import/no-unresolved */
+
 import React from 'react';
 import * as d3 from 'd3';
 import './App.scss';

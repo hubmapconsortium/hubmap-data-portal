@@ -1,3 +1,8 @@
+// TODO!
+/* eslint-disable camelcase */
+/* eslint-disable max-len */
+/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 
 import axios from 'axios';
 import * as Constants from '../commons/constants';
