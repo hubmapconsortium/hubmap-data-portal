@@ -4,7 +4,7 @@
 
 let GitVersion;
 try {
-  GitVersion = require('./git-version.json').version;
+  GitVersion = require('./git-version.json').version; // eslint-disable-line import/no-unresolved
 } catch (e) {
   GitVersion = () => '[unknown version]';
 }
