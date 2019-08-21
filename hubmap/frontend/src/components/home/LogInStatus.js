@@ -154,7 +154,7 @@ export default function LogInStatus() {
     return (
       <div className={classes.sectionMenuDesktop}>
         <a href={`${API_URL}auth/login/globus/`} style={{ textDecoration: 'none' }}>
-          <Button color={grey[300]} aria-haspopup="true" id="button-login">
+          <Button color={grey[300]} aria-haspopup="true">
             Login
             <AccountCircle className={classes.rightIcon} />
           </Button>
@@ -166,7 +166,6 @@ export default function LogInStatus() {
     <div className={classes.sectionMenuDesktop}>
       <Button
         color={grey[300]}
-        id="button-menu"
         aria-controls="browse-menu"
         aria-haspopup="true"
         onClick={handleClick}
@@ -176,7 +175,6 @@ export default function LogInStatus() {
         <AccountCircle className={classes.rightIcon} />
       </Button>
       <Menu
-        id="loggedin-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}

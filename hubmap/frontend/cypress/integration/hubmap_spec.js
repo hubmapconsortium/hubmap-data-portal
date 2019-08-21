@@ -9,21 +9,34 @@ describe('HuBMAP', () => {
     cy.route(`${api}/?format=json`, 'fixture:base.json');
     cy.route(`${api}/colors/?format=json`, 'fixture:colors.json');
     cy.route(`${api}/genes/?format=json`, 'fixture:genes.json');
-    // since redirect urls ( multiple HTTP 303/304) are not intercepted by route, are not recommended in cypress.
-    cy.setCookie('email', 'test@gmail.com');
   });
 
   after(() => {
-    cy.server()
-      .clearCookie('email');
+    cy.server();
     const api = 'http://localhost:8000/';
     cy.route(`${api}/api/?format=json`, 'fixture:base.json');
     cy.route(`${api}/api/colors/?format=json`, 'fixture:colors.json');
     cy.route(`${api}/api/genes/?format=json`, 'fixture:genes.json');
+  });
+
+  it('Login and Logout', () => {
+    cy.server();
+    cy.clearCookie('email');
     cy.visit('/');
-    cy.get('#button-login').then((el) => {
-      assert.include(el[0].textContent, 'Login');
+    cy.contains('Login');
+    // since redirect urls ( multiple HTTP 303/304) are not intercepted by route, are not recommended in cypress.
+    cy.setCookie('email', 'test@gmail.com');
+    cy.visit('/');
+    // auth cookie should be present
+    cy.getCookie('email').should('exist');
+
+    // UI should reflect this user being logged in
+    cy.contains('Logged in').click().then(() => {
+      cy.contains('Globus email').should('exist');
+      cy.contains('Logout from Globus').should('exist');
     });
+
+    cy.clearCookie('email');
   });
 
   it('Has a homepage', () => {
@@ -47,20 +60,6 @@ describe('HuBMAP', () => {
 
     // Footer:
     cy.contains('Supported by the NIH Common Fund');
-
-    cy.get('#loggedin-menu').should('exist');
-
-    // auth cookie should be present
-    cy.getCookie('email').should('exist');
-
-    // UI should reflect this user being logged in
-    cy.get('#button-menu').click().then((el) => {
-      assert.include(el[0].textContent, 'Logged in');
-      cy.get('#loggedin-menu').find('li').as('menuitems').then((menuitem) => {
-        assert.include(menuitem.text(), 'Globus email');
-        assert.include(menuitem.text(), 'Logout from Globus');
-      });
-    });
   });
 
   it('Has a working browse menu', () => {
