@@ -2,9 +2,9 @@
 // TODO: Configure eslint to recognize "cy" as a global.
 // We don't click <a> tags here since hrefs redirect to cross-domain urls, which use
 // stubs (to add/remove cookies). HTTP 304 requested urls are not handled by route/request.
+let mount;
 describe('HuBMAP', () => {
   before(() => {
-    Cypress.Cookies.debug(true);
     cy.server();
     const api = 'http://localhost:8000/api';
     cy.route(`${api}/?format=json`, 'fixture:base.json');
@@ -22,8 +22,9 @@ describe('HuBMAP', () => {
     cy.route(`${api}/api/colors/?format=json`, 'fixture:colors.json');
     cy.route(`${api}/api/genes/?format=json`, 'fixture:genes.json');
     cy.visit('/');
-    cy.contains('Login');
-    Cypress.Cookies.debug(false);
+    cy.get('#button-login').then((el) => {
+      assert.include(el[0].textContent, 'Login');
+    });
   });
 
   it('Has a homepage', () => {
@@ -54,11 +55,12 @@ describe('HuBMAP', () => {
     cy.getCookie('email').should('exist');
 
     // UI should reflect this user being logged in
-    cy.get('#loggedinemail').should('contain', 'test@gmail.com').should('exist');
-    cy.get('#loggedin-menu').children().get('#logout-menuitem').should('exist');
-    cy.get('#loggedin-menu').children().get('#logout-menuitem')
-      .children()
-      .get('#logout')
-      .should('exist');
+    cy.get('#button-menu').click().then((el) => {
+      assert.include(el[0].textContent, 'Logged in');
+      cy.get('#loggedin-menu').find('li').as('menuitems').then((menuitem) => {
+        assert.include(menuitem.text(), 'Globus email');
+        assert.include(menuitem.text(), 'Logout from Globus');
+      });
+    });
   });
 });

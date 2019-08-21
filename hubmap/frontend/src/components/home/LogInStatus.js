@@ -153,9 +153,9 @@ export default function LogInStatus() {
   if (email === '' || email === undefined) {
     return (
       <div className={classes.sectionMenuDesktop}>
-        <a id="globuslogin" href={`${API_URL}auth/login/globus/`} style={{ textDecoration: 'none' }}>
+        <a href={`${API_URL}auth/login/globus/`} style={{ textDecoration: 'none' }}>
           <Button color={grey[300]} aria-haspopup="true" id="button-login">
-                        Login
+            Login
             <AccountCircle className={classes.rightIcon} />
           </Button>
         </a>
@@ -171,7 +171,7 @@ export default function LogInStatus() {
         aria-haspopup="true"
         onClick={handleClick}
       >
-          Logged in
+        Logged in
         {' '}
         <AccountCircle className={classes.rightIcon} />
       </Button>
@@ -182,15 +182,15 @@ export default function LogInStatus() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem id="loggedinemail">
+        <MenuItem>
           {' '}
-Globus email:
+          Globus email:
           {email}
           <AccountCircleSharp className={classes.rightIcon} />
         </MenuItem>
-        <MenuItem onClick={handleCloseLogout} id="logout-menuitem">
-          <a id="logout" href={`${API_URL}logout/`} style={{ textDecoration: 'none' }}>
-                            Logout from Globus
+        <MenuItem onClick={handleCloseLogout}>
+          <a href={`${API_URL}logout/`} style={{ textDecoration: 'none' }}>
+            Logout from Globus
             <AccountCircleSharp className={classes.rightIcon} />
           </a>
         </MenuItem>
