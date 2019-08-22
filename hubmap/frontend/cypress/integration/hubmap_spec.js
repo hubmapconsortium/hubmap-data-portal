@@ -1,7 +1,5 @@
 /* eslint no-undef: 0 */
 // TODO: Configure eslint to recognize "cy" as a global.
-// We don't click <a> tags here since hrefs redirect to cross-domain urls, which use
-// stubs (to add/remove cookies). HTTP 304 requested urls are not handled by route/request.
 describe('HuBMAP', () => {
   beforeEach(() => {
     cy.server();
@@ -11,23 +9,11 @@ describe('HuBMAP', () => {
     cy.route(`${api}/genes/?format=json`, 'fixture:genes.json');
   });
 
-  after(() => {
-    cy.server();
-    const api = 'http://localhost:8000/';
-    cy.route(`${api}/api/?format=json`, 'fixture:base.json');
-    cy.route(`${api}/api/colors/?format=json`, 'fixture:colors.json');
-    cy.route(`${api}/api/genes/?format=json`, 'fixture:genes.json');
-  });
-
-  it('Login and Logout', () => {
-    cy.server();
-    cy.clearCookie('email');
-    cy.visit('/');
-    cy.contains('Login');
-    // since redirect urls ( multiple HTTP 303/304) are not intercepted by route, are not recommended in cypress.
+  it('Shows login info when cookie is set', () => {
+    // We don't click the "Login" tag because it redirects to a cross-domain url.
+    // HTTP 304 responses are not handled by Cypress routes.
     cy.setCookie('email', 'test@gmail.com');
     cy.visit('/');
-    // auth cookie should be present
     cy.getCookie('email').should('exist');
 
     // UI should reflect this user being logged in
@@ -36,7 +22,10 @@ describe('HuBMAP', () => {
       cy.contains('Logout from Globus').should('exist');
     });
 
+    // Emulate logout:
     cy.clearCookie('email');
+    cy.visit('/');
+    cy.contains('Login');
   });
 
   it('Has a homepage', () => {
@@ -45,6 +34,7 @@ describe('HuBMAP', () => {
     // Header:
     cy.contains('Browse');
     cy.contains('Help');
+    cy.contains('Login');
 
     // Charts:
     cy.contains('# of Cells per Tissue, by Center');
