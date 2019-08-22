@@ -131,15 +131,15 @@ class SearchBox extends React.Component {
                     this.searchState = store.getState().searchState;
 
                     // extract what we need for gene/tissue from search results
-                    let results = this.searchState.response !== undefined
+                    const results = this.searchState.response !== undefined
                       ? this.searchState.response : '';
-                    let tissues = results.reduce((arr, h) => {
+                    const tissues = results.reduce((arr, h) => {
                       if (h.tissue !== undefined) {
                         arr.push(h.tissue.name.toLowerCase());
                       }
                       return arr;
                     }, []);
-                    let heatmap = results.reduce((arr, h) => {
+                    const heatmap = results.reduce((arr, h) => {
                       if (h.hugo_symbol !== undefined) {
                         arr = Object.entries(h.tissue_expression_heatmap);
                       }
@@ -148,7 +148,7 @@ class SearchBox extends React.Component {
                     heatmap.forEach((entry) => {
                       tissues.forEach((tissue) => {
                         if (entry[0].includes(tissue)) {
-                          let tissueElement = document.getElementById(tissue);
+                          const tissueElement = document.getElementById(tissue);
                           const animationName = `${tissue}tissueAnimation`;
                           Utils.addAnimationToStyle(animationName,
                             `0% {fill: ${entry[1]}; opacity: 0;}
@@ -159,12 +159,12 @@ class SearchBox extends React.Component {
                           tissueElement.style.setProperty('fill', `${entry[1]}`);
                           console.log(tissueElement);
                         } else {
-                          let tissue1 = document.getElementById(tissue);
+                          const tissue1 = document.getElementById(tissue);
                           tissue1.style.setProperty('fill', `${entry[1]}`);
                         }
                       });
                     });
-                    let imgelement = document.getElementById('tab10ColorMap');
+                    const imgelement = document.getElementById('tab10ColorMap');
                     console.log(imgelement);
                     imgelement.style.setProperty('display', 'block');
                   }, []);
