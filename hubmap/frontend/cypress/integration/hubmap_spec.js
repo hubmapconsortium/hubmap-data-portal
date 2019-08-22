@@ -18,10 +18,9 @@ describe('HuBMAP', () => {
 
     // UI should reflect this user being logged in
     cy.contains('Login').should('not.be.visible');
-    cy.contains('Logged in').should('be.visible').click().then(() => {
-      cy.contains('Globus email').should('be.visible');
-      cy.contains('Logout from Globus').should('be.visible');
-    });
+    cy.contains('Logged in').should('be.visible').click();
+    cy.contains('Globus email').should('be.visible');
+    cy.contains('Logout from Globus').should('be.visible');
 
     // Emulate logout:
     cy.clearCookie('email');
