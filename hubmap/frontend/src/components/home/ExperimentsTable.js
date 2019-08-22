@@ -1,3 +1,12 @@
+// TODO!
+/* eslint-disable camelcase */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable max-len */
+/* eslint-disable import/named */
+/* eslint-disable no-return-assign */
+/* eslint-disable import/no-unresolved */
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 import { connect } from 'react-redux';
 import { get_experiments, in_progress } from '../controllers/actions';

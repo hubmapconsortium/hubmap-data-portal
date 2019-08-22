@@ -1,3 +1,17 @@
+// TODO!
+/* eslint-disable camelcase */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable import/no-cycle */
+/* eslint-disable max-len */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-tabs */
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 import MUIDataTable from 'mui-datatables';
 import grey from '@material-ui/core/colors/grey';

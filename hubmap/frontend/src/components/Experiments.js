@@ -1,3 +1,12 @@
+// TODO!
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable react/no-unused-state */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/state-in-constructor */
+
 import React from 'react';
 import grey from '@material-ui/core/colors/grey';
 import PropTypes from 'prop-types';

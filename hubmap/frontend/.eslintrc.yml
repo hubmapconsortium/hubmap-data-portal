@@ -15,40 +15,7 @@ parserOptions:
 plugins:
   - react
 rules:
-  camelcase: 0 # TODO
-  class-methods-use-this: 0 # TODO
-  func-names: 0 # TODO
-  global-require: 0 # TODO
-  import/named: 0 # TODO
-  import/no-cycle: 0 # TODO
-  import/no-extraneous-dependencies: 0 # TODO
-  import/no-mutable-exports: 0 # TODO
-  import/no-unresolved: 0 # TODO
-  import/prefer-default-export: 0 # TODO
-  max-len: 0 # TODO
-  no-console: 0 # TODO
-  no-mixed-spaces-and-tabs: 0 # TODO
-  no-param-reassign: 0 # TODO
-  no-plusplus: 0 # TODO
-  no-return-assign: 0 # TODO
-  no-shadow: 0 # TODO
-  no-tabs: 0 # TODO
-  no-undef: 0 # TODO
-  no-underscore-dangle: 0 # TODO
-  no-unused-expressions: 0 # TODO
-  no-unused-vars: 0 # TODO
-  no-use-before-define: 0 # TODO
-  no-useless-concat: 0 # TODO
-  prefer-const: 0 # TODO
-  prefer-destructuring: 0 # TODO
-  react/destructuring-assignment: 0 # TODO
-  react/forbid-prop-types: 0 # TODO
-  react/jsx-filename-extension: 0 # TODO
-  react/jsx-props-no-spreading: 0 # TODO
-  react/no-access-state-in-setstate: 0 # TODO
-  react/no-unused-state: 0 # TODO
-  react/prefer-stateless-function: 0 # TODO
-  react/prop-types: 0 # TODO
-  react/require-default-props: 0 # TODO
-  react/sort-comp: 0 # TODO
-  react/state-in-constructor: 0 # TODO
+  no-console: [2, { "allow": ["warn", "error"]}]  # Lower levels used for debugging should not be checked in.
+  react/jsx-filename-extension: [0]  # JSX is ubiquitous; We don't need to make it explicit.
+  react/sort-comp: [0]  # Non-alphabetical groupings can make more sense.
+  react/jsx-one-expression-per-line: [0]  # Makes punctuation after tab awkward.

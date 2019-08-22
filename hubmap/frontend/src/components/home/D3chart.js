@@ -1,3 +1,15 @@
+// TODO!
+/* eslint-disable camelcase */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable func-names */
+/* eslint-disable max-len */
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-return-assign */
+/* eslint-disable no-shadow */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
+/* eslint-disable react/prop-types */
+
 import React from 'react';
 import * as d3 from 'd3';
 import { CircularProgress, Typography } from '@material-ui/core';
