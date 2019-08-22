@@ -133,7 +133,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LoggedInStatus() {
+export default function LogInStatus() {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -154,25 +154,27 @@ export default function LoggedInStatus() {
     return (
       <div className={classes.sectionMenuDesktop}>
         <a href={`${API_URL}auth/login/globus/`} style={{ textDecoration: 'none' }}>
-
           <Button color={grey[300]} aria-haspopup="true">
-                        Login
+            Login
             <AccountCircle className={classes.rightIcon} />
           </Button>
         </a>
       </div>
     );
   }
-
   return (
     <div className={classes.sectionMenuDesktop}>
-      <Button color={grey[300]} aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
-                    Logged in
+      <Button
+        color={grey[300]}
+        aria-controls="browse-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        Logged in
         {' '}
         <AccountCircle className={classes.rightIcon} />
       </Button>
       <Menu
-        id="loggedin-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
@@ -180,13 +182,13 @@ export default function LoggedInStatus() {
       >
         <MenuItem>
           {' '}
-Globus email:
+          Globus email:
           {email}
           <AccountCircleSharp className={classes.rightIcon} />
         </MenuItem>
         <MenuItem onClick={handleCloseLogout}>
           <a href={`${API_URL}logout/`} style={{ textDecoration: 'none' }}>
-                            Logout from Globus
+            Logout from Globus
             <AccountCircleSharp className={classes.rightIcon} />
           </a>
         </MenuItem>

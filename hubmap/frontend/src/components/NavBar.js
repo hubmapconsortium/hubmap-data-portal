@@ -21,7 +21,7 @@ import { NavLink } from 'react-router-dom';
 import HubmapLogo from '../images/HuBMAP-Retina-Logo-Color.png';
 
 import MicroscopeIcon from '../icons/MicroscopeIcon';
-import LoggedInStatus from './home/LoggedInStatus';
+import LogInStatus from './home/LogInStatus';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -277,13 +277,11 @@ User FAQs
             </Menu>
           </div>
           <div className={classes.sectionMenuDesktop}>
-
-            <LoggedInStatus />
+            <LogInStatus />
           </div>
           <div className={classes.grow} />
           <div className={classes.grow} />
           <div className={classes.grow} />
-
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -302,7 +300,6 @@ User FAQs
           </div>
         </Toolbar>
       </AppBar>
-
     </div>
   );
 }

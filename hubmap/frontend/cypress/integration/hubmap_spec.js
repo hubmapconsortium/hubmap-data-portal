@@ -1,3 +1,5 @@
+/* eslint no-undef: 0 */
+// TODO: Configure eslint to recognize "cy" as a global.
 describe('HuBMAP', () => {
   beforeEach(() => {
     cy.server();
@@ -5,6 +7,26 @@ describe('HuBMAP', () => {
     cy.route(`${api}/?format=json`, 'fixture:base.json');
     cy.route(`${api}/colors/?format=json`, 'fixture:colors.json');
     cy.route(`${api}/genes/?format=json`, 'fixture:genes.json');
+  });
+
+  it('Shows login info when cookie is set', () => {
+    // We don't click the "Login" tag because it redirects to a cross-domain url.
+    // HTTP 304 responses are not handled by Cypress routes.
+    cy.setCookie('email', 'test@gmail.com');
+    cy.visit('/');
+    cy.getCookie('email').should('exist');
+
+    // UI should reflect this user being logged in
+    cy.contains('Login').should('not.be.visible');
+    cy.contains('Logged in').should('be.visible').click();
+    cy.contains('Globus email').should('be.visible');
+    cy.contains('Logout from Globus').should('be.visible');
+
+    // Emulate logout:
+    cy.clearCookie('email');
+    cy.visit('/');
+    cy.contains('Logged in').should('not.be.visible');
+    cy.contains('Login').should('be.visible');
   });
 
   it('Has a homepage', () => {

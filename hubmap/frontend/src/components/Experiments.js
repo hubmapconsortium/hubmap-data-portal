@@ -75,7 +75,6 @@ class Experiments extends React.Component {
                   <StyledTableCell align="right">{experiment.image_count ? experiment._image_count : null}</StyledTableCell>
                 </StyledTableRow>
               ))
-
               : 'No experiments found'}
           </TableBody>
         </Table>
