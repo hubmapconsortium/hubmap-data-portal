@@ -17,15 +17,17 @@ describe('HuBMAP', () => {
     cy.getCookie('email').should('exist');
 
     // UI should reflect this user being logged in
-    cy.contains('Logged in').click().then(() => {
-      cy.contains('Globus email').should('exist');
-      cy.contains('Logout from Globus').should('exist');
+    cy.contains('Login').should('not.be.visible');
+    cy.contains('Logged in').should('be.visible').click().then(() => {
+      cy.contains('Globus email').should('be.visible');
+      cy.contains('Logout from Globus').should('be.visible');
     });
 
     // Emulate logout:
     cy.clearCookie('email');
     cy.visit('/');
-    cy.contains('Login');
+    cy.contains('Logged in').should('not.be.visible');
+    cy.contains('Login').should('be.visible');
   });
 
   it('Has a homepage', () => {
