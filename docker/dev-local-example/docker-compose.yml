@@ -32,9 +32,6 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
-    expose:
-      - 7474
-      - 7687
   elasticsearch:
     image: elasticsearch:7.2.0
     environment:
@@ -42,15 +39,14 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-    expose:
-      - 9200
-      - 9300
   rabbitmq:
     image: rabbitmq:3.5
     ports:
       - "5672:5672"
-    expose:
-      - 5672
+  mongodb:
+    image: mongo:4.2
+    ports:
+      - "27017:27017"
 #  nginx:
 #    build: nginx
 #    ports:
