@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import { get_gene_tissue_colors, in_progress, searchThis } from '../../middleware/actions';
-import * as Utils from '../../commons/utils';
+import * as Utils from '../../commons/animation-utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
