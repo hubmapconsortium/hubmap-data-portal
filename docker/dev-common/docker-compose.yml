@@ -33,16 +33,12 @@ services:
       - "7474:7474"
       - "7687:7687"
   elasticsearch:
-    image: elasticsearch:7.2.0
+    image: elasticsearch:7.3.1
     environment:
       - discovery.type=single-node
     ports:
       - "9200:9200"
       - "9300:9300"
-  rabbitmq:
-    image: rabbitmq:3.5
-    ports:
-      - "5672:5672"
   mongodb:
     image: mongo:4.2
     ports:
