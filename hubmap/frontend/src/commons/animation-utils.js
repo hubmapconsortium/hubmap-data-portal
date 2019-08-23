@@ -1,8 +1,3 @@
-// TODO!
-/* eslint-disable no-plusplus */
-/* eslint-disable no-use-before-define */
-
-export { addAnimationToStyle };
 let dynamicStyles = null;
 export default function addAnimationToStyle(animationName, animationSteps) {
   // add style
@@ -11,7 +6,7 @@ export default function addAnimationToStyle(animationName, animationSteps) {
     dynamicStyles.type = 'text/css';
     document.head.appendChild(dynamicStyles);
   }
-  for (let i = 0; i < dynamicStyles.sheet.cssRules.length; i++) {
+  for (let i = 0; i < dynamicStyles.sheet.cssRules.length; i += 1) {
     if (dynamicStyles.sheet.cssRules[i].name === animationName) {
       dynamicStyles.sheet.deleteRule(i);
     }

@@ -20,7 +20,7 @@ import { connect } from 'react-redux';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 import { get_gene_tissue_colors, in_progress, searchThis } from '../../middleware/actions';
-import * as Utils from '../../commons/animation-utils';
+import addAnimationToStyle from '../../commons/animation-utils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -127,9 +127,8 @@ class SearchBox extends React.Component {
             }}
             variant="outlined"
             fullWidth
-            onChange={(event, newValue) => {
-              event.persist(); // allow native event access (see: https://facebook.github.io/react/docs/events.html)
-              // give react a function to set the state asynchronously.
+            onChange={(event) => {
+              event.persist(); // allow native event access (see: https://facebook.github.io/react/docs/events.html)-              // give react a function to set the state asynchronously.
               // here it's using the "name" value set on the TextField
               // to set state.person.[firstname|lastname]. event.target.name
               // required for showing animation
@@ -137,7 +136,6 @@ class SearchBox extends React.Component {
             }}
             onKeyPress={(ev) => {
               if (ev.key === 'Enter') {
-                // Do code here
                 // search for tissue+gene
                 this.props.dispatch(searchThis(this.state.searchtext))
                   .then(() => {
@@ -148,7 +146,7 @@ class SearchBox extends React.Component {
                       ? this.searchState.response : '';
                     const tissues = results.reduce((arr, h) => {
                       if (h.tissue !== undefined) {
-                        arr.push(h.tissue.name.toLowerCase());
+                        arr.push(h.tissue.name);
                       }
                       return arr;
                     }, []);
@@ -160,17 +158,15 @@ class SearchBox extends React.Component {
                     }, []);
                     heatmap.forEach((entry) => {
                       tissues.forEach((tissue) => {
-                        if (entry[0].includes(tissue)) {
+                        if (entry[0].includes(tissue.toLowerCase())) {
                           const tissueElement = document.getElementById(tissue);
                           const animationName = `${tissue}tissueAnimation`;
-                          Utils.addAnimationToStyle(animationName,
+                          addAnimationToStyle(animationName,
                             `0% {fill: ${entry[1]}; opacity: 0;}
                                                     100% {fill: ${entry[1]}; opacity: 1;}`);
                           tissueElement.style.removeProperty('animation');
                           tissueElement.addEventListener('animationend', animationEnd);
                           tissueElement.style.setProperty('animation', `${tissue}tissueAnimation 10s linear`);
-                          tissueElement.style.setProperty('fill', `${entry[1]}`);
-                          console.log(tissueElement);
                         } else {
                           const tissue1 = document.getElementById(tissue);
                           tissue1.style.setProperty('fill', `${entry[1]}`);
@@ -178,22 +174,8 @@ class SearchBox extends React.Component {
                       });
                     });
                     const imgelement = document.getElementById('tab10ColorMap');
-                    console.log(imgelement);
                     imgelement.style.setProperty('display', 'block');
                   }, []);
-                ev.preventDefault();
-              }
-            }}
-            onAnimationStart={(ev) => {
-              if (ev.key === 'Enter') {
-                // Do code here
-                ev.preventDefault();
-              }
-            }}
-            onAnimationEnd={(ev) => {
-              if (ev.key === 'Enter') {
-                // Do code here
-
                 ev.preventDefault();
               }
             }}
