@@ -51,6 +51,10 @@ services:
       - "5672:5672"
     expose:
       - 5672
+  mongodb:
+    image: mongo:4.2
+    ports:
+      - "27017:27017"
 #  nginx:
 #    build: nginx
 #    ports:
