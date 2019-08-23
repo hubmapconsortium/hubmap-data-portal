@@ -39,10 +39,6 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
-  rabbitmq:
-    image: rabbitmq:3.5
-    ports:
-      - "5672:5672"
   mongodb:
     image: mongo:4.2
     ports:
