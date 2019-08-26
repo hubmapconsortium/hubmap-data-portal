@@ -1,4 +1,3 @@
-
 export function updateText(textSpanId, tooltipText) {
   const spanEl = document.getElementById(textSpanId);
   while (spanEl.firstChild) {
