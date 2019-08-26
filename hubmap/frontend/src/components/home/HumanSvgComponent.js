@@ -63,7 +63,7 @@ class HumanAnatomyCard extends React.Component {
           utils.setAttributes(pathTrigger, {
             'data-tooltip-text': `${pathTrigger.id},No gene data available`,
           });
-          // exclude the summary (cellcount and imagecount summary) from response array
+          // Last element of `response` is a summary: Use `slice` to exclude it.
           this.experimentState.response.slice(0, -1).forEach((experiment) => {
             if (pathTrigger.id === experiment.tissue.name) {
               utils.setAttributes(pathTrigger, {
