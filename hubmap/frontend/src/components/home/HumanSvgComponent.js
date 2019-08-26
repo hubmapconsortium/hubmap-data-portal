@@ -71,7 +71,7 @@ class HumanAnatomyCard extends React.Component {
               });
             } else if (pathTrigger.id === 'Main') {
               utils.setAttributes(pathTrigger, {
-                'data-tooltip-text': `# experiments:${(this.experimentState.response.length - 1).toString()}, 9 genes`,
+                'data-tooltip-text': `# experiments:${this.experimentState.response.length - 1}, 9 genes`,
               });
             }
           });
