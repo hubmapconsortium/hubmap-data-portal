@@ -35,7 +35,7 @@ export function showToolTip(evt) {
   // Adjust width, length, font-size, and opacity of tooltip textbox.
   setAttributes(tooltipBox,
     {
-      width: `${length + 10}`,
+      width: length + 10,
       height: 30,
       'font-size': 2,
       opacity: 0.6,
