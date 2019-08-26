@@ -43,7 +43,7 @@ export const getExperimentsErrorResponse = (error) => ({
   type: Constants.GET_EXPERIMENTS,
 });
 
-/** *
+/**
  * Fills error details returned by any of get methods from any reducer
  */
 export const getErrorResponse = (error, requestType) => ({
