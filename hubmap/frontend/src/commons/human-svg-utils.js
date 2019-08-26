@@ -16,12 +16,12 @@ export function showToolTip(evt) {
   const tooltip = document.getElementById('tooltip');
   const tooltipText = tooltip.getElementsByTagName('text')[0];
   const tooltipBox = tooltip.getElementsByTagName('rect')[0];
-  // get Human SVG's current transformation matrix.
+  // Get Human SVG's current transformation matrix.
   const CTM = document.getElementById('human').getScreenCTM();
-  // if element has attributes x,y then screen coordinates are of the form ax+e, dy+f.
-  // so find real position of mouse pointer (coordinates) in SVG space i.e. ViewBox
+  // If element has attributes x,y then screen coordinates are of the form ax+e, dy+f.
+  // So find real position of mouse pointer (coordinates) in SVG space i.e. ViewBox
   // by calculating the inverse.
-  // adding 6 and 20 are numbers to: maintain sufficient distance between mouse cursor
+  // Adding 6 and 20 are numbers to: maintain sufficient distance between mouse cursor
   // and the tooltip rectangle.
   const mouseX = (evt.clientX - CTM.e + 6) / CTM.a;
   const mouseY = (evt.clientY - CTM.f + 20) / CTM.d;
@@ -44,5 +44,5 @@ export function showToolTip(evt) {
 export function hideToolTip() {
   const tooltip = document.getElementById('tooltip');
   tooltip.setAttributeNS(null, 'visibility', 'hidden');
-  this.setAttribute('opacity', 1);
+  tooltip.setAttribute('opacity', 1);
 }

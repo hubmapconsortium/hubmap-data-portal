@@ -38,8 +38,10 @@ class HumanAnatomyCard extends React.Component {
         this.experimentState = store.getState().experimentState;
         this.geneTissueColorState = store.getState().geneTissueColorState;
       });
-      if (this.currentState !== '' && this.currentState.status !== Constants.IN_PROGRESS && this.currentState.response !== ''
-            && this.currentState.type === Constants.GET_TISSUE_COLORS) {
+      if (this.currentState !== ''
+      && this.currentState.status !== Constants.IN_PROGRESS
+      && this.currentState.response !== ''
+      && this.currentState.type === Constants.GET_TISSUE_COLORS) {
         get_colors();
       } else {
         in_progress();
