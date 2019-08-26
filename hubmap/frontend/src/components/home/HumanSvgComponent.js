@@ -1,11 +1,10 @@
 // TODO!
-/* eslint-disable camelcase */
 /* eslint-disable import/no-cycle */
 
 import React from 'react';
 import { connect } from 'react-redux';
 import { ReactComponent as HumanSvgReactComp } from '../../images/Human_body_silhouette_minimal.svg';
-import { get_colors, in_progress } from '../../middleware/actions';
+import { getColors, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import * as utils from '../../commons/human-svg-utils';
 import { store } from '../../index';
@@ -35,9 +34,9 @@ class HumanAnatomyCard extends React.Component {
       && this.currentState.status !== Constants.IN_PROGRESS
       && this.currentState.response !== ''
       && this.currentState.type === Constants.GET_TISSUE_COLORS) {
-        get_colors();
+        getColors();
       } else {
-        in_progress();
+        inProgress();
       }
     }
 
