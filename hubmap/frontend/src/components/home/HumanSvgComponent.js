@@ -4,7 +4,6 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { ReactComponent as HumanSvgReactComp } from '../../images/Human_body_silhouette_minimal.svg';
 import { get_colors, in_progress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
@@ -16,12 +15,6 @@ const mapStateToProps = (state) => ({
   response: state.colorsState.response,
   error: state.colorsState.error,
 });
-const mapDispatchToProps = (dispatch) => bindActionCreators(
-  {
-    get_colors,
-    in_progress,
-  }, dispatch,
-);
 
 class HumanAnatomyCard extends React.Component {
     currentState = {};
@@ -84,4 +77,4 @@ class HumanAnatomyCard extends React.Component {
       );
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(HumanAnatomyCard);
+export default connect(mapStateToProps)(HumanAnatomyCard);
