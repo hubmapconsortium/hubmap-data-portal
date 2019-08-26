@@ -61,7 +61,7 @@ class HumanAnatomyCard extends React.Component {
           pathTrigger.addEventListener('mousemove', utils.showToolTip);
           pathTrigger.addEventListener('mouseout', utils.hideToolTip);
           utils.setAttributes(pathTrigger, {
-            'data-tooltip-text': `${pathTrigger.id},No gene data available`,
+            'data-tooltip-text': `${pathTrigger.id}: No gene data available`,
           });
           // Last element of `response` is a summary: Use `slice` to exclude it.
           this.experimentState.response.slice(0, -1).forEach((experiment) => {
