@@ -1,4 +1,3 @@
-
 export function updateText(textSpanId, tooltipText) {
   const spanEl = document.getElementById(textSpanId);
   while (spanEl.firstChild) {
@@ -32,10 +31,10 @@ export function showToolTip(evt) {
   tooltipText.firstChild.data = data;
   updateText('tspanid', text);
   const length = tooltipText.getComputedTextLength();
-  // adjust width length, font-size and opacity of tooltip textbox.
+  // Adjust width, length, font-size, and opacity of tooltip textbox.
   setAttributes(tooltipBox,
     {
-      width: `${length + 10}`,
+      width: length + 10,
       height: 30,
       'font-size': 2,
       opacity: 0.6,
