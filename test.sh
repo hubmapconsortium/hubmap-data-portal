@@ -33,7 +33,7 @@ end eslint
 
 start cypress
 pushd hubmap/frontend
-npm start &
+REACT_APP_STAGE=dev npm run build & serve -s build -l 3000
 SERVER_PID=$!
 $(npm bin)/wait-on http://localhost:3000
 $(npm bin)/cypress run
