@@ -16,7 +16,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import grey from '@material-ui/core/colors/grey';
 import { connect } from 'react-redux';
 import * as Constants from '../../commons/constants';
-import { store } from '../../middleware/createStore';
+import store from '../../middleware/store';
 import { getGeneTissueColorsResponse, inProgress, searchThis } from '../../middleware/actions';
 import addAnimationToStyle from '../../commons/animation-utils';
 

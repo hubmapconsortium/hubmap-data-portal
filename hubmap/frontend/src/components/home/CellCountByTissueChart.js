@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { getExperimentsResponse, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
-import { store } from '../../middleware/createStore';
+import store from '../../middleware/store';
 
 const mapStateToProps = (state) => ({
   status: state.experimentState.status,

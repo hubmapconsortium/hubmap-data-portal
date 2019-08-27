@@ -5,7 +5,7 @@ import { ReactComponent as HumanSvgReactComp } from '../../images/Human_body_sil
 import { getColors, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import * as utils from '../../commons/human-svg-utils';
-import { store } from '../../middleware/createStore';
+import store from '../../middleware/store';
 
 const mapStateToProps = (state) => ({
   status: state.colorsState.status,
