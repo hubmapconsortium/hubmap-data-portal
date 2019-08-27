@@ -43,18 +43,8 @@ export const getExperimentsErrorResponse = (error) => ({
   type: Constants.GET_EXPERIMENTS,
 });
 
-/** *
- * Fills error details returned by any of get methods from any reducer
- */
-export const getErrorResponse = (error, requestType) => ({
-  status: Constants.FAILURE,
-  response: {},
-  error: { error },
-  type: requestType,
-});
-
 /**
- * Fills study state props here after any of get methods from experiments reducer
+ * Fills study state props here after any of get methods from colors reducer
  * @param {Props object} response
  */
 export function getGeneTissueColorsResponse(response) {
@@ -182,7 +172,7 @@ export function searchThis(searchTerm) {
       const response = await axios.get(API_URL + Constants.SEARCH_EXPERIMENTS_REST_API + searchTerm);
       return dispatch(searchExperimentsResponse(response.data));
     } catch (error) {
-      return dispatch(getErrorResponse(error, Constants.SEARCH_EXPERIMENTS));
+      return dispatch(getExperimentsErrorResponse(error));
     }
   };
 }
