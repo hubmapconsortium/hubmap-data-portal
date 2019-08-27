@@ -1,5 +1,4 @@
 // TODO!
-/* eslint-disable camelcase */
 /* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 /* eslint-disable no-return-assign */
@@ -10,7 +9,7 @@ import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 import { connect } from 'react-redux';
 import { CircularProgress, Typography } from '@material-ui/core';
-import { get_experiments, in_progress } from '../../middleware/actions';
+import { getExperimentsResponse, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import { store } from '../../index';
 
@@ -29,9 +28,9 @@ class ImageCountByTissuesChart extends PureComponent {
       store.subscribe(() => this.currentState = store.getState().experimentState);
       if (this.currentState !== '' && this.currentState.status !== Constants.IN_PROGRESS
             && this.currentState.response !== {} && this.currentState.type === Constants.GET_EXPERIMENTS) {
-        this.props.dispatch(get_experiments(this.currentState));
+        this.props.dispatch(getExperimentsResponse(this.currentState));
       } else if (this.currentState.type === Constants.GET_EXPERIMENTS && this.currentState.status === Constants.IN_PROGRESS) {
-        this.props.dispatch(in_progress());
+        this.props.dispatch(inProgress());
       }
     }
 

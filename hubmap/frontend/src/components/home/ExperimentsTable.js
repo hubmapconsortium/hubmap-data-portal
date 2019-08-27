@@ -1,5 +1,4 @@
 // TODO!
-/* eslint-disable camelcase */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable max-len */
 /* eslint-disable import/named */
@@ -9,7 +8,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { get_experiments, in_progress } from '../controllers/actions';
+import { getExperimentsResponse, inProgress } from '../controllers/actions';
 import * as Constants from '../../commons/constants';
 import { hubmapStore } from '../../index';
 import MaterialTableDemo from './MUITable';
@@ -34,9 +33,9 @@ class ExperimentsTable extends React.Component {
       hubmapStore.subscribe(() => this.currentState = hubmapStore.getState());
       if (this.currentState !== '' && this.currentState.status !== Constants.IN_PROGRESS
             && this.currentState.response !== {} && this.currentState.type === Constants.GET_EXPERIMENTS) {
-        this.props.dispatch(get_experiments());
+        this.props.dispatch(getExperimentsResponse());
       } else if (this.currentState.type === Constants.GET_EXPERIMENTS && this.currentState.status === Constants.IN_PROGRESS) {
-        this.props.dispatch(in_progress());
+        this.props.dispatch(inProgress());
       }
     }
 
