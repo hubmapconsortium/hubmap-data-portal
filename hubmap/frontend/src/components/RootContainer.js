@@ -1,6 +1,3 @@
-// TODO!
-/* eslint-disable import/no-cycle */
-
 import React from 'react';
 import Container from '@material-ui/core/Container';
 import { Route, BrowserRouter } from 'react-router-dom';

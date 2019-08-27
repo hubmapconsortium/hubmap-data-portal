@@ -1,5 +1,4 @@
 // TODO!
-/* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 /* eslint-disable no-return-assign */
 /* eslint-disable react/destructuring-assignment */
@@ -11,7 +10,7 @@ import { connect } from 'react-redux';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { getExperimentsResponse, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
-import { store } from '../../index';
+import store from '../../middleware/store';
 
 const mapStateToProps = (state) => ({
   status: state.experimentState.status,
