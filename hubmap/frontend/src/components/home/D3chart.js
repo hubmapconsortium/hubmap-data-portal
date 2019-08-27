@@ -13,7 +13,7 @@ import * as d3 from 'd3';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { getExperimentsResponse, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
-import { store } from '../../middleware/createStore';
+import store from '../../middleware/store';
 
 class ImageCountStackedChart extends React.Component {
   currentState = {};
