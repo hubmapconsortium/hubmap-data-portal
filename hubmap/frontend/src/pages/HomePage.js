@@ -10,7 +10,7 @@ import HumanSvg from '../components/home/HumanSvgWithSearchComponent';
 import CellCountByTissueChart from '../components/home/CellCountByTissueChart';
 import ImageCountByTissuesChart from '../components/home/ImageCountByTissueChart';
 import MaterialTableDemo from '../components/home/MUITable';
-import ExperimentsBarChart from '../components/home/BarChart';
+import ExperimentsBarChart from '../components/home/ExperimentsBarChart';
 import ImageCountStackedChart from '../components/home/D3chart';
 import viridis from '../images/viridis.png';
 import * as actions from '../middleware/actions';

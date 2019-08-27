@@ -74,30 +74,6 @@ class ExperimentsBarChart extends React.Component {
           .attr('opacity', 0.6)
           .attr('x', (a) => xScale(a.center) - 5)
           .attr('width', xScale.bandwidth() + 10);
-
-        // const y = yScale(actual.May2019);
-        /* const line = chart.append('line')
-        .attr('id', 'limit')
-        .attr('x1', 0)
-        .attr('y1', y)
-        .attr('x2', width)
-        .attr('y2', y); */
-
-        /* barGroups.append('text')
-        //.attr('class', 'divergence')
-        .attr('x', a => xScale(a.center) + xScale.bandwidth()/2)
-        .attr('y', a => yScale(a.May2019)+30)
-        .attr("fill", "white")
-        .attr("text-anchor", "middle")
-        .text((a, idx) => {
-          //const divergence = (a.May2019 - actual.May2019).toFixed(1);
-
-          let text = "";
-          //if (divergence > 0) text += "+";
-          //text += `${divergence}`;
-
-          return idx ;
-        }) */
       });
     barGroups.on('mouseleave', function () {
       d3.selectAll('.May2019').attr('opacity', 1);
@@ -106,11 +82,7 @@ class ExperimentsBarChart extends React.Component {
         .transition()
         .duration(500)
         .attr('opacity', 1)
-        // .attr("x", a => xScale(a.center))
         .attr('width', xScale.bandwidth());
-
-      // chart.selectAll("#limit").remove();
-      // chart.selectAll(".divergence").remove();
     });
 
     barGroups
