@@ -2,7 +2,6 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable func-names */
 /* eslint-disable max-len */
-/* eslint-disable import/no-cycle */
 /* eslint-disable no-return-assign */
 /* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
@@ -14,7 +13,7 @@ import * as d3 from 'd3';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { getExperimentsResponse, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
-import { store } from '../../index';
+import { store } from '../../middleware/createStore';
 
 class ImageCountStackedChart extends React.Component {
   currentState = {};

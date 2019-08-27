@@ -1,7 +1,6 @@
 // TODO!
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable max-len */
-/* eslint-disable import/no-cycle */
 /* eslint-disable react/prop-types */
 
 import './App.scss';
