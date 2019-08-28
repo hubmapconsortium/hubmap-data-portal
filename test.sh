@@ -33,6 +33,7 @@ end eslint
 
 start cypress
 pushd hubmap/frontend
+echo '{"version": "unknown"}' > src/git-version.json
 REACT_APP_STAGE=dev npm run build
 pushd build
 python3 -m http.server --bind localhost 3000 &
