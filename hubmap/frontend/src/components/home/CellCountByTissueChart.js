@@ -1,9 +1,3 @@
-// TODO!
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable max-len */
-/* eslint-disable no-return-assign */
-/* eslint-disable react/prop-types */
-
 import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 import { connect } from 'react-redux';
@@ -24,12 +18,15 @@ class CellCountByTissueChart extends PureComponent {
     previousState = {};
 
     componentDidMount() {
-      store.subscribe(() => this.currentState = store.getState().experimentState);
-      if (this.currentState !== '' && this.currentState.status !== Constants.IN_PROGRESS
-            && this.currentState.response !== {} && this.currentState.type === Constants.GET_EXPERIMENTS) {
-        this.props.dispatch(getExperimentsResponse(this.currentState));
-      } else if (this.currentState.type === Constants.GET_EXPERIMENTS && this.currentState.status === Constants.IN_PROGRESS) {
-        this.props.dispatch(inProgress());
+      store.subscribe(() => { this.currentState = store.getState().experimentState; });
+      if (this.currentState !== ''
+      && this.currentState.status !== Constants.IN_PROGRESS
+        && this.currentState.response !== {}
+        && this.currentState.type === Constants.GET_EXPERIMENTS) {
+        getExperimentsResponse(this.currentState);
+      } else if (this.currentState.type === Constants.GET_EXPERIMENTS
+        && this.currentState.status === Constants.IN_PROGRESS) {
+        inProgress();
       }
     }
 
@@ -41,7 +38,7 @@ class CellCountByTissueChart extends PureComponent {
       if (error) {
         return (
           <div>
-Error!
+            Error!
             {error.message}
           </div>
         );
@@ -106,7 +103,9 @@ Error!
           </div>
         );
       }
-      if (status === Constants.IN_PROGRESS && response === undefined && type === Constants.GET_EXPERIMENTS) {
+      if (status === Constants.IN_PROGRESS
+        && response === undefined
+        && type === Constants.GET_EXPERIMENTS) {
         return (
           <CellCountByTissueChart
             size="medium"
@@ -125,6 +124,3 @@ Experiments From HuBMAP Consortium
     }
 }
 export default connect(mapStateToProps)(CellCountByTissueChart);
-// () => (
-//  <StudiesChart />
-// )
