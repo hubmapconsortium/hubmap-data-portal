@@ -6,6 +6,7 @@ import { List, ListItem, ListItemText } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import PropTypes from 'prop-types';
 import Chip from './Chip';
 
 const StyledMenu = withStyles({
@@ -39,29 +40,34 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
-class DropdownMenu extends React.Component {
+export default class DropdownMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuitems: {},
       anchorEl: null,
-      setAnchorEl: null,
+      open: false,
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleClose = this.handleClose.bind(this);
   }
 
   handleClick(event) {
-    const { setAnchorEl } = this.state;
-    setAnchorEl(event.currentTarget);
+    event.preventDefault();
+    const { open } = this.state;
+    this.setState({
+      anchorEl: event.currentTarget,
+      open: !open,
+    });
   }
 
   handleClose() {
-    const { setAnchorEl } = this.state;
-    setAnchorEl(null);
+    this.setState({
+      open: false,
+    });
   }
 
   handleMenuItemClick(event) {
+    console.log(event.currentTarget)
     // add Chip to Browse data page
     // filter data in ExperimentTables
     // show a one-line summary on Browse page
@@ -70,7 +76,8 @@ class DropdownMenu extends React.Component {
     menuitems = this.state;
 
     render() {
-      const { menuitems, anchorEl } = this.state;
+      const { anchorEl, open } = this.state;
+      const { menuitems, menuname } = this.props;
       return (
         <div>
           <Button
@@ -80,19 +87,21 @@ class DropdownMenu extends React.Component {
             color="#f5f5f5"
             onClick={this.handleClick}
           >
-                    Open Menu
+            {menuname}
           </Button>
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorEl}
             keepMounted
-            open={Boolean(anchorEl)}
-            onClose={this.handleClose}
-          >
-            {menuitems ? menuitems.array.forEach((menuitem) => (
-              <StyledMenuItem onSelect={(event) => this.handleMenuItemClick(event)}>
-                <ListItemText primary={menuitem} />
-              </StyledMenuItem>
+            open={open}
+            onClose={this.handleClose} >
+                <MenuItem key={menuitems[0]} disabled={true}>
+                {menuitems[0]}
+              </MenuItem>
+            { menuitems ? menuitems.slice(1,menuitems.length).map((menuitem) => (
+              <MenuItem key={menuitem} selected={menuitem === 'Homo Sapiens'} onClick={this.handleMenuItemClick}>
+                {menuitem}
+              </MenuItem>
             ))
               : ''};
           </StyledMenu>
@@ -100,3 +109,11 @@ class DropdownMenu extends React.Component {
       );
     }
 }
+DropdownMenu.defaultProps = {
+  menuitems: ['empty'],
+  menuname: 'Menu'
+};
+DropdownMenu.propTypes = {
+  menuitems: PropTypes.array,
+  menuname: PropTypes.string,
+};
