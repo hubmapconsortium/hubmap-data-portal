@@ -11,21 +11,26 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
+import { DropdownMenu } from '../../ui-components/';
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-  },
+const useStyles = makeStyles((theme) => ({
   chip: {
     margin: theme.spacing(1),
   },
+  textField: {
+    backgroundColor: '#ffffff',
+  },
 }));
 
-class DonorDropdownList extends PureComponent {
-  render() {
-    return <div />;
-  }
+export default function DonorDropdown() {
+  const menuitems = ['Species', 'Homo Sapiens', 'Mus musculus']
+  return (
+    <DropdownMenu
+      className={useStyles.textField}
+      margin="normal"
+      variant="outlined"
+      menuitems={ menuitems}
+      menuname="Donor"
+    />
+  );
 }
