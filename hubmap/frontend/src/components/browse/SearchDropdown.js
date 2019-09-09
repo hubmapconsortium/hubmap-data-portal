@@ -10,12 +10,24 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
+import { CustomSearchInput } from '../../ui-components/';
 
-class SearchDropdown extends PureComponent{
-    render(){
-        return ( 
-            <div></div>
-        );
-    }
+const useStyles = makeStyles((theme) => ({
+    chip: {
+      margin: theme.spacing(1),
+    },
+    textField: {
+      backgroundColor: '#ffffff',
+    },
+  }));
 
+export default function SearchDropdown() {
+  return (<CustomSearchInput
+    id="filled-search"
+    label="Search"
+    type="search"
+    className={useStyles.textField}
+    margin="normal"
+    variant="outlined"
+  />);
 }

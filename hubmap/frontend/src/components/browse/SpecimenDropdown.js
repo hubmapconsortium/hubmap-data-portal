@@ -11,8 +11,6 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 
-class SpecimenComponent extends PureComponent{
-    render(){
-        return <div></div>;
-    }
+export default function SpecimenComponent() {
+  return (<div />);
 }
