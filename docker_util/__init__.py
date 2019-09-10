@@ -29,6 +29,11 @@ CONTAINER_LABELS.update(f'{CONTAINER_LABEL_BASE}-{suffix}' for suffix in CONTAIN
 
 REPOSITORY_PATH = Path('/opt/hubmap-data-portal')
 
+MANAGE_PY_COMMAND_TEMPLATE: List[str] = [
+    'python3',
+    str(REPOSITORY_PATH / 'hubmap/manage.py'),
+]
+
 def get_running_containers() -> List[str]:
     # Want to return a list instead of this being a generator function,
     # because we care quite a bit about the length of the resulting list

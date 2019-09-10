@@ -2,11 +2,9 @@
 from argparse import ArgumentParser
 from typing import List
 
-from docker_util import run_in_django_container
+from docker_util import MANAGE_PY_COMMAND_TEMPLATE, run_in_django_container
 
-MIGRATE_COMMAND: List[str] = [
-    'python3',
-    '/opt/hubmap-data-portal/hubmap/manage.py',
+MIGRATE_COMMAND: List[str] = MANAGE_PY_COMMAND_TEMPLATE + [
     'migrate',
     '--force-color',
 ]

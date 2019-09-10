@@ -4,12 +4,10 @@ from pathlib import Path
 from shutil import copy
 from typing import List
 
-from docker_util import REPOSITORY_PATH, run_in_django_container
+from docker_util import MANAGE_PY_COMMAND_TEMPLATE, REPOSITORY_PATH, run_in_django_container
 
 DATA_PATH = Path(__file__).parent / 'data'
-LOAD_DATA_COMMAND: List[str] = [
-    'python3',
-    str(REPOSITORY_PATH / 'hubmap/manage.py'),
+LOAD_DATA_COMMAND: List[str] = MANAGE_PY_COMMAND_TEMPLATE + [
     'metadata_import',
     '--force-color',
 ]
