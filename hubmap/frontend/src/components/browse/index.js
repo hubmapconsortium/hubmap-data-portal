@@ -1,9 +1,8 @@
-/***
+/** *
  * This exports all required components for browse data page.
  */
 
- export {SearchDropdown} from './SearchDropdown';
- export {SpecimenDropdown} from './SpecimenDropdown';
- export {DonorDropdown} from './DonorDropdown';
- export {ExperimentsTable} from './ExperimentsTable';
- export {BrowseDataComponent} from './BrowseDataComponent';
+export { default as SearchDropdown } from './SearchDropdown';
+export { default as SpecimenDropdown } from './SpecimenDropdown';
+export { default as DonorDropdown } from './DonorDropdown';
+export { default as ExperimentsTable } from './ExperimentsTable';
