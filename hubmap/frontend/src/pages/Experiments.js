@@ -30,7 +30,7 @@ export default class Experiments extends React.Component {
           <Grid item xs={12}>            
           <Title>Explore Experiments data</Title>
           </Grid>
-          <Grid item xs={3}  style={{ marginLeft:'-80px' }}>
+          <Grid item xs={3}  >
           <SearchDropdown />
           </Grid>
           <Grid item xs={3} >
@@ -40,8 +40,10 @@ export default class Experiments extends React.Component {
           <DonorDropdown />
           </Grid>
           <Grid item xs={3}>
-          <DonorDropdown />
+          <SpecimenDropdown />
           </Grid>
+          <Grid item xs={12}></Grid>
+          <Grid item xs={12}></Grid>
           <Grid item xs={12}>            
 
           <ExperimentsTable />
