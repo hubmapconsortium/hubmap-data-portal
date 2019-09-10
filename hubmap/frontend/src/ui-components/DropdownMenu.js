@@ -8,6 +8,12 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import PropTypes from 'prop-types';
 import Chip from './Chip';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const StyledMenu = withStyles({
   paper: {
@@ -40,6 +46,40 @@ const StyledMenuItem = withStyles((theme) => ({
   },
 }))(MenuItem);
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    maxWidth: 300,
+  },
+  chips: {
+    display: 'flex',
+    flexWrap: 'wrap',
+  },
+  chip: {
+    margin: 2,
+  },
+  noLabel: {
+    marginTop: theme.spacing(3),
+  },
+}));
+
+const ITEM_HEIGHT = 48;
+const ITEM_PADDING_TOP = 8;
+const MenuProps = {
+  PaperProps: {
+    style: {
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      width: 250,
+    },
+  },
+};
+
+
 export default class DropdownMenu extends React.Component {
   constructor(props) {
     super(props);
@@ -67,7 +107,7 @@ export default class DropdownMenu extends React.Component {
   }
 
   handleMenuItemClick(event) {
-    console.log(event.currentTarget)
+    console.log(event.currentTarget, event.target.outerText);
     // add Chip to Browse data page
     // filter data in ExperimentTables
     // show a one-line summary on Browse page
@@ -94,12 +134,12 @@ export default class DropdownMenu extends React.Component {
             anchorEl={anchorEl}
             keepMounted
             open={open}
-            onClose={this.handleClose} >
-                <MenuItem key={menuitems[0]} disabled={true}>
-                {menuitems[0]}
-              </MenuItem>
+            onClose={this.handleClose}>
+            <MenuItem key={menuitems[0]} disabled>
+              {menuitems[0]}
+            </MenuItem>
             { menuitems ? menuitems.slice(1,menuitems.length).map((menuitem) => (
-              <MenuItem key={menuitem} selected={menuitem === 'Homo Sapiens'} onClick={this.handleMenuItemClick}>
+              <MenuItem key={menuitem} onClick={this.handleMenuItemClick}>
                 {menuitem}
               </MenuItem>
             ))
