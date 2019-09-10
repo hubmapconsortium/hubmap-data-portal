@@ -225,3 +225,16 @@ def flatten(orderedDict):
         else:
             result.append(item)
     return result
+
+# TODO: figure out if there's a better place for this
+def normalize_whitespace(string: str) -> str:
+    """
+    :param string: Text input
+    :return: A version of `string` with all consecutive runs of whitespace
+     (tabs, newlines, multiple spaces in a row, etc.) replaced by single spaces.
+
+    >>> s = '\\n    A string containing\\n    \\tnewlines and more\\t\\n'
+    >>> normalize_whitespace(s)
+    'A string containing newlines and more'
+    """
+    return ' '.join(string.split())
