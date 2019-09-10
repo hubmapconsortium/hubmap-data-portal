@@ -10,24 +10,30 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import { CustomSearchInput } from '../../ui-components/';
+import { CustomSearchInput, ControlledChipInput } from '../../ui-components/';
 
 const useStyles = makeStyles((theme) => ({
-    chip: {
-      margin: theme.spacing(1),
-    },
-    textField: {
-      backgroundColor: '#ffffff',
-    },
-  }));
+  chip: {
+    margin: theme.spacing(1),
+  },
+  textField: {
+    backgroundColor: '#ffffff',
+  },
+}));
 
-export default function SearchDropdown() {
-  return (<CustomSearchInput
-    id="filled-search"
-    label="Search"
-    type="search"
-    className={useStyles.textField}
-    margin="normal"
-    variant="outlined"
-  />);
+export default class SearchDropdown extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchtext: '',
+    };
+  }
+
+  render() {
+    return (
+      <div>  
+        <ControlledChipInput />        
+      </div>
+    );
+  }
 }

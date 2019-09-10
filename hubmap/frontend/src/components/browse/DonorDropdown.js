@@ -11,7 +11,7 @@ import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
-import { DropdownMenu } from '../../ui-components/';
+import { DropdownMenu, SelectDropdown } from '../../ui-components/';
 
 const useStyles = makeStyles((theme) => ({
   chip: {
@@ -25,12 +25,15 @@ const useStyles = makeStyles((theme) => ({
 export default function DonorDropdown() {
   const menuitems = ['Species', 'Homo Sapiens', 'Mus musculus']
   return (
-    <DropdownMenu
-      className={useStyles.textField}
-      margin="normal"
+      <div>
+  
+    <DropdownMenu 
+    margin="normal"
       variant="outlined"
       menuitems={ menuitems}
       menuname="Donor"
+      width='200px'
     />
+    </div>
   );
 }
