@@ -3,13 +3,13 @@ from pathlib import Path
 from django.conf import settings
 from django.core.management.base import BaseCommand
 
-from ._metadata_import import metadata_import
 from ...utils import normalize_whitespace
+from ._metadata_import import metadata_import
 
 
 class Command(BaseCommand):
     help = normalize_whitespace('''
-        Import a metadata file from the Human Cell Atlas project (e.g. 
+        Import a metadata file from the Human Cell Atlas project (e.g.
         the "Project Metadata" download from
         https://data.humancellatlas.org/explore/projects/8c3c290d-dfff-4553-8868-54ce45f4ba7f
     ''')

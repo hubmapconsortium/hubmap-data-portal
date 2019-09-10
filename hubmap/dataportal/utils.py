@@ -226,6 +226,7 @@ def flatten(orderedDict):
             result.append(item)
     return result
 
+
 # TODO: figure out if there's a better place for this
 def normalize_whitespace(string: str) -> str:
     """

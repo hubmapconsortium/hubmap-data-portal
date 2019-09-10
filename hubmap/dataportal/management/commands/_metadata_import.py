@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 import base64
+import json
 from binascii import unhexlify
 from collections import Mapping, Sequence, defaultdict
 from hashlib import sha256
-import json
 from math import isnan
 from pathlib import Path
 from typing import Dict, List, Union
 
-from elasticsearch import Elasticsearch
-from frozendict import frozendict
-from neo4j import Driver as Neo4jDriver, GraphDatabase
 import networkx as nx
 import pandas as pd
+from elasticsearch import Elasticsearch
+from frozendict import frozendict
+from neo4j import Driver as Neo4jDriver
+from neo4j import GraphDatabase
 from pymongo import MongoClient
+
 
 def infinite_defaultdict():
     return defaultdict(infinite_defaultdict)
+
 
 def value_adjust(row):
     for item in row:
@@ -24,6 +27,7 @@ def value_adjust(row):
             yield None
         else:
             yield item
+
 
 def freeze(data):
     """
@@ -41,6 +45,7 @@ def freeze(data):
         return tuple(freeze(value) for value in data)
     return data
 
+
 def unfreeze(data):
     if isinstance(data, Mapping):
         return dict(
@@ -50,6 +55,7 @@ def unfreeze(data):
     elif isinstance(data, Sequence) and not isinstance(data, str):
         return [unfreeze(value) for value in data]
     return data
+
 
 def read_hca_metadata(metadata_file: Path) -> nx.DiGraph:
     """
@@ -92,20 +98,25 @@ def read_hca_metadata(metadata_file: Path) -> nx.DiGraph:
 
     return g
 
+
 def get_node_id(serialized: str):
     return sha256(serialized.encode('utf-8')).hexdigest()
+
 
 def hash_to_accn_number(hash_str: str) -> str:
     b = unhexlify(hash_str)
     encoded = base64.b32encode(b).rstrip(b'=').decode('utf-8')
     return encoded[:9]
 
+
 def hash_to_accn(hash_str: str) -> str:
     return 'HBM0' + hash_to_accn_number(hash_str)
+
 
 def get_node_accn(serialized: str):
     h = get_node_id(serialized)
     return hash_to_accn(h)
+
 
 def add_node(tx, node):
     tx.run(
@@ -122,6 +133,7 @@ def add_node(tx, node):
         type=node['type'],
     )
 
+
 def add_edge(tx, n1, n2):
     tx.run(
         """
@@ -134,6 +146,7 @@ def add_edge(tx, n1, n2):
         id1=n1['id'],
         id2=n2['id'],
     )
+
 
 def neo4j_import(driver, graph: nx.DiGraph):
     serialized_nodes = {}
@@ -154,6 +167,7 @@ def neo4j_import(driver, graph: nx.DiGraph):
         for n1, n2 in graph.edges:
             session.write_transaction(add_edge, serialized_nodes[n1], serialized_nodes[n2])
 
+
 def index_from_graph(
         neo4j_driver: Neo4jDriver,
         mongo_client: MongoClient,
@@ -168,7 +182,7 @@ def index_from_graph(
             """
             MATCH (e:Entity)-->(m:Metadata)
             RETURN e.id, e.type, m.metadata
-            """
+            """,
         )
         for record in results:
             # deserialize value, add ID for Mongo
@@ -191,6 +205,7 @@ def index_from_graph(
             # Can't quite use `insert_many` yet, since we need to dispatch to a
             #  different collection for each item
             collection.insert_one(metadata)
+
 
 def metadata_import(
         metadata_file: Path,
