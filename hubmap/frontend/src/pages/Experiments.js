@@ -9,6 +9,7 @@ import {
   SpecimenDropdown,
   DonorDropdown,
 } from '../components/browse';
+import { BaseDropdownPanel, DropdownMenu } from '../ui-components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,31 +26,31 @@ export default class Experiments extends React.Component {
 
   render() {
     return (
-        <div className={useStyles.root}>
+      <div className={useStyles.root}>
         <Grid container spacing={3} style={{marginTop: '150px'}} justify="left" alignItems="left">
           <Grid item xs={12}>            
-          <Title>Explore Experiments data</Title>
-          </Grid>
-          <Grid item xs={3}  >
-          <SearchDropdown />
+            <Title>Explore Experiments data</Title>
           </Grid>
           <Grid item xs={3} >
-          <DonorDropdown />
+            <SearchDropdown />
+          </Grid>
+          <Grid item xs={3} >
+            <DonorDropdown />
           </Grid>
           <Grid item xs={3}>
-          <DonorDropdown />
+            <DonorDropdown />
           </Grid>
           <Grid item xs={3}>
-          <SpecimenDropdown />
+            <DropdownMenu />
           </Grid>
-          <Grid item xs={12}></Grid>
-          <Grid item xs={12}></Grid>
+          <Grid item xs={12} />
+          <Grid item xs={12} />
           <Grid item xs={12}>            
 
-          <ExperimentsTable />
+            <ExperimentsTable />
           </Grid>
         </Grid>
-        </div>
+      </div>
     );
   }
 }
