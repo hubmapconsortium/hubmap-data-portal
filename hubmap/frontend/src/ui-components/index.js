@@ -7,3 +7,4 @@ export { default as DropdownMenu } from './DropdownMenu';
 export { default as CustomSearchInput } from './CustomSearchInput';
 export { default as ControlledChipInput } from './ControlledChipInput';
 export { default as SelectDropdown } from './SelectDropdown';
+export { default as BaseDropdownPanel } from './BaseDropdownPanel';
