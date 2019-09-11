@@ -2,7 +2,7 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import { List, ListItem, ListItemText } from '@material-ui/core';
+import { List, ListItem, ListItemText, Paper, Checkbox, TextField, FormLabel } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,7 +13,10 @@ import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+
 
 const StyledMenu = withStyles({
   paper: {
@@ -52,9 +55,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-    maxWidth: 300,
+    margin: theme.spacing(3),
   },
   chips: {
     display: 'flex',
@@ -97,6 +98,9 @@ export default class DropdownMenu extends React.Component {
     this.setState({
       anchorEl: event.currentTarget,
       open: !open,
+      gilad: true,
+      jason: false,
+      antoine: false,
     });
   }
 
@@ -105,6 +109,11 @@ export default class DropdownMenu extends React.Component {
       open: false,
     });
   }
+
+   handleChange = name => event => {
+    this.setState({ ...this.state, [name]: event.target.checked });
+  };
+
 
   handleMenuItemClick(event) {
     console.log(event.currentTarget, event.target.outerText);
@@ -116,7 +125,7 @@ export default class DropdownMenu extends React.Component {
     menuitems = this.state;
 
     render() {
-      const { anchorEl, open } = this.state;
+      const { anchorEl, open,  gilad, jason, antoine  } = this.state;
       const { menuitems, menuname } = this.props;
       return (
         <div>
@@ -134,6 +143,7 @@ export default class DropdownMenu extends React.Component {
             anchorEl={anchorEl}
             keepMounted
             open={open}
+            onClick={this.handleClick}
             onClose={this.handleClose}>
             <MenuItem key={menuitems[0]} disabled>
               {menuitems[0]}
@@ -144,6 +154,29 @@ export default class DropdownMenu extends React.Component {
               </MenuItem>
             ))
               : ''};
+
+                  <Paper>
+                  <FormControl component="fieldset" className={useStyles.formControl}>
+                        <FormLabel component="legend">Assign responsibility</FormLabel>
+                        <FormGroup>
+                        <FormControlLabel
+                            control={<Checkbox checked={gilad} onChange={this.handleChange('gilad')} value="gilad" />}
+                            label="Gilad Gray"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox checked={jason} onChange={this.handleChange('jason')} value="jason" />}
+                            label="Jason Killian"
+                        />
+                        <FormControlLabel
+                            control={
+                            <Checkbox checked={antoine} onChange={this.handleChange('antoine')} value="antoine" />
+                            }
+                            label="Antoine Llorca"
+                        />
+                        </FormGroup>
+                        <FormHelperText>**</FormHelperText>
+                    </FormControl>
+                  </Paper>
           </StyledMenu>
         </div>
       );
