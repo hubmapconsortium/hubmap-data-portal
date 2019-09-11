@@ -1,0 +1,31 @@
+{
+    "facets":
+    {
+        "Donor":{
+            "Genus species": ["Homo Sapiens", "Mus Musculus"],
+            "Organism Age": ["Unspecified", "<0", "0", "1", "2", "3", "4", "5", "6-15", "16-20", "21-30", "31-40", 
+                "41-50", "51-60", "61-70", "71-80", ">80"],
+            "Organism Age unit": ["Unspecified", "day", "week", "month", "year"],
+            "Biological Sex": ["female", "male", "Unspecified"]
+        },
+        "Tissue Type":{
+            "Sample": ["cell_lines", "organoids", "specimens"],
+            "Organ": ["Unspecified", "lung", "kidney"],
+            "Organ Part": ["Unspecified", "lobe of lung", "cortex of kidney", "right lung lobe", "Unspecified"],
+            "Model Organ": ["Unspecified", "kidney", "lung"],
+            "Selected Cell Type": ["Unspecified", "kidney cell"]
+        },
+        "Specimen":{
+            "Sample": ["Unspecified", "end stage renal failure"]
+        },
+        "Method":{
+            "Instrument Manufacturer Model":["Illumnina HiSeq 4000", "Illumina NovaSeq 6000"],
+            "Preservation Method": ["Unspecified", "cryopreservation in liquid nitrogen (dead tissue)"],
+            "Library Construction Method": ["Smart-seq", "UnSpecified"],
+            "Paired End": ["false", "true"]
+        },
+        "File":{
+            "File Format":["fastq.gz", "matrix", "csv", "tsv", "bam", "bai", "pdf"]
+        }  
+    }
+}
