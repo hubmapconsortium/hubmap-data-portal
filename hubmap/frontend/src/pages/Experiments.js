@@ -9,7 +9,6 @@ import {
   SpecimenDropdown,
   DonorDropdown,
 } from '../components/browse';
-import { BaseDropdownPanel, DropdownMenu } from '../ui-components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +41,7 @@ export default class Experiments extends React.Component {
             <DonorDropdown />
           </Grid>
           <Grid item xs={3}>
-            <BaseDropdownPanel menuitems={menuitems} menuname='test' />
+            <DonorDropdown />
           </Grid>
           <Grid item xs={12} />
           <Grid item xs={12} />
