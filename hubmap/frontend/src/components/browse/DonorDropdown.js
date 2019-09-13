@@ -1,17 +1,7 @@
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import Avatar from '@material-ui/core/Avatar';
-import { DropdownMenu, SelectDropdown } from '../../ui-components/';
+import { BaseDropdownPanel } from '../../ui-components/';
+import facets from '../../data/searchfacets.json';
 
 const useStyles = makeStyles((theme) => ({
   chip: {
@@ -23,17 +13,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function DonorDropdown() {
-  const menuitems = ['Species', 'Homo Sapiens', 'Mus musculus']
+  const menuitems = ['Species', 'Homo Sapiens', 'Mus musculus'];
+  const menuCategories = facets.facets.Donor;
+
+  const htmlElements = [];
+  for(const key in menuCategories) {
+    console.log(menuCategories[key], key);
+    htmlElements.push(<BaseDropdownPanel
+     menuitems={menuCategories[key]}
+     menuname={key}
+  />);
+  }
   return (
-      <div>
-  
-    <DropdownMenu 
-    margin="normal"
-      variant="outlined"
-      menuitems={ menuitems}
-      menuname="Donor"
-      width='200px'
-    />
+    <div>
+        {htmlElements}
     </div>
   );
 }
