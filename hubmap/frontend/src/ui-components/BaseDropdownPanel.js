@@ -21,13 +21,14 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     overflow: 'hidden',
+    width:'1500px'
   },
   divroot: {
     flexGrow: 1,
     backgroundColor: grey[300],
     marginTop: '50px',
     display: 'flex',
-    width:'900px'
+    width:'1200px'
   },
   paper: {
     //position: 'absolute',
@@ -35,14 +36,14 @@ const useStyles = makeStyles((theme) => ({
     right: 0,
     left: 0,
     backgroundColor: '#eeeeee',
-    width: '100%',
+    width: '1200px',
     justifyContent: 'space-between',
   },
   formControl: {
     marginTop: 50,
   },
   gridList: {
-    width: 'auto',
+    width: 1200,
     height: 300,
   },
 }));
@@ -77,7 +78,7 @@ export default class BaseDropdownPanel extends React.Component {
       for (const key in menusections) {
         console.log(menusections[key], key);
         htmlElements.push(                
-        <GridListTile key={key} cols={i++}>
+        <GridListTile key={key} cols={3}>
         <BaseChildDropdown
           menuitems={menusections[key]}
           menuname={key}
@@ -90,13 +91,13 @@ export default class BaseDropdownPanel extends React.Component {
           <div className={useStyles.root}>
             <Button onClick={this.handleClick}>{menuname}</Button>
             {open ? (
-             // <Paper className={useStyles.paper}>
+              <Paper className={useStyles.paper}>
 
-                <GridList cellHeight={"auto"} className={useStyles.gridList} cols={6}>
-                {htmlElements}
+                <GridList cellHeight="auto" className={useStyles.gridList} cols={12}>
+                  {htmlElements}
                   <FormHelperText />
-                    </GridList>
-              //</Paper>
+                </GridList>
+              </Paper>
             ) : null}
           </div>
         </ClickAwayListener>
