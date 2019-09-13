@@ -25,6 +25,7 @@ export default class Experiments extends React.Component {
   }
 
   render() {
+    const menuitems = ['Species', 'Homo Sapiens', 'Mus musculus'];
     return (
       <div className={useStyles.root}>
         <Grid container spacing={3} style={{marginTop: '150px'}} justify="left" alignItems="left">
@@ -41,7 +42,7 @@ export default class Experiments extends React.Component {
             <DonorDropdown />
           </Grid>
           <Grid item xs={3}>
-            <DropdownMenu />
+            <BaseDropdownPanel menuitems={menuitems} menuname='test' />
           </Grid>
           <Grid item xs={12} />
           <Grid item xs={12} />
