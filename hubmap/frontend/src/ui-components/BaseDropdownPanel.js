@@ -1,17 +1,18 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles,withStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import { grey } from '@material-ui/core/colors';
-import Checkbox from '@material-ui/core/Checkbox';
+import { grey, blueGrey } from '@material-ui/core/colors';
+import PropTypes from 'prop-types';
+import { Checkbox } from '@material-ui/core';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
-import PropTypes from 'prop-types';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
   },
@@ -20,87 +21,88 @@ const useStyles = makeStyles(theme => ({
     top: 36,
     right: 0,
     left: 0,
+    backgroundColor: '#eeeeee',
+    marginTop: 30,
   },
-  fake: {
-    backgroundColor: grey[200],
-    height: theme.spacing(1),
-    margin: theme.spacing(2),
-    // Selects every two elements among any group of siblings.
-    '&:nth-child(2n)': {
-      marginRight: theme.spacing(3),
-    },
+  formControl: {
+    marginTop: 50,
   },
 }));
 
-export default class BaseDropdownPanel extends React.Component {
+const GreyCheckbox = withStyles({
+    root: {
+      color: blueGrey[400],
+      '&$checked': {
+        color: blueGrey[600],
+      },
+    },
+    checked: {},
+  })((props) => <Checkbox color="default" {...props} />);
+
+export default class BaseDropDownPanel extends React.Component {
+  container = React.createRef();
+
   constructor(props) {
     super(props);
     this.state = {
       open: false,
-      value: '',
-      menuname: '',
-      menuitems: {},
+      selectedMenu: '',
     };
     this.handleClick = this.handleClick.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.handleClickAway = this.handleClickAway.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-  }
-        
-
-  handleChange(event) {
-    this.setState({
-      value: event.target.value,
-    });
   }
 
     handleClick = () => {
-      this.setState({
-        open: true,
-      });
-    };
-
-    handleClose = () => {
-        this.setState({
-          open: false,
-        });
-      };
+      this.setState((state) => ({ open: !state.open }));
+    }
 
     handleClickAway = () => {
-      this.setState({
-        open: false,
-      });
-    };
+      this.setState({ open: false });
+    }
 
+    handleChange = (name) => (event) => {
+      const { selectedMenu } = this.state;
+      this.setState({ selectedMenu: event.target.checked });
+    };
+    
 
     render() {
-      const fake = <div className={useStyles.fake} />;
-      const {open, value, menuitems, menuname} = this.state;
+      const { open } = this.state;
+      const { menuitems, menuname } = this.props;
       return (
-        <div className={useStyles.root}>
+        <div className={useStyles.root} ref={this.container}>
+          <ClickAwayListener onClickAway={this.handleClickAway}>
             <div>
-              <Button onClick={this.handleClick} onClose={this.handleClose}>menu</Button>
+              <Button onClick={this.handleClick}>{menuname}</Button>
               {open ? (
                 <Paper className={useStyles.paper}>
-                  {fake}
-                  {fake}
-                  {fake}
-                  {fake}
-                  {fake}
-                  {console.log(open)}
+                  <FormControl component="fieldset" className={useStyles.formControl}>
+                   <FormLabel component="label" color={grey[400]}>{menuname}</FormLabel>
+                     <FormGroup>
+                  { menuitems ? menuitems.slice(0,menuitems.length).map((menuitem) => {
+                      return <FormControlLabel  key={menuitem}
+                      control={<GreyCheckbox onChange={this.handleChange(menuitem)} value={menuitem}  key={menuitem} />}
+                      label={menuitem}
+                    />
+                  }) : null}
+                  
+                  </FormGroup>
+                <FormHelperText></FormHelperText>
+                </FormControl>
                 </Paper>
               ) : null}
             </div>
+          </ClickAwayListener>
         </div>
       );
     }
 }
 
-BaseDropdownPanel.defaultProps = {
-  menuitems: ['empty'],
-  menuname: 'Menu',
-};
-BaseDropdownPanel.propTypes = {
+BaseDropDownPanel.propTypes = {
   menuitems: PropTypes.array,
   menuname: PropTypes.string,
+};
+BaseDropDownPanel.defaultProps = {
+  menuitems: {},
+  menuname: '',
 };
