@@ -3,17 +3,13 @@ import { makeStyles,withStyles } from '@material-ui/core/styles';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import { grey, blueGrey } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 import PropTypes from 'prop-types';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Grid from '@material-ui/core/Grid';
-import BaseChildDropdown from './BaseChildDropdown';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import ElevationScroll from './ElevationScroll';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import BaseChildDropdown from './BaseChildDropdown';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 50,
   },
   gridList: {
-    width: 1200,
+    width: '100%',
     height: 300,
+    margin: 0,
   },
 }));
 
