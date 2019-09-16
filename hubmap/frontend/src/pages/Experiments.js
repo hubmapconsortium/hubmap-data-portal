@@ -8,13 +8,18 @@ import {
   SearchDropdown,
   SpecimenDropdown,
   DonorDropdown,
+  TissueTypeDropdown,
+  MethodDropdown,
+  FileDropdown,
 } from '../components/browse';
+
+import { SelectedMenuSummary } from '../ui-components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: grey[300],
     marginTop: '150px',
+    width:'1900px',
   },
 
 }));
@@ -24,27 +29,37 @@ export default class Experiments extends React.Component {
   }
 
   render() {
-    const menuitems = ['Species', 'Homo Sapiens', 'Mus musculus'];
     return (
       <div className={useStyles.root}>
-        <Grid container spacing={3} style={{marginTop: '150px'}} justify="left" alignItems="left">
+        <Grid container spacing={3} style={{marginTop: '150px', width:'100%'}} justify="left" alignItems="left">
           <Grid item xs={12}>            
-            <Title>Explore Experiments data</Title>
+            <Title>Browse Experiments data</Title>
           </Grid>
-          <Grid item xs={3} >
+          <Grid item xs={2} >
             <SearchDropdown />
           </Grid>
-          <Grid item xs={3} >
+          <Grid item xs={2} >
             <DonorDropdown />
           </Grid>
-          <Grid item xs={3}>
-            <DonorDropdown />
+          <Grid item xs={2}>
+            <TissueTypeDropdown />
           </Grid>
-          <Grid item xs={3}>
-            <DonorDropdown />
+          <Grid item xs={2}>
+            <MethodDropdown />
+          </Grid>
+          <Grid item xs={2}>
+            <FileDropdown />
+          </Grid>
+          <Grid item xs={2}>
+            <SpecimenDropdown />
           </Grid>
           <Grid item xs={12} />
           <Grid item xs={12} />
+          <Grid item xs={12}>            
+            Search results here:
+            
+            <SelectedMenuSummary />
+          </Grid>
           <Grid item xs={12}>            
 
             <ExperimentsTable />
