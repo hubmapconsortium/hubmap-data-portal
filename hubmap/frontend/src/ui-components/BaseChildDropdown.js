@@ -7,8 +7,9 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { Checkbox } from '@material-ui/core';
-import { grey, blueGrey } from '@material-ui/core/colors';
-import Grid from '@material-ui/core/Grid';
+import { grey } from '@material-ui/core/colors';
+import { PubSubApi } from '../middleware';
+import * as Commons from '../commons';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -16,64 +17,75 @@ const useStyles = makeStyles((theme) => ({
     top: 36,
     right: 0,
     left: 0,
-    backgroundColor: '#eeeeee',
+    //backgroundColor: '#eeeeee',
     marginTop: 30,
   },
 }));
 const GreyCheckbox = withStyles({
-    root: {
-      color: blueGrey[400],
-      '&$checked': {
-        color: blueGrey[600],
-      },
+  root: {
+    color: grey[400],
+    '&$checked': {
+      color: grey[600],
     },
-    checked: {},
-  })((props) => <Checkbox color="default" {...props} />);
+  },
+  checked: {},
+})((props) => <Checkbox color="default" {...props} />);
+let selectedValue = [];
+let selectedValuesDict = {};
 
 export default class BaseChildDropdown extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuitems: {},
-      menuname:'',
-      selectedMenu: '',
-    };
-  }
+    pubsubObj = null;
+    constructor(props) {
+      super(props);
+      this.state = {
+        menuitems: {},
+        menuname: '',
+        selectedMenu: '',
+      };
+      this.pubsubObj = new PubSubApi();
+    }
 
   handleChange = (name) => (event) => {
-    const { selectedMenu } = this.state;
-    this.setState({ selectedMenu: event.target.checked });
+
+    const { menuname, selectedMenu } = this.props;
+    console.log(menuname);
+    if (selectedMenu !== ""){
+      selectedValue.push(selectedMenu);
+    }
+    selectedValue.push(`${event.target.value}`);
+    this.setState({ selectedMenu: selectedValue });
+    console.log(selectedValue);
+    this.pubsubObj.publish(Commons.SELECTED_MENU_OPTIONS, selectedValue);
   };
 
   render() {
     const { menuitems, menuname } = this.props;
     return (
-          <Grid item xs={3} >
-        <FormControl component="fieldset" className={useStyles.formControl}>
-          <FormLabel component="label" color={grey[400]}>{menuname}</FormLabel>
+        <FormControl component="fieldset" className={useStyles.formControl} style={{padding: '10px'}}>
+          <FormLabel component="label" color={grey[800]} style={{fontSize: '18px', padding: '10px', fontWeight: 'bold', margin: '10px'}} >{menuname}</FormLabel>
             <FormGroup>
                   { menuitems ? menuitems.slice(0,menuitems.length).map((menuitem) => {
-                      return (
-                        
+                    return (
+
                       <FormControlLabel key={menuitem}
                         control={<GreyCheckbox onChange={this.handleChange(menuitem)} value={menuitem} key={menuitem} />}
                         label={menuitem}
                     />)
                   }) : null}
-                  
+
         </FormGroup>
         </FormControl>
-        </Grid>
     );
   }
 }
 
 BaseChildDropdown.propTypes = {
-    menuitems: PropTypes.array,
-    menuname: PropTypes.string,
-  };
-  BaseChildDropdown.defaultProps = {
-    menuitems: {},
-    menuname: '',
-  };
-  
+  menuitems: PropTypes.array,
+  menuname: PropTypes.string,
+  selectedMenu: PropTypes.string,
+};
+BaseChildDropdown.defaultProps = {
+  menuitems: {},
+  menuname: '',
+  selectedMenu: '',
+};
