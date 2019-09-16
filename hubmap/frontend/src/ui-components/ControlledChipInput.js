@@ -85,8 +85,10 @@ class ControlledChipInput extends React.Component {
 
 ControlledChipInput.propTypes = {
   addOnBlur: PropTypes.bool,
+  chip: PropTypes.string,
 };
 ControlledChipInput.defaultProps = {
   addOnBlur: false,
+  chip: '',
 };
 export default ControlledChipInput;
