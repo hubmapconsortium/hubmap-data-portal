@@ -10,16 +10,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Chip from '@material-ui/core/Chip';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
-import { SelectDropdown } from '../../ui-components';
+import { CustomSelectMenu } from '../../ui-components';
+import facets from '../../data/searchfacets.json';
 
 export default function SpecimenComponent() {
-    const menuitems = ['Species', 'Homo Sapiens', 'Mus musculus']
-
-  return ( <SelectDropdown 
+    const menuCategories = facets.facets.Specimen;
+  return ( <CustomSelectMenu 
     margin="normal"
       variant="outlined"
-      menuitems={ menuitems}
-      menuname="Donor"
+      menusections={ menuCategories}
+      menuname="Specimen"
       width='200px'
     />);
 }
