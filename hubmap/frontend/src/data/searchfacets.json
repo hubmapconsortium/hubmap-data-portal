@@ -8,10 +8,10 @@
             "Organism Age unit": ["Unspecified", "day", "week", "month", "year"],
             "Biological Sex": ["female", "male", "Unspecified"]
         },
-        "Tissue Type":{
+        "TissueType":{
             "Sample": ["cell_lines", "organoids", "specimens"],
             "Organ": ["Unspecified", "lung", "kidney"],
-            "Organ Part": ["Unspecified", "lobe of lung", "cortex of kidney", "right lung lobe", "Unspecified"],
+            "Organ Part": ["Unspecified", "lobe of lung", "cortex of kidney", "right lung lobe"],
             "Model Organ": ["Unspecified", "kidney", "lung"],
             "Selected Cell Type": ["Unspecified", "kidney cell"]
         },
