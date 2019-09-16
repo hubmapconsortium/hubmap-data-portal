@@ -9,3 +9,5 @@ export { default as ControlledChipInput } from './ControlledChipInput';
 export { default as SelectDropdown } from './SelectDropdown';
 export { default as BaseDropdownPanel } from './BaseDropdownPanel';
 export { default as ElevationScroll } from './ElevationScroll';
+export { default as CustomSelectMenu } from './CustomSelectMenu';
+export { default as SelectedMenuSummary } from './SelectedMenuSummary';
