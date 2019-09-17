@@ -71,7 +71,6 @@ export default class BaseDropdownPanel extends React.Component {
       const { open } = this.state;
       const { menusections,menuname } = this.props;
       const htmlElements = [];
-      let i=0;
       for (const key in menusections) {
         console.log(menusections[key], key);
         htmlElements.push(                

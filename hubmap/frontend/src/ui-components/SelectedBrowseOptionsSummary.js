@@ -94,8 +94,6 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
     this.searchtoken = this.pubsubObj.subscribe(Commons.TYPED_SEARCH_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
   }
 
-  
-
   render() {
     const { menuSelected, searchOptions, chips } = this.state;
     if (menuSelected || searchOptions) {
