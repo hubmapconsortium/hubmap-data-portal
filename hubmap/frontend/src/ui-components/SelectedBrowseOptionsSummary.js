@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import ChipInput from 'material-ui-chip-input';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
@@ -7,18 +6,6 @@ import blue from '@material-ui/core/colors/blue';
 
 import * as Commons from '../commons';
 import { PubSubApi } from '../middleware';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    border: 0,
-  },
-  chip: {
-    margin: theme.spacing(1),
-  },  
-}));
 
 const theme = createMuiTheme({});
 theme.overrides = {
@@ -41,11 +28,13 @@ theme.overrides = {
     focused: {
       '&$focused': {
         color: grey[800],
-        fontSize: "16px",
+        fontSize: '16px',
       },
     },
+    color: grey[800],
   },
 };
+
 export default class SelectedBrowseOptionsSummary extends React.Component {
   summary = '';
 
@@ -111,21 +100,21 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
     const { menuSelected, searchOptions, chips } = this.state;
     if (menuSelected || searchOptions) {
       return (
-          <MuiThemeProvider theme={this.theme} >
-          <ChipInput
-            {...this.props}
-            value={chips}
-            onAdd={(chip) => this.handleAdd(chip)}
-            onDelete={(deletedChip) => this.handleDelete(deletedChip)}
-            onBlur={(event) => {
-              if (this.props.addOnBlur && event.target.value) {
-                this.handleAdd(event.target.value);
-              }
-            }}
-            style={{ borderWidth: 0 }}
-            fullWidth
-            label="Selection summary"
-            variant="outlined"
+        <MuiThemeProvider theme={theme} >
+        <ChipInput
+          {...this.props}
+          value={chips}
+          onAdd={(chip) => this.handleAdd(chip)}
+          onDelete={(deletedChip) => this.handleDelete(deletedChip)}
+          onBlur={(event) => {
+            if (this.props.addOnBlur && event.target.value) {
+              this.handleAdd(event.target.value);
+            }
+          }}
+          style={{ borderWidth: 0 }}
+          fullWidth
+          label="Selection summary"
+          variant="outlined"
           />
           </MuiThemeProvider>
       );
