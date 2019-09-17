@@ -5,7 +5,7 @@
   "dependencies": {
     "@babel/runtime": "^7.4.5",
     "@google/model-viewer": "^0.3.1",
-    "@material-ui/core": "^4.0.1",
+    "@material-ui/core": "^4.4.2",
     "@material-ui/icons": "^4.0.1",
     "@material-ui/styles": "^4.0.1",
     "axios": "^0.19.0",
