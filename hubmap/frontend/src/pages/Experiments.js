@@ -53,11 +53,7 @@ export default class Experiments extends React.Component {
           <Grid item xs={2}>
             <SpecimenDropdown />
           </Grid>
-          <Grid item xs={12} />
-          <Grid item xs={12} />
-          <Grid item xs={12}>            
-            Search results here:
-            
+          <Grid item xs={12}>                      
             <SelectedMenuSummary />
           </Grid>
           <Grid item xs={12}>            
