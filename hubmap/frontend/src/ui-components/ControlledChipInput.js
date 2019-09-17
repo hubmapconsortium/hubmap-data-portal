@@ -4,6 +4,8 @@ import ChipInput from 'material-ui-chip-input';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
+import { PubSubApi } from '../middleware';
+import * as Commons from '../commons';
 
 const theme = createMuiTheme({});
 theme.overrides = {
@@ -26,18 +28,23 @@ theme.overrides = {
     focused: {
       '&$focused': {
         color: grey[800],
-        fontSize: "16px",
+        fontSize: '16px',
       },
     },
   },
 };
 
+const selectedValue = [];
+
 class ControlledChipInput extends React.Component {
+  pubsubObj = null;
+
   constructor(props) {
     super(props);
     this.state = {
-      chips: ['Homo Sapiens'],
+      chips: [],
     };
+    this.pubsubObj = new PubSubApi();
   }
 
   onBeforeAdd(chip) {
@@ -48,6 +55,8 @@ class ControlledChipInput extends React.Component {
     this.setState({
       chips: [...this.state.chips, chip],
     });
+    selectedValue.push(chip);
+    this.pubsubObj.publish(Commons.TYPED_SEARCH_OPTIONS, chip);
   }
 
   handleDelete(deletedChip) {
@@ -55,30 +64,28 @@ class ControlledChipInput extends React.Component {
       this.setState({
         chips: this.state.chips.filter((c) => c !== deletedChip),
       });
-    } else {
-      // alert('Why would you delete React?');
     }
   }
 
   render() {
     return (
-        <MuiThemeProvider theme={theme}>
-      <ChipInput
-        {...this.props}
-        value={this.state.chips}
-        onBeforeAdd={(chip) => this.onBeforeAdd(chip)}
-        onAdd={(chip) => this.handleAdd(chip)}
-        onDelete={(deletedChip) => this.handleDelete(deletedChip)}
-        onBlur={(event) => {
-          if (this.props.addOnBlur && event.target.value) {
-            this.handleAdd(event.target.value);
-          }
-        }}
-        fullWidth
-        label="Search"
-        variant='outlined'
+      <MuiThemeProvider theme={theme}>
+        <ChipInput
+          {...this.props}
+          value={this.state.chips}
+          onBeforeAdd={(chip) => this.onBeforeAdd(chip)}
+          onAdd={(chip) => this.handleAdd(chip)}
+          onDelete={(deletedChip) => this.handleDelete(deletedChip)}
+          onBlur={(event) => {
+            if (this.props.addOnBlur && event.target.value) {
+              this.handleAdd(event.target.value);
+            }
+          }}
+          fullWidth
+          label="Search"
+          variant="outlined"
     />
-    </MuiThemeProvider>
+      </MuiThemeProvider>
     );
   }
 }
