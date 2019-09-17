@@ -17,3 +17,4 @@ export const GET_TISSUE_COLORS_API = 'api/colors/?format=json';
 export const GET_GENE_TISSUE_COLOR_API = 'api/genes/?format=json';
 
 export const SELECTED_MENU_OPTIONS = 'SELECTED_MENU_OPTIONS';
+export const TYPED_SEARCH_OPTIONS = 'TYPED_SEARCH_OPTIONS';
