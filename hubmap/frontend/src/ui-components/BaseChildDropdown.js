@@ -26,16 +26,15 @@ const GreyCheckbox = withStyles({
       color: grey[600],
     },
   },
-  checked: {},
 })((props) => <Checkbox color="default" {...props} />);
 let selectedValue = [];
 
 export default class BaseChildDropdown extends React.Component {
     pubsubObj = null;
+
     constructor(props) {
       super(props);
       this.state = {
-        menuitems: {},
         menuname: '',
         selectedMenu: '',
       };
@@ -43,27 +42,31 @@ export default class BaseChildDropdown extends React.Component {
     }
 
   handleChange = (name) => (event) => {
-
     const { menuname, selectedMenu } = this.props;
-    if (selectedMenu !== ""){
+    if (selectedMenu !== '') {
       selectedValue.push(selectedMenu);
     }
+    event.target.checked = !event.target.checked;
     selectedValue.push(`${event.target.value}`);
     this.setState({ selectedMenu: selectedValue });
-    this.pubsubObj.publish(Commons.SELECTED_MENU_OPTIONS, `${menuname} :${event.target.value}`);
+    this.pubsubObj.publish(Commons.SELECTED_MENU_OPTIONS, `${menuname, event.target.key}:${event.target.value}`);
   };
 
   render() {
-    const { menuitems, menuname } = this.props;
+    const { menuitems, menuname, selectedMenu } = this.props;
     return (
         <FormControl component="fieldset" className={useStyles.formControl} style={{padding: '10px'}}>
-          <FormLabel component="label" color={grey[800]} style={{fontSize: '18px', padding: '10px', fontWeight: 'bold', margin: '10px'}} >{menuname}</FormLabel>
+          <FormLabel component="label" color={grey[800]} style={{fontSize: '16px', padding: '10px', fontWeight: 'bold', margin: '10px'}} >{menuname}</FormLabel>
             <FormGroup>
                   { menuitems ? menuitems.slice(0,menuitems.length).map((menuitem) => {
-                    return (
+                    var isChecked = false;
+                    selectedValue.indexOf(menuitem) !== -1 && selectedMenu.indexOf(menuname+ ':'+menuitem) ? isChecked = true : isChecked = false;
 
+                    console.log(selectedValue, isChecked, menuitem,selectedMenu, menuname,selectedMenu.indexOf(menuname+ ':'+menuitem) );
+                    return (
                       <FormControlLabel key={menuitem}
-                        control={<GreyCheckbox onChange={this.handleChange(menuitem)} value={menuitem} key={menuitem} />}
+                        control={<GreyCheckbox onChange={this.handleChange(menuitem)}
+                            value={menuitem} key={menuitem} checked={isChecked}/>}
                         label={menuitem}
                     />)
                   }) : null}

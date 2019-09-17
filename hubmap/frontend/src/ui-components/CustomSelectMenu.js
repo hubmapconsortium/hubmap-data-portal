@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import BaseChildDropdown from '../ui-components/BaseChildDropdown';
-import Divider from '@material-ui/core/Divider';
+import { PubSubApi } from '../middleware';
+import * as Commons from '../commons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,7 +42,7 @@ const ITEM_PADDING_TOP = 12;
 const MenuProps = {
   PaperProps: {
     style: {
-       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
       // width: 300,
       margin: '10px',
       padding: '35px',
@@ -65,7 +66,7 @@ theme.overrides = {
   },
   MuiFormLabel: {
     root: {
-      color: grey[800],
+      // color: grey[800],
       fontSize: '18px',
     },
     focused: {
@@ -76,53 +77,77 @@ theme.overrides = {
     },
   },
 };
+let selectedMenuSummary = [];
 
 export default class CustomSelectMenu extends React.Component {
+  menutoken = '';
+
+  pubsubObj = null;
+
   constructor(props) {
     super(props);
     this.state = {
       menuitem: '',
       menuname: '',
     };
+    this.pubsubObj = new PubSubApi();
+  }
+
+  selectedMenuSummaryAdded(msg, summary) {
+    if (msg === Commons.SELECTED_MENU_OPTIONS 
+        && selectedMenuSummary.indexOf(summary) === -1) {
+      selectedMenuSummary.push(summary);
+    }
+  }
+
+  componentWillMount() {
+    this.menutoken = this.pubsubObj.subscribe(Commons.SELECTED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
   }
 
   render() {
     const { menusections, menuname } = this.props;
     const htmlElements = [];
-
-    console.log(menuname);
+    const keys = [], values= [];
     for (const key in menusections) {
-        console.log(menusections[key], key);
-        htmlElements.push(             
-          <BaseChildDropdown
-          menuitems={menusections[key]}
-          menuname={key}
-        />
-        );
-      }
+      keys.push(key)
+      values.push(menusections[key]);
+      htmlElements.push(             
+        <BaseChildDropdown
+            menuitems={menusections[key]}
+            menuname={key}
+            selectedMenu={ selectedMenuSummary}
+          />
+      );
+    }
+
     return(
           
-              <MuiThemeProvider theme={theme}>
-            <Select
-              single
-              value={menuname}
-              name={menuname}
-              onChange={(event) => {
-                event.persist();
-                console.log(event.target.value);
-                this.setState({ ...this.state, menuitem: event.target.value });
-              }}
-              input={<Input id="select-multiple-placeholder" />}
-              renderValue={(selected) => (this.props.menuname)}
-            MenuProps={MenuProps}
-              variant='outlined'
-            >
-             
-            {htmlElements}
+      <MuiThemeProvider theme={theme}>
+        <Select
+          multiple
+          value={keys}
+          name={menuname}
+          onChange={(event) => {
+            event.persist();
+            console.log(event.target.value);
+            this.setState({ ...this.state, menuitem: event.target.value});
+          }}
+          input={<Input id="select-multiple-placeholder" />}
+          renderValue={(selected) => (this.props.menuname)}
+          MenuProps={MenuProps}
+          variant="outlined"
+          onOpen={(event) => {
+            console.log(event);
+          }}
+          onClose={(event) => {
+            console.log(event.currentTarget);
+          }}
+        >          
+          {htmlElements}
 
-          </Select>
-          {console.log(document.getSelection(menuname))}
-          </MuiThemeProvider>
+        </Select>
+        {console.log(document.getSelection(menuname))}
+      </MuiThemeProvider>
     );
   }
 }
