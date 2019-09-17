@@ -31,6 +31,7 @@ theme.overrides = {
         fontSize: '16px',
       },
     },
+    color: grey[800],
   },
 };
 
