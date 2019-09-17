@@ -13,7 +13,7 @@ import {
   FileDropdown,
 } from '../components/browse';
 
-import { SelectedMenuSummary } from '../ui-components';
+import { SelectedBrowseOptionsSummary } from '../ui-components';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +54,7 @@ export default class Experiments extends React.Component {
             <SpecimenDropdown />
           </Grid>
           <Grid item xs={12}>                      
-            <SelectedMenuSummary />
+            <SelectedBrowseOptionsSummary />
           </Grid>
           <Grid item xs={12}>            
 
