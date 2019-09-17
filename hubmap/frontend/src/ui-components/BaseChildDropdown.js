@@ -1,5 +1,4 @@
 import React from 'react';
-import { Paper } from '@material-ui/core';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -17,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
     top: 36,
     right: 0,
     left: 0,
-    //backgroundColor: '#eeeeee',
     marginTop: 30,
   },
 }));
