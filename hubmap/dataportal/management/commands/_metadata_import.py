@@ -152,14 +152,16 @@ def add_node(tx, node):
 def add_edge(tx, n1, n2):
     tx.run(
         """
-        MATCH (e1:Entity {id: $id1, type: "donor_organism", name: $name1})
-        MATCH (e2:Entity {id: $id2, type: "specimen_from_organism", name: $name2})
+        MATCH (e1:Entity {id: $id1, type: $type1, name: $name1})
+        MATCH (e2:Entity {id: $id2, type: $type2, name: $name2})
         CREATE (e1)-[r1:ACTION]->(a1:Action)-[r2:ACTION]->(e2)
         """,
-        name1=n1['name'],
-        name2=n2['name'],
         id1=n1['id'],
         id2=n2['id'],
+        name1=n1['name'],
+        name2=n2['name'],
+        type1=n1['type'],
+        type2=n2['type'],
     )
 
 
