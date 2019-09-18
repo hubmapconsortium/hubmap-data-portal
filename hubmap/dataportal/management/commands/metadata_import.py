@@ -4,7 +4,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand
 
 from ...utils import normalize_whitespace
-from ._metadata_import import metadata_import
+from ._metadata_import_utils import metadata_import
 
 
 class Command(BaseCommand):
