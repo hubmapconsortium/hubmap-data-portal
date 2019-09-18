@@ -35,9 +35,9 @@ export default class BaseChildDropdown extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        menuname: '',
-        selectedMenu: '',
-      };
+          checkedMenu: '',
+          checked: false,
+      }
       this.pubsubObj = new PubSubApi();
     }
 
@@ -46,6 +46,7 @@ export default class BaseChildDropdown extends React.Component {
     {
         selectedValue.push(`${menuname}:${event.target.value}`);
         this.pubsubObj.publish(Commons.CHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
+        console.log(event.target.checked, selectedValue);
     }
     else{
         var index = selectedValue.indexOf(`${menuname}:${event.target.value}`);
@@ -54,13 +55,17 @@ export default class BaseChildDropdown extends React.Component {
             selectedValue.splice(index, 1);
             this.pubsubObj.publish(Commons.UNCHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
         }
-        this.setState({ selectedMenu: selectedValue });
     }
+    this.setState({ 
+        checkedMenu: `${menuname}:${event.target.value}`, 
+        checked: event.target.checked,
+    });
     // event.target.checked = !event.target.checked;  
   };
 
   render() {
     const { menuitems, menuname, selectedMenu } = this.props;
+    const { checkedMenu, checked } = this.state;
     return (
       <FormControl component="fieldset" className={useStyles.formControl} style={{ padding: '10px' }}>
         <FormLabel
@@ -74,8 +79,15 @@ export default class BaseChildDropdown extends React.Component {
         <FormGroup>
           { menuitems ? menuitems.slice(0,menuitems.length).map((menuitem) => {
             let isChecked = false;
-            selectedValue.indexOf(menuname+ ':'+menuitem) !== -1 ? isChecked = true : isChecked = false;
-
+            if ( checkedMenu.includes(menuname+ ':'+menuitem) && !selectedValue.includes(menuname+ ':'+menuitem)){
+                isChecked = checked;
+            }
+            else if (selectedValue.includes(menuname+ ':'+menuitem))
+            {
+                isChecked = true;
+            }
+            
+            console.log(isChecked, selectedMenu,selectedValue,menuname+ ':'+menuitem);
             return (
               <FormControlLabel
                 key={menuitem}
