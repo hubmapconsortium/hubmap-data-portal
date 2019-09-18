@@ -6,7 +6,7 @@ from collections import Mapping, Sequence, defaultdict
 from hashlib import sha256
 from math import isnan
 from pathlib import Path
-from pprint import pprint
+from pprint import pprint  # noqa: F401
 from typing import Any, Dict, Iterable, List, Union
 
 import networkx as nx
