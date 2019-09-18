@@ -6,7 +6,8 @@ from collections import Mapping, Sequence, defaultdict
 from hashlib import sha256
 from math import isnan
 from pathlib import Path
-from typing import Dict, List, Union
+from pprint import pprint
+from typing import Any, Dict, Iterable, List, Union
 
 import networkx as nx
 import pandas as pd
@@ -21,7 +22,14 @@ def infinite_defaultdict():
     return defaultdict(infinite_defaultdict)
 
 
-def value_adjust(row):
+def value_adjust(row: Iterable[Any]) -> Iterable[Any]:
+    """
+    :param row: Iterable of heterogeneous data, probably a `pd.Series`
+      in which missing values are represented as `math.nan`
+    :return: Iterable of the same data, with `nan` values replaced
+      with `None` (since `nan` values are a pain to work with in this
+      context: they don't compare equal to themselves, etc.)
+    """
     for item in row:
         if isinstance(item, float) and isnan(item):
             yield None
@@ -47,6 +55,13 @@ def freeze(data):
 
 
 def unfreeze(data):
+    """
+    Inverse of `freeze` defined above. In our usage, we don't actually care
+    about whether the data is mutable; we just care that this can be serialized
+    as JSON. (`frozendict` instances are not.)
+    :param data:
+    :return:
+    """
     if isinstance(data, Mapping):
         return dict(
             (key, unfreeze(value))
