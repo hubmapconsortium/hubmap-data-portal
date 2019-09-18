@@ -69,7 +69,7 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
 
   selectedMenuSummaryAdded(msg, summary) {
     const { chips } = this.state;
-    if (msg === Commons.SELECTED_MENU_OPTIONS) {
+    if (msg === Commons.CHECKED_MENU_OPTIONS) {
       this.setState({
         selectedMenuSummary: summary,
         menuSelected: true,
@@ -90,7 +90,7 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
   }
 
   componentWillMount() {
-    this.menutoken = this.pubsubObj.subscribe(Commons.SELECTED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+    this.menutoken = this.pubsubObj.subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
     this.searchtoken = this.pubsubObj.subscribe(Commons.TYPED_SEARCH_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
   }
 
