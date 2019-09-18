@@ -5,7 +5,7 @@ import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
-import BaseChildDropdown from '../ui-components/BaseChildDropdown';
+import BaseChildDropdown from './BaseChildDropdown';
 import { PubSubApi } from '../middleware';
 import * as Commons from '../commons';
 
@@ -94,14 +94,22 @@ export default class CustomSelectMenu extends React.Component {
   }
 
   selectedMenuSummaryAdded(msg, summary) {
-    if (msg === Commons.SELECTED_MENU_OPTIONS 
+    if (msg === Commons.CHECKED_MENU_OPTIONS
         && selectedMenuSummary.indexOf(summary) === -1) {
       selectedMenuSummary.push(summary);
+    }
+    if (msg === Commons.UNCHECKED_MENU_OPTIONS
+        && selectedMenuSummary.indexOf(summary) === -1) {
+      var index = selectedMenuSummary.indexOf(summary);
+      if ( index > -1 )
+      {
+        selectedMenuSummary.splice(index, 1);
+      }
     }
   }
 
   componentWillMount() {
-    this.menutoken = this.pubsubObj.subscribe(Commons.SELECTED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+    this.menutoken = this.pubsubObj.subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
   }
 
   render() {
@@ -115,7 +123,7 @@ export default class CustomSelectMenu extends React.Component {
         <BaseChildDropdown
             menuitems={menusections[key]}
             menuname={key}
-            selectedMenu={ selectedMenuSummary}
+            // selectedMenu={ selectedMenuSummary}
           />
       );
     }
@@ -136,13 +144,7 @@ export default class CustomSelectMenu extends React.Component {
           renderValue={(selected) => (this.props.menuname)}
           MenuProps={MenuProps}
           variant="outlined"
-          onOpen={(event) => {
-            console.log(event);
-          }}
-          onClose={(event) => {
-            console.log(event.currentTarget);
-          }}
-        >          
+        >
           {htmlElements}
 
         </Select>
