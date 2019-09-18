@@ -41,38 +41,59 @@ export default class BaseChildDropdown extends React.Component {
       this.pubsubObj = new PubSubApi();
     }
 
-  handleChange = (name) => (event) => {
-    const { menuname, selectedMenu } = this.props;
-    if (selectedMenu !== '') {
-      selectedValue.push(selectedMenu);
+  handleChange = (menuname) => (event) => {    
+    if (event.target.checked)
+    {
+        selectedValue.push(`${menuname}:${event.target.value}`);
+        this.pubsubObj.publish(Commons.CHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
     }
-    event.target.checked = !event.target.checked;
-    selectedValue.push(`${event.target.value}`);
-    this.setState({ selectedMenu: selectedValue });
-    this.pubsubObj.publish(Commons.SELECTED_MENU_OPTIONS, `${menuname, event.target.key}:${event.target.value}`);
+    else{
+        var index = selectedValue.indexOf(`${menuname}:${event.target.value}`);
+        if ( index > -1 )
+        {
+            selectedValue.splice(index, 1);
+            this.pubsubObj.publish(Commons.UNCHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
+        }
+        this.setState({ selectedMenu: selectedValue });
+    }
+    // event.target.checked = !event.target.checked;  
   };
 
   render() {
     const { menuitems, menuname, selectedMenu } = this.props;
     return (
-        <FormControl component="fieldset" className={useStyles.formControl} style={{padding: '10px'}}>
-          <FormLabel component="label" color={grey[800]} style={{fontSize: '16px', padding: '10px', fontWeight: 'bold', margin: '10px'}} >{menuname}</FormLabel>
-            <FormGroup>
-                  { menuitems ? menuitems.slice(0,menuitems.length).map((menuitem) => {
-                    var isChecked = false;
-                    selectedValue.indexOf(menuitem) !== -1 && selectedMenu.indexOf(menuname+ ':'+menuitem) ? isChecked = true : isChecked = false;
+      <FormControl component="fieldset" className={useStyles.formControl} style={{ padding: '10px' }}>
+        <FormLabel
+          component="label"
+          color={grey[800]}
+          style={{
+            fontSize: '16px', padding: '10px', fontWeight: 'bold', margin: '10px'
+          }}
+        >{menuname}
+          </FormLabel>
+        <FormGroup>
+          { menuitems ? menuitems.slice(0,menuitems.length).map((menuitem) => {
+            let isChecked = false;
+            selectedValue.indexOf(menuname+ ':'+menuitem) !== -1 ? isChecked = true : isChecked = false;
 
-                    console.log(selectedValue, isChecked, menuitem,selectedMenu, menuname,selectedMenu.indexOf(menuname+ ':'+menuitem) );
-                    return (
-                      <FormControlLabel key={menuitem}
-                        control={<GreyCheckbox onChange={this.handleChange(menuitem)}
-                            value={menuitem} key={menuitem} checked={isChecked}/>}
-                        label={menuitem}
-                    />)
-                  }) : null}
+            return (
+              <FormControlLabel
+                key={menuitem}
+                control={(
+                  <GreyCheckbox
+                    onChange={this.handleChange(menuname)}
+                    value={menuitem}
+                    key={menuitem}
+                    checked={isChecked}
+                  />
+                    )}
+                label={menuitem}
+              />
+            );
+          }) : null}
 
         </FormGroup>
-        </FormControl>
+      </FormControl>
     );
   }
 }
