@@ -90,6 +90,8 @@ application. You may want to run `build_docker_container.py` from a fresh checko
 - New feature branches from `develop` should have names like `username/short-description-123`:
 Including your username will help us identify the owners of stale branches;
 Including an issue number will remind us what the branch was trying to do.
+- Non-trivial PRs should update the changelog. The idea is to provide something more readable
+and more accessible than the git log.
 - Identify a single reviewer for PRs, unless there are really cross-cutting concerns.
 Feel free to solicit broader feedback on Slack, but it's good to have a single check,
 rather than letting responsibility be more diffuse.
