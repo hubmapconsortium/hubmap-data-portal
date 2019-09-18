@@ -16,5 +16,6 @@ export const SEARCH_EXPERIMENTS_REST_API = 'api/search/?format=json&search=';
 export const GET_TISSUE_COLORS_API = 'api/colors/?format=json';
 export const GET_GENE_TISSUE_COLOR_API = 'api/genes/?format=json';
 
-export const SELECTED_MENU_OPTIONS = 'SELECTED_MENU_OPTIONS';
+export const CHECKED_MENU_OPTIONS = 'CHECKED_MENU_OPTIONS';
+export const UNCHECKED_MENU_OPTIONS = 'UNCHECKED_MENU_OPTIONS';
 export const TYPED_SEARCH_OPTIONS = 'TYPED_SEARCH_OPTIONS';
