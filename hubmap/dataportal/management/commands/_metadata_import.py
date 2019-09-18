@@ -72,6 +72,35 @@ def unfreeze(data):
     return data
 
 
+def dotted_keys_to_nested_dict(mapping: Dict[str, Any]):
+    """
+    :param mapping: A flat dict with keys as dotted strings, e.g.
+      "donor_organism.mouse_specific.strain.text", and arbitrary values
+    :return: A nested representation of that dictionary, with dotted
+      keys split into sub-dicts.
+
+    >>> d = { \
+        'a.b.c': 1, \
+        'a.b.d': 'value', \
+        'a.b.e': 5, \
+        'a.f': 'another', \
+        'g.h': None, \
+    }
+    >>> pprint(dotted_keys_to_nested_dict(d))
+    {'a': {'b': {'c': 1, 'd': 'value', 'e': 5}, 'f': 'another'}, 'g': {'h': None}}
+    """
+    nested = infinite_defaultdict()
+    for key_str, value in mapping.items():
+        # TODO: probably skip if value is None
+        keys = key_str.split('.')
+        subdict = nested
+        for key in keys[:-1]:
+            subdict = subdict[key]
+        subdict[keys[-1]] = value
+
+    return unfreeze(freeze(nested))
+
+
 def read_hca_metadata(metadata_file: Path) -> nx.DiGraph:
     """
     :param metadata_file:
@@ -79,31 +108,21 @@ def read_hca_metadata(metadata_file: Path) -> nx.DiGraph:
     """
     donor_data = pd.read_table(metadata_file)
 
-    # List first, then remove duplicates, then convert to nested structure
-    all_data = []
+    row_data = []
     for i, row in donor_data.iterrows():
-        row_data = tuple(zip(row.index, value_adjust(row)))
-        all_data.append(row_data)
-
-    nested_list = []
-    for row_data in all_data:
-        nested = infinite_defaultdict()
-        for key_str, value in row_data:
-            # TODO: probably skip if value is None
-            keys = key_str.split('.')
-            subdict = nested
-            for key in keys[:-1]:
-                subdict = subdict[key]
-            subdict[keys[-1]] = value
-        nested_list.append(nested)
+        dotted_row_dict = dict(zip(row.index, value_adjust(row)))
+        nested_row_dict = dotted_keys_to_nested_dict(dotted_row_dict)
+        row_data.append(nested_row_dict)
 
     # Use "full" nested representation at this stage, so we can pull out
     # the donor and specimen metadata soon
-    hashable = [freeze(v) for v in nested_list]
+    hashable_row_data = [freeze(v) for v in row_data]
 
     g = nx.DiGraph()
 
-    for h in hashable:
+    for h in hashable_row_data:
+        # Since frozen subtrees are hashable, they are usable as nodes in
+        # a NetworkX graph, and NetworkX enforces uniqueness of nodes
         donor = h['donor_organism']
         specimen = h['specimen_from_organism']
         g.add_edge(donor, specimen)
