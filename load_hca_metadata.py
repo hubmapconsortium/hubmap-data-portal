@@ -55,7 +55,12 @@ def copy_file_if_necessary(metadata_file: Path) -> str:
     return str(absolute_path_for_container)
 
 if __name__ == '__main__':
-    p = ArgumentParser()
+    p = ArgumentParser(
+        description="""
+            Import a tab-delimited metadata spreadsheet from the Human Cell Atlas
+            project into Neo4j, MongoDB, and Elasticsearch
+        """
+    )
     p.add_argument('--pretend', action='store_true')
     p.add_argument('metadata_file', type=Path)
     args = p.parse_args()
