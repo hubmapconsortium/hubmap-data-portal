@@ -64,7 +64,7 @@ export default class Experiments extends React.Component {
             <SelectedBrowseOptionsSummary />
           </Grid>
           <Grid item xs={12}>   
-          <Typography align='left' variant='body1' style={{fontWeight:'normal',textUnderlinePosition:'under', textDecorationStyle:'initial', textDecoration:'underline',textDecorationColor: blue[500], color:'black', borderBottomColor:blue[500]}}> Experiments </Typography>                   
+            <Typography align="left" variant="body1" style={{fontWeight:'normal',textUnderlinePosition:'under', textDecorationStyle:'initial', textDecoration:'underline',textDecorationColor: blue[500], color:'black', borderBottomColor:blue[500]}}> Experiments </Typography>                   
             <Divider />
           </Grid>
           <Grid item xs={12}>            
