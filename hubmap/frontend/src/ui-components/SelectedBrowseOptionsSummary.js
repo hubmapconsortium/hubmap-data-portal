@@ -15,7 +15,7 @@ theme.overrides = {
         borderColor: blue[500],
         borderWidth: 1,
         fontColor: 'black',
-        fontSize: '16px',
+        fontSize: '14px',
       },
       height: 50,
     },
@@ -98,23 +98,36 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
     const { menuSelected, searchOptions, chips } = this.state;
     if (menuSelected || searchOptions) {
       return (
-        <MuiThemeProvider theme={theme} >
-        <ChipInput
-          {...this.props}
-          value={chips}
-          onAdd={(chip) => this.handleAdd(chip)}
-          onDelete={(deletedChip) => this.handleDelete(deletedChip)}
-          onBlur={(event) => {
-            if (this.props.addOnBlur && event.target.value) {
-              this.handleAdd(event.target.value);
-            }
-          }}
-          style={{ borderWidth: 0 }}
-          fullWidth
-          label="Selection summary"
-          variant="outlined"
+        <div style={{backgroundColor: grey[300]}}>
+          <MuiThemeProvider theme={theme} >
+            <ChipInput
+              {...this.props}
+              value={chips}
+              onDelete={(deletedChip) => this.handleDelete(deletedChip)}
+              onBlur={(event) => {
+                if (this.props.addOnBlur && event.target.value) {
+                  this.handleAdd(event.target.value);
+                }
+              }}
+              style={{ borderWidth: 0, '&:focus': { outline: 'none', borderWidth: 0 }, backgroundColor: grey[200], borderColor: grey[100], color: grey[500], textDecorationColor: grey[500]}}
+              fullWidth
+              label="Selection summary"
+              variant="outlined"
+              readonly="true"
+              allowDuplicates={false}
+              onKeyDown={(e) => {
+                e.preventDefault();
+                return false;
+              }}
+              onPaste={(e) => {
+                e.preventDefault();
+              }}
+              onFocus={(e) => {
+                e.stopPropagation();
+              }}
           />
           </MuiThemeProvider>
+          </div>
       );
     }
     return (
