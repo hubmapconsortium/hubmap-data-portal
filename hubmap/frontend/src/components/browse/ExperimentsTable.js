@@ -29,41 +29,35 @@ function createData(experimentTitle, sampleType, organ, selectedCellType, librar
 
 export default function ExperimentsTable() {
   const experimentsDict = experiments.experiments;
-  let columnNames = Object.keys(experimentsDict[1]);
-  let columns = [];
-  var experimentsRows = [];
-  console.log(columnNames, experimentsRows);
-  for ( const i in columnNames){
-    columns.push(<TableCell style={{minWidth: '80px', fontWeight: 'bold', color:'black', fontSize:'10px'}}>{columnNames[i]}</TableCell>);   
+  const columnNames = Object.keys(experimentsDict[1]);
+  const columns = [];
+  let experimentsRows = [];
+  for (const i in columnNames) {
+    columns.push(<TableCell style={{ minWidth: '80px', fontWeight: 'bold', color: 'black', fontSize: '10px' }}>{columnNames[i]}</TableCell>);
   }
-  for (const key in experimentsDict)
-  {
-      console.log(key, experimentsDict[key], experimentsDict[key][0]);
-      const keys = Object.keys(experimentsDict[key]);
-          experimentsRows.push(
-            <TableRow key={key}>
-              {keys.map((k) =>{
-                return ( <TableCell>{experimentsDict[key][k]} </TableCell>);
-             })}
+  for (const key in experimentsDict) {
+    const keys = Object.keys(experimentsDict[key]);
+    experimentsRows.push(
+      <TableRow key={key}>
+        {keys.map((k) => (<TableCell>{experimentsDict[key][k]} </TableCell>))}
 
-            </TableRow>
-          );
-      console.log(experimentsRows[0]);
+      </TableRow>,
+    );
   }
   return (
     <>
       <Table size="small">
         <colgroup>
-          <col style={{width:'2%'}} />
-          <col style={{width:'30%'}} />
-          <col style={{width:'5%'}} />
-          <col style={{width:'5%'}} />
-          <col style={{width:'15%'}} />
-          <col style={{width:'15%'}} />
-          <col style={{width:'10%'}} />
-          <col style={{width:'25%'}} />
-          <col style={{width:'5%'}} />
-          <col style={{width:'5%'}} />
+          <col style={{ width: '2%' }} />
+          <col style={{ width: '30%' }} />
+          <col style={{ width: '5%' }} />
+          <col style={{ width: '5%' }} />
+          <col style={{ width: '15%' }} />
+          <col style={{ width: '15%' }} />
+          <col style={{ width: '10%' }} />
+          <col style={{ width: '25%' }} />
+          <col style={{ width: '5%' }} />
+          <col style={{ width: '5%' }} />
         </colgroup>
         <TableHead fixedHeader>
           <TableRow head>
@@ -71,7 +65,7 @@ export default function ExperimentsTable() {
           </TableRow>
         </TableHead>
         <TableBody>
-          
+
           {experimentsRows}
         </TableBody>
       </Table>
