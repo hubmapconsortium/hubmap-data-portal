@@ -123,7 +123,7 @@ export default class CustomSelectMenu extends React.Component {
         <BaseChildDropdown
             menuitems={menusections[key]}
             menuname={key}
-            // selectedMenu={ selectedMenuSummary}
+            selectedMenu={ selectedMenuSummary}
           />
       );
     }
@@ -144,6 +144,12 @@ export default class CustomSelectMenu extends React.Component {
           renderValue={(selected) => (this.props.menuname)}
           MenuProps={MenuProps}
           variant="outlined"
+          onOpen={(event) => {
+            console.log(event);
+          }}
+          onClose={(event) => {
+            console.log(event.currentTarget);
+          }}
         >
           {htmlElements}
 
