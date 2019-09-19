@@ -9,3 +9,4 @@ export { default as ExperimentsTable } from './ExperimentsTable';
 export { default as TissueTypeDropdown } from './TissueTypeDropdown';
 export { default as MethodDropdown } from './MethodDropdown';
 export { default as FileDropdown } from './FileDropdown';
+export { default as AssaysDropdown } from './AssaysDropdown';
