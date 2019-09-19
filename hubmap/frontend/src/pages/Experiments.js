@@ -11,6 +11,7 @@ import {
   TissueTypeDropdown,
   MethodDropdown,
   FileDropdown,
+  AssaysDropdown,
 } from '../components/browse';
 
 import { SelectedBrowseOptionsSummary } from '../ui-components';
@@ -19,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     marginTop: '150px',
-    width:'1900px',
+    width: '2100px',
+    marginLeft: '-200px'
   },
 
 }));
@@ -31,33 +33,35 @@ export default class Experiments extends React.Component {
   render() {
     return (
       <div className={useStyles.root}>
-        <Grid container spacing={3} style={{marginTop: '150px', width:'100%'}} justify="left" alignItems="left">
+        <Grid container spacing={3} style={{marginTop: '150px', width: '1800px'}} justify="left" alignItems="left">
           <Grid item xs={12}>            
             <Title>Browse Experiments data</Title>
           </Grid>
-          <Grid item xs={2} >
+          <Grid item xs={3} >
             <SearchDropdown />
           </Grid>
-          <Grid item xs={2} >
+          <Grid item xs={1} >
             <DonorDropdown />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <TissueTypeDropdown />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <MethodDropdown />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <FileDropdown />
           </Grid>
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <SpecimenDropdown />
+          </Grid>
+          <Grid item xs={1}>
+            <AssaysDropdown />
           </Grid>
           <Grid item xs={12}>                      
             <SelectedBrowseOptionsSummary />
           </Grid>
           <Grid item xs={12}>            
-
             <ExperimentsTable />
           </Grid>
         </Grid>
