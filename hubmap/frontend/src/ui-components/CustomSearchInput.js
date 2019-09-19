@@ -14,6 +14,10 @@ theme.overrides = {
         fontColor: 'black',
         fontSize: '18px',
       },
+      '&:hover':{
+        borderColor: blue[500],
+        borderWidth: 1,
+      },
       height: 50,
     },
   },

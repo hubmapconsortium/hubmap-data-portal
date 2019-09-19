@@ -4,6 +4,7 @@ import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import blue from '@material-ui/core/colors/blue';
 import grey from '@material-ui/core/colors/grey';
 import BaseChildDropdown from './BaseChildDropdown';
 import { PubSubApi } from '../middleware';
@@ -55,10 +56,14 @@ theme.overrides = {
   MuiOutlinedInput: {
     root: {
       '&$focused $notchedOutline': {
-        borderColor: grey[500],
+        borderColor: blue[500],
         borderWidth: 1,
         fontColor: 'black',
         fontSize: '18px',
+      },
+      '&:hover': {
+        borderColor: blue[500],
+        borderWidth: 1,
       },
       height: 50,
       width: 300,
@@ -71,8 +76,8 @@ theme.overrides = {
     },
     focused: {
       '&$focused': {
-        color: grey[800],
-        fontSize: "18px",
+        color: grey[500],
+        fontSize: '18px',
       },
     },
   },
