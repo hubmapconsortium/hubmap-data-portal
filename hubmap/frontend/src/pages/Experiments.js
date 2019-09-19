@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import grey from '@material-ui/core/colors/grey';
+import blue from '@material-ui/core/colors/blue';
 import Title from '../components/browse/Title';
 import {
   ExperimentsTable,
@@ -15,6 +15,8 @@ import {
 } from '../components/browse';
 
 import { SelectedBrowseOptionsSummary } from '../ui-components';
+import { Divider, Typography } from '@material-ui/core';
+import { borderColor } from '@material-ui/system';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,8 +35,8 @@ export default class Experiments extends React.Component {
   render() {
     return (
       <div className={useStyles.root}>
-        <Grid container spacing={3} style={{marginTop: '150px', width: '1800px'}} justify="left" alignItems="left">
-          <Grid item xs={12}>            
+        <Grid container spacing={3} style={{ marginTop: '150px', width: '2100px' }} justify="left" alignItems="left">
+          <Grid item xs={12} >            
             <Title>Browse Experiments data</Title>
           </Grid>
           <Grid item xs={3} >
@@ -60,6 +62,10 @@ export default class Experiments extends React.Component {
           </Grid>
           <Grid item xs={12}>                      
             <SelectedBrowseOptionsSummary />
+          </Grid>
+          <Grid item xs={12}>   
+          <Typography align='left' variant='body1' style={{fontWeight:'normal',textUnderlinePosition:'under', textDecorationStyle:'initial', textDecoration:'underline',textDecorationColor: blue[500], color:'black', borderBottomColor:blue[500]}}> Experiments </Typography>                   
+            <Divider />
           </Grid>
           <Grid item xs={12}>            
             <ExperimentsTable />
