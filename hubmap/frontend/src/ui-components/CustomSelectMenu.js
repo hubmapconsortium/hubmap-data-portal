@@ -142,24 +142,16 @@ export default class CustomSelectMenu extends React.Component {
           name={menuname}
           onChange={(event) => {
             event.persist();
-            console.log(event.target.value);
             this.setState({ ...this.state, menuitem: event.target.value});
           }}
           input={<Input id="select-multiple-placeholder" />}
           renderValue={(selected) => (this.props.menuname)}
           MenuProps={MenuProps}
           variant="outlined"
-          onOpen={(event) => {
-            console.log(event);
-          }}
-          onClose={(event) => {
-            console.log(event.currentTarget);
-          }}
         >
           {htmlElements}
 
         </Select>
-        {console.log(document.getSelection(menuname))}
       </MuiThemeProvider>
     );
   }
