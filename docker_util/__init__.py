@@ -34,7 +34,7 @@ MANAGE_PY_COMMAND_TEMPLATE: List[str] = [
     str(REPOSITORY_PATH / 'hubmap/manage.py'),
 ]
 
-def get_running_containers() -> List[str]:
+def get_running_django_containers() -> List[str]:
     # Want to return a list instead of this being a generator function,
     # because we care quite a bit about the length of the resulting list
     containers = []
@@ -65,18 +65,18 @@ def print_run(command: List[str], pretend: bool, return_stdout: bool=False):
             return proc.stdout.strip().decode('utf-8')
 
 def run_in_django_container(command: List[str], pretend: bool):
-    containers = get_running_containers()
-    if not containers:
-        label_str = '\n'.join(f'\t{label}'for label in CONTAINER_LABELS)
+    django_containers = get_running_django_containers()
+    if not django_containers:
+        label_str = '\n'.join(f'\t{label}' for label in CONTAINER_LABELS)
         message = f'No containers found. Tried labels:\n{label_str}'
         raise EnvironmentError(message)
 
-    if len(containers) > 1:
-        print('Warning: multiple containers found ({}). Using first.'.format(', '.join(containers)))
+    if len(django_containers) > 1:
+        print('Warning: multiple containers found ({}). Using first.'.format(', '.join(django_containers)))
 
     docker_migrate_command = [
         piece.format(
-            container_id=containers[0],
+            container_id=django_containers[0],
         )
         for piece in DOCKER_MIGRATE_COMMAND_TEMPLATE
     ]
