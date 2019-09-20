@@ -6,7 +6,6 @@ from collections import Mapping, Sequence, defaultdict
 from hashlib import sha256
 from math import isnan
 from pathlib import Path
-from pprint import pprint  # noqa: F401
 from typing import Any, Dict, Iterable, List, Union
 
 import networkx as nx
@@ -86,7 +85,7 @@ def dotted_keys_to_nested_dict(mapping: Dict[str, Any]):
         'a.f': 'another', \
         'g.h': None, \
     }
-    >>> pprint(dotted_keys_to_nested_dict(d))
+    >>> dotted_keys_to_nested_dict(d)
     {'a': {'b': {'c': 1, 'd': 'value', 'e': 5}, 'f': 'another'}, 'g': {'h': None}}
     """
     nested = infinite_defaultdict()
