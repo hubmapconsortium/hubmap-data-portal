@@ -24,6 +24,18 @@
             "Known Diseases": "hereditary clear cell renal cell carcinoma, clear cell renal carcinoma, chromophobe renal cell carcinoma, renal cell carcinoma (disease), normal, papillary renal cell carcinoma",
             "Donor Count": "15",
             "Cell Count Estimate": "Unspecified"
+        },
+        "3":{
+            "Id":"3",
+            "Experiment Title": "patio-temporal immune zonation of the human kidney",
+            "Sample Type": "specimens",
+            "Organ/Model Organ": "kidney",
+            "Selected Cell Type": "kidney cell",
+            "Library Construction Method": "10X v2 sequencing",
+            "Species": "Homo Sapiens",
+            "Known Diseases": "hereditary clear cell renal cell carcinoma, clear cell renal carcinoma, chromophobe renal cell carcinoma, renal cell carcinoma (disease), normal, papillary renal cell carcinoma",
+            "Donor Count": "15",
+            "Cell Count Estimate": "Unspecified"
         }
         
     }
