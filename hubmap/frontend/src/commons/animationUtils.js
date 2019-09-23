@@ -1,5 +1,9 @@
+// TODO: Avoid global variables!
 let dynamicStyles = null;
-export default function addAnimationToStyle(animationName, animationSteps) {
+
+// If we anticipate more utils eventually, it shouldn't be a single default export:
+// eslint-disable-next-line import/prefer-default-export
+export function addAnimationToStyle(animationName, animationSteps) {
   // Add style
   if (!dynamicStyles) {
     dynamicStyles = document.createElement('style');

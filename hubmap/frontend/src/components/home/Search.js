@@ -18,7 +18,7 @@ import { connect } from 'react-redux';
 import * as Constants from '../../commons/constants';
 import store from '../../middleware/store';
 import { getGeneTissueColorsResponse, inProgress, searchThis } from '../../middleware/actions';
-import addAnimationToStyle from '../../commons/animation-utils';
+import { addAnimationToStyle } from '../../commons/animationUtils';
 
 const useStyles = makeStyles((theme) => ({
   root: {
