@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function ExperimentsComponent() {
+export default function () {
   return (
     <div style={{ margin: 100 }}>
 Experiments

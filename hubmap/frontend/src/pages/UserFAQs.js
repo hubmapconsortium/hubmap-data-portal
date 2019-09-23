@@ -1,5 +1,5 @@
 import React from 'react';
 
-export default function UserFAQsComponent() {
+export default function () {
   return <div style={{ margin: 100 }}>User FAQs</div>;
 }
