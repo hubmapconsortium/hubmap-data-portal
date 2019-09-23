@@ -9,7 +9,7 @@ import ExperimentsComponent from '../pages/Experiments';
 import PipelinesComponent from '../pages/Pipelines';
 import HomePage from '../pages/HomePage';
 
-function RootContainer() {
+export default function () {
   return (
     <BrowserRouter>
       <NavBar />
@@ -24,4 +24,3 @@ function RootContainer() {
     </BrowserRouter>
   );
 }
-export default RootContainer;
