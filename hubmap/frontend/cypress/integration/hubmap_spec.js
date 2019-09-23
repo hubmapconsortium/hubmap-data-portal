@@ -120,4 +120,9 @@ describe('HuBMAP', () => {
     cy.location('pathname').should('eq', '/userfaqs');
     // TODO: Empty page
   });
+
+  it('Has a no-match page', () => {
+    cy.visit('/no-such-page');
+    cy.contains('Sorry, no such page.');
+  });
 });
