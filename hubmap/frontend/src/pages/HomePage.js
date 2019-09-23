@@ -23,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
   {
     marginTop: '-30px',
   },
-
 }));
+
 class HomeComponent extends React.Component {
   componentDidMount() {
     actions.getAllExperiments();
