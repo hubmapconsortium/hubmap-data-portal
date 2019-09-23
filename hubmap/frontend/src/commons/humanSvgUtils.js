@@ -1,3 +1,5 @@
+// TODO: DOM manipulation in React apps is generally discouraged.
+
 export function updateText(textSpanId, tooltipText) {
   const spanEl = document.getElementById(textSpanId);
   while (spanEl.firstChild) {

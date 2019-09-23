@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { ReactComponent as HumanSvgReactComp } from '../../images/Human_body_silhouette_minimal.svg';
 import { getColors, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
-import * as utils from '../../commons/human-svg-utils';
+import * as utils from '../../commons/humanSvgUtils';
 import store from '../../middleware/store';
 
 const mapStateToProps = (state) => ({
