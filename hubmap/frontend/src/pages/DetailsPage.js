@@ -14,7 +14,7 @@ const fakeMetadata = {
 function Details(props) {
   const { metadata } = props;
   return (
-    <table>
+    <table border="1">
       {
         Object.entries(metadata).map(
           ([key, value]) => {
