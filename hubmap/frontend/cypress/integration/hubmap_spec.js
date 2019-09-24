@@ -125,6 +125,6 @@ describe('HuBMAP', () => {
     // The request will pass (and the test will fail) if targetting the React dev server.
     // See https://github.com/hubmapconsortium/hubmap-data-portal/issues/162
     cy.request({ url: '/experiments', failOnStatusCode: false })
-      .its('status').should('equal', '404');
+      .its('status').should('equal', 404);
   });
 });
