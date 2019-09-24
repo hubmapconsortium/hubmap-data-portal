@@ -91,14 +91,6 @@ class HomeComponent extends React.Component {
         >
           <ExperimentsBarChart />
         </Grid>
-        <Grid
-          item
-          style={{
-            height: '700px', width: '1200px', marginTop: '250px', marginLeft: '0px',
-          }}
-        >
-          <ImageCountStackedChart />
-        </Grid>
       </Grid>
     );
   }
