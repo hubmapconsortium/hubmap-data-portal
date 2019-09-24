@@ -35,9 +35,8 @@ When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new termi
 
 Revisit [`localhost:3000`](http://localhost:3000/) and it should show the sample data.
 
-### Details
-
-Run `docker-compose up` in the `docker/dev-common` directory. This will
+<details>
+When you run `docker-compose up` in the `docker/dev-common` directory it will
 download pre-built Docker containers for development, and start all services
 listed in `docker/dev-common/docker-compose.yml`. The local copy of this
 repository will be mounted in Django and ReactJS containers, and those
@@ -62,7 +61,8 @@ After all services are started, the Django REST API is available at
 `http://localhost:3000`.
 
 To experiment with local modifications to the development Docker container,
-see `docker/dev-local-example/README.md`.
+see [the docs](docker/dev-local-example/README.md).
+</details>
 
 ### Running in production via `docker-compose`
 The current production configuration for this application runs most pieces of the application
