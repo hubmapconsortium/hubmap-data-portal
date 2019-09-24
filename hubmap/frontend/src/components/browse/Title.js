@@ -6,13 +6,16 @@ import grey from '@material-ui/core/colors/grey';
 export default function Title(props) {
   const { children } = props;
   return (
-    <Typography variant="h5" align="left" color={grey[800]} gutterBottom >
+    <Typography variant="h5" align="left" color={grey[800]} gutterBottom>
       {children}
     </Typography>
   );
 }
 
 Title.propTypes = {
-  // eslint-disable-next-line react/require-default-props
   children: PropTypes.node,
+};
+
+Title.defaultProps = {
+  children: {},
 };
