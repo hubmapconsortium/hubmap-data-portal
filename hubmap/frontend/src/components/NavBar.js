@@ -196,12 +196,10 @@ function SearchAppBar(props) {
             href="/"
           >
             {img}
-
           </IconButton>
           <div className={classes.grow} />
 
           <div className={classes.sectionMenuDesktop}>
-
             <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
                             Browse
               <GraphIcon className={classes.rightIcon} />
@@ -213,22 +211,23 @@ function SearchAppBar(props) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose} component={NavLink} to="/dataanalysis">
-                {' '}
-Data Analysis
-                <GraphIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleClose} component={NavLink} to="/experiments">
-Experiments
-                <LibraryIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleClose} component={NavLink} to="/pipelines">
-Pipelines
-                <FlowIcon className={classes.rightIcon} />
-              </MenuItem>
+              {
+                [
+                  ['/dataanalysis', 'Data Analysis', GraphIcon],
+                  ['/experiments', 'Experiments', LibraryIcon],
+                  ['/pipelines', 'Pipelines', FlowIcon],
+                ].map(
+                  ([path, name, Icon]) => (
+                    <MenuItem onClick={handleClose} component={NavLink} to={path}>
+                      {name}
+                      <Icon className={classes.rightIcon} />
+                    </MenuItem>
+                  ),
+                )
+              }
             </Menu>
-
           </div>
+
           <div className={classes.sectionMenuDesktop}>
             <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} color={grey[300]}>
                             Help
@@ -241,44 +240,30 @@ Pipelines
               open={Boolean(anchorEl1)}
               onClose={handleCloseHelp}
             >
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/rnaseq">
-Rna seq Pipeline
-                <ExploreIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/atacseq">
-ATAC-seq Pipeline
-                <ExploreIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/cdnaseq">
-CDNA-seq Pipeline
-                <ExploreIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/spatialtranscriptomic">
-Spatial Transcriptomic Pipeline
-                <ExploreIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/microscopy">
-Microscopy Pipeline
-                <MicroscopeIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/seqfishimaging">
-Seq Fish Imaging Pipeline
-                <MicroscopeIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/masscytometry">
-Mass Cytometry Pipeline
-                <MicroscopeIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/download">
-Data Download
-                <CloudDownloadIcon className={classes.rightIcon} />
-              </MenuItem>
-              <MenuItem onClick={handleCloseHelp} component={NavLink} to="/userfaqs">
-User FAQs
-              </MenuItem>
-
+              {
+                [
+                  ['/rnaseq', 'Rna seq Pipeline', ExploreIcon],
+                  ['/atacseq', 'ATAC-seq Pipeline', ExploreIcon],
+                  ['/cdnaseq', 'CDNA-seq Pipeline', ExploreIcon],
+                  ['/spatialtranscriptomic', 'Spatial Transcriptomic Pipeline', ExploreIcon],
+                  ['/microscopy', 'Microscopy Pipeline', MicroscopeIcon],
+                  ['/seqfishimaging', 'Seq Fish Imaging Pipeline', MicroscopeIcon],
+                  ['/masscytometry', 'Mass Cytometry Pipeline', MicroscopeIcon],
+                  ['/download', 'Data Download', CloudDownloadIcon],
+                  ['/userfaqs', 'User FAQs', ExploreIcon],
+                ].map(
+                  ([path, name, Icon]) => (
+                    <MenuItem onClick={handleClose} component={NavLink} to={path}>
+                      {name}
+                      <Icon className={classes.rightIcon} />
+                    </MenuItem>
+                  ),
+                )
+              }
+            ]
             </Menu>
           </div>
+
           <div className={classes.sectionMenuDesktop}>
             <LogInStatus />
           </div>
