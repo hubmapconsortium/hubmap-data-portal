@@ -27,8 +27,10 @@ docker-compose up
 ```
 When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new terminal:
 ```
-run_migrations_in_container.py
-# TODO: Load sample data into DB
+./run_migrations_in_container.py
+# Download a metadata .tsv file from HCA, e.g. from
+# https://data.humancellatlas.org/explore/projects/74b6d569-3b11-42ef-b6b1-a0454522b4a0
+./load_hca_metadata.py path_to_metadata_from_HCA.tsv
 ```
 
 Revisit [`localhost:3000`](http://localhost:3000/) and it should show the sample data.
@@ -97,6 +99,14 @@ Feel free to solicit broader feedback on Slack, but it's good to have a single c
 rather than letting responsibility be more diffuse.
 - At the end of the sprint, @mruffalo will make a release branch, confirm that it's good,
 tag a release, and merge to master, in line with the [gitflow](https://nvie.com/posts/a-successful-git-branching-model/) model.
+
+### Troubleshooting
+
+#### "No space left on disk"
+Over time old image files will accumate. If `docker-compose up` produces a "No space left on disk" error, this will give you a blank slate:
+```
+$ docker system prune --all
+```
 
 ## Misc
 Acronyms:

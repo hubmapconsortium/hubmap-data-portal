@@ -6,6 +6,8 @@ from pathlib import Path
 from subprocess import PIPE, run
 from typing import List, Tuple
 
+from docker_util import print_run
+
 # Would like to include timezone offset, but not worth the
 # complexity of including pytz/etc.
 TIMESTAMP_FORMAT = '%Y%m%d-%H%M%S%z'
@@ -47,18 +49,6 @@ IMAGES: List[Tuple[str, Path]] = [
     ('hubmap/data-portal-reactjs-dev', Path('docker/dev-common/reactjs_app/Dockerfile')),
     ('hubmap/data-portal-python-prod', Path('docker/prod/uwsgi+python-env/Dockerfile')),
 ]
-
-def print_run(command: List[str], pretend: bool, return_stdout: bool=False):
-    print('Running "{}"'.format(' '.join(command)))
-    if pretend:
-        return '<pretend>'
-    else:
-        kwargs = {}
-        if return_stdout:
-            kwargs['stdout'] = PIPE
-        proc = run(command, check=True, **kwargs)
-        if return_stdout:
-            return proc.stdout.strip().decode('utf-8')
 
 def write_git_version():
     path = Path(__file__).parent
