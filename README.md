@@ -10,6 +10,8 @@ This uses sample data and data types and creates basic models in Django
 (database, tables), provides a REST API via Django REST framework, and has
 a front-end interface written in ReactJS.
 
+The site will adhere to [FAIR principles](https://docs.google.com/document/d/1RXmFrLhm_twOQGSlElcqWp8P8uEcq2jiJavjjM13cbo).
+
 ## Development
 
 The application is packaged in Docker containers for production deployment,
@@ -103,17 +105,3 @@ Over time old image files will accumate. If `docker-compose up` produces a "No s
 ```
 $ docker system prune --all
 ```
-
-## Misc
-Acronyms:
-
-FAIR reference: https://docs.google.com/document/d/1RXmFrLhm_twOQGSlElcqWp8P8uEcq2jiJavjjM13cbo/edit#heading=h.5s6i6l1nfb30
-
-FAIR Metrics: https://github.com/FAIRMetrics/Metrics
-
-TODO: Along with a full functional description all published APIs will include complete information describing:
-* authentication and authorization (security scheme)
-* request header
-* call parameters
-* response
-* data models used for any of the above
