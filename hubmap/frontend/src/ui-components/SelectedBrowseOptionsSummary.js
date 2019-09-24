@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import ChipInput from 'material-ui-chip-input';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -59,9 +60,9 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
 
   handleDelete(deletedChip) {
     if (deletedChip) {
-      this.setState({
-        chips: this.state.chips.filter((c) => c !== deletedChip),
-      });
+      this.setState((prevState) => ({
+        chips: prevState.chips.filter((c) => c !== deletedChip),
+      }));
     } else {
       // alert('Why would you delete React?');
     }
@@ -84,32 +85,38 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
       chips.push(summary);
     }
     this.setState({
+      // eslint-disable-next-line react/no-access-state-in-setstate
       ...this.state,
-      chips: chips,
+      chips,
     });
   }
 
   componentWillMount() {
-    this.menutoken = this.pubsubObj.subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
-    this.searchtoken = this.pubsubObj.subscribe(Commons.TYPED_SEARCH_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+    this.menutoken = this.pubsubObj
+      .subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+    this.searchtoken = this.pubsubObj
+      .subscribe(Commons.TYPED_SEARCH_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
   }
 
   render() {
     const { menuSelected, searchOptions, chips } = this.state;
     if (menuSelected || searchOptions) {
       return (
-        <div style={{backgroundColor: grey[300]}}>
-          <MuiThemeProvider theme={theme} >
+        <div style={{ backgroundColor: grey[300] }}>
+          <MuiThemeProvider theme={theme}>
             <ChipInput
               {...this.props}
               value={chips}
               onDelete={(deletedChip) => this.handleDelete(deletedChip)}
               onBlur={(event) => {
+                // eslint-disable-next-line react/destructuring-assignment
                 if (this.props.addOnBlur && event.target.value) {
                   this.handleAdd(event.target.value);
                 }
               }}
-              style={{ borderWidth: 0, '&:focus': { outline: 'none', borderWidth: 0 }, backgroundColor: grey[200], borderColor: grey[100], color: grey[500], textDecorationColor: grey[500]}}
+              style={{
+                borderWidth: 0, '&:focus': { outline: 'none', borderWidth: 0 }, backgroundColor: grey[200], borderColor: grey[100], color: grey[500], textDecorationColor: grey[500],
+              }}
               fullWidth
               label="Selection summary"
               variant="outlined"
@@ -125,9 +132,9 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
               onFocus={(e) => {
                 e.stopPropagation();
               }}
-          />
+            />
           </MuiThemeProvider>
-          </div>
+        </div>
       );
     }
     return (
