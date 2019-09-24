@@ -6,7 +6,7 @@ import { Divider, Typography } from '@material-ui/core';
 import Title from '../components/browse/Title';
 import {
   ExperimentsTable,
-  SearchDropdown,
+  SearchInput,
   SpecimenDropdown,
   DonorDropdown,
   TissueTypeDropdown,
@@ -39,7 +39,7 @@ export default class Experiments extends React.Component {
             <Title>Browse Experiments data</Title>
           </Grid>
           <Grid item xs={3}>
-            <SearchDropdown />
+            <SearchInput />
           </Grid>
           <Grid item xs={1}>
             <DonorDropdown />
