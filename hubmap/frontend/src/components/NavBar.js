@@ -147,10 +147,44 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function SearchAppBar(props) {
+function NavigationMenu(props) {
+  const { name, icon, items } = props;
+  const Icon = icon;
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [anchorEl1, setAnchorEl1] = React.useState(null);
+  const handleClose = () => setAnchorEl(null);
+  const handleClick = (event) => setAnchorEl(event.currentTarget);
+  return (
+    <div className={classes.sectionMenuDesktop}>
+      <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
+        {name}
+        <Icon className={classes.rightIcon} />
+      </Button>
+      <Menu
+        id="help-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        {
+          items.map(
+            ([path, linkName, LinkIcon]) => (
+              <MenuItem onClick={handleClose} component={NavLink} to={path}>
+                {linkName}
+                <LinkIcon className={classes.rightIcon} />
+              </MenuItem>
+            ),
+          )
+        }
+      ]
+      </Menu>
+    </div>
+  );
+}
+
+function SearchAppBar(props) {
+  const classes = useStyles();
   posed.img({
     pressable: true,
     init: { scale: 1 },
@@ -169,22 +203,7 @@ function SearchAppBar(props) {
     />
   );
 
-  function handleClose() {
-    setAnchorEl(null);
-  }
-
-  function handleCloseHelp() {
-    setAnchorEl1(null);
-  }
-
-  function handleClick(event) {
-    setAnchorEl(event.currentTarget);
-  }
-  function handleHelpClick(event) {
-    setAnchorEl1(event.currentTarget);
-  }
   return (
-
     <div className={classes.root}>
       <AppBar justifyContent="flex-start" position="fixed" style={{ backgroundColor: grey[300] }} height={30} width="100%">
         <Toolbar>
@@ -199,70 +218,31 @@ function SearchAppBar(props) {
           </IconButton>
           <div className={classes.grow} />
 
-          <div className={classes.sectionMenuDesktop}>
-            <Button aria-controls="browse-menu" aria-haspopup="true" onClick={handleClick}>
-                            Browse
-              <GraphIcon className={classes.rightIcon} />
-            </Button>
-            <Menu
-              id="browse-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-            >
-              {
-                [
-                  ['/dataanalysis', 'Data Analysis', GraphIcon],
-                  ['/experiments', 'Experiments', LibraryIcon],
-                  ['/pipelines', 'Pipelines', FlowIcon],
-                ].map(
-                  ([path, name, Icon]) => (
-                    <MenuItem onClick={handleClose} component={NavLink} to={path}>
-                      {name}
-                      <Icon className={classes.rightIcon} />
-                    </MenuItem>
-                  ),
-                )
-              }
-            </Menu>
-          </div>
+          <NavigationMenu
+            name="Browse"
+            icon={GraphIcon}
+            items={[
+              ['/dataanalysis', 'Data Analysis', GraphIcon],
+              ['/experiments', 'Experiments', LibraryIcon],
+              ['/pipelines', 'Pipelines', FlowIcon],
+            ]}
+          />
 
-          <div className={classes.sectionMenuDesktop}>
-            <Button aria-controls="help-menu" aria-haspopup="true" onClick={handleHelpClick} color={grey[300]}>
-                            Help
-              <HelpIcon className={classes.rightIcon} />
-            </Button>
-            <Menu
-              id="help-menu"
-              anchorEl={anchorEl1}
-              keepMounted
-              open={Boolean(anchorEl1)}
-              onClose={handleCloseHelp}
-            >
-              {
-                [
-                  ['/rnaseq', 'Rna seq Pipeline', ExploreIcon],
-                  ['/atacseq', 'ATAC-seq Pipeline', ExploreIcon],
-                  ['/cdnaseq', 'CDNA-seq Pipeline', ExploreIcon],
-                  ['/spatialtranscriptomic', 'Spatial Transcriptomic Pipeline', ExploreIcon],
-                  ['/microscopy', 'Microscopy Pipeline', MicroscopeIcon],
-                  ['/seqfishimaging', 'Seq Fish Imaging Pipeline', MicroscopeIcon],
-                  ['/masscytometry', 'Mass Cytometry Pipeline', MicroscopeIcon],
-                  ['/download', 'Data Download', CloudDownloadIcon],
-                  ['/userfaqs', 'User FAQs', ExploreIcon],
-                ].map(
-                  ([path, name, Icon]) => (
-                    <MenuItem onClick={handleClose} component={NavLink} to={path}>
-                      {name}
-                      <Icon className={classes.rightIcon} />
-                    </MenuItem>
-                  ),
-                )
-              }
-            ]
-            </Menu>
-          </div>
+          <NavigationMenu
+            name="Help"
+            icon={HelpIcon}
+            items={[
+              ['/rnaseq', 'Rna seq Pipeline', ExploreIcon],
+              ['/atacseq', 'ATAC-seq Pipeline', ExploreIcon],
+              ['/cdnaseq', 'CDNA-seq Pipeline', ExploreIcon],
+              ['/spatialtranscriptomic', 'Spatial Transcriptomic Pipeline', ExploreIcon],
+              ['/microscopy', 'Microscopy Pipeline', MicroscopeIcon],
+              ['/seqfishimaging', 'Seq Fish Imaging Pipeline', MicroscopeIcon],
+              ['/masscytometry', 'Mass Cytometry Pipeline', MicroscopeIcon],
+              ['/download', 'Data Download', CloudDownloadIcon],
+              ['/userfaqs', 'User FAQs', ExploreIcon],
+            ]}
+          />
 
           <div className={classes.sectionMenuDesktop}>
             <LogInStatus />
