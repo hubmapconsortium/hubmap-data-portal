@@ -87,6 +87,14 @@ the containers! I.e., local modifications in your copy will be reflected in the 
 application. You may want to run `build_docker_container.py` from a fresh checkout and/or run
 `git clean -dfx; git reset --hard` before building.
 
+### Troubleshooting
+
+#### "No space left on disk"
+Over time old image files will accumate. If `docker-compose up` produces a "No space left on disk" error, this will give you a blank slate:
+```
+$ docker system prune --all
+```
+
 ## Misc
 Acronyms:
 
