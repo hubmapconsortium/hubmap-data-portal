@@ -5,8 +5,8 @@ const fakeMetadata = {
   'date-published': '2020-01-01',
   authors: ['Austen, Jane', 'Basho', 'Carroll, Lewis'],
   experiments: [
-    // { name: 'Foucault\'s Pendulum', demonstrates: 'Earth\'s rotation' },
-    // { name: 'Millikan\'s Oil Drop', demonstrates: 'Electron charge' },
+    { name: 'Foucault\'s Pendulum', demonstrates: 'Earth\'s rotation' },
+    { name: 'Millikan\'s Oil Drop', demonstrates: 'Electron charge' },
   ],
   credits: { Catering: 'Clover', 'Dolly Grip': 'ABC', Gaffer: 'XYZ' },
 };
@@ -20,9 +20,13 @@ function Details(props) {
           ([key, value]) => {
             let renderedValue = value;
             if (Array.isArray(value)) {
-              renderedValue = '[array]';
+              if (value.every((x) => typeof x !== 'object')) {
+                renderedValue = value.join(', ');
+              } else {
+                renderedValue = value.map((x) => <Details metadata={x} />);
+              }
             } else if (typeof value === 'object') {
-              renderedValue = '[object]';
+              renderedValue = <Details metadata={value} />;
             }
 
             return (
