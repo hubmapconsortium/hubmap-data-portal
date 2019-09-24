@@ -14,6 +14,7 @@ import {
   FileDropdown,
   AssaysDropdown,
 } from '../components/browse';
+import {ReactAutosuggestExample} from '../ui-components'
 
 import { SelectedBrowseOptionsSummary } from '../ui-components';
 
@@ -40,6 +41,7 @@ export default class Experiments extends React.Component {
           </Grid>
           <Grid item xs={3}>
             <SearchInput />
+            <ReactAutosuggestExample />
           </Grid>
           <Grid item xs={1}>
             <DonorDropdown />
