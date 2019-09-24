@@ -1,6 +1,5 @@
 // TODO!
 /* eslint-disable class-methods-use-this */
-/* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 /* eslint-disable no-mixed-spaces-and-tabs */
 /* eslint-disable no-return-assign */
@@ -18,7 +17,7 @@ import { connect } from 'react-redux';
 import { CircularProgress, Typography } from '@material-ui/core';
 import { getExperimentsResponse, inProgress, getNextPageFromExperiments } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
-import { store } from '../../index';
+import store from '../../middleware/store';
 
 const mapStateToProps = (state) => ({
   status: state.experimentState.status,
