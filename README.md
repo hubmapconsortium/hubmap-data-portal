@@ -87,6 +87,19 @@ the containers! I.e., local modifications in your copy will be reflected in the 
 application. You may want to run `build_docker_container.py` from a fresh checkout and/or run
 `git clean -dfx; git reset --hard` before building.
 
+### Branching and merging
+
+- New feature branches from `develop` should have names like `username/short-description-123`:
+Including your username will help us identify the owners of stale branches;
+Including an issue number will remind us what the branch was trying to do.
+- Non-trivial PRs should update the changelog. The idea is to provide something more readable
+and more accessible than the git log.
+- Identify a single reviewer for PRs, unless there are really cross-cutting concerns.
+Feel free to solicit broader feedback on Slack, but it's good to have a single check,
+rather than letting responsibility be more diffuse.
+- At the end of the sprint, @mruffalo will make a release branch, confirm that it's good,
+tag a release, and merge to master, in line with the [gitflow](https://nvie.com/posts/a-successful-git-branching-model/) model.
+
 ### Troubleshooting
 
 #### "No space left on disk"
