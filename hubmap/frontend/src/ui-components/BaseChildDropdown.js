@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
@@ -10,7 +12,7 @@ import { grey } from '@material-ui/core/colors';
 import { PubSubApi } from '../middleware';
 import * as Commons from '../commons';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   paper: {
     position: 'absolute',
     top: 36,
@@ -27,7 +29,8 @@ const GreyCheckbox = withStyles({
     },
   },
 })((props) => <Checkbox color="default" {...props} />);
-let selectedValue = [];
+// eslint-disable-next-line no-var
+var selectedValue = [];
 
 export default class BaseChildDropdown extends React.Component {
     pubsubObj = null;
@@ -35,32 +38,28 @@ export default class BaseChildDropdown extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-          checkedMenu: '',
-          checked: false,
-      }
+        checkedMenu: '',
+        checked: false,
+      };
       this.pubsubObj = new PubSubApi();
     }
 
-  handleChange = (menuname) => (event) => {    
-    if (event.target.checked)
-    {
-        selectedValue.push(`${menuname}:${event.target.value}`);
-        this.pubsubObj.publish(Commons.CHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
-        console.log(event.target.checked, selectedValue);
+  handleChange = (menuname) => (event) => {
+    if (event.target.checked) {
+      selectedValue.push(`${menuname}:${event.target.value}`);
+      this.pubsubObj.publish(Commons.CHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
+    } else {
+      const index = selectedValue.indexOf(`${menuname}:${event.target.value}`);
+      if (index > -1) {
+        selectedValue.splice(index, 1);
+        this.pubsubObj.publish(Commons.UNCHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
+      }
     }
-    else{
-        var index = selectedValue.indexOf(`${menuname}:${event.target.value}`);
-        if ( index > -1 )
-        {
-            selectedValue.splice(index, 1);
-            this.pubsubObj.publish(Commons.UNCHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
-        }
-    }
-    this.setState({ 
-        checkedMenu: `${menuname}:${event.target.value}`, 
-        checked: event.target.checked,
+    this.setState({
+      checkedMenu: `${menuname}:${event.target.value}`,
+      checked: event.target.checked,
     });
-    // event.target.checked = !event.target.checked;  
+    // event.target.checked = !event.target.checked;
   };
 
   render() {
@@ -72,22 +71,19 @@ export default class BaseChildDropdown extends React.Component {
           component="label"
           color={grey[800]}
           style={{
-            fontSize: '16px', padding: '10px', fontWeight: 'bold', margin: '10px'
+            fontSize: '16px', padding: '10px', fontWeight: 'bold', margin: '10px',
           }}
         >{menuname}
-          </FormLabel>
+        </FormLabel>
         <FormGroup>
-          { menuitems ? menuitems.slice(0,menuitems.length).map((menuitem) => {
+          { menuitems ? menuitems.slice(0, menuitems.length).map((menuitem) => {
             let isChecked = false;
-            if ( checkedMenu.includes(menuname+ ':'+menuitem) && !selectedValue.includes(menuname+ ':'+menuitem)){
-                isChecked = checked;
+            if (checkedMenu.includes(`${menuname}:${menuitem}`) && !selectedValue.includes(`${menuname}:${menuitem}`)) {
+              isChecked = checked;
+            } else if (selectedValue.includes(`${menuname}:${menuitem}`)) {
+              isChecked = true;
             }
-            else if (selectedValue.includes(menuname+ ':'+menuitem))
-            {
-                isChecked = true;
-            }
-            
-            console.log(isChecked, selectedMenu,selectedValue,menuname+ ':'+menuitem);
+
             return (
               <FormControlLabel
                 key={menuitem}
