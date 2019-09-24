@@ -48,36 +48,36 @@ class ControlledChipInput extends React.Component {
     this.pubsubObj = new PubSubApi();
   }
 
-  onBeforeAdd(chip) {
-    return chip.length >= 3;
-  }
+  onBeforeAdd = (chip) => chip.length >= 3
 
   handleAdd(chip) {
-    this.setState({
-      chips: [...this.state.chips, chip],
-    });
+    this.setState((prevState) => ({
+      chips: [prevState.chips, chip],
+    }));
     selectedValue.push(chip);
     this.pubsubObj.publish(Commons.TYPED_SEARCH_OPTIONS, chip);
   }
 
   handleDelete(deletedChip) {
     if (deletedChip) {
-      this.setState({
-        chips: this.state.chips.filter((c) => c !== deletedChip),
-      });
+      this.setState((prevState) => ({
+        chips: prevState.chips.filter((c) => c !== deletedChip),
+      }));
     }
   }
 
   render() {
+    const { chips } = this.state;
     return (
       <MuiThemeProvider theme={theme}>
         <ChipInput
           {...this.props}
-          value={this.state.chips}
+          value={chips}
           onBeforeAdd={(chip) => this.onBeforeAdd(chip)}
           onAdd={(chip) => this.handleAdd(chip)}
           onDelete={(deletedChip) => this.handleDelete(deletedChip)}
           onBlur={(event) => {
+            // eslint-disable-next-line react/destructuring-assignment
             if (this.props.addOnBlur && event.target.value) {
               this.handleAdd(event.target.value);
             }
@@ -85,7 +85,7 @@ class ControlledChipInput extends React.Component {
           fullWidth
           label="Search"
           variant="outlined"
-    />
+        />
       </MuiThemeProvider>
     );
   }
