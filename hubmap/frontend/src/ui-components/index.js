@@ -4,6 +4,5 @@
 
 export { default as CustomSearchInput } from './CustomSearchInput';
 export { default as ControlledChipInput } from './ControlledChipInput';
-export { default as ElevationScroll } from './ElevationScroll';
 export { default as CustomSelectMenu } from './CustomSelectMenu';
 export { default as SelectedBrowseOptionsSummary } from './SelectedBrowseOptionsSummary';
