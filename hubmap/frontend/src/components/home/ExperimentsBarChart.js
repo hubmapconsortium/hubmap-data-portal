@@ -1,7 +1,4 @@
 // TODO!
-/* eslint-disable func-names */
-/* eslint-disable no-return-assign */
-/* eslint-disable no-unused-vars */
 
 import React from 'react';
 import * as d3 from 'd3';
@@ -66,7 +63,7 @@ class ExperimentsBarChart extends React.Component {
       .attr('y', (s) => yScale(s.May2019))
       .attr('height', (s) => height - yScale(s.May2019))
       .attr('width', xScale.bandwidth())
-      .on('mouseenter', function (actual, i) {
+      .on('mouseenter', function () {
         d3.selectAll('.May2019').attr('opacity', 0);
         d3.select(this)
           .transition()
@@ -136,7 +133,7 @@ class ExperimentsBarChart extends React.Component {
   }
 
   render() {
-    return <div id="chartcontainer"><svg id="barchart" ref={(svg) => this.svg = svg} /></div>;
+    return <div id="chartcontainer"><svg id="barchart" ref={(svg) => { this.svg = svg; }} /></div>;
   }
 }
 
