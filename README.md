@@ -72,10 +72,6 @@ the ReactJS app through Node.js. PostgreSQL is used for the database server, thr
 
 Web serving is handled by `nginx` on the _host_ machine, with a TLS certificate from Let's Encrypt.
 
-### `nginx` configuration
-See `nginx/demo1.hubmapconsortium.org.conf`. This is a modified version of `/etc/nginx/nginx.conf`
-from a CentOS 7 host, and the file in this repository can be symlinked to that location.
-
 ### Building "official" Docker containers
 A `build_docker_container.py` script is provided -- running this builds Docker containers for
 both the Python/Django/`uwsgi` application and the ReactJS application. This script automatically
