@@ -29,7 +29,7 @@ theme.overrides = {
     focused: {
       '&$focused': {
         color: grey[800],
-        fontSize: "18px",
+        fontSize: '18px',
       },
     },
   },
