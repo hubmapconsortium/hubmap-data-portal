@@ -9,19 +9,13 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
+import PropTypes from 'prop-types';
 import experiments from '../../data/experiments.json';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     marginTop: theme.spacing(3),
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    minWidth: 750,
   },
   tableWrapper: {
     overflowX: 'auto',
@@ -39,6 +33,74 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
   
+const headCells2 = [
+  { id: 'id', numeric: false, disablePadding: false, label: 'Id'},
+  { id: 'Experiment Title', numeric: false, disablePadding: false, label: 'Experiment Title'},
+  { id: 'Sample Type', numeric: false, disablePadding: false, label: 'Sample Type' },
+  { id: 'Organ/Model Organ', numeric: false, disablePadding: false, label: 'Organ/Model Organ' },
+  { id: 'Selected Cell Type', numeric: false, disablePadding: false, label: 'Selected Cell Type' },
+  { id: 'Library Construction Method', numeric: false, disablePadding: false, label: 'Library Construction Method' },
+  { id: 'Species', numeric: false, disablePadding: false, label: 'Species' },
+  { id: 'Known Diseases', numeric: false, disablePadding: false, label: 'Known Diseases' },
+  { id: 'Donor Count', numeric: false, disablePadding: false, label: 'Donor Count' },
+  { id: 'Cell Count Estimate', numeric: false, disablePadding: false, label: 'Cell Count Estimate' }
+];
+
+
+function CustomTableHead(props) {
+  const {
+    order,
+    orderBy,
+    onRequestSort,
+  } = props;
+    
+  const createSortHandler = (property) => (event) => {
+    onRequestSort(event, property);
+  };
+    
+  // const { order, orderBy } = this.state;
+  let columnsHeaders = [];
+  return (
+    <TableHead fixedHeader>
+      <TableRow head>
+        {
+            headCells2.forEach((column) => (
+              columnsHeaders.push(<TableCell
+                style={{
+                  fontWeight: 'bold', color: 'black', fontSize: '10px',
+                }}
+                key={column.id}
+                padding={column.disablePadding ? 'none' : 'default'}
+                sortDirection={orderBy === column.id ? order : false}
+              >
+                
+                <TableSortLabel
+                  active={orderBy === column.id}
+                  direction={order}
+                  onClick={createSortHandler(column.id)}
+                >
+                  {column.label}
+                  {orderBy === column.id ? (
+                    <span className={useStyles.visuallyHidden}>
+                      {/* {order === 'desc' ? 'sorted descending' : 'sorted ascending'} */}
+                    </span>
+                  ) : null}
+                </TableSortLabel>
+              </TableCell>)
+            ))
+        }
+        {columnsHeaders}
+      </TableRow>
+    </TableHead>
+  );
+}
+
+CustomTableHead.propTypes = {
+  onRequestSort: PropTypes.func.isRequired,
+  order: PropTypes.oneOf(['asc', 'desc']).isRequired,
+  orderBy: PropTypes.string.isRequired,
+};
+
 export default class ExperimentsTable extends React.Component {
   constructor(props) {
     super(props);
@@ -46,6 +108,7 @@ export default class ExperimentsTable extends React.Component {
       order: 'desc',
       orderBy: 'Id',
     };
+    this.handleRequestSort = this.handleRequestSort.bind(this);
   }
 
   experimentsDict = experiments.experiments;
@@ -54,117 +117,49 @@ export default class ExperimentsTable extends React.Component {
 
   experimentsRows = [];
 
-  headCells2 = [
-    { id: 'id', numeric: false, disablePadding: false, label: 'id'},
-    { id: 'Experiment Title', numeric: false, disablePadding: false, label: 'Experiment Title'},
-    { id: 'Sample Type', numeric: false, disablePadding: false, label: 'Sample Type' },
-    { id: 'Organ/Model Organ', numeric: false, disablePadding: false, label: 'Organ/Model Organ' },
-    { id: 'Selected Cell Type', numeric: false, disablePadding: false, label: 'Selected Cell Type' },
-    { id: 'Library Construction Method', numeric: false, disablePadding: false, label: 'Library Construction Method' },
-    { id: 'Species', numeric: false, disablePadding: false, label: 'Species' },
-    { id: 'Known Diseases', numeric: false, disablePadding: false, label: 'Known Diseases' },
-    { id: 'Donor Count', numeric: false, disablePadding: false, label: 'Donor Count' },
-    { id: 'Cell Count Estimate', numeric: false, disablePadding: false, label: 'Cell Count Estimate' }
-  ];
-
-  getColumns() {
-    const { order, orderBy } = this.state;
-    this.headCells2.forEach((column) => {
-      this.columns.push(
-        <TableCell
-          style={{
-            minWidth: '80px', fontWeight: 'bold', color: 'black', fontSize: '10px',
-          }}
-          key={column.id}
-          align={column.numeric ? 'right' : 'left'}
-          padding={column.disablePadding ? 'none' : 'default'}
-          sortDirection={orderBy === column.id ? order : false}
-        >
-          <TableSortLabel
-            active={orderBy === column.id}
-            direction={order}
-            onClick={(event) => {
-              const { order, orderBy } = this.state;
-              console.log(event.target.innerText, orderBy === event.target.innerText && order === 'desc');
-              const isDesc = orderBy === event.target.innerText && order === 'desc';
-              this.setState({
-                order: isDesc ? 'asc' : 'desc',
-                orderBy: event.target.innerText,
-              });
-            }}
-          >
-            {column.label}
-            {orderBy === column.id ? (
-              <span className={useStyles.visuallyHidden}>
-                {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-              </span>
-            ) : null}
-          </TableSortLabel>
-        </TableCell>,
-      );
-    });
-  }
-
-  getRows() {
-    const { order, orderBy } = this.state;
+  getRows(order, orderBy) {
     let cells = [];
-    console.log(Object.values(experiments.experiments));
-    this.stableSort(Object.values(experiments.experiments), this.getSorting(order, orderBy)).forEach((experiment) => {
-      experiment.forEach((colValue) => {
-        cells.push(<TableCell>{colValue} </TableCell>);
+    let sortedEntries = [];
+    order === 'desc' ?
+    sortedEntries = Object.values(experiments.experiments).sort((a, b) => ((a[orderBy] > b[orderBy]) ? 1 : -1)) :
+    sortedEntries =Object.values(experiments.experiments).sort((a, b) => ((a[orderBy] < b[orderBy]) ? 1 : -1));
+    sortedEntries.forEach((experiment) => {
+      Object.values(experiment).forEach((cell) => {
+        cells.push(<TableCell>{cell} </TableCell>);
       });
       this.experimentsRows.push(
         <TableRow key={experiment.id}>
           {cells}
-        </TableRow>
+        </TableRow>,
       );
       cells = [];
     });
   }
 
-
-  desc(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
-    return 0;
-  }
-
-  stableSort(array, cmp) {
-    const stabilizedThis = array.map((el, index) => [Object.values(el), index]);
-    stabilizedThis.sort((a, b) => {
-      const order = cmp(a[0], b[0]);
-      console.log(cmp, a, b, cmp(a[0], b[0]), cmp);
-      if (order !== 0) return order;
-      return a[1] - b[1];
+  handleRequestSort(event, property) {
+    const { order, orderBy } = this.state;
+    const isDesc = orderBy === property && order === 'desc';
+    this.setState({
+      order: isDesc ? 'asc' : 'desc',
+      orderBy: property,
     });
-    console.log(stabilizedThis.map((el) => el[0]));
-    return stabilizedThis.map((el) => el[0]);
-  }
-  
-  getSorting(order, orderBy) {
-    console.log(order, orderBy);
-    return order === 'desc' ? (a, b) => this.desc(a, b, orderBy) : (a, b) => -this.desc(a, b, orderBy);
+    console.log(this.state, order, orderBy)
+    this.experimentsRows = [];
+    this.getRows(isDesc ? 'asc' : 'desc', property);
   }
 
   componentWillMount() {
     this.experimentsRows = [];
     this.columns = [];
-    this.setState({
-      order: 'Id',
-      orderBy: 'desc',
-    })
-    this.getColumns();
+    console.log(this.state);
     this.getRows();
   }
 
   render() {
+    const { order, orderBy } = this.state;
     return (
       <>
-        <Table size="small">
+        <Table size="medium">
           <colgroup>
             <col style={{ width: '2%' }} />
             <col style={{ width: '30%' }} />
@@ -177,11 +172,13 @@ export default class ExperimentsTable extends React.Component {
             <col style={{ width: '5%' }} />
             <col style={{ width: '5%' }} />
           </colgroup>
-          <TableHead fixedHeader>
-            <TableRow head>
-              {this.columns}
-            </TableRow>
-          </TableHead>
+          <CustomTableHead
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={this.handleRequestSort}
+          />
+        
+
           <TableBody>
             {this.experimentsRows}
           </TableBody>
