@@ -1,13 +1,10 @@
-// TODO!
-/* eslint-disable import/no-cycle */
-
 import React from 'react';
 import { connect } from 'react-redux';
 import { ReactComponent as HumanSvgReactComp } from '../../images/Human_body_silhouette_minimal.svg';
 import { getColors, inProgress } from '../../middleware/actions';
 import * as Constants from '../../commons/constants';
 import * as utils from '../../commons/human-svg-utils';
-import { store } from '../../index';
+import store from '../../middleware/store';
 
 const mapStateToProps = (state) => ({
   status: state.colorsState.status,

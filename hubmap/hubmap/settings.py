@@ -27,6 +27,10 @@ DATABASES = {
     },
 }
 
+NEO4J_URL = 'bolt://neo4j:7687'
+MONGODB_HOST = 'mongodb'
+ELASTICSEARCH_HOSTS = [{'host': 'elasticsearch', 'port': 9200}]
+
 # Location of the React app. Overriden to '/' for production
 FRONTEND_URL = 'http://localhost:3000/'
 

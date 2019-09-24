@@ -1,5 +1,4 @@
 // TODO!
-/* eslint-disable import/no-cycle */
 /* eslint-disable react/prefer-stateless-function */
 
 import React from 'react';

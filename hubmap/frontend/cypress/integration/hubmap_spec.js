@@ -57,7 +57,8 @@ describe('HuBMAP', () => {
     cy.visit('/');
 
     cy.contains('Browse').click();
-    cy.contains('Data Analysis').click();
+    // https://github.com/rakannimer/react-google-charts/blob/master/cypress/integration/charts.spec.js
+    cy.contains('Data Analysis', { timeout: 100000 }).click();
     cy.location('pathname').should('eq', '/dataanalysis');
     cy.contains('Search by Tissue'); // TODO: more tests
 
@@ -118,5 +119,10 @@ describe('HuBMAP', () => {
     cy.contains('User FAQs').click();
     cy.location('pathname').should('eq', '/userfaqs');
     // TODO: Empty page
+  });
+
+  it('Has a no-match page', () => {
+    cy.visit('/no-such-page');
+    cy.contains('Sorry, no such page.');
   });
 });

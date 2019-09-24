@@ -1,5 +1,4 @@
 // TODO!
-/* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
@@ -17,7 +16,7 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import grey from '@material-ui/core/colors/grey';
 import { connect } from 'react-redux';
 import * as Constants from '../../commons/constants';
-import { store } from '../../index';
+import store from '../../middleware/store';
 import { getGeneTissueColorsResponse, inProgress, searchThis } from '../../middleware/actions';
 import addAnimationToStyle from '../../commons/animation-utils';
 
