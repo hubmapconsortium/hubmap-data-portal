@@ -213,14 +213,14 @@ function SearchAppBar(props) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleClose} component={NavLink} to="/experiments">
-Experiments
-                <LibraryIcon className={classes.rightIcon} />
-              </MenuItem>
               <MenuItem onClick={handleClose} component={NavLink} to="/dataanalysis">
                 {' '}
 Data Analysis
                 <GraphIcon className={classes.rightIcon} />
+              </MenuItem>
+              <MenuItem onClick={handleClose} component={NavLink} to="/experiments">
+Experiments
+                <LibraryIcon className={classes.rightIcon} />
               </MenuItem>
               <MenuItem onClick={handleClose} component={NavLink} to="/pipelines">
 Pipelines
@@ -285,6 +285,22 @@ User FAQs
           <div className={classes.grow} />
           <div className={classes.grow} />
           <div className={classes.grow} />
+          <div className={classes.search}>
+            <div className={classes.searchIcon}>
+              <SearchIcon />
+            </div>
+            <InputBase
+              placeholder="Search"
+              classes={{
+                root: classes.inputRoot,
+                input: classes.inputInput,
+              }}
+              inputProps={{
+                'aria-label': 'Search',
+              }}
+              variant="outlined"
+            />
+          </div>
         </Toolbar>
       </AppBar>
     </div>
