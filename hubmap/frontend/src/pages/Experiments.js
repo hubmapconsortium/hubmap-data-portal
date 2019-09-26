@@ -6,8 +6,15 @@ import { Divider, Typography } from '@material-ui/core';
 import {
   ExperimentsTable,
   Title,
+  SpecimenDropdown,
+  DonorDropdown,
+  TissueTypeDropdown,
+  MethodDropdown,
+  FileDropdown,
+  AssaysDropdown,
 } from '../components/browse';
 
+import { BrowseSummary, ControlledChipInput } from '../ui-components';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -29,6 +36,30 @@ export default class Experiments extends React.Component {
         <Grid container spacing={3} style={{ marginTop: '150px', width: '2100px' }} justify="left" alignItems="left">
           <Grid item xs={12}>
             <Title>Browse Experiments data</Title>
+          </Grid>
+          <Grid item xs={3}>
+            <ControlledChipInput />
+          </Grid>
+          <Grid item xs={1}>
+            <DonorDropdown />
+          </Grid>
+          <Grid item xs={1}>
+            <TissueTypeDropdown />
+          </Grid>
+          <Grid item xs={1}>
+            <MethodDropdown />
+          </Grid>
+          <Grid item xs={1}>
+            <FileDropdown />
+          </Grid>
+          <Grid item xs={1}>
+            <SpecimenDropdown />
+          </Grid>
+          <Grid item xs={1}>
+            <AssaysDropdown />
+          </Grid>
+          <Grid item xs={12}>
+            <BrowseSummary />
           </Grid>
           <Grid item xs={12}>
             <Typography
