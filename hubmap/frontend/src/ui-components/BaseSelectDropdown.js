@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import grey from '@material-ui/core/colors/grey';
-import BaseChildDropdown from './BaseChildDropdown';
+import BaseChildDropdown from './SubMenuOptions';
 import { PubSubApi } from '../middleware';
 import * as Commons from '../commons';
 
