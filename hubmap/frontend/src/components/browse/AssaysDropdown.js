@@ -1,12 +1,12 @@
 import React from 'react';
-import { CustomSelectMenu } from '../../ui-components';
+import { BaseSelectDropdown } from '../../ui-components';
 import facets from '../../data/searchfacets.json';
 
 export default function AssaysDropdown() {
   const menuCategories = facets.facets.Assays;
 
   return (
-    <CustomSelectMenu
+    <BaseSelectDropdown
       margin="normal"
       variant="outlined"
       menusections={menuCategories}
