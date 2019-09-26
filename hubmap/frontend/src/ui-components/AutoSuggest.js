@@ -1,4 +1,4 @@
-/* global XMLHttpRequest */
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Autosuggest from 'react-autosuggest';
@@ -10,23 +10,15 @@ import { withStyles } from '@material-ui/core/styles';
 import ChipInput from 'material-ui-chip-input';
 import flatten from 'flat';
 import facets from '../data/searchfacets.json';
-
-function flattenDeep(arr1) {
-    return arr1.reduce(
-      (acc, val) => (Array.isArray(val) ? acc.concat(flattenDeep(val)) : acc.concat(val)), []);
-  }
-function getSuggestionsArray(array)
-{
-    let suggestionsArray = [];
-    array.forEach((val) => {
-        suggestionsArray.push( { name: val } );
-    }) ;
-    return suggestionsArray;
-}
+/** *
+ * Example from: https://github.com/TeamWertarbyte/material-ui-chip-input/blob/master/stories/examples/react-autosuggest.js
+ */
 const suggestions = Object.values(flatten(facets.facets));
 
 function renderInput(inputProps) {
-  const { value, onChange, chips, ref, ...other } = inputProps;
+  const {
+    value, onChange, chips, ref, ...other
+  } = inputProps;
 
   return (
     <ChipInput
@@ -50,17 +42,15 @@ function renderSuggestion(suggestion, { query, isHighlighted }) {
       onMouseDown={(e) => e.preventDefault()} // prevent the click causing the input to be blurred
     >
       <div>
-        {parts.map((part, index) => {
-          return part.highlight ? (
-            <span key={String(index)} style={{ fontWeight: 500 }}>
-              {part.text}
-            </span>
-          ) : (
-            <span key={String(index)}>
-              {part.text}
-            </span>
-          );
-        })}
+        {parts.map((part, index) => (part.highlight ? (
+          <span key={String(index)} style={{ fontWeight: 500 }}>
+            {part.text}
+          </span>
+        ) : (
+          <span key={String(index)}>
+            {part.text}
+          </span>
+        )))}
       </div>
     </MenuItem>
   );
@@ -87,8 +77,7 @@ function getSuggestions(value) {
   return inputLength === 0
     ? []
     : suggestions.filter((suggestion) => {
-      const keep =
-          count < 5 && typeof suggestion !== 'object' && suggestion.toLowerCase().slice(0, inputLength) === inputValue;
+      const keep = count < 5 && typeof suggestion !== 'object' && suggestion.toLowerCase().slice(0, inputLength) === inputValue;
 
       if (keep) {
         count += 1;
@@ -125,12 +114,15 @@ const styles = (theme) => ({
 });
 
 class ReactAutosuggest extends React.Component {
-  state = {
-    // value: '',
-    suggestions: [],
-    value: [],
-    textFieldInput: '',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      // value: '',
+      suggestions: [],
+      value: [],
+      textFieldInput: '',
+    };
+  }
 
   handleSuggestionsFetchRequested = ({ value }) => {
     this.setState({
@@ -167,7 +159,7 @@ class ReactAutosuggest extends React.Component {
         value: temp,
       };
     });
-  };
+  }
 
   render() {
     const { classes, ...other } = this.props;
@@ -186,7 +178,9 @@ class ReactAutosuggest extends React.Component {
         renderSuggestionsContainer={renderSuggestionsContainer}
         getSuggestionValue={getSuggestionValue}
         renderSuggestion={renderSuggestion}
-        onSuggestionSelected={(e, { suggestionValue }) => { this.handleAddChip(suggestionValue); e.preventDefault(); }}
+        onSuggestionSelected={(e, { suggestionValue }) => {
+          this.handleAddChip(suggestionValue); e.preventDefault();
+        }}
         focusInputOnSuggestionClick={false}
         inputProps={{
           chips: this.state.value,
@@ -203,7 +197,12 @@ class ReactAutosuggest extends React.Component {
 
 ReactAutosuggest.propTypes = {
   allowDuplicates: PropTypes.bool,
+  // eslint-disable-next-line react/forbid-prop-types
   classes: PropTypes.object.isRequired,
+};
+
+ReactAutosuggest.defaultProps = {
+  allowDuplicates: false,
 };
 
 export default withStyles(styles)(ReactAutosuggest);
