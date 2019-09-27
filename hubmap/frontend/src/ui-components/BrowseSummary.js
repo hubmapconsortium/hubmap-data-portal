@@ -63,8 +63,6 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
       this.setState((prevState) => ({
         chips: prevState.chips.filter((c) => c !== deletedChip),
       }));
-    } else {
-      // alert('Why would you delete React?');
     }
   }
 

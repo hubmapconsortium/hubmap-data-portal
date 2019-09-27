@@ -16,7 +16,6 @@ const MenuProps = {
   PaperProps: {
     style: {
       maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-      // width: 300,
       margin: '10px',
       padding: '35px',
     },
@@ -43,7 +42,6 @@ theme.overrides = {
   },
   MuiFormLabel: {
     root: {
-      // color: grey[800],
       fontSize: '18px',
     },
     focused: {

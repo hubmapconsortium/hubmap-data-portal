@@ -59,7 +59,6 @@ export default class BaseChildDropdown extends React.Component {
       checkedMenu: `${menuname}:${event.target.value}`,
       checked: event.target.checked,
     });
-    // event.target.checked = !event.target.checked;
   };
 
   render() {
