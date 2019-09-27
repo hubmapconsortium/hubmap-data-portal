@@ -82,7 +82,7 @@ const mapStateToProps = (state) => ({
   next: state.geneTissueColorState.next,
   previous: state.geneTissueColorState.previous,
 });
-/** *
+/**
  * Remove animation from style in element's event handler
  */
 function animationEnd(ev) {

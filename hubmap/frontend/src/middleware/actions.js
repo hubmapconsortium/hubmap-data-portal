@@ -29,7 +29,7 @@ export function getExperimentsResponse(response) {
   };
 }
 
-/** *
+/**
  * Fills error details returned by any of get methods from experiments reducer
  */
 export const getExperimentsErrorResponse = (error) => ({
@@ -55,7 +55,7 @@ export function getGeneTissueColorsResponse(response) {
   };
 }
 
-/** *
+/**
  * Search experiments by REST filter api
  */
 export function searchExperimentsResponse(response) {
@@ -77,7 +77,7 @@ export function getColors(colors) {
   };
 }
 
-/** *
+/**
  * Fetch all experiments from REST api
  */
 export function getAllExperiments() {
@@ -103,7 +103,7 @@ export function getAllExperiments() {
   };
 }
 
-/** *
+/**
  * Fetch experiments by page
  */
 export function getExperimentsFirstPage(page) {
@@ -118,7 +118,7 @@ export function getExperimentsFirstPage(page) {
   };
 }
 
-/** *
+/**
  * Fetch next page from experiments
  */
 export function getNextPageFromExperiments(next) {
@@ -133,7 +133,7 @@ export function getNextPageFromExperiments(next) {
   };
 }
 
-/** *
+/**
  * Get colors from REST api for tissues SVGs
  */
 export function getTissueColorsFromServer() {
@@ -147,7 +147,7 @@ export function getTissueColorsFromServer() {
   };
 }
 
-/** *
+/**
  * Get gene-tissue colors maps from REST api for tissues SVGs
  * NOTE: this a temporary tweak for prototype
  */
@@ -162,7 +162,7 @@ export function getGeneTissueColors() {
   };
 }
 
-/** *
+/**
  * Search experiments
  */
 export function searchThis(searchTerm) {

@@ -80,7 +80,7 @@ class MaterialTableDemo extends React.Component {
 	  }
 	}
 
-	/** *
+	/**
 	 * Change page on Table (previous/next)
 	 */
 	changePage = (page) => {

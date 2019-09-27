@@ -12,7 +12,7 @@ const DEFAULT_STATE = {
   error: null,
 };
 
-/** *
+/**
  * fill in state object for experiments
  */
 export default function experimentsReducer(state = DEFAULT_STATE, action) {

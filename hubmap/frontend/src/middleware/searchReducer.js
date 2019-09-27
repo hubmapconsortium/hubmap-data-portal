@@ -8,7 +8,7 @@ const DEFAULT_STATE = {
   error: null,
 };
 
-/** *
+/**
  * fill in state object for experiments
  */
 export default function searchResponseReducer(state = DEFAULT_STATE, action) {

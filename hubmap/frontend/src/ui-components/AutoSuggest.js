@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import ChipInput from 'material-ui-chip-input';
 import flatten from 'flat';
 import facets from '../data/searchfacets.json';
-/** *
+/**
  * Example from: https://github.com/TeamWertarbyte/material-ui-chip-input/blob/master/stories/examples/react-autosuggest.js
  */
 const suggestions = Object.values(flatten(facets.facets));
