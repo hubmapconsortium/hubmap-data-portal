@@ -120,4 +120,11 @@ describe('HuBMAP', () => {
     cy.location('pathname').should('eq', '/userfaqs');
     // TODO: Empty page
   });
+
+  it('TODO: Saved links do not work (when going through Django)!', () => {
+    // The request will pass (and the test will fail) if targetting the React dev server.
+    // See https://github.com/hubmapconsortium/hubmap-data-portal/issues/162
+    cy.request({ url: '/experiments', failOnStatusCode: false })
+      .its('status').should('equal', 404);
+  });
 });
