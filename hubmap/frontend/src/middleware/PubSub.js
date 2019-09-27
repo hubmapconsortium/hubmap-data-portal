@@ -1,6 +1,6 @@
 import PubSub from 'pubsub-js';
 
-export default class PubSubApi {
+export default class {
 tokens = {};
 
 subscribe = (topic, subscriber) => {
