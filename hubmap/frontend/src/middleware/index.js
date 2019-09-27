@@ -1,4 +1,4 @@
-/** *
+/**
  * This exports all required components for middleware.
  */
 
