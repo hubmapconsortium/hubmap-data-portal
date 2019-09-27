@@ -19,7 +19,7 @@
             "Sample": ["Unspecified", "end stage renal failure"]
         },
         "Assays":{
-            "scRNAseq":["snDropseq", "scRNAseq","IHC","LRET-IF","PER-DEI"],
+            "scRNAseq": ["snDropseq", "scRNAseq", "IHC", "LRET-IF", "PER-DEI"],
             "scChromatin":["scTHSseq", "SNAREseq", "scATACseq"],
             "scProteomics":["IMC"],
             "Imaging DNA": ["PER-DEI"],
