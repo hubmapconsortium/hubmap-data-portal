@@ -78,7 +78,8 @@ export default class BaseChildDropdown extends React.Component {
         <FormGroup>
           { menuitems ? menuitems.slice(0, menuitems.length).map((menuitem) => {
             let isChecked = false;
-            if (checkedMenu.includes(`${menuname}:${menuitem}`) && !selectedValue.includes(`${menuname}:${menuitem}`)) {
+            if (checkedMenu.includes(`${menuname}:${menuitem}`)
+            && !selectedValue.includes(`${menuname}:${menuitem}`)) {
               isChecked = checked;
             } else if (selectedValue.includes(`${menuname}:${menuitem}`)) {
               isChecked = true;
