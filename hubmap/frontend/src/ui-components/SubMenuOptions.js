@@ -45,18 +45,19 @@ export default class BaseChildDropdown extends React.Component {
     }
 
   handleChange = (menuname) => (event) => {
+    const menuNameValue = `${menuname}:${event.target.value}`;
     if (event.target.checked) {
-      selectedValue.push(`${menuname}:${event.target.value}`);
-      this.pubsubObj.publish(Commons.CHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
+      selectedValue.push(menuNameValue);
+      this.pubsubObj.publish(Commons.CHECKED_MENU_OPTIONS, menuNameValue);
     } else {
-      const index = selectedValue.indexOf(`${menuname}:${event.target.value}`);
+      const index = selectedValue.indexOf(menuNameValue);
       if (index > -1) {
         selectedValue.splice(index, 1);
-        this.pubsubObj.publish(Commons.UNCHECKED_MENU_OPTIONS, `${menuname}:${event.target.value}`);
+        this.pubsubObj.publish(Commons.UNCHECKED_MENU_OPTIONS, menuNameValue);
       }
     }
     this.setState({
-      checkedMenu: `${menuname}:${event.target.value}`,
+      checkedMenu: menuNameValue,
       checked: event.target.checked,
     });
   };
