@@ -40,7 +40,6 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
   summary = '';
   searchtoken = '';
   menutoken = '';
-
   pubsubObj = null;
 
   constructor(props) {
