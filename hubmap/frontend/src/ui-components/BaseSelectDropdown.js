@@ -125,7 +125,6 @@ export default class CustomSelectMenu extends React.Component {
           variant="outlined"
         >
           {htmlElements}
-
         </Select>
       </MuiThemeProvider>
     );
