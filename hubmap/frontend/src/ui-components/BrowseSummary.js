@@ -5,8 +5,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
 
+import PubSub from 'pubsub-js';
 import * as Commons from '../commons';
-import { PubSubApi } from '../middleware';
 
 const theme = createMuiTheme({});
 theme.overrides = {
@@ -47,7 +47,7 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
 
   constructor(props) {
     super(props);
-    this.pubsubObj = new PubSubApi();
+    this.pubsubObj = new PubSub();
     this.state = {
       selectedMenuSummary: null,
       typedSearchOptions: null,
