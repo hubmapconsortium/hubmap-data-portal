@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import {
   BrowseSummary, ControlledChipInput, SearchInput, BaseSelectDropdown, ReactAutosuggestExample,
 } from '../ui-components';
-import facets from '../data/searchfacets.json';
+import facets from '../data/searchFacets.json';
 
 const useStyles = makeStyles(() => ({
   root: {
