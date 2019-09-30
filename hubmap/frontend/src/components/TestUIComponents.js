@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import {
-  BrowseSummary, ControlledChipInput, SearchInput, BaseSelectDropdown, ReactAutosuggestExample,
+  BrowseSummary, ControlledChipInput, BaseSelectDropdown,
 } from '../ui-components';
 import facets from '../data/searchFacets.json';
 
@@ -27,9 +27,6 @@ export default function MockupUIComponents() {
           <ControlledChipInput />
         </Grid>
         <Grid item xs={3}>
-          <SearchInput />
-        </Grid>
-        <Grid item xs={3}>
           <BaseSelectDropdown
             margin="normal"
             variant="outlined"
@@ -37,9 +34,6 @@ export default function MockupUIComponents() {
             menuname="Assays"
             width="200px"
           />
-        </Grid>
-        <Grid item xs={3}>
-          <ReactAutosuggestExample />
         </Grid>
         <Grid item xs={12}>
           <BrowseSummary />
