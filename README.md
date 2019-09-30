@@ -10,6 +10,8 @@ This uses sample data and data types and creates basic models in Django
 (database, tables), provides a REST API via Django REST framework, and has
 a front-end interface written in ReactJS.
 
+The site will adhere to [FAIR principles](https://docs.google.com/document/d/1RXmFrLhm_twOQGSlElcqWp8P8uEcq2jiJavjjM13cbo).
+
 ## Development
 
 The application is packaged in Docker containers for production deployment,
@@ -35,9 +37,8 @@ When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new termi
 
 Revisit [`localhost:3000`](http://localhost:3000/) and it should show the sample data.
 
-### Details
-
-Run `docker-compose up` in the `docker/dev-common` directory. This will
+<details>
+When you run `docker-compose up` in the `docker/dev-common` directory it will
 download pre-built Docker containers for development, and start all services
 listed in `docker/dev-common/docker-compose.yml`. The local copy of this
 repository will be mounted in Django and ReactJS containers, and those
@@ -62,7 +63,11 @@ After all services are started, the Django REST API is available at
 `http://localhost:3000`.
 
 To experiment with local modifications to the development Docker container,
-see `docker/dev-local-example/README.md`.
+see [the docs](docker/dev-local-example/README.md).
+
+See the [nginx README](docker/prod/nginx/README.md) for more detail on the configuration
+of that container.
+</details>
 
 ### Running in production via `docker-compose`
 The current production configuration for this application runs most pieces of the application
@@ -71,10 +76,6 @@ the ReactJS app through Node.js. PostgreSQL is used for the database server, thr
 `postgres:11` Docker image.
 
 Web serving is handled by `nginx` on the _host_ machine, with a TLS certificate from Let's Encrypt.
-
-### `nginx` configuration
-See `nginx/demo1.hubmapconsortium.org.conf`. This is a modified version of `/etc/nginx/nginx.conf`
-from a CentOS 7 host, and the file in this repository can be symlinked to that location.
 
 ### Building "official" Docker containers
 A `build_docker_container.py` script is provided -- running this builds Docker containers for
@@ -107,17 +108,3 @@ Over time old image files will accumate. If `docker-compose up` produces a "No s
 ```
 $ docker system prune --all
 ```
-
-## Misc
-Acronyms:
-
-FAIR reference: https://docs.google.com/document/d/1RXmFrLhm_twOQGSlElcqWp8P8uEcq2jiJavjjM13cbo/edit#heading=h.5s6i6l1nfb30
-
-FAIR Metrics: https://github.com/FAIRMetrics/Metrics
-
-TODO: Along with a full functional description all published APIs will include complete information describing:
-* authentication and authorization (security scheme)
-* request header
-* call parameters
-* response
-* data models used for any of the above
