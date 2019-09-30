@@ -33,7 +33,6 @@ const GreyCheckbox = withStyles({
 var selectedValue = [];
 
 export default class BaseChildDropdown extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
