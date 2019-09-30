@@ -64,6 +64,9 @@ After all services are started, the Django REST API is available at
 
 To experiment with local modifications to the development Docker container,
 see [the docs](docker/dev-local-example/README.md).
+
+See the [nginx README](docker/prod/nginx/README.md) for more detail on the configuration
+of that container.
 </details>
 
 ### Running in production via `docker-compose`
