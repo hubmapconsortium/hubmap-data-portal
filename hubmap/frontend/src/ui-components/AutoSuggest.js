@@ -9,7 +9,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import ChipInput from 'material-ui-chip-input';
 import flatten from 'flat';
-import facets from '../data/searchfacets.json';
+import facets from '../data/searchFacets.json';
 /**
  * Example from: https://github.com/TeamWertarbyte/material-ui-chip-input/blob/master/stories/examples/react-autosuggest.js
  */
