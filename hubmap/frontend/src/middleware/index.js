@@ -4,4 +4,4 @@
 
 export { default as rootReducer } from './rootReducer';
 export { default as store } from './store';
-export { default as PubSubApi } from './PubSub';
+export { default as PubSub } from './PubSub';
