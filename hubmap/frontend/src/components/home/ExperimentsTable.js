@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { getExperimentsResponse, inProgress } from '../controllers/actions';
+import { getExperimentsResponse, inProgress } from '../middleware';
 import * as Constants from '../../commons/constants';
 import { hubmapStore } from '../../index';
 import MaterialTableDemo from './MUITable';
