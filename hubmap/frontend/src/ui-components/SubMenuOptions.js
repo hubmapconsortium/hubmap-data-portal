@@ -9,7 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import { Checkbox } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
-import { PubSubApi } from '../middleware';
+import PubSub from 'pubsub-js';
 import * as Commons from '../commons';
 
 const useStyles = makeStyles(() => ({
@@ -41,7 +41,7 @@ export default class BaseChildDropdown extends React.Component {
         checkedMenu: '',
         checked: false,
       };
-      this.pubsubObj = new PubSubApi();
+      this.pubsubObj = new PubSub();
     }
 
   handleChange = (menuname) => (event) => {
