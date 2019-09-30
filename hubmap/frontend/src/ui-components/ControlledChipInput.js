@@ -4,7 +4,7 @@ import ChipInput from 'material-ui-chip-input';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import blue from '@material-ui/core/colors/blue';
-import { PubSubApi } from '../middleware';
+import PubSub from 'pubsub-js';
 import * as Commons from '../commons';
 
 const theme = createMuiTheme({});
@@ -45,7 +45,7 @@ class ControlledChipInput extends React.Component {
     this.state = {
       chips: [],
     };
-    this.pubsubObj = new PubSubApi();
+    this.pubsubObj = new PubSub();
   }
 
   onBeforeAdd = (chip) => chip.length >= 3
