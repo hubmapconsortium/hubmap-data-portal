@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import blue from '@material-ui/core/colors/blue';
 import grey from '@material-ui/core/colors/grey';
+import PubSub from 'pubsub-js';
 import BaseChildDropdown from './SubMenuOptions';
-import { PubSubApi } from '../middleware';
 import * as Commons from '../commons';
 
 const ITEM_HEIGHT = 48;
@@ -66,7 +66,7 @@ export default class CustomSelectMenu extends React.Component {
       menuitem: '',
       menuname: '',
     };
-    this.pubsubObj = new PubSubApi();
+    this.pubsubObj = new PubSub();
   }
 
   selectedMenuSummaryAdded = (msg, summary) => {
