@@ -1,7 +1,5 @@
-// TODO!
-/* eslint-disable no-unused-vars */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -182,8 +180,15 @@ function NavigationMenu(props) {
     </div>
   );
 }
+NavigationMenu.propTypes = {
+  name: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  items: PropTypes.arrayOf(
+    PropTypes.object,
+  ).isRequired,
+};
 
-function SearchAppBar(props) {
+function SearchAppBar() {
   const classes = useStyles();
   posed.img({
     pressable: true,
