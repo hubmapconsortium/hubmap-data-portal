@@ -1,4 +1,4 @@
-import * as Constants from '../commons/constants';
+import * as Constants from '../../commons/constants';
 
 // define DEFAULT state, so it is never "undefined".
 const DEFAULT_STATE = {
@@ -9,11 +9,11 @@ const DEFAULT_STATE = {
 };
 
 /**
- * fill in the state object for colors
+ * fill in state object for experiments
  */
-export default function geneTissueColorResponseReducer(state = DEFAULT_STATE, action) {
+export default function searchResponseReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
-    case Constants.GET_GENE_TISSUE_COLORS:
+    case Constants.SEARCH_EXPERIMENTS:
       return {
         ...state,
         response: action.response,
@@ -21,7 +21,6 @@ export default function geneTissueColorResponseReducer(state = DEFAULT_STATE, ac
         status: action.status,
         error: action.error,
       };
-
     default:
       return state;
   }
