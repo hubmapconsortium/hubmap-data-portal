@@ -1,10 +1,6 @@
 // TODO!
 /* eslint-disable react/forbid-prop-types */
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/require-default-props */
-/* eslint-disable react/state-in-constructor */
 
 import React from 'react';
 import grey from '@material-ui/core/colors/grey';
@@ -27,7 +23,7 @@ const StyledTableCell = withStyles((theme) => ({
   },
 }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
+const StyledTableRow = withStyles(() => ({
   root: {
     '&:nth-of-type(odd)': {
       backgroundColor: grey[300],
@@ -47,11 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 class Experiments extends React.Component {
-  state = {
-    experiments: [],
-    searchString: '',
-  }
-
   getExperimentsTable() {
     const heads = ['Id', 'Experiment type', 'Institution', 'Data type', 'Tissue',
       'Uploaded on', 'Genes', 'Proteins', '#Cells', 'Unique Barcode', '#Reads', '#Reads Aligned',
@@ -81,7 +72,7 @@ class Experiments extends React.Component {
                   <StyledTableCell align="right">{experiment.Unique_barcode_count}</StyledTableCell>
                   <StyledTableCell align="right">{experiment.read_count_total ? experiment.read_count_total : null}</StyledTableCell>
                   <StyledTableCell align="right">{experiment.read_count_aligned ? experiment.read_count_aligned : null}</StyledTableCell>
-                  <StyledTableCell align="right">{experiment.image_count ? experiment._image_count : null}</StyledTableCell>
+                  <StyledTableCell align="right">{experiment.image_count ? experiment.image_count : null}</StyledTableCell>
                 </StyledTableRow>
               ))
               : 'No experiments found'}
