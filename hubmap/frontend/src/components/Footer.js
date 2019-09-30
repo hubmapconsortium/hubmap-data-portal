@@ -1,13 +1,10 @@
-// TODO!
-/* eslint-disable no-unused-vars */
-
 import React from 'react';
 import '../App.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import grey from '@material-ui/core/colors/grey';
 import GitVersion from '../GitVersion';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   footer: {
     position: 'fixed',
     left: 0,
