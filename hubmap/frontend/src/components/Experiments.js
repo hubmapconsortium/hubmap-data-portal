@@ -1,5 +1,4 @@
 // TODO!
-/* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable react/no-unused-state */
@@ -53,10 +52,11 @@ class Experiments extends React.Component {
     searchString: '',
   }
 
-  getExperimentsTable(experiments) {
+  getExperimentsTable() {
     const heads = ['Id', 'Experiment type', 'Institution', 'Data type', 'Tissue',
       'Uploaded on', 'Genes', 'Proteins', '#Cells', 'Unique Barcode', '#Reads', '#Reads Aligned',
       '#Images'].map((label) => <StyledTableCell align="right">{label}</StyledTableCell>);
+    const { experiments } = this.props;
     return (
       <Paper className={useStyles.root}>
         <Table className={useStyles.table} title="Studies from HuBMAP Consortium">
@@ -66,8 +66,8 @@ class Experiments extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.experiments
-              ? this.props.experiments.map((experiment) => (
+            {experiments
+              ? experiments.map((experiment) => (
                 <StyledTableRow key={experiment.id}>
                   <StyledTableCell component="th" scope="row">{experiment.id}</StyledTableCell>
                   <StyledTableCell component="th" scope="row">{experiment.subclass.model}</StyledTableCell>
@@ -92,8 +92,9 @@ class Experiments extends React.Component {
   }
 
   render() {
+    const { experiments } = this.props;
     return (
-      this.getExperimentsTable(this.props.experiments)
+      this.getExperimentsTable(experiments)
     );
   }
 }
