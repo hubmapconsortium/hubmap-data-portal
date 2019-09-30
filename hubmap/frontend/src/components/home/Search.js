@@ -17,7 +17,7 @@ import grey from '@material-ui/core/colors/grey';
 import { connect } from 'react-redux';
 import * as Constants from '../../commons/constants';
 import store from '../../middleware/store';
-import { getGeneTissueColorsResponse, inProgress, searchThis } from '../../middleware/actions';
+import { getGeneTissueColorsResponse, inProgress, searchThis } from '../../middleware';
 import addAnimationToStyle from '../../commons/animation-utils';
 
 const useStyles = makeStyles((theme) => ({
