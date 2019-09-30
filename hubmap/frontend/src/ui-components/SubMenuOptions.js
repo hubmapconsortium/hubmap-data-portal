@@ -33,27 +33,25 @@ const GreyCheckbox = withStyles({
 var selectedValue = [];
 
 export default class BaseChildDropdown extends React.Component {
-    pubsubObj = null;
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        checkedMenu: '',
-        checked: false,
-      };
-      this.pubsubObj = new PubSub();
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      checkedMenu: '',
+      checked: false,
+    };
+  }
 
   handleChange = (menuname) => (event) => {
     const menuNameValue = `${menuname}:${event.target.value}`;
     if (event.target.checked) {
       selectedValue.push(menuNameValue);
-      this.pubsubObj.publish(Commons.CHECKED_MENU_OPTIONS, menuNameValue);
+      PubSub.publish(Commons.CHECKED_MENU_OPTIONS, menuNameValue);
     } else {
       const index = selectedValue.indexOf(menuNameValue);
       if (index > -1) {
         selectedValue.splice(index, 1);
-        this.pubsubObj.publish(Commons.UNCHECKED_MENU_OPTIONS, menuNameValue);
+        PubSub.publish(Commons.UNCHECKED_MENU_OPTIONS, menuNameValue);
       }
     }
     this.setState({
