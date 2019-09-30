@@ -58,15 +58,12 @@ let selectedMenuSummary = [];
 export default class CustomSelectMenu extends React.Component {
   menutoken = '';
 
-  pubsubObj = null;
-
   constructor(props) {
     super(props);
     this.state = {
       menuitem: '',
       menuname: '',
     };
-    this.pubsubObj = new PubSub();
   }
 
   selectedMenuSummaryAdded = (msg, summary) => {
@@ -84,7 +81,7 @@ export default class CustomSelectMenu extends React.Component {
   }
 
   componentWillMount() {
-    this.menutoken = this.pubsubObj
+    this.menutoken = PubSub
       .subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
   }
 

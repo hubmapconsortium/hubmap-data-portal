@@ -43,11 +43,8 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
 
   menutoken = '';
 
-  pubsubObj = null;
-
   constructor(props) {
     super(props);
-    this.pubsubObj = new PubSub();
     this.state = {
       selectedMenuSummary: null,
       typedSearchOptions: null,
@@ -90,9 +87,9 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
   }
 
   componentWillMount() {
-    this.menutoken = this.pubsubObj
+    this.menutoken = PubSub
       .subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
-    this.searchtoken = this.pubsubObj
+    this.searchtoken = PubSub
       .subscribe(Commons.TYPED_SEARCH_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
   }
 

@@ -45,7 +45,6 @@ class ControlledChipInput extends React.Component {
     this.state = {
       chips: [],
     };
-    this.pubsubObj = new PubSub();
   }
 
   onBeforeAdd = (chip) => chip.length >= 3
@@ -55,7 +54,7 @@ class ControlledChipInput extends React.Component {
       chips: [prevState.chips, chip],
     }));
     selectedValue.push(chip);
-    this.pubsubObj.publish(Commons.TYPED_SEARCH_OPTIONS, chip);
+    PubSub.publish(Commons.TYPED_SEARCH_OPTIONS, chip);
   }
 
   handleDelete(deletedChip) {
