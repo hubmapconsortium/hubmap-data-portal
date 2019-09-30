@@ -10,12 +10,10 @@ import PubSub from 'pubsub-js';
 import BaseChildDropdown from './SubMenuOptions';
 import * as Commons from '../commons';
 
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 12;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      maxHeight: 228,
       margin: '10px',
       padding: '35px',
     },
