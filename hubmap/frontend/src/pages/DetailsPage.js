@@ -41,6 +41,11 @@ function Details(props) {
     </table>
   );
 }
+Details.propTypes = {
+  // TODO: When we know enough to constrain this object type, we will.
+  // eslint-disable-next-line react/forbid-prop-types
+  metadata: Details.object.isRequired,
+};
 
 export default function () {
   // TODO: Fix the banner so the BRs are not needed.
