@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { ReactComponent as HumanSvgReactComp } from '../../images/Human_body_silhouette_minimal.svg';
-import { getColors, inProgress } from '../../middleware/actions';
+import { getColors, inProgress } from '../../middleware';
 import * as Constants from '../../commons/constants';
 import * as utils from '../../commons/human-svg-utils';
 import store from '../../middleware/store';
