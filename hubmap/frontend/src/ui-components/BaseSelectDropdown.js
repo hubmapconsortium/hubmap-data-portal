@@ -54,7 +54,6 @@ theme.overrides = {
 let selectedMenuSummary = [];
 
 export default class CustomSelectMenu extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
