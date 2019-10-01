@@ -24,19 +24,25 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
     }));
   }
 
-  addSelectedOptions(msg, summary) {
+  addCheckedMenuOptions(msg, summary) {
     this.setState((prevState) => ({
       chips: prevState.chips.concat(summary),
       menuSelected: msg === Commons.CHECKED_MENU_OPTIONS,
+    }));
+  }
+
+  addTypedSearchOptions(msg, summary) {
+    this.setState((prevState) => ({
+      chips: prevState.chips.concat(summary),
       searchOptions: msg === Commons.TYPED_SEARCH_OPTIONS,
     }));
   }
 
   componentWillMount() {
     this.menuToken = PubSub
-      .subscribe(Commons.CHECKED_MENU_OPTIONS, this.addSelectedOptions.bind(this));
+      .subscribe(Commons.CHECKED_MENU_OPTIONS, this.addCheckedMenuOptions.bind(this));
     this.searchToken = PubSub
-      .subscribe(Commons.TYPED_SEARCH_OPTIONS, this.addSelectedOptions.bind(this));
+      .subscribe(Commons.TYPED_SEARCH_OPTIONS, this.addTypedSearchOptions.bind(this));
   }
 
   componentWillUnmount() {
