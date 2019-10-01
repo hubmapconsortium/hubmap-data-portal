@@ -30,8 +30,8 @@ export default function MockupUIComponents() {
           <BaseSelectDropdown
             margin="normal"
             variant="outlined"
-            menusections={menuCategories}
-            menuname="Assays"
+            menuSections={menuCategories}
+            menuName="Assays"
             width="200px"
           />
         </Grid>

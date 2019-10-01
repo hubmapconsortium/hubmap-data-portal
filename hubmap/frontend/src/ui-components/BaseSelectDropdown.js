@@ -59,8 +59,8 @@ export default class CustomSelectMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuItem: '',
-      menuName: '',
+      menuitem: '',
+      menuname: '',
     };
   }
 
@@ -93,7 +93,7 @@ export default class CustomSelectMenu extends React.Component {
       values.push(menuSections[key]);
       htmlElements.push(
         <BaseChildDropdown
-          menuiItems={menuSections[key]}
+          menuItems={menuSections[key]}
           menuName={key}
           selectedMenu={selectedMenuSummary}
         />,
@@ -109,11 +109,11 @@ export default class CustomSelectMenu extends React.Component {
           name={menuName}
           onChange={(event) => {
             event.persist();
-            this.setState({ ...this.state, menuItem: event.target.value });
+            this.setState({ ...this.state, menuitem: event.target.value });
           }}
           input={<Input id="select-multiple-placeholder" />}
           // eslint-disable-next-line react/destructuring-assignment
-          renderValue={() => (this.props.menuname)}
+          renderValue={() => (this.props.menuName)}
           MenuProps={MenuProps}
           variant="outlined"
         >
