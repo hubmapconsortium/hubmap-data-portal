@@ -60,7 +60,7 @@ export default class BaseChildDropdown extends React.Component {
   };
 
   render() {
-    const { menuitems, menuname, selectedMenu } = this.props;
+    const { menuItems, menuName, selectedMenu } = this.props;
     const { checkedMenu, checked } = this.state;
     return (
       <FormControl component="fieldset" className={useStyles.formControl} style={{ padding: '10px' }}>
@@ -70,30 +70,30 @@ export default class BaseChildDropdown extends React.Component {
           style={{
             fontSize: '16px', padding: '10px', fontWeight: 'bold', margin: '10px',
           }}
-        >{menuname}
+        >{menuName}
         </FormLabel>
         <FormGroup>
-          { menuitems ? menuitems.slice(0, menuitems.length).map((menuitem) => {
+          { menuItems ? menuItems.slice(0, menuItems.length).map((menuItem) => {
             let isChecked = false;
-            if (checkedMenu.includes(`${menuname}:${menuitem}`)
-            && !selectedValue.includes(`${menuname}:${menuitem}`)) {
+            if (checkedMenu.includes(`${menuName}:${menuItem}`)
+            && !selectedValue.includes(`${menuName}:${menuItem}`)) {
               isChecked = checked;
-            } else if (selectedValue.includes(`${menuname}:${menuitem}`)) {
+            } else if (selectedValue.includes(`${menuName}:${menuItem}`)) {
               isChecked = true;
             }
 
             return (
               <FormControlLabel
-                key={menuitem}
+                key={menuItem}
                 control={(
                   <GreyCheckbox
-                    onChange={this.handleChange(menuname)}
-                    value={menuitem}
-                    key={menuitem}
+                    onChange={this.handleChange(menuName)}
+                    value={menuItem}
+                    key={menuItem}
                     checked={isChecked}
                   />
                     )}
-                label={menuitem}
+                label={menuItem}
               />
             );
           }) : null}
@@ -105,12 +105,12 @@ export default class BaseChildDropdown extends React.Component {
 }
 
 BaseChildDropdown.propTypes = {
-  menuitems: PropTypes.array,
-  menuname: PropTypes.string,
+  menuItems: PropTypes.array,
+  menuName: PropTypes.string,
   selectedMenu: PropTypes.string,
 };
 BaseChildDropdown.defaultProps = {
-  menuitems: {},
-  menuname: '',
+  menuItems: {},
+  menuName: '',
   selectedMenu: '',
 };
