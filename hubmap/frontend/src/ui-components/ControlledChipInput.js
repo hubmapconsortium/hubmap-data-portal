@@ -45,8 +45,6 @@ class ControlledChipInput extends React.Component {
     };
   }
 
-  onBeforeAdd = (chip) => chip.length >= 3
-
   handleAdd(chip) {
     this.setState((prevState) => ({
       chips: [prevState.chips, chip],
@@ -70,7 +68,6 @@ class ControlledChipInput extends React.Component {
         <ChipInput
           {...this.props}
           value={chips}
-          onBeforeAdd={(chip) => this.onBeforeAdd(chip)}
           onAdd={(chip) => this.handleAdd(chip)}
           onDelete={(deletedChip) => this.handleDelete(deletedChip)}
           onBlur={(event) => {
