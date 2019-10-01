@@ -57,19 +57,20 @@ export default class CustomSelectMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuitem: '',
-      menuname: '',
+      menuItem: '',
     };
-    this.menutoken = '';
+    this.checkedMenuSubscribertoken = '';
+    this.uncheckedMenuSubscribertoken = '';
+    this.selectedMenuSummary = [];
   }
 
   selectedMenuSummaryAdded = (msg, summary) => {
+    const isNewBrowseSummary = selectedMenuSummary.indexOf(summary) === -1;
     if (msg === Commons.CHECKED_MENU_OPTIONS
-        && selectedMenuSummary.indexOf(summary) === -1) {
+        && isNewBrowseSummary) {
       selectedMenuSummary.push(summary);
-    }
-    if (msg === Commons.UNCHECKED_MENU_OPTIONS
-        && selectedMenuSummary.indexOf(summary) === -1) {
+    } else if (msg === Commons.UNCHECKED_MENU_OPTIONS
+        && isNewBrowseSummary) {
       const index = selectedMenuSummary.indexOf(summary);
       if (index > -1) {
         selectedMenuSummary.splice(index, 1);
@@ -78,8 +79,15 @@ export default class CustomSelectMenu extends React.Component {
   }
 
   componentWillMount() {
-    this.menutoken = PubSub
+    this.checkedMenuSubscribertoken = PubSub
       .subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+    this.uncheckedMenuSubscribertoken = PubSub
+      .subscribe(Commons.UNCHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+  }
+
+  componentWillUnmount() {
+    PubSub.unsubscribe(this.checkedMenuSubscribertoken);
+    PubSub.unsubscribe(this.uncheckedMenuSubscribertoken);
   }
 
   render() {
@@ -108,7 +116,7 @@ export default class CustomSelectMenu extends React.Component {
           name={menuName}
           onChange={(event) => {
             event.persist();
-            this.setState({ ...this.state, menuitem: event.target.value });
+            this.setState({ ...this.state, menuItem: event.target.value });
           }}
           input={<Input id="select-multiple-placeholder" />}
           // eslint-disable-next-line react/destructuring-assignment
