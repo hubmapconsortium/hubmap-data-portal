@@ -19,11 +19,9 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
   }
 
   handleDelete(deletedChip) {
-    if (deletedChip) {
-      this.setState((prevState) => ({
-        chips: prevState.chips.filter((c) => c !== deletedChip),
-      }));
-    }
+    this.setState((prevState) => ({
+      chips: prevState.chips.filter((c) => c !== deletedChip),
+    }));
   }
 
   addSelectedOptions(msg, summary) {
@@ -57,7 +55,6 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
             value={chip}
             onDelete={this.handleDelete(chip)}
             onBlur={(event) => {
-            // eslint-disable-next-line react/destructuring-assignment
               if (event.target.value) {
                 this.handleAdd(event.target.value);
               }
