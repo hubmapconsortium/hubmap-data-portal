@@ -1,6 +1,3 @@
-import matplotlib.cm
-import numpy as np
-import pandas as pd
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth.views import auth_logout
