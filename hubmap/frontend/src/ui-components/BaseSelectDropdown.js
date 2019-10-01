@@ -54,7 +54,6 @@ theme.overrides = {
 let selectedMenuSummary = [];
 
 export default class CustomSelectMenu extends React.Component {
-  menutoken = '';
 
   constructor(props) {
     super(props);
@@ -62,6 +61,7 @@ export default class CustomSelectMenu extends React.Component {
       menuitem: '',
       menuname: '',
     };
+    this.menutoken = '';
   }
 
   selectedMenuSummaryAdded = (msg, summary) => {
