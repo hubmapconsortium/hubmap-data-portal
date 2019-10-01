@@ -38,7 +38,6 @@ theme.overrides = {
 const selectedValue = [];
 
 class ControlledChipInput extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
