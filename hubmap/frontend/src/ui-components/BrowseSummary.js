@@ -1,58 +1,21 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
-import ChipInput from 'material-ui-chip-input';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import grey from '@material-ui/core/colors/grey';
-import blue from '@material-ui/core/colors/blue';
 
 import PubSub from 'pubsub-js';
+import { Chip, Typography } from '@material-ui/core';
 import * as Commons from '../commons';
 
-const theme = createMuiTheme({});
-theme.overrides = {
-  MuiOutlinedInput: {
-    root: {
-      '&$focused $notchedOutline': {
-        borderColor: blue[500],
-        borderWidth: 1,
-        fontColor: 'black',
-        fontSize: '14px',
-      },
-      height: 50,
-    },
-  },
-  MuiFormLabel: {
-    root: {
-      color: grey[800],
-      fontSize: '16px',
-    },
-    focused: {
-      '&$focused': {
-        color: grey[800],
-        fontSize: '16px',
-      },
-    },
-    color: grey[800],
-  },
-};
-
 export default class SelectedBrowseOptionsSummary extends React.Component {
-  summary = '';
-
-  searchtoken = '';
-
-  menutoken = '';
-
   constructor(props) {
     super(props);
     this.state = {
-      selectedMenuSummary: null,
-      typedSearchOptions: null,
       menuSelected: false,
       searchOptions: false,
       chips: [],
     };
     this.handleDelete = this.handleDelete.bind(this);
+    this.summary = '';
+    this.searchToken = '';
+    this.menuToken = '';
   }
 
   handleDelete(deletedChip) {
@@ -63,73 +26,64 @@ export default class SelectedBrowseOptionsSummary extends React.Component {
     }
   }
 
-  selectedMenuSummaryAdded(msg, summary) {
-    const { chips } = this.state;
-    if (msg === Commons.CHECKED_MENU_OPTIONS) {
-      this.setState({
-        selectedMenuSummary: summary,
-        menuSelected: true,
-      });
-      chips.push(summary);
-    }
-    if (msg === Commons.TYPED_SEARCH_OPTIONS) {
-      this.setState({
-        typedSearchOptions: summary,
-        searchOptions: true,
-      });
-      chips.push(summary);
-    }
-    this.setState({
-      // eslint-disable-next-line react/no-access-state-in-setstate
-      ...this.state,
-      chips,
-    });
+  addSelectedOptions(msg, summary) {
+    this.setState((prevState) => ({
+      chips: prevState.chips.concat(summary),
+      menuSelected: msg === Commons.CHECKED_MENU_OPTIONS,
+      searchOptions: msg === Commons.TYPED_SEARCH_OPTIONS,
+    }));
   }
 
   componentWillMount() {
-    this.menutoken = PubSub
-      .subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
-    this.searchtoken = PubSub
-      .subscribe(Commons.TYPED_SEARCH_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+    this.menuToken = PubSub
+      .subscribe(Commons.CHECKED_MENU_OPTIONS, this.addSelectedOptions.bind(this));
+    this.searchToken = PubSub
+      .subscribe(Commons.TYPED_SEARCH_OPTIONS, this.addSelectedOptions.bind(this));
   }
+
+  componentWillUnmount() {
+    PubSub.unsubscribe(this.menuToken);
+    PubSub.unsubscribe(this.searchToken);
+  }
+
 
   render() {
     const { menuSelected, searchOptions, chips } = this.state;
-    if (menuSelected || searchOptions) {
+    if ((menuSelected || searchOptions) && chips.length > 0) {
+      const chipsArray = [];
+      chips.forEach((chip) => (
+        chipsArray.push(
+          <Chip
+            value={chip}
+            onDelete={this.handleDelete(chip)}
+            onBlur={(event) => {
+            // eslint-disable-next-line react/destructuring-assignment
+              if (event.target.value) {
+                this.handleAdd(event.target.value);
+              }
+            }}
+
+            fullWidth
+            label={chip}
+            variant="outlined"
+            readonly="true"
+            allowDuplicates={false}
+            onKeyDown={(e) => {
+              e.preventDefault();
+              return false;
+            }}
+            onPaste={(e) => {
+              e.preventDefault();
+            }}
+            onFocus={(e) => {
+              e.stopPropagation();
+            }}
+          />,
+        )));
       return (
-        <div style={{ backgroundColor: grey[300] }}>
-          <MuiThemeProvider theme={theme}>
-            <ChipInput
-              {...this.props}
-              value={chips}
-              onDelete={(deletedChip) => this.handleDelete(deletedChip)}
-              onBlur={(event) => {
-                // eslint-disable-next-line react/destructuring-assignment
-                if (this.props.addOnBlur && event.target.value) {
-                  this.handleAdd(event.target.value);
-                }
-              }}
-              style={{
-                borderWidth: 0, '&:focus': { outline: 'none', borderWidth: 0 }, backgroundColor: grey[200], borderColor: grey[100], color: grey[500], textDecorationColor: grey[500],
-              }}
-              fullWidth
-              label="Selection summary"
-              variant="outlined"
-              readonly="true"
-              allowDuplicates={false}
-              onKeyDown={(e) => {
-                e.preventDefault();
-                return false;
-              }}
-              onPaste={(e) => {
-                e.preventDefault();
-              }}
-              onFocus={(e) => {
-                e.stopPropagation();
-              }}
-            />
-          </MuiThemeProvider>
-        </div>
+        <Typography>Browse summary:
+          {chipsArray}
+        </Typography>
       );
     }
     return (
