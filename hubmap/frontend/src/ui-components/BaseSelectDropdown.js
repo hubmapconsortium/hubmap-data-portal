@@ -59,8 +59,8 @@ export default class CustomSelectMenu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      menuitem: '',
-      menuname: '',
+      menuItem: '',
+      menuName: '',
     };
   }
 
@@ -84,17 +84,17 @@ export default class CustomSelectMenu extends React.Component {
   }
 
   render() {
-    const { menusections, menuname } = this.props;
+    const { menuSections, menuName } = this.props;
     const htmlElements = [];
     const keys = [];
     const values = [];
-    Object.keys(menusections).forEach((key) => {
+    Object.keys(menuSections).forEach((key) => {
       keys.push(key);
-      values.push(menusections[key]);
+      values.push(menuSections[key]);
       htmlElements.push(
         <BaseChildDropdown
-          menuitems={menusections[key]}
-          menuname={key}
+          menuiItems={menuSections[key]}
+          menuName={key}
           selectedMenu={selectedMenuSummary}
         />,
       );
@@ -106,10 +106,10 @@ export default class CustomSelectMenu extends React.Component {
         <Select
           multiple
           value={keys}
-          name={menuname}
+          name={menuName}
           onChange={(event) => {
             event.persist();
-            this.setState({ ...this.state, menuitem: event.target.value });
+            this.setState({ ...this.state, menuItem: event.target.value });
           }}
           input={<Input id="select-multiple-placeholder" />}
           // eslint-disable-next-line react/destructuring-assignment
@@ -125,11 +125,11 @@ export default class CustomSelectMenu extends React.Component {
 }
 
 CustomSelectMenu.defaultProps = {
-  menusections: {},
-  menuname: 'Menu',
+  menuSections: {},
+  menuName: 'Menu',
 };
 CustomSelectMenu.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
-  menusections: PropTypes.array,
-  menuname: PropTypes.string,
+  menuSections: PropTypes.array,
+  menuName: PropTypes.string,
 };
