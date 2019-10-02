@@ -17,6 +17,9 @@ const selectDropdownHeight = 60;
 const selectDropdownWidth = 300;
 const selectBorderWidth = 1;
 const controlledChipBorderWidth = 1;
+const checkBoxColor = grey[400];
+const onCheckedColor = grey[800];
+
 
 export const selectDropdownTheme = createMuiTheme({});
 selectDropdownTheme.overrides = {
@@ -79,9 +82,9 @@ controlledChipInputTheme.overrides = {
 
 export const GreyCheckbox = withStyles({
   root: {
-    color: grey[400],
+    color: checkBoxColor,
     '&$checked': {
-      color: grey[600],
+      color: onCheckedColor,
     },
   },
 })((props) => <Checkbox color="default" {...props} />);
