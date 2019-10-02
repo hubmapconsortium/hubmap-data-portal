@@ -7,28 +7,11 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
-import { Checkbox } from '@material-ui/core';
 import { grey } from '@material-ui/core/colors';
 import PubSub from 'pubsub-js';
+import { GreyCheckbox, useStyles } from './styles';
 import * as Commons from '../commons';
 
-const useStyles = makeStyles(() => ({
-  paper: {
-    position: 'absolute',
-    top: 36,
-    right: 0,
-    left: 0,
-    marginTop: 30,
-  },
-}));
-const GreyCheckbox = withStyles({
-  root: {
-    color: grey[400],
-    '&$checked': {
-      color: grey[600],
-    },
-  },
-})((props) => <Checkbox color="default" {...props} />);
 // eslint-disable-next-line no-var
 var selectedValue = [];
 
