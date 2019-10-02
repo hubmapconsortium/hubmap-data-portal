@@ -3,53 +3,12 @@ import React from 'react';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
 import PropTypes from 'prop-types';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import blue from '@material-ui/core/colors/blue';
-import grey from '@material-ui/core/colors/grey';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import PubSub from 'pubsub-js';
 import BaseChildDropdown from './SubMenuOptions';
+import { selectDropdownTheme, MenuProps } from './styles';
 import * as Commons from '../commons';
 
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: 228,
-      margin: '10px',
-      padding: '35px',
-    },
-  },
-};
-
-const theme = createMuiTheme({});
-theme.overrides = {
-  MuiOutlinedInput: {
-    root: {
-      '&$focused $notchedOutline': {
-        borderColor: blue[500],
-        borderWidth: 1,
-        fontColor: 'black',
-        fontSize: '18px',
-      },
-      '&:hover': {
-        borderColor: blue[500],
-        borderWidth: 1,
-      },
-      height: 50,
-      width: 300,
-    },
-  },
-  MuiFormLabel: {
-    root: {
-      fontSize: '18px',
-    },
-    focused: {
-      '&$focused': {
-        color: grey[500],
-        fontSize: '18px',
-      },
-    },
-  },
-};
 // eslint-disable-next-line prefer-const
 let selectedMenuSummary = [];
 
@@ -108,8 +67,7 @@ export default class CustomSelectMenu extends React.Component {
     });
 
     return (
-
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={selectDropdownTheme}>
         <Select
           multiple
           value={keys}
