@@ -23,25 +23,22 @@ export default class CustomSelectMenu extends React.Component {
     this.selectedMenuSummary = [];
   }
 
-  selectedMenuSummaryAdded = (msg, summary) => {
-    const isNewBrowseSummary = selectedMenuSummary.indexOf(summary) === -1;
+  onMenuOptionsChanged = (msg, summary) => {
+    const index = selectedMenuSummary.indexOf(summary);
     if (msg === Commons.CHECKED_MENU_OPTIONS
-        && isNewBrowseSummary) {
+        && index >= -1) {
       selectedMenuSummary.push(summary);
     } else if (msg === Commons.UNCHECKED_MENU_OPTIONS
-        && isNewBrowseSummary) {
-      const index = selectedMenuSummary.indexOf(summary);
-      if (index > -1) {
-        selectedMenuSummary.splice(index, 1);
-      }
+        && index > 0) {
+      selectedMenuSummary.splice(index, 1);
     }
   }
 
   componentWillMount() {
     this.checkedMenuSubscribertoken = PubSub
-      .subscribe(Commons.CHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+      .subscribe(Commons.CHECKED_MENU_OPTIONS, this.onMenuOptionsChanged.bind(this));
     this.uncheckedMenuSubscribertoken = PubSub
-      .subscribe(Commons.UNCHECKED_MENU_OPTIONS, this.selectedMenuSummaryAdded.bind(this));
+      .subscribe(Commons.UNCHECKED_MENU_OPTIONS, this.onMenuOptionsChanged.bind(this));
   }
 
   componentWillUnmount() {
