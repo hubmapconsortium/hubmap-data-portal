@@ -51,18 +51,17 @@ export default class CustomSelectMenu extends React.Component {
 
   render() {
     const { menuSections, menuName } = this.props;
-    const htmlElements = [];
     const keys = [];
     const values = [];
-    Object.keys(menuSections).forEach((key) => {
+    const htmlElements = Object.keys(menuSections).map((key) => {
       keys.push(key);
       values.push(menuSections[key]);
-      htmlElements.push(
+      return (
         <BaseChildDropdown
           menuItems={menuSections[key]}
           menuName={key}
           selectedMenu={selectedMenuSummary}
-        />,
+        />
       );
     });
 
