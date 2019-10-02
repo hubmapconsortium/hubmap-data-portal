@@ -1,39 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ChipInput from 'material-ui-chip-input';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import grey from '@material-ui/core/colors/grey';
-import blue from '@material-ui/core/colors/blue';
+import { MuiThemeProvider } from '@material-ui/core/styles';
 import PubSub from 'pubsub-js';
+import { controlledChipInputTheme } from './styles';
 import * as Commons from '../commons';
-
-const theme = createMuiTheme({});
-theme.overrides = {
-  MuiOutlinedInput: {
-    root: {
-      '&$focused $notchedOutline': {
-        borderColor: blue[500],
-        borderWidth: 1,
-        fontColor: 'black',
-        fontSize: '16px',
-      },
-      height: 50,
-    },
-  },
-  MuiFormLabel: {
-    root: {
-      color: grey[800],
-      fontSize: '16px',
-    },
-    focused: {
-      '&$focused': {
-        color: grey[800],
-        fontSize: '16px',
-      },
-    },
-    color: grey[800],
-  },
-};
 
 const selectedValue = [];
 
@@ -64,7 +35,7 @@ class ControlledChipInput extends React.Component {
   render() {
     const { chips } = this.state;
     return (
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={controlledChipInputTheme}>
         <ChipInput
           {...this.props}
           value={chips}
