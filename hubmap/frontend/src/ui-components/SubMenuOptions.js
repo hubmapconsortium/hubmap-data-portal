@@ -29,9 +29,8 @@ export default class BaseChildDropdown extends React.Component {
     const menuNameValue = `${menuName}_${event.target.value}`;
     const isChecked = event.target.checked;
     const { listStatus } = this.state;
-    console.log(listStatus, menuNameValue)
     if (event.target.checked) {
-        listStatus.findIndex(menuNameValue) ;
+      listStatus.findIndex(menuNameValue);
       PubSub.publish(Commons.CHECKED_MENU_OPTIONS, menuNameValue);
     } else {
       const isMenuChecked = listStatus[menuNameValue];
@@ -57,7 +56,6 @@ export default class BaseChildDropdown extends React.Component {
   render() {
     const { menuItems, menuName, selectedMenu } = this.props;
     const { checkedMenu, checked, listStatus } = this.state;
-    console.log(listStatus)
     return (
       <FormControl component="fieldset" className={useStyles.formControl} style={{ padding: '10px' }}>
         <FormLabel
@@ -73,7 +71,6 @@ export default class BaseChildDropdown extends React.Component {
             let isChecked = false;
             const changedValue = `${menuName}:${menuItem}`;
             const isUnchecked = !listStatus[changedValue];
-            console.log(listStatus[changedValue], changedValue, listStatus);  
             if (checkedMenu.includes(changedValue)
             && !isUnchecked) {
               isChecked = checked;
