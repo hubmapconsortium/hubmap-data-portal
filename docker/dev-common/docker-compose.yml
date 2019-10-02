@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "9999:9999"
   postgres:
     image: postgres:11
     environment:
