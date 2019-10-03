@@ -12,6 +12,12 @@ flake8
 popd
 end flake8
 
+start doctest
+pushd hubmap
+TODO
+popd
+end doctest
+
 start python
 pushd hubmap
 python manage.py test
