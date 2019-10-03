@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -11,40 +9,22 @@ import PubSub from 'pubsub-js';
 import { GreyCheckbox, useStyles } from './styles';
 import * as Commons from '../commons';
 
-// eslint-disable-next-line no-var
-var selectedValue = [];
-
 export default class BaseChildDropdown extends React.Component {
   constructor(props) {
     super(props);
-    const defaultList = Object.values(props.menuItems).map((menuItem) => ({ name: `${props.menuName}_${menuItem}`, checked: false }));
     this.state = {
-      checkedMenu: '',
-      checked: false,
-      listStatus: defaultList,
+      selectedMenuSummary: props.selectedMenuSummary,
     };
   }
 
-  handleChange = (menuName) => (event) => {
-    const menuNameValue = `${menuName}_${event.target.value}`;
+  handleChange = (checkedMenuValue) => (event) => {
     const isChecked = event.target.checked;
-    const { listStatus } = this.state;
-    if (event.target.checked) {
-      listStatus.findIndex(menuNameValue);
-      PubSub.publish(Commons.CHECKED_MENU_OPTIONS, menuNameValue);
+
+    if (isChecked) {
+      PubSub.publish(Commons.CHECKED_MENU_OPTIONS, checkedMenuValue);
     } else {
-      const isMenuChecked = listStatus[menuNameValue];
-      if (isMenuChecked) {
-        listStatus[menuNameValue] = false;
-        PubSub.publish(Commons.UNCHECKED_MENU_OPTIONS, menuNameValue);
-      }
+      PubSub.publish(Commons.UNCHECKED_MENU_OPTIONS, checkedMenuValue);
     }
-    this.setState((state) => ({
-      ...state,
-      checkedMenu: menuNameValue,
-      checked: isChecked,
-      listChecked: state.listStatus,
-    }));
   };
 
   componentWillMount() {
@@ -54,8 +34,7 @@ export default class BaseChildDropdown extends React.Component {
   }
 
   render() {
-    const { menuItems, menuName, selectedMenu } = this.props;
-    const { checkedMenu, checked, listStatus } = this.state;
+    const { menuItems, menuName, selectedMenuSummary } = this.props;
     return (
       <FormControl component="fieldset" className={useStyles.formControl} style={{ padding: '10px' }}>
         <FormLabel
@@ -69,21 +48,17 @@ export default class BaseChildDropdown extends React.Component {
         <FormGroup>
           {menuItems.map((menuItem) => {
             let isChecked = false;
-            const changedValue = `${menuName}:${menuItem}`;
-            const isUnchecked = !listStatus[changedValue];
-            if (checkedMenu.includes(changedValue)
-            && !isUnchecked) {
-              isChecked = checked;
-            } else if (isUnchecked) {
-              isChecked = true;
-            }
+            const changedValue = `${menuName}_${menuItem}`;
+            const index = (selectedMenuSummary || [])
+              .findIndex((listItem) => listItem.name === changedValue);
+            isChecked = index > -1 ? selectedMenuSummary[index].checked : false;
 
             return (
               <FormControlLabel
                 key={menuItem}
                 control={(
                   <GreyCheckbox
-                    onChange={this.handleChange(menuName)}
+                    onChange={this.handleChange(`${menuName}_${menuItem}`)}
                     value={menuItem}
                     key={menuItem}
                     checked={isChecked}
@@ -101,12 +76,12 @@ export default class BaseChildDropdown extends React.Component {
 }
 
 BaseChildDropdown.propTypes = {
-  menuItems: PropTypes.array,
+  menuItems: PropTypes.shape(),
   menuName: PropTypes.string,
-  selectedMenu: PropTypes.string,
+  selectedMenuSummary: PropTypes.string,
 };
 BaseChildDropdown.defaultProps = {
   menuItems: {},
   menuName: '',
-  selectedMenu: '',
+  selectedMenuSummary: '',
 };
