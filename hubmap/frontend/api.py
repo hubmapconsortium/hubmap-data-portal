@@ -46,7 +46,10 @@ def get_donor_uuids(user=None):
     True
     '''
     if user:
-        response = requests.get(f'{base_url}/entities/donors/created-by/{user}')
+        response = requests.get(f'{base_url}/entities/donors/created-by/{quote_plus(user)}')
     else:
         response = requests.get(f'{base_url}/entities/donors')
     return response.json()['uuids']
+
+
+# TODO: More functions
