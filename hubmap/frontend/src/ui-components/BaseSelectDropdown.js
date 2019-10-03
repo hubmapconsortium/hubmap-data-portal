@@ -1,4 +1,3 @@
-/* eslint-disable react/no-access-state-in-setstate */
 import React from 'react';
 import Input from '@material-ui/core/Input';
 import Select from '@material-ui/core/Select';
@@ -9,29 +8,39 @@ import BaseChildDropdown from './SubMenuOptions';
 import { selectDropdownTheme, MenuProps } from './styles';
 import * as Commons from '../commons';
 
-// eslint-disable-next-line prefer-const
-let selectedMenuSummary = [];
-
 export default class CustomSelectMenu extends React.Component {
   constructor(props) {
     super(props);
+    const defaultList = [];
+    Object.keys(props.menuSections).forEach((key) => {
+      Object.values(props.menuSections[key]).forEach((menuItem) => (defaultList.push({ name: `${key}_${menuItem}`, checked: false })));
+    });
     this.state = {
       menuItem: '',
+      selectedMenuSummary: [],
+      menuItems: defaultList,
     };
     this.checkedMenuSubscribertoken = '';
     this.uncheckedMenuSubscribertoken = '';
-    this.selectedMenuSummary = [];
   }
 
   onMenuOptionsChanged = (msg, summary) => {
-    const index = selectedMenuSummary.indexOf(summary);
+    const { selectedMenuSummary, menuItems } = this.state;
+    const index = menuItems.findIndex((menuItem) => menuItem.name === summary);
     if (msg === Commons.CHECKED_MENU_OPTIONS
-        && index >= -1) {
-      selectedMenuSummary.push(summary);
+        && index > -1) {
+      menuItems[index].checked = true;
+      selectedMenuSummary.push({ name: summary, checked: true });
     } else if (msg === Commons.UNCHECKED_MENU_OPTIONS
         && index > 0) {
-      selectedMenuSummary.splice(index, 1);
+      menuItems[index].checked = false;
+      selectedMenuSummary.splice(selectedMenuSummary
+        .findIndex((menuItem) => menuItem.name === summary), 1);
     }
+    this.setState((state) => ({
+      ...state,
+      menuItems,
+    }));
   }
 
   componentWillMount() {
@@ -48,16 +57,15 @@ export default class CustomSelectMenu extends React.Component {
 
   render() {
     const { menuSections, menuName } = this.props;
+    const { selectedMenuSummary } = this.state;
     const keys = [];
-    const values = [];
     const htmlElements = Object.keys(menuSections).map((key) => {
       keys.push(key);
-      values.push(menuSections[key]);
       return (
         <BaseChildDropdown
           menuItems={menuSections[key]}
           menuName={key}
-          selectedMenu={selectedMenuSummary}
+          selectedMenuSummary={selectedMenuSummary}
         />
       );
     });
@@ -70,11 +78,10 @@ export default class CustomSelectMenu extends React.Component {
           name={menuName}
           onChange={(event) => {
             event.persist();
-            this.setState({ ...this.state, menuItem: event.target.value });
+            this.setState((state) => ({ ...state, menuItem: event.target.value }));
           }}
           input={<Input id="select-multiple-placeholder" />}
-          // eslint-disable-next-line react/destructuring-assignment
-          renderValue={() => (this.props.menuName)}
+          renderValue={() => (menuName)}
           MenuProps={MenuProps}
           variant="outlined"
         >
@@ -90,7 +97,6 @@ CustomSelectMenu.defaultProps = {
   menuName: 'Menu',
 };
 CustomSelectMenu.propTypes = {
-  // eslint-disable-next-line react/forbid-prop-types
-  menuSections: PropTypes.array,
+  menuSections: PropTypes.shape({}),
   menuName: PropTypes.string,
 };
