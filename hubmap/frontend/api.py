@@ -17,8 +17,8 @@ def get_entity_types():
     >>> all([type(t) is str for t in types])
     True
     '''
-    response = requests.get(f'{base_url}/entities').json()
-    return response['entity_types']
+    response = requests.get(f'{base_url}/entities')
+    return response.json()['entity_types']
 
 
 def get_entity(uuid):
@@ -27,8 +27,8 @@ def get_entity(uuid):
     >>> entity['description']
     'Test Donor 1'
     '''
-    entity = requests.get(f'{base_url}/entities/{quote_plus(uuid)}').json()
-    return entity
+    response = requests.get(f'{base_url}/entities/{quote_plus(uuid)}')
+    return response.json()
 
 
 def get_donor_uuids(user=None):
@@ -46,7 +46,7 @@ def get_donor_uuids(user=None):
     True
     '''
     if user:
-        response = requests.get(f'{base_url}/entities/donors/created-by/{user}').json()
+        response = requests.get(f'{base_url}/entities/donors/created-by/{user}')
     else:
-        response = requests.get(f'{base_url}/entities/donors').json()
-    return response['uuids']
+        response = requests.get(f'{base_url}/entities/donors')
+    return response.json()['uuids']
