@@ -13,9 +13,10 @@ popd
 end flake8
 
 start doctest
-pushd hubmap
-TODO
-popd
+python -m doctest hubmap/frontend/api.py
+# TODO: Would prefer
+#   python -m doctest hubmap/**.py
+# but it's erroring on relative imports.
 end doctest
 
 start python
