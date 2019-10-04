@@ -27,7 +27,7 @@ cd docker/dev-common
 docker-compose pull # Only needed if you have old images.
 docker-compose up
 ```
-When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new terminal:
+When [`localhost:8000`](http://localhost:8000/) is up, enter this in a new terminal:
 ```
 ./run_migrations_in_container.py
 # Download a metadata .tsv file from HCA, e.g. from
@@ -35,7 +35,7 @@ When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new termi
 ./load_hca_metadata.py path_to_metadata_from_HCA.tsv
 ```
 
-Revisit [`localhost:3000`](http://localhost:3000/) and it should show the sample data.
+Revisit [`localhost:8000`](http://localhost:8000/) and it should show the sample data.
 
 <details>
 When you run `docker-compose up` in the `docker/dev-common` directory it will

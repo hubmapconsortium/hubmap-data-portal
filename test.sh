@@ -36,10 +36,10 @@ pushd hubmap/frontend
 echo '{"version": "unknown"}' > src/git-version.json
 REACT_APP_STAGE=dev npm run build
 pushd build
-python3 -m http.server --bind localhost 3000 &
+python3 -m http.server --bind localhost 8000 &
 SERVER_PID=$!
 popd
-$(npm bin)/wait-on http://localhost:3000
+$(npm bin)/wait-on http://localhost:8000
 $(npm bin)/cypress run
 kill $SERVER_PID
 popd
