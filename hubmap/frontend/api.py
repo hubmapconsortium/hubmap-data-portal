@@ -1,14 +1,18 @@
-import requests
 from urllib.parse import quote_plus
+
+import requests
 
 # In general, unit tests should not depend on live servers
 # ... but in this case, it's all one project, and fairly simple,
 # and making sure docker works is actually a good thing, too.
 
-# Down the road, generate API client code from OpenAPI:
+# Hopefully soon, generate API client code from OpenAPI:
 # https://github.com/hubmapconsortium/hubmap-data-portal/issues/179
 
-base_url = 'http://localhost:9999/v0'
+# Not tested by Travis because we are not starting compose services there.
+# https://github.com/hubmapconsortium/hubmap-data-portal/issues/199
+
+base_url = 'http://api:9999/v0'
 
 
 def get_entity_types():

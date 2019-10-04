@@ -12,13 +12,6 @@ flake8
 popd
 end flake8
 
-start doctest
-python -m doctest hubmap/frontend/api.py
-# TODO: Would prefer
-#   python -m doctest hubmap/**.py
-# but it's erroring on relative imports.
-end doctest
-
 start python
 pushd hubmap
 python manage.py test
