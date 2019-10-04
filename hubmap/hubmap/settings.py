@@ -31,8 +31,7 @@ NEO4J_URL = 'bolt://neo4j:7687'
 MONGODB_HOST = 'mongodb'
 ELASTICSEARCH_HOSTS = [{'host': 'elasticsearch', 'port': 9200}]
 
-# Location of the React app. Overriden to '/' for production
-FRONTEND_URL = 'http://localhost:3000/' # TODO: Still needed?
+FRONTEND_URL = 'http://localhost:8000/'
 
 # for test globus app configuration
 SOCIAL_AUTH_GLOBUS_KEY = '12518f0d-4594-4632-8c4c-a6839024d238'
@@ -74,7 +73,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000', # TODO: Still needed?
+    # TODO: Fill in API Host here?
 ]
 
 REST_FRAMEWORK = {
