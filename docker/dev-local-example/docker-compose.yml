@@ -19,14 +19,6 @@ services:
       - ../..:/opt/hubmap-data-portal
     depends_on:
       - "postgres"
-  react_app:
-    image: "hubmap/data-portal-reactjs-dev:latest"
-    ports:
-      - "3000:3000"
-    expose:
-      - 3000
-    volumes:
-      - ../..:/opt/hubmap-data-portal
   neo4j:
     image: neo4j:3.5
     ports:
