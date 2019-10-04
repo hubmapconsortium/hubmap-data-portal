@@ -30,9 +30,6 @@ docker-compose up
 When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new terminal:
 ```
 ./run_migrations_in_container.py
-# Download a metadata .tsv file from HCA, e.g. from
-# https://data.humancellatlas.org/explore/projects/74b6d569-3b11-42ef-b6b1-a0454522b4a0
-./load_hca_metadata.py path_to_metadata_from_HCA.tsv
 ```
 
 Revisit [`localhost:3000`](http://localhost:3000/) and it should show the sample data.
