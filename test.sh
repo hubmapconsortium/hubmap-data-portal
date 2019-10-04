@@ -8,7 +8,7 @@ die() { set +v; echo "$*" 1>&2 ; exit 1; }
 
 start flake8
 pushd hubmap
-flake8
+flake8 --exclude frontend/node_modules/,dataportal/migrations/
 popd
 end flake8
 
