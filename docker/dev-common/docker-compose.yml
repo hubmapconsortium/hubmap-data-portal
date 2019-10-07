@@ -1,6 +1,11 @@
 version: '3'
 
 services:
+  api:
+    build:
+      context: ./api
+    ports:
+      - "9999:9999"
   postgres:
     image: postgres:11
     environment:
@@ -32,6 +37,8 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
+    environment:
+      - NEO4J_AUTH=none
   elasticsearch:
     image: elasticsearch:7.3.1
     environment:

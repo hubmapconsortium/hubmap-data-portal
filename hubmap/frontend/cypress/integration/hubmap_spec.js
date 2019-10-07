@@ -57,7 +57,8 @@ describe('HuBMAP', () => {
     cy.visit('/');
 
     cy.contains('Browse').click();
-    cy.contains('Data Analysis').click();
+    // https://github.com/rakannimer/react-google-charts/blob/master/cypress/integration/charts.spec.js
+    cy.contains('Data Analysis', { timeout: 100000 }).click();
     cy.location('pathname').should('eq', '/dataanalysis');
     cy.contains('Search by Tissue'); // TODO: more tests
 
@@ -118,5 +119,12 @@ describe('HuBMAP', () => {
     cy.contains('User FAQs').click();
     cy.location('pathname').should('eq', '/userfaqs');
     // TODO: Empty page
+  });
+
+  it('TODO: Saved links do not work (when going through Django)!', () => {
+    // The request will pass (and the test will fail) if targetting the React dev server.
+    // See https://github.com/hubmapconsortium/hubmap-data-portal/issues/162
+    cy.request({ url: '/experiments', failOnStatusCode: false })
+      .its('status').should('equal', 404);
   });
 });
