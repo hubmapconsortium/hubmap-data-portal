@@ -3,12 +3,13 @@
 # disk space in the real image
 FROM ubuntu:18.04 as BASE
 
-RUN apt-get update
-RUN apt-get -y install \
+RUN apt-get update \
+&& apt-get -y install \
     postgresql-server-dev-all \
     python3 \
     python3-dev \
-    python3-pip
+    python3-pip \
+&& rm -rf /var/cache/apt/*
 
 COPY hubmap/requirements.txt /opt
 # Doing a little redundant work to actually *install* things in the base
@@ -18,8 +19,8 @@ RUN pip3 install -r /opt/requirements.txt
 ## 2. Actual container
 FROM ubuntu:18.04 as RELEASE
 
-RUN apt-get update
-RUN apt-get -y install python3 python3-six python3-idna python3-pkg-resources libpq5
-RUN rm -rf /var/cache/apt/*
+RUN apt-get update \
+&& apt-get -y install python3 python3-six python3-idna python3-pkg-resources libpq5 \
+&& rm -rf /var/cache/apt/*
 
 COPY --from=BASE /usr/local/lib/python3.6 /usr/local/lib/python3.6
