@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<table>
+    <thead>
+    <tr>
+         <th>HuBMAP Id</th>
+        <th>Entity Type</th>
+    </tr>
+    </thead>
+    {% for entity in filtered_list %}
+    <tr>
+        <th>{{ entity.hubmap_id }} </th>
+        <th><a href="{% url 'details' entity_type=entity.entity_type hubmap_id=entity.hubmap_id %}">{{ entity.entity_type }} </a></th>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
