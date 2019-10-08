@@ -9,7 +9,8 @@ FROM hubmap/data-portal-python-base:latest
 # after building a new version of the base container
 RUN apt-get -y install \
     python3-dev \
-    python3-pip
+    python3-pip \
+&& rm -rf /var/cache/apt/*
 
 RUN pip3 install -U pip setuptools wheel
 

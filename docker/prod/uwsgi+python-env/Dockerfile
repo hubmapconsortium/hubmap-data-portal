@@ -8,9 +8,9 @@ RUN npm run build
 
 FROM hubmap/data-portal-python-base:latest
 
-RUN apt-get update
-RUN apt-get -y install uwsgi uwsgi-plugin-python3
-RUN rm -rf /var/cache/apt/*
+RUN apt-get update \
+&& apt-get -y install uwsgi uwsgi-plugin-python3 \
+&& rm -rf /var/cache/apt/*
 
 COPY uwsgi/dataportal.xml /opt/dataportal.xml
 
