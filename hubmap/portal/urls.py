@@ -4,7 +4,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('home/', views.index, name='home'),
+    path('', views.index, name='home'),
     path('all/', views.listall, name='listall'),
     path('browse/<entity_type>/<int:hubmap_id>', views.details, name='details'),
     path('browse/<entity_type>', views.entities, name='entities'),
