@@ -26,7 +26,7 @@ def details(request, entity_type: string, hubmap_id: int):
         {
             "entity_type": entity_type,
             "hubmap_id": hubmap_id,
-            "title": "Browse Entity Details"
+            "title": "This is " + entity_type + " details page"
         }
     )
 
@@ -37,7 +37,7 @@ def listall(request):
         'listall.html',
         {
             "entities_list": entities_list,
-            "title": "Browse all Entities"
+            "title": "This is browse page for all Entities"
         }
     )
 
@@ -50,7 +50,7 @@ def entities(request, entity_type: string):
                   {
                       "filtered_list": filtered_list,
                       "entity_type": entity_type,
-                      "title": "Browse " + entity_type + " entities"
+                      "title": "This is browse page for all " + entity_type + "s"
                   })
 
 
