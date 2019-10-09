@@ -33,14 +33,14 @@ end eslint
 
 start cypress
 pushd hubmap
-python manage.py runserver &
+python3 manage.py runserver &
 DJANGO_SERVER_PID=$!
 popd
 pushd hubmap/frontend
 echo '{"version": "unknown"}' > src/git-version.json
 REACT_APP_STAGE=dev npm run build
 pushd build
-python -m http.server --bind localhost 3000 &
+python3 -m http.server --bind localhost 3000 &
 REACT_SERVER_PID=$!
 popd
 $(npm bin)/wait-on http://localhost:3000

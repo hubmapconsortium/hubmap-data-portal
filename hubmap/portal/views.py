@@ -1,4 +1,5 @@
 import string
+
 from django.shortcuts import render
 
 entities_list = [{"entity_type": "sample", "hubmap_id": 1},
@@ -27,7 +28,7 @@ def details(request, entity_type: string, hubmap_id: int):
             "entity_type": entity_type,
             "hubmap_id": hubmap_id,
             "title": "This is " + entity_type + " details page",
-        }
+        },
     )
 
 
@@ -38,7 +39,7 @@ def listall(request):
         {
             "entities_list": entities_list,
             "title": "This is browse page for all Entities",
-        }
+        },
     )
 
 
