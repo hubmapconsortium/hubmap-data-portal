@@ -50,7 +50,7 @@ def entities(request, entity_type: string):
                   {
                       "filtered_list": filtered_list,
                       "entity_type": entity_type,
-                      "title": "Browse Entities of " + entity_type
+                      "title": "Browse " + entity_type + " entities"
                   })
 
 
