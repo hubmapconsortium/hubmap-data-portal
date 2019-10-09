@@ -17,29 +17,42 @@ describe('HuBMAP', () => {
   it('Test route to browse all entities', () => {
     cy.visit('/');
     cy.contains('Browse All Entities').click();
+    cy.contains('This is browse page for all Entities').should('be.visible');
     cy.contains('Entity Type').should('be.visible');
     cy.contains('HuBMAP Id').should('be.visible');
   });
-  it('Test route to browse all samples', () => {
+  it('Test route to browse all samples and details pages', () => {
     cy.visit('/');
     cy.contains('Browse all Samples').click();
+    cy.contains('This is browse page for all samples').should('be.visible');
     cy.contains('Entity Type').should('be.visible');
     cy.contains('HuBMAP Id').should('be.visible');
-    cy.contains('Browse sample entities');
+    cy.contains('th', 'sample').find('a').click();
+    cy.contains('Entity Type').should('be.visible');
+    cy.contains('HuBMAP Id').should('be.visible');
+    cy.contains('This is sample details page').should('be.visible');
   });
-  it('Test route to browse all donors', () => {
+  it('Test route to browse all donors and details pages', () => {
     cy.visit('/');
     cy.contains('Browse all Donors').click();
+    cy.contains('This is browse page for all donors').should('be.visible');
     cy.contains('Entity Type').should('be.visible');
     cy.contains('HuBMAP Id').should('be.visible');
-    cy.contains('Browse donor entities');
+    cy.contains('th', 'donor').find('a').click();
+    cy.contains('Entity Type').should('be.visible');
+    cy.contains('HuBMAP Id').should('be.visible');
+    cy.contains('This is donor details page').should('be.visible');
   });
-  it('Test route to browse all datasets', () => {
+  it('Test route to browse all datasets and details pages', () => {
     cy.visit('/');
     cy.contains('Browse all Datasets').click();
+    cy.contains('This is browse page for all datasets').should('be.visible');
     cy.contains('Entity Type').should('be.visible');
     cy.contains('HuBMAP Id').should('be.visible');
-    cy.contains('Browse dataset entities');
+    cy.contains('th', 'dataset').find('a').click();
+    cy.contains('Entity Type').should('be.visible');
+    cy.contains('HuBMAP Id').should('be.visible');
+    cy.contains('This is dataset details page').should('be.visible');
   });
   it('Test route to help', () => {
     cy.visit('/');
