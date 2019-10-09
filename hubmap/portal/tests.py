@@ -1,8 +1,7 @@
-from django.test import TestCase
+from django.test import RequestFactory, TestCase
 
 # Create your tests here.
-from .views import listall, entities, details, index
-from django.test import RequestFactory
+from .views import details, entities, index, listall
 
 
 class PortalViewsTestCase(TestCase):
