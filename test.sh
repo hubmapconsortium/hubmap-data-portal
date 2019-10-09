@@ -14,8 +14,10 @@ end flake8
 
 start python
 pushd hubmap
-python manage.py test
+python3 manage.py test
 # TODO: Django tests
+python3 manage.py makemigrations
+python3 manage.py migrate
 popd
 end python
 
