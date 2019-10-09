@@ -2,6 +2,10 @@
 // TODO: Configure eslint to recognize "cy" as a global.
 describe('HuBMAP', () => {
   beforeEach(() => {
+    // Cypress does not allow multiple superdomains per Test.
+    //  https://docs.cypress.io/guides/guides/web-security.html#One-Superdomain-per-Test
+    // Instead set baseUrl in test before.
+    Cypress.config('baseUrl', 'http://localhost:3000');
     cy.server();
     const api = 'http://localhost:8000/api';
     cy.route(`${api}/?format=json`, 'fixture:base.json');
