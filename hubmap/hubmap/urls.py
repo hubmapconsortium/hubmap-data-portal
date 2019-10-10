@@ -27,7 +27,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('dataportal.urls')),
     path('', include('frontend.urls')),
-    path('portal/', include('portal.urls')),
     path(f'{settings.AUTH_URL_PREFIX}/', include('rest_framework_social_oauth2.urls')),
     path('openapi/', schema_view, name='openapi-schema'),
     path('docs/', include_docs_urls(title=settings.OPENAPI_TITLE,
