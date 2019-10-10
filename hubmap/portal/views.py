@@ -45,7 +45,7 @@ def list_all(request):
 
 def entities(request, entity_type: string):
     filtered_list = [entity for entity in entities_list
-                     if entity['entity_type'].__eq__(entity_type)]
+                     if entity['entity_type'] == entity_type]
     return render(request,
                   'entities.html',
                   {
