@@ -16,9 +16,6 @@ start python
 pushd hubmap
 python3 manage.py test
 # TODO: Django tests
-service postgresql start
-python3 manage.py makemigrations
-python3 manage.py migrate
 popd
 end python
 
