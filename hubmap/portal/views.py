@@ -32,10 +32,10 @@ def details(request, entity_type: string, hubmap_id: int):
     )
 
 
-def listall(request):
+def list_all(request):
     return render(
         request,
-        'listall.html',
+        'list_all.html',
         {
             "entities_list": entities_list,
             "title": "This is browse page for all Entities",
@@ -53,7 +53,6 @@ def entities(request, entity_type: string):
                       "entity_type": entity_type,
                       "title": "This is browse page for all " + entity_type + "s",
                   })
-
 
 def help(request):
     return render(request, 'help.html', {"title": "Help"})
