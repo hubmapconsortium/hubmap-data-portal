@@ -1,6 +1,5 @@
 from django.test import RequestFactory, TestCase
 
-# Create your tests here.
 from .views import details, entities, index, list_all
 
 
