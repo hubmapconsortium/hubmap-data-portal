@@ -32,10 +32,6 @@ popd
 end eslint
 
 start cypress
-pushd hubmap
-python3 manage.py runserver &
-DJANGO_SERVER_PID=$!
-popd
 pushd hubmap/frontend
 echo '{"version": "unknown"}' > src/git-version.json
 REACT_APP_STAGE=dev npm run build
@@ -46,6 +42,5 @@ popd
 $(npm bin)/wait-on http://localhost:3000
 $(npm bin)/cypress run
 kill $REACT_SERVER_PID
-kill $DJANGO_SERVER_PID
 popd
 end cypress
