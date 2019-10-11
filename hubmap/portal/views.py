@@ -54,5 +54,6 @@ def entities(request, entity_type: string):
                       "title": "This is browse page for all " + entity_type + "s",
                   })
 
+
 def help(request):
     return render(request, 'help.html', {"title": "Help"})
