@@ -1,3 +1,4 @@
 {
+  "blacklistHosts": ["localhost:8000"],
   "video": false
 }
