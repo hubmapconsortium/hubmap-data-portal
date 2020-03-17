@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'dataportal',
     'frontend',
+    'portal',
     'django_filters',
     'rest_framework.authtoken',
     'social_django',

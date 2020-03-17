@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HuBMAP</title>
+     {% csrf_token %}
+</head>
+<nav>
+    <ul>
+        <li><a href="{% url 'list_all' %}">Browse All Entities</a></li>
+        <li><a href="{% url 'entities' 'sample' %}">Browse all Samples</a> </li>
+        <li><a href="{% url 'entities' 'donor' %}">Browse all Donors</a> </li>
+        <li><a href="{% url 'entities' 'dataset' %}">Browse all Datasets</a> </li>
+        <li><a href="{% url 'help' %}">Help</a> </li>
+    </ul>
+</nav>
+<body>
+<h3>{{ title }}</h3>
+{% block content %}
+{% endblock %}
+</body>
+</html>

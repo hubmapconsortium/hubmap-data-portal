@@ -14,7 +14,7 @@ end flake8
 
 start python
 pushd hubmap
-python manage.py test
+python3 manage.py test
 # TODO: Django tests
 popd
 end python
@@ -37,10 +37,10 @@ echo '{"version": "unknown"}' > src/git-version.json
 REACT_APP_STAGE=dev npm run build
 pushd build
 python3 -m http.server --bind localhost 3000 &
-SERVER_PID=$!
+REACT_SERVER_PID=$!
 popd
 $(npm bin)/wait-on http://localhost:3000
 $(npm bin)/cypress run
-kill $SERVER_PID
+kill $REACT_SERVER_PID
 popd
 end cypress
