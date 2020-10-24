@@ -1,4 +1,4 @@
-import * as Constants from '../commons/constants';
+import * as Constants from '../../commons/constants';
 
 // define DEFAULT state, so it is never "undefined".
 const DEFAULT_STATE = {
@@ -8,7 +8,7 @@ const DEFAULT_STATE = {
   error: null,
 };
 
-/** *
+/**
  * fill in the state object for colors
  */
 export default function colorResponseReducer(state = DEFAULT_STATE, action) {

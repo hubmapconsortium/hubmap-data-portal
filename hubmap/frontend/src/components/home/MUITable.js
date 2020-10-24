@@ -15,7 +15,7 @@ import MUIDataTable from 'mui-datatables';
 import grey from '@material-ui/core/colors/grey';
 import { connect } from 'react-redux';
 import { CircularProgress, Typography } from '@material-ui/core';
-import { getExperimentsResponse, inProgress, getNextPageFromExperiments } from '../../middleware/actions';
+import { getExperimentsResponse, inProgress, getNextPageFromExperiments } from '../../middleware';
 import * as Constants from '../../commons/constants';
 import store from '../../middleware/store';
 
@@ -80,7 +80,7 @@ class MaterialTableDemo extends React.Component {
 	  }
 	}
 
-	/** *
+	/**
 	 * Change page on Table (previous/next)
 	 */
 	changePage = (page) => {

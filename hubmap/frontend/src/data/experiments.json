@@ -1,0 +1,30 @@
+{
+    "experiments":
+    {
+        "1":{
+            "Id": "1",
+            "Experiment Title": "Single Cell Transcriptomics of a Human Kidney Allograft Biopsy Defines a Diverse Inflammatory Response",
+            "Sample Type": "specimens",
+            "Organ/Model Organ": "kidney",
+            "Selected Cell Type": ["fibroblast", "epithelial cell", "endothelial cell", "myofibroblast cell", "monocyte"],
+            "Library Construction Method": "inDrop",
+            "Species": "Homo Sapiens",
+            "Known Diseases": "hemolytic-uremic syndrome, end stage renal failure",
+            "Donor Count": "1",
+            "Cell Count Estimate": "4000"
+        },
+        "2":{
+            "Id":"2",
+            "Experiment Title": "Spatio-temporal immune zonation of the human kidney",
+            "Sample Type": "specimens",
+            "Organ/Model Organ": "kidney",
+            "Selected Cell Type": "kidney cell",
+            "Library Construction Method": "10X v2 sequencing",
+            "Species": "Homo Sapiens",
+            "Known Diseases": "hereditary clear cell renal cell carcinoma, clear cell renal carcinoma, chromophobe renal cell carcinoma, renal cell carcinoma (disease), normal, papillary renal cell carcinoma",
+            "Donor Count": "15",
+            "Cell Count Estimate": "Unspecified"
+        }
+        
+    }
+}

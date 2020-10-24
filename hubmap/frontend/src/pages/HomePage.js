@@ -12,7 +12,7 @@ import MaterialTableDemo from '../components/home/MUITable';
 import ExperimentsBarChart from '../components/home/ExperimentsBarChart';
 import ImageCountStackedChart from '../components/home/D3chart';
 import viridis from '../images/viridis.png';
-import * as actions from '../middleware/actions';
+import * as actions from '../middleware';
 
 const useStyles = makeStyles((theme) => ({
   root: {

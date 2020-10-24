@@ -7,7 +7,7 @@ import './App.scss';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import RootContainer from './components/RootContainer';
-import { getTissueColorsFromServer, getAllExperiments, getGeneTissueColors } from './middleware/actions';
+import { getTissueColorsFromServer, getAllExperiments, getGeneTissueColors } from './middleware';
 
 // import '@google/model-viewer' ;
 // npm run setup -- --spaceId eo4e2dc0pbyt --deliveryToken H3bSZhVoA8_0_hjDzD6yGsq1jHCdBgxop3iJ9EM54B8 --managementToken CFPAT-nXzmTIQFv4Om1KFSnqn0fS3X7_3YLXDacst4IC52_1M

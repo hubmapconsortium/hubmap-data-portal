@@ -11,7 +11,7 @@
 import React from 'react';
 import * as d3 from 'd3';
 import { CircularProgress, Typography } from '@material-ui/core';
-import { getExperimentsResponse, inProgress } from '../../middleware/actions';
+import { getExperimentsResponse, inProgress } from '../../middleware';
 import * as Constants from '../../commons/constants';
 import store from '../../middleware/store';
 

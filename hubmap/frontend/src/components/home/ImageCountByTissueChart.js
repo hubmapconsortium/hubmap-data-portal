@@ -8,7 +8,7 @@ import React, { PureComponent } from 'react';
 import { Chart } from 'react-google-charts';
 import { connect } from 'react-redux';
 import { CircularProgress, Typography } from '@material-ui/core';
-import { getExperimentsResponse, inProgress } from '../../middleware/actions';
+import { getExperimentsResponse, inProgress } from '../../middleware';
 import * as Constants from '../../commons/constants';
 import store from '../../middleware/store';
 
