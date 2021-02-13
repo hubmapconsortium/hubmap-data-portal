@@ -24,5 +24,6 @@ pymongo==3.9.0
 python-jose==3.0.1
 python-social-auth==0.3.6
 PyYAML==5.1.2
+requests==2.22.0
 social-auth-app-django==3.1.0
 xarray==0.12.3
