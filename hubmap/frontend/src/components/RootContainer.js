@@ -10,7 +10,7 @@ import PipelinesComponent from '../pages/Pipelines';
 import HomePage from '../pages/HomePage';
 import NoMatch from '../pages/NoMatch';
 
-function RootContainer() {
+export default function () {
   return (
     <BrowserRouter>
       <NavBar />
@@ -28,4 +28,3 @@ function RootContainer() {
     </BrowserRouter>
   );
 }
-export default RootContainer;
