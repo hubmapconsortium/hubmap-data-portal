@@ -3,12 +3,13 @@ import Container from '@material-ui/core/Container';
 import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import Footer from './Footer';
 import NavBar from './NavBar';
-import DataAnalysisComponent from '../pages/DataAnalysis';
-import UserFAQsComponent from '../pages/UserFAQs';
-import ExperimentsComponent from '../pages/Experiments';
-import PipelinesComponent from '../pages/Pipelines';
+import DataAnalysisPage from '../pages/DataAnalysis';
+import UserFAQsPage from '../pages/UserFAQs';
+import ExperimentsPage from '../pages/Experiments';
+import PipelinesPage from '../pages/Pipelines';
+import DetailsPage from '../pages/DetailsPage';
 import HomePage from '../pages/HomePage';
-import NoMatch from '../pages/NoMatch';
+import NoMatchPage from '../pages/NoMatch';
 
 function RootContainer() {
   return (
@@ -16,12 +17,13 @@ function RootContainer() {
       <NavBar />
       <Container xl="true" component="div" className="gridContainer" style={{ height: '100vh', flexGrow: 1 }}>
         <Switch>
-          <Route exact path="/dataanalysis" component={DataAnalysisComponent} />
-          <Route exact path="/userfaqs" component={UserFAQsComponent} />
-          <Route exact path="/experiments" component={ExperimentsComponent} />
-          <Route exact path="/pipelines" component={PipelinesComponent} />
+          <Route exact path="/dataanalysis" component={DataAnalysisPage} />
+          <Route exact path="/userfaqs" component={UserFAQsPage} />
+          <Route exact path="/experiments" component={ExperimentsPage} />
+          <Route exact path="/pipelines" component={PipelinesPage} />
+          <Route exact path="/details" component={DetailsPage} />
           <Route exact path="/" component={HomePage} />
-          <Route component={NoMatch} />
+          <Route component={NoMatchPage} />
         </Switch>
         <Footer />
       </Container>
