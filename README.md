@@ -27,7 +27,7 @@ cd docker/dev-common
 docker-compose pull # Only needed if you have old images.
 docker-compose up
 ```
-When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new terminal:
+When [`localhost:8000`](http://localhost:8000/) is up, enter this in a new terminal:
 ```
 ./run_migrations_in_container.py
 # Download a metadata .tsv file from HCA, e.g. from
@@ -35,18 +35,16 @@ When [`localhost:3000`](http://localhost:3000/) is up, enter this in a new termi
 ./load_hca_metadata.py path_to_metadata_from_HCA.tsv
 ```
 
-Revisit [`localhost:3000`](http://localhost:3000/) and it should show the sample data.
+Revisit [`localhost:8000`](http://localhost:8000/) and it should show the sample data.
 
 <details>
 When you run `docker-compose up` in the `docker/dev-common` directory it will
 download pre-built Docker containers for development, and start all services
 listed in `docker/dev-common/docker-compose.yml`. The local copy of this
-repository will be mounted in Django and ReactJS containers, and those
-containers will start development servers for both parts of the application.
-Note that the ReactJS container will run `npm install` before starting the
-application, so a `node_modules` directory will appear in `hubmap/frontend`.
+repository will be mounted in the Django container, and that
+container will start a development server.
 Modifications of your local copy of the repository will be noticed by the
-Django and ReactJS development servers, which should reload automatically.
+Django development server, which should reload automatically.
 
 The Postgres container will initially have an empty database. Database
 migrations (including the initial migration which creates the database tables)
@@ -58,9 +56,8 @@ through `docker exec` instead of something like
 container is only accessible through the virtual network provided by
 `docker-compose`).
 
-After all services are started, the Django REST API is available at
-`http://localhost:8000/api` and the ReactJS app is available at
-`http://localhost:3000`.
+After all services are started, Django is available at
+`http://localhost:8000/`.
 
 To experiment with local modifications to the development Docker container,
 see [the docs](docker/dev-local-example/README.md).
